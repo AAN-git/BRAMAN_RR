@@ -342,6 +342,14 @@ form is in view; on a desktop the sticky offer is the bar, so there is none.
 The name steps in from the left, the figure lands, then the stage and the
 strip rise, on the page's clock.
 
+## Where it lives
+
+The code is at **https://github.com/AAN-git/BRAMAN_RR** and GitHub Pages
+serves it as the preview at **https://aan-git.github.io/BRAMAN_RR/** —
+relative links throughout, `.nojekyll` so the files go out as they are,
+videos and fonts included. A push to `main` republishes it within a minute
+or two. After any edit: `python3 tools/build.py`, commit, push.
+
 ## For the server
 
 `dist/` is the site and nothing else: the two pages, `vehicles/`, `css/`,
