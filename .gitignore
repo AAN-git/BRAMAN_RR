@@ -1,0 +1,11 @@
+# Confidential: the dealer brand guidelines live here, not in the repository.
+DO NOTO GIT/
+DO NOTO GIT /
+
+# The supplied masters (115MB). assets/video/ carries the web encodes.
+VIDEOS/
+
+.DS_Store
+.playwright-mcp/
+dist/
+BRAMAN_RR-preview.zip

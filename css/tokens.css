@@ -1,0 +1,153 @@
+/* ==========================================================================
+   Rolls-Royce Motor Cars Palm Beach — tokens
+   Transcribed from Figma "Braman BRANDS" → page "UPD #2 Braman RR" → frame
+   "1920 version #2" (193:2952). Colours are the file's fills, not samples of
+   imagery. Motion durations and the Gentle curve are read from the prototype's
+   own reactions, so the page moves the way the prototype does.
+   ========================================================================== */
+
+/* --- Riviera Nights --------------------------------------------------------
+   The marque typeface. Light carries display and body; Regular carries the
+   control register (buttons, navigation, labels) — one family, two weights. */
+
+@font-face {
+  font-family: "Riviera Nights";
+  src: url("../assets/fonts/riviera-nights-light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Riviera Nights";
+  src: url("../assets/fonts/riviera-nights-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* --- Palette -----------------------------------------------------------
+     The named colours are the brand's own, from BRAND GUIDELINES → COLOUR
+     VALUES. The Figma fills already are these, to the digit.               */
+  --purple-spirit: #281432; /* primary brand ground — Ghost panel, footer   */
+  --pearl:         #e7d2c3; /* supporting ground — Spectre panel, About     */
+  --sky:           #b4c7cb; /* supporting ground — Service & Parts          */
+  --steel:         #676776; /* the secondary control                        */
+  --steel-press:   #4c4c58; /* its pressed tint                             */
+  --ultraviolet:   #6d30a7; /* the one highlight on this page               */
+  --pebble:        #d2d2d2;
+  --frost:         #ffffff;
+  --noir:          #000000;
+
+  /* Not in the palette: the file's own cinematic ground, one step off Noir,
+     which the guidelines reserve for Black Badge. Kept as the file sets it. */
+  --grey-8:        #151515;
+
+  /* Type is Frost or Noir (guidelines, COLOUR USE). The quieter registers are
+     tints of Frost rather than separate greys; every one is measured on its
+     own ground below. */
+  --ink:           var(--frost);
+  --ink-quiet:     rgba(255, 255, 255, 0.86); /* copy on Purple Spirit       */
+  --ink-support:   rgba(255, 255, 255, 0.78); /* copy on film                */
+  --ink-muted:     rgba(255, 255, 255, 0.70); /* news excerpts               */
+  --ink-route:     rgba(255, 255, 255, 0.64); /* footer routes               */
+  --ink-legal:     rgba(255, 255, 255, 0.52); /* the legal line              */
+
+  --rule-plum:     #39155b; /* footer hairlines                            */
+  --rule-news:     #323232; /* news column dividers                        */
+  --rule-mist:     rgba(0, 0, 0, 0.14);
+  --rule-mist-end: rgba(0, 0, 0, 0.8);
+
+  /* Aliases kept so the sections read in the file's own language. */
+  --white:  var(--frost);
+  --black:  var(--noir);
+  --plum:   var(--purple-spirit);
+  --sand:   var(--pearl);
+  --mist:   var(--sky);
+  --slate:  var(--steel);
+  --slate-press: var(--steel-press);
+  --white-press: var(--pebble);
+  --violet: var(--ultraviolet);
+  --grey-86: var(--ink-quiet);
+  --nav-ink: var(--frost);
+  --copy-news: var(--ink-muted);
+  --copy-sell: var(--ink-support);
+  --copy-footer: var(--ink-route);
+  --copy-legal: var(--ink-legal);
+
+  /* Every image shade in the file is one gradient: #151515 from 0 to 100%. */
+  --shade:         linear-gradient(to bottom, rgba(21, 21, 21, 0), var(--grey-8));
+  --shade-up:      linear-gradient(to top, rgba(21, 21, 21, 0), var(--grey-8));
+
+  /* --- Type ------------------------------------------------------------- */
+  --font: "Riviera Nights", "Helvetica Neue", Arial, sans-serif;
+
+  /* Figma text styles. Letter-spacing in the file is a percentage of size. */
+  --h1:        clamp(2.25rem, 1.2rem + 2.2vw, 3.75rem);  /* riviera 60 H1 → 36 */
+  --h1-lead:   1.1667;                                   /* 70 / 60             */
+  --h3:        clamp(1.5rem, 1.1rem + 0.7vw, 1.875rem);  /* riviera 30 H3 → 24 */
+  --h3-lead:   1.3333;                                   /* 40 / 30             */
+  --h4:        clamp(1.125rem, 1rem + 0.2vw, 1.25rem);   /* riviera 20 H4 → 18 */
+  --h4-lead:   1.5;                                      /* 30 / 20             */
+  --h4-track:  0.02em;
+  --body:      1rem;                                     /* Paragraph 16        */
+  --body-lead: 1.625;                                    /* 26 / 16             */
+  --body-track: 0.005em;
+  --small:     0.875rem;                                 /* Paragraph 14        */
+  --small-lead: 1.5714;                                  /* 22 / 14             */
+  --button:    1rem;                                     /* Button riviera      */
+  --button-track: 0.02em;
+  /* The file sets MORE, utility links and footer links at 12px. Functional
+     text is held at a 14px floor; 14 is the smallest size the file itself
+     already uses (Paragraph 14). */
+  --label:     0.875rem;
+
+  /* --- Grid ------------------------------------------------------------- */
+  /* 1920 frame: 12 columns, 30 gutter, 1320 measure, 300 margins. The margin
+     tightens faster than the viewport so the measure stays usable at 1024. */
+  --gutter:      30px;
+  --page-margin: clamp(24px, 26.3vw - 205px, 300px);
+  --container:   min(1320px, calc(100% - 2 * var(--page-margin)));
+  --chrome-margin: clamp(24px, 3.9vw, 75px);  /* header and footer: 75 at 1920 */
+
+  /* One Figma pixel at the current width. Travel distances scale with it. */
+  --u: calc(100vw / 1920);
+
+  /* --- Section heights ---------------------------------------------------
+     Every section fills the screen, whatever the screen is; the vertical
+     positions inside them stay the file's proportions of the section. The
+     floors keep a section usable on a short laptop window.                */
+  --h-split: max(620px, 100svh);
+  --h-full:  max(660px, 100svh);
+
+  /* How far a locked picture stays put while the next section climbs over it. */
+  --cover:   max(660px, 100svh);
+
+  /* --- Controls --------------------------------------------------------- */
+  --button-h:   46px;
+  --radius-pill: 70px;
+
+  /* --- Motion ------------------------------------------------------------
+     "Gentle" is Figma's spring (mass 1, stiffness 100, damping 15; 2.8%
+     overshoot), sampled into linear(). The prototype stretches the same
+     spring over a different clock per section; the clocks are its own.     */
+  --ease-gentle: linear(0, 0.073 4.2%, 0.234 8.3%, 0.4201 12.5%, 0.5949 16.7%,
+    0.7407 20.8%, 0.8519 25%, 0.9301 29.2%, 0.9807 33.3%, 1.0099 37.5%,
+    1.024 41.7%, 1.0283 45.8%, 1.0268 50%, 1.0225 54.2%, 1.0173 58.3%,
+    1.0122 62.5%, 1.0079 66.7%, 1.0046 70.8%, 1.0023 75%, 1.0007 79.2%,
+    0.9998 83.3%, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);   /* arrivals: decelerate in    */
+  --ease-in:  cubic-bezier(0.32, 0, 0.67, 0);   /* exits: accelerate away     */
+
+  /* One clock for the page. The prototype's own spring durations (1.92s ·
+     2.04s · 2.68s) were written for a pointer resting on a section; with one
+     gesture per section they are still running when the next one is asked
+     for, so the character is kept and the clock is halved. */
+  --dur-press:   280ms;   /* hover and press — control feedback is never slow */
+  --dur-enter:   900ms;   /* copy, buttons, anything typographic              */
+  --dur-arrive: 1100ms;   /* photographs and film frames                      */
+  --dur-exit:    480ms;   /* leaving is shorter and quieter than arriving     */
+  --step-enter:  140ms;   /* one tread of a staircase, arriving              */
+  --step-exit:    90ms;   /* one tread, leaving                               */
+  --dur-bar:     400ms;   /* the header condensing and freezing over          */
+}

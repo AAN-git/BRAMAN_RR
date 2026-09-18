@@ -1,0 +1,1639 @@
+/* ==========================================================================
+   Rolls-Royce Motor Cars Palm Beach — home
+   Desktop is the Figma frame "1920 version #2" at 1920 and proportional below
+   it; under 1024 every section is recomposed rather than shrunk.
+   ========================================================================== */
+
+/* --- Base ---------------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--grey-8);
+  color: var(--white);
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: var(--body);
+  line-height: var(--body-lead);
+  letter-spacing: var(--body-track);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img,
+video,
+svg { display: block; max-width: 100%; }
+
+h1, h2, h3, p, ul, dl, dd, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+address { font-style: normal; }
+/* controls take the page's face and ink: a <button> or <input> left to the
+   browser draws in Arial, and did on the vehicle page */
+button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+a { color: inherit; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--white);
+  color: var(--black);
+  font-weight: 400;
+  transform: translateY(-200%);
+}
+.skip:focus { transform: none; }
+
+/* Focus ring takes the ink of the ground it sits on. */
+:focus-visible {
+  outline: 2px solid var(--ring, var(--white));
+  outline-offset: 3px;
+}
+[data-ground="light"] { --ring: var(--grey-8); }
+[data-ground="dark"],
+[data-ground="photo"] { --ring: var(--white); }
+.header { --ring: var(--white); }
+
+/* --- Shared furniture ----------------------------------------------------- */
+
+.wrap {
+  position: relative;
+  width: var(--container);
+  margin-inline: auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+
+.title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+/* Buttons — pill, 46 tall. Widths are the file's three: 195 · 149 · 307. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--button-h);
+  min-width: 195px;
+  padding: 0 19px;
+  border-radius: var(--radius-pill);
+  font-weight: 400;
+  font-size: var(--button);
+  line-height: 22px;
+  letter-spacing: var(--button-track);
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--dur-press) var(--ease-out);
+}
+.btn--slate { background: var(--slate); color: var(--white); }
+.btn--slate:hover { background: var(--slate-press); }
+.btn--white { background: var(--white); color: var(--black); }
+.btn--white:hover { background: var(--white-press); }
+.btn--compact { min-width: 149px; }
+.btn--wide { min-width: 307px; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px var(--gutter);
+}
+.actions--centre { justify-content: center; }
+
+/* MORE — Figma's chevron, turned to point along the line of reading. */
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 24px;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--black);
+}
+.more::before {
+  content: "";
+  width: 16px;
+  height: 9px;
+  background: currentColor;
+  -webkit-mask: url("../assets/icons/chevron-light.svg") center / contain no-repeat;
+  mask: url("../assets/icons/chevron-light.svg") center / contain no-repeat;
+  transform: rotate(-90deg);
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.more:hover::before { transform: rotate(-90deg) translateY(3px); }
+.more--light { color: var(--white); }
+
+/* --- Header ----------------------------------------------------------------
+   In the file the bar is glass over everything. Alex's call, 2026-09-16: no
+   ground at rest, and a gradient bar once the page scrolls under it. One ink
+   throughout — the bar carries the ground, so nothing switches.             */
+
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: 139px;
+  color: var(--white);
+  --logo-w: 156px;
+  transition: height var(--dur-bar) var(--ease-out);
+}
+/* On scroll the bar condenses but keeps everything: the seven routes stay on
+   their own line, the two services and the telephone on theirs, both drawn in
+   tighter. No menu button on a desktop — the routes are always in view. */
+.header[data-scrolled] {
+  height: 112px;
+  --logo-w: 120px;
+}
+/* At rest the bar is the page. Once the page moves under it, the bar freezes
+   over: the content behind it blurs and a tint carries the ink. */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: rgba(21, 21, 21, 0.62);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+  backdrop-filter: blur(22px) saturate(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-bar) var(--ease-out);
+}
+.header[data-scrolled]::before { opacity: 1; }
+
+.header__logo {
+  position: absolute;
+  top: 50%;
+  left: var(--chrome-margin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: var(--logo-w);
+  color: var(--white);
+  transform: translateY(-50%);
+  transition: width var(--dur-bar) var(--ease-out), color var(--dur-press) var(--ease-out);
+}
+.header__wordmark { width: 100%; height: auto; }
+.header__dealer { width: 40.4%; height: auto; margin-top: 3.5%; }
+
+/* The side: the two services, the telephone, the menu button. At rest it sits
+   on the file's line; once condensed it centres in the shorter bar. */
+.header__aside {
+  position: absolute;
+  top: 22px;
+  right: var(--chrome-margin);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  transition: top var(--dur-bar) var(--ease-out), transform var(--dur-bar) var(--ease-out);
+}
+.header[data-scrolled] .header__aside { top: 14px; }
+.header__utility {
+  display: flex;
+  align-items: center;
+}
+.header__utility li + li::before {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  margin: 0 12px;
+  vertical-align: -2px;
+  background: #8d8d8d;
+}
+.header__utility a {
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 26px;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nav-ink);
+  transition: color var(--dur-press) var(--ease-out);
+}
+.header__utility a:hover { color: var(--white); }
+
+.header__phone {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: -11px 0;
+  color: inherit;
+  transition: opacity var(--dur-press) var(--ease-out);
+}
+.header__phone svg { width: 20px; height: 20px; }
+.header__phone:hover { opacity: 0.7; }
+
+.header__nav {
+  position: absolute;
+  top: 69px;
+  right: var(--chrome-margin);
+  transition: top var(--dur-bar) var(--ease-out);
+}
+.header[data-scrolled] .header__nav { top: 52px; }
+/* Seven routes, kept on one line down to 1024 by tightening the interval and
+   the label rather than folding them away. */
+.header__nav ul { display: flex; gap: clamp(18px, 2.35vw, 45px); }
+.header__nav a {
+  position: relative;
+  display: block;
+  font-weight: 400;
+  font-size: clamp(0.875rem, 0.22vw + 0.76rem, 1rem);
+  line-height: 46px;
+  letter-spacing: var(--button-track);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nav-ink);
+  transition: color var(--dur-press) var(--ease-out);
+}
+/* Nav item Variant2 (192:1450): the 6px tick under the label runs its width. */
+.header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.12);
+  transform-origin: left;
+  transition: transform var(--dur-press) var(--ease-out), opacity var(--dur-press) var(--ease-out);
+}
+.header__nav a:hover { color: var(--white); }
+.header__nav a:hover::after { opacity: 1; transform: none; }
+
+.header__toggle { color: var(--grey-8); }
+.header[data-nav="light"] .header__utility li + li::before { background: rgba(21, 21, 21, 0.4); }
+.header[data-logo="light"],
+.header[data-nav="light"] { --ring: var(--grey-8); }
+
+/* The menu button exists for the widths where the routes cannot fit beside
+   the mark (under 1024); on a desktop it is never shown. */
+.header__toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin: -11px -10px -11px 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.header__toggle-lines,
+.header__toggle-lines::before {
+  position: absolute;
+  left: 11px;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.header__toggle-lines { top: 18px; }
+.header__toggle-lines::before { content: ""; left: 0; top: 7px; }
+
+/* --- The menu panel --------------------------------------------------------
+   One panel for every width: the condensed bar's button opens it. */
+
+/* Closed, the panel is not a layer at all — its children stay where the bar
+   puts them, so the routes are simply the navigation. Open, it becomes the
+   full-screen panel. */
+.header__menu { display: contents; }
+.header[data-open] .header__menu {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 160px var(--chrome-margin) 48px;
+  overflow-y: auto;
+  background: var(--plum);
+  animation: panel-in var(--dur-press) var(--ease-out) both;
+}
+@keyframes panel-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.header[data-open] .header__nav {
+  position: static;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: none;
+}
+.header[data-open] .header__nav ul {
+  flex-direction: column;
+  gap: 0;
+  max-width: 520px;
+}
+.header[data-open] .header__nav a {
+  font-size: var(--h4);
+  line-height: 64px;
+  border-bottom: 0.5px solid var(--rule-plum);
+}
+.header[data-open] .header__nav a::after { display: none; }
+/* Open: the side keeps only the close button, so it can drop its transform —
+   a transformed ancestor would capture the fixed positioning below. */
+.header[data-open] .header__aside {
+  top: calc(50% - 22px);
+  transform: none;
+}
+.header[data-open] .header__utility {
+  position: fixed;
+  left: var(--chrome-margin);
+  bottom: 48px;
+}
+.header[data-open] .header__phone { display: none; }
+.header[data-open]::before { opacity: 0; }
+.header[data-open] .header__logo,
+.header[data-open] .header__toggle,
+.header[data-open] .header__nav a,
+.header[data-open] .header__utility a { color: var(--white); }
+.header[data-open] .header__toggle-lines { transform: translateY(3.5px) rotate(45deg); }
+.header[data-open] .header__toggle-lines::before { transform: translateY(-7px) rotate(-90deg); }
+
+/* --- 1 · Hero ------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--grey-8) url("../assets/img/hero-poster.webp") center / cover;
+}
+.hero__film {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* The hero is the film and nothing over it — Alex's call, 2026-09-16, after
+   seeing the pool read as a smudge on the pale dune frames. The consequence is
+   recorded: on the two palest shots the headline measures about 2.3:1 and the
+   navigation about 1.6:1, both under AA. Options that keep the film clean are
+   in README → Open. Kept as a hook so a ground can be put back in one place. */
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero__body {
+  position: absolute;
+  top: 38.06%;               /* 411 / 1080 */
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  text-align: center;
+}
+.hero__model {
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.hero__title {
+  margin-top: 19px;
+  font-weight: 300;
+  font-size: var(--h1);
+  line-height: var(--h1-lead);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.hero__cta { margin-top: 42px; }
+
+/* Transport for the two films. */
+.film-toggle {
+  position: absolute;
+  right: var(--chrome-margin);
+  bottom: 32px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(21, 21, 21, 0.25);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color var(--dur-press) var(--ease-out);
+}
+.film-toggle:hover { background: rgba(21, 21, 21, 0.55); }
+.film-toggle[hidden] { display: none; }
+.film-toggle__glyph {
+  width: 10px;
+  height: 12px;
+  border-left: 3px solid currentColor;
+  border-right: 3px solid currentColor;
+}
+.film-toggle[data-state="paused"] .film-toggle__glyph {
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 10px solid currentColor;
+  border-right: 0;
+}
+
+/* --- 2–3 · Ghost and Spectre ------------------------------------------------ */
+
+.split {
+  position: relative;
+  min-height: var(--h-split);
+  overflow: hidden;
+}
+.split--ghost { background: var(--plum); color: var(--white); }
+.split--spectre { background: var(--sand); color: var(--black); }
+
+.split__media {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - var(--gutter) / 2);   /* ends on column 6: 945 at 1920 */
+  overflow: hidden;
+}
+.split--ghost .split__media { left: 0; }
+.split--spectre .split__media { right: 0; }
+.split__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 100%;
+}
+.split__shade {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 54.9%;             /* 527 / 960 */
+  background: var(--shade);
+  pointer-events: none;
+}
+
+.split__wrap {
+  min-height: 100%;
+  padding-bottom: 80px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-content: start;
+  padding-top: calc(var(--h-split) * 0.3375);   /* 324 / 960 */
+}
+.split--ghost .split__body { grid-column: 8 / span 5; }
+.split--spectre .split__body { grid-column: 1 / span 5; }
+
+.split__title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.split__copy {
+  max-width: 420px;
+  margin-top: 20px;
+}
+.split--ghost .split__copy { color: var(--grey-86); }
+.split--spectre .split__copy { color: var(--grey-8); }
+.split .actions { margin-top: 60px; }
+
+/* --- 4 · Cullinan ------------------------------------------------------------
+   A sticky section. The section is the frame plus a hold; the field (the
+   file's 1080 frame) sits at its foot and scrolls, the copy sticks at its own
+   height until the field's top reaches the top of the viewport — the moment
+   the composition matches the file — and then leaves with it.               */
+
+.cullinan {
+  --tail: 40vh;
+  position: relative;
+  display: flow-root;
+  z-index: 0;
+  /* frame + the copy's exit + the span the next section climbs over */
+  height: calc(var(--h-full) + var(--tail) + var(--cover));
+  background: var(--grey-8);
+  color: var(--white);
+}
+/* The picture owns the screen from the section's first pixel and stays locked
+   to the top; the copy holds on it and then leaves over it. */
+.cullinan__field {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: var(--h-full);
+  overflow: hidden;
+}
+.cullinan__image {
+  position: absolute;
+  left: 0;
+  top: -19.25%;              /* the photograph overscans the frame by 1293 / 1080 */
+  width: 100%;
+  height: 119.72%;
+  object-fit: cover;
+}
+.cullinan__shade-top,
+.cullinan__shade-low,
+.cullinan__shade-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+}
+.cullinan__shade-top { top: 0; height: 72.13%; background: var(--shade-up); }
+.cullinan__shade-low { top: 61.3%; height: 38.7%; background: var(--shade); }
+.cullinan__shade-floor { top: 75.09%; height: 24.91%; background: var(--shade); }
+
+/* The copy holds on the locked picture, then is released into the tail. */
+.cullinan__track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: calc(var(--h-full) * 0.3787 + var(--tail) * 0.5);
+  padding-top: calc(var(--h-full) * 0.1889);   /* 204 / 1080 */
+}
+.cullinan__body {
+  position: sticky;
+  top: calc(var(--h-full) * 0.1889);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.cullinan__title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.cullinan__copy { margin-top: 17px; color: var(--grey-86); }
+.cullinan__copy .line { display: block; }
+
+/* The copy leaves the locked picture on its own, a line at a time, before the
+   section releases it — so the exit is authored rather than scrolled away. */
+.cullinan__title,
+.cullinan__copy .line,
+.cullinan .actions,
+.badge__mark,
+.badge__copy,
+.badge__cta {
+  transition:
+    transform var(--dur-enter) var(--ease-out),
+    opacity var(--dur-enter) var(--ease-out),
+    background-color var(--dur-press) var(--ease-out);
+}
+/* Leaving: shorter, and accelerating away rather than easing to a stop. */
+[data-exit].is-out .cullinan__title,
+[data-exit].is-out .cullinan__copy .line,
+[data-exit].is-out .actions,
+[data-exit].is-out .badge__mark,
+[data-exit].is-out .badge__copy,
+[data-exit].is-out .badge__cta {
+  transition-duration: var(--dur-exit), var(--dur-exit), var(--dur-press);
+  transition-timing-function: var(--ease-in), var(--ease-in), var(--ease-out);
+}
+[data-exit].is-out .cullinan__title,
+[data-exit].is-out .cullinan__copy .line,
+[data-exit].is-out .actions,
+[data-exit].is-out .badge__mark,
+[data-exit].is-out .badge__copy,
+[data-exit].is-out .badge__cta { opacity: 0; }
+/* leaving is the same staircase, run upward */
+[data-exit].is-out .cullinan__title,
+[data-exit].is-out .badge__mark { transform: translateY(-24px); }
+[data-exit].is-out .cullinan__copy .line:first-child { transform: translateY(-32px); }
+[data-exit].is-out .cullinan__copy .line:last-child,
+[data-exit].is-out .badge__copy { transform: translateY(-40px); }
+[data-exit].is-out .actions,
+[data-exit].is-out .badge__cta { transform: translateY(-48px); }
+[data-exit].is-out .cullinan__title,
+[data-exit].is-out .badge__mark { transition-delay: 0ms; }
+[data-exit].is-out .cullinan__copy .line:first-child { transition-delay: var(--step-exit); }
+[data-exit].is-out .cullinan__copy .line:last-child,
+[data-exit].is-out .badge__copy { transition-delay: calc(var(--step-exit) * 2); }
+[data-exit].is-out .actions,
+[data-exit].is-out .badge__cta { transition-delay: calc(var(--step-exit) * 3); }
+.cullinan .actions { margin-top: 50px; }
+
+/* --- 5 · About ------------------------------------------------------------- */
+
+.about {
+  position: relative;
+  z-index: 2;                     /* climbs over the locked Cullinan picture */
+  margin-top: calc(-1 * var(--cover));
+  min-height: var(--h-full);
+  overflow: hidden;
+  background: var(--sand);
+  color: var(--grey-8);
+}
+.about__wrap {
+  padding-bottom: 80px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+  padding-top: calc(var(--h-full) * 0.1713);   /* 185 / 1080 */
+}
+.about__body { grid-column: 1 / span 5; }
+.about__title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.about__copy { margin-top: 30px; }
+.about__copy + .about__copy { margin-top: 26px; }
+.about__copy a {
+  color: var(--ultraviolet);
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.about .more { margin-top: 40px; }
+.about .actions { margin-top: 66px; }
+.about__media {
+  grid-column: 7 / span 6;
+  aspect-ratio: 645 / 710;
+  overflow: hidden;
+}
+.about__media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* --- 6 · Black Badge ----------------------------------------------------------- */
+
+/* Sticky, like Cullinan: the mark, the line and the button hold their place
+   while the film rises into its frame underneath them. */
+.badge {
+  --tail: 40vh;
+  position: relative;
+  display: flow-root;
+  z-index: 0;
+  min-height: calc(var(--h-full) + var(--tail) + var(--cover));
+  background: var(--grey-8);
+  color: var(--white);
+}
+/* The film owns the screen from the first pixel of the section and stays
+   pinned to the top; the copy holds on it and then leaves over it. No rise:
+   it left a black band above the frame with the copy floating in it. */
+.badge__frame {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: var(--h-full);
+  overflow: hidden;
+  background: var(--grey-8) url("../assets/img/black-badge-poster.webp") center / cover;
+}
+.badge__track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: calc(var(--h-full) * 0.5750 + var(--tail) * 0.5);   /* the copy holds, then leaves */
+  padding-top: calc(var(--h-full) * 0.3407);            /* 368 / 1080 */
+}
+.badge__film {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Not in the file: a pool of shadow behind the copy, which otherwise lands
+   on the lit grille and daytime-running lights of the car in the film. */
+.badge__frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 46% 22% at 50% 44%, rgba(10, 10, 12, 0.58) 0%, rgba(10, 10, 12, 0.5) 60%, rgba(10, 10, 12, 0) 100%);
+  pointer-events: none;
+}
+.badge__body {
+  position: sticky;
+  top: calc(var(--h-full) * 0.3407);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 24px;
+  text-align: center;
+}
+.badge__mark { width: 236px; }
+.badge__mark svg { width: 236px; height: 18.87px; }
+.badge__copy {
+  max-width: 870px;
+  margin-top: 34px;
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.badge__cta { margin-top: 34px; }
+
+/* --- 7 · Service & Parts ---------------------------------------------------- */
+
+.service {
+  position: relative;
+  z-index: 2;                     /* climbs over the locked Black Badge film */
+  margin-top: calc(-1 * var(--cover));
+  min-height: var(--h-full);
+  overflow: hidden;
+  background: var(--mist);
+  color: var(--black);
+}
+.service__wrap {
+  padding-bottom: 80px;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  align-items: start;
+  padding-top: calc(var(--h-full) * 0.1944);   /* 210 / 1080 */
+}
+.service__media {
+  grid-column: 1 / span 6;
+  margin-top: 1px;
+  aspect-ratio: 645 / 659;
+  overflow: hidden;
+}
+.service__media img { width: 100%; height: 100%; object-fit: cover; }
+.service__body { grid-column: 8 / span 5; }
+.service__title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.service__copy { margin-top: 30px; }
+.service__copy + .service__copy { margin-top: 26px; }
+.service .more { margin-top: 40px; }
+.service__contacts {
+  margin-top: 30px;
+  padding: 10px 0;
+  border-top: 1px solid var(--rule-mist);
+  border-bottom: 0.5px solid var(--rule-mist-end);
+  font-size: var(--small);
+  line-height: var(--small-lead);
+}
+.service__lines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 55px;
+  margin-top: 10px;
+}
+.service__lines dd a { text-decoration: none; }
+.service__lines dd a:hover { text-decoration: underline; }
+.service .actions { margin-top: 62px; }
+
+/* Both pairs are exactly five columns wide in the file (195 + 30 + 307).
+   Where the measure allows, they stay on one line and may lean a few pixels
+   into the gutter rather than break. */
+@media (min-width: 1366px) {
+  .about .actions,
+  .service .actions { flex-wrap: nowrap; }
+}
+
+/* --- Card ----------------------------------------------------------------- */
+
+/* Every card in a row is the same height, and its parts sit on the same
+   lines: the title keeps three lines of room whether it needs them or not,
+   the price row keeps the mark's height, and the colour is pinned to the foot. */
+.card { display: flex; list-style: none; }
+.card[hidden] { display: none; }
+.card__link {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color var(--dur-press) var(--ease-out);
+}
+.card__link:hover,
+.card__link:focus-visible { border-color: rgba(255, 255, 255, 0.4); }
+.card__link:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+.card__media {
+  position: relative;
+  display: block;
+  margin: -1px -1px 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--grey-8);
+}
+/* The lease flag — where the dealer offers a payment, it is pinned to the
+   photograph as a pill in the page's own control register. */
+.card__flag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 14px;
+  border-radius: var(--radius-pill);
+  background: var(--purple-spirit);   /* holds on the white studio and on a dark car alike */
+  color: var(--white);
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1400ms var(--ease-out);
+}
+.card__link:hover .card__media img { transform: scale(1.03); }
+
+/* the facts line: STOCK · MILEAGE, mono-quiet, 14px floor */
+.card__facts {
+  display: flex;
+  gap: 24px;
+  padding: 20px 20px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-support);
+}
+.card__facts div { display: flex; gap: 6px; }
+.card__facts dd { color: var(--white); }
+
+.card__title {
+  min-height: calc(2em * var(--h4-lead) + 20px + 6px + 22px);   /* two lines of the name and the place, reserved */
+  padding: 20px 20px 0;
+  font-weight: 300;
+  font-size: var(--h4);
+  line-height: var(--h4-lead);
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+/* "in West Palm Beach, FL" — its own line, small and quiet, under the name */
+.card__place {
+  display: block;
+  margin-top: 6px;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--ink-support);
+}
+
+/* The price is a tag — a hairline pill on the same line as the mark — so it
+   reads as a figure, not as another line of copy. The label inside says which
+   figure it is: MSRP on a new car, Braman Price on a pre-owned one. */
+.card__row {
+  display: flex;
+  flex-wrap: wrap;                                /* on a narrow card the mark drops under the tag rather than pushing past the edge */
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 16px;
+  min-height: calc(49px + 12px + 20px);           /* the mark's height, reserved on every card */
+  padding: 12px 20px 20px;
+}
+.card__price {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-pill);
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: border-color var(--dur-press) var(--ease-out), background-color var(--dur-press) var(--ease-out);
+}
+.card__price-label { color: var(--ink-support); }
+.card__price-value { color: var(--white); font-size: var(--body); letter-spacing: 0.02em; }
+.card__link:hover .card__price,
+.card__link:focus-visible .card__price { border-color: var(--white); }
+
+/* The foot is the colour: exterior over interior, in the facts register,
+   pinned under its own hairline. Every card carries it, so every card ends
+   on the same line. The lease, where the dealer offers one, is the flag on
+   the photograph and nowhere else. */
+.card__spec {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: auto;                               /* pinned to the foot */
+  padding: 18px 20px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 18px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-support);
+}
+.card__spec div { display: flex; gap: 8px; }
+.card__spec dt { flex: none; width: 74px; }
+.card__spec dd { color: var(--white); }
+
+/* The Provenance mark — the client's own lockup (monogram, the name, the
+   certified pre-owned line), supplied 2026-09-17 as a vector at the file's
+   107 × 49, inlined in each pre-owned card with its paths on currentColor,
+   so it draws in every browser with no mask and no second request. (".cpo",
+   not ".badge": that name is the Black Badge section in the shared
+   stylesheet.) */
+.cpo {
+  display: block;
+  flex: none;
+  margin-left: auto;
+  width: 107px;
+  height: 49px;
+  color: var(--ink-legal);
+  transition: color var(--dur-press) var(--ease-out);
+}
+.card__link:hover .cpo { color: var(--ink-support); }
+
+/* --- 7b · Inventory -------------------------------------------------------------
+   The older frame's inventory section ("1920", 192:1231): three of the
+   cards on the cinematic ground under a pool of purple, and one Sky pill,
+   VIEW ALL. Version #2 dropped the section; Alex asked for it back under
+   Service (2026-09-17). The head is not in the file — the title and the
+   count give the section a name in the page's outline. The three cars are
+   the first three of the listing's featured order, generated by
+   tools/build-cards.py from data/inventory.json. */
+
+.stock {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: var(--h-full);
+  overflow: hidden;
+  /* File: a pool of purple falling from above the frame's top edge. */
+  background:
+    radial-gradient(100% 62% at 50% -10%, rgba(109, 48, 167, 0.5) 0%, rgba(80, 40, 116, 0.6) 22%, rgba(40, 20, 50, 0.8) 46%, rgba(21, 21, 21, 0) 78%),
+    var(--grey-8);
+  color: var(--white);
+}
+.stock .wrap { padding: 120px 0 88px; }
+.stock__title {
+  margin-bottom: 48px;
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+/* The rail: three cards to a screen, clipped at the measure, snapping a
+   card at a time; an arrow in each margin moves it a screen. The row keeps
+   a little room above and below so a focus ring is not clipped — an
+   entrance that starts below the row is, and that is the staircase. */
+.stock__rail { position: relative; }
+.stock__row {
+  display: flex;
+  gap: var(--gutter);
+  margin: -6px 0;
+  padding: 6px 0;
+  list-style: none;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+.stock__row::-webkit-scrollbar { display: none; }
+.stock__row .card {
+  flex: 0 0 calc((100% - 2 * var(--gutter)) / 3);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+.stock__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: none;
+  color: var(--white);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: border-color var(--dur-press) var(--ease-out), opacity var(--dur-press) var(--ease-out);
+}
+.stock__arrow svg { width: 16px; height: 10px; }
+.stock__arrow--prev { left: calc(-1 * var(--page-margin) / 2 - 24px); }
+.stock__arrow--prev svg { transform: rotate(90deg); }
+.stock__arrow--next { right: calc(-1 * var(--page-margin) / 2 - 24px); }
+.stock__arrow--next svg { transform: rotate(-90deg); }
+.stock__arrow:hover,
+.stock__arrow:focus-visible { border-color: var(--white); outline: none; }
+.stock__arrow:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+.stock__arrow[disabled] { opacity: 0.3; cursor: default; }
+.stock .actions { justify-content: center; margin-top: 64px; }   /* file: 65 under the cards */
+.btn--sky { background: var(--sky); color: var(--black); }
+.btn--sky:hover { background: #a3b8bd; }
+
+/* --- 8 · Sell ------------------------------------------------------------------ */
+
+.sell {
+  position: relative;
+  min-height: var(--h-full);
+  overflow: hidden;
+  background: var(--grey-8);
+  color: var(--white);
+}
+.sell__field { position: absolute; inset: 0; }
+.sell__field img {
+  position: absolute;
+  left: 0;
+  top: -7.76%;               /* 83.8 / 1080 */
+  width: 100%;
+  height: 118.5%;
+  object-fit: cover;
+}
+/* File: two shades rising from the floor and one falling from the top. */
+.sell__field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--shade), var(--shade), var(--shade-up);
+}
+.sell__wrap { padding: calc(var(--h-full) * 0.325) 0 80px; }   /* 351 / 1080 */
+.sell__head { max-width: 645px; }
+.sell__title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.sell__lede,
+.sell__points h3 {
+  font-weight: 300;
+  font-size: var(--h4);
+  line-height: var(--h4-lead);
+  letter-spacing: var(--h4-track);
+  text-transform: uppercase;
+}
+.sell__lede { margin-top: 12px; }
+.sell__points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  margin-top: 39px;
+}
+.sell__points li::before {
+  content: "";
+  display: block;
+  width: 31px;
+  height: 2px;
+  background: var(--violet);
+  transform-origin: left;
+  transition: transform var(--dur-press) var(--ease-out);
+}
+.sell__points li:hover::before,
+.sell__points li:focus-within::before { transform: scaleX(2.4); }
+.sell__points h3 { margin-top: 22px; }
+.sell__points p {
+  margin-top: 15px;
+  color: var(--copy-sell);
+  letter-spacing: 0;
+}
+.sell .actions { margin-top: 59px; }
+
+/* --- 9 · News ------------------------------------------------------------------ */
+
+.news {
+  position: relative;
+  min-height: var(--h-full);
+  overflow: hidden;
+  /* File: radial fill, centre 1145 × 506, radii ≈ 710 × 400. */
+  background: radial-gradient(ellipse 37% 37% at 59.6% 46.9%, #2b1d39 0%, #201927 50%, var(--grey-8) 100%);
+  color: var(--white);
+}
+.news .wrap { padding: calc(var(--h-full) * 0.2241) 0 80px; }   /* 242 / 1080 */
+.news__title {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-align: center;
+  text-transform: uppercase;
+}
+.news__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 24px;
+  /* The file insets each column by 10; pulled back out so the pictures and
+     the headlines sit on the page grid, not 10px inside it. */
+  margin: 38px -10px 0;
+}
+.story {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto auto auto 1fr auto;
+  min-height: 519px;
+  padding: 0 10px;
+}
+.story + .story::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -12px;
+  border-left: 0.5px solid var(--rule-news);
+}
+.story__image {
+  align-self: start;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 286 / 204;
+  object-fit: cover;
+}
+.story__title {
+  min-height: 78px;
+  margin-top: 24px;
+  font-weight: 300;
+  font-size: var(--body);
+  line-height: var(--body-lead);
+  text-transform: uppercase;
+}
+.story__excerpt {
+  display: -webkit-box;
+  margin-top: 20px;
+  overflow: hidden;
+  color: var(--copy-news);
+  font-size: var(--small);
+  line-height: var(--small-lead);
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+.story .more { grid-row: 5; margin: 29px 0 18px; justify-self: start; }
+
+/* --- Footer --------------------------------------------------------------------- */
+
+.footer {
+  position: relative;
+  z-index: 1;                     /* above the listing's fixed pool of light, which is painted from inside <main> */
+  padding: 144px var(--chrome-margin) 65px;
+  background: var(--plum);
+  color: var(--white);
+}
+.footer__name {
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.footer__contacts {
+  display: grid;
+  grid-template-columns: 338px 225px 225px auto;
+  margin-top: 29px;
+  padding: 26px 0 28px;
+  border-top: 0.5px solid var(--rule-plum);
+  border-bottom: 0.5px solid var(--rule-plum);
+}
+.footer__contacts a { text-decoration: none; }
+.footer__contacts a:hover { text-decoration: underline; }
+.footer__routes {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  column-gap: 23px;
+  margin-top: 51px;
+  padding-bottom: 46px;
+  border-bottom: 0.5px solid var(--rule-plum);
+}
+.footer__routes h2 {
+  font-weight: 400;
+  font-size: var(--button);
+  line-height: 22px;
+  letter-spacing: var(--button-track);
+  text-transform: uppercase;
+}
+.footer__routes ul { margin-top: 28px; }
+.footer__routes a {
+  display: inline-block;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 26px;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--copy-footer);
+  transition: color var(--dur-press) var(--ease-out);
+}
+.footer__routes a:hover { color: var(--white); }
+.footer__legal {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 185px;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 20px;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--copy-legal);
+}
+
+/* ==========================================================================
+   Motion — desktop. The prototype's Default → Variant2 pairs, triggered when a
+   section reaches the middle of the viewport (where the prototype's pointer
+   met it) and never reversed. Exists only under html.motion.
+   ========================================================================== */
+
+@media (min-width: 1024px) {
+
+  /* Hero — 1s ease-out on load. */
+  .motion .hero__model,
+  .motion .hero__title,
+  .motion .hero__cta {
+    transition:
+      transform var(--dur-enter) var(--ease-out),
+      opacity var(--dur-enter) var(--ease-out),
+      background-color var(--dur-press) var(--ease-out);
+  }
+  .ready .hero:not(.is-in) .hero__model { transform: translateY(calc(-34 * var(--u))); }
+  .ready .hero:not(.is-in) .hero__title { transform: translateY(calc(26 * var(--u))); opacity: 0; }
+  .ready .hero:not(.is-in) .hero__cta { transform: translateY(calc(70 * var(--u))); opacity: 0; }
+
+  /* Ghost and Spectre — the photograph rises inside its half, the copy
+     arrives from the side it faces, the buttons lift. */
+  .split--ghost { --reveal: var(--dur-arrive); }
+  .split--spectre { --reveal: var(--dur-arrive); }
+  .motion .split__media,
+  .motion .split__title,
+  .motion .split__copy,
+  .motion .split__primary,
+  .motion .split__secondary {
+    transition:
+      transform var(--reveal) var(--ease-gentle),
+      opacity var(--reveal) var(--ease-gentle),
+      color var(--reveal) var(--ease-out),
+      background-color var(--dur-press) var(--ease-out);
+  }
+  .ready .split--ghost:not(.is-in) .split__media { transform: translateY(71.04%); opacity: 0; }
+  .ready .split--ghost:not(.is-in) .split__title { transform: translateX(calc(485 * var(--u))); opacity: 0; }
+  .ready .split--ghost:not(.is-in) .split__copy { transform: translateX(calc(241 * var(--u))); opacity: 0; }
+  .ready .split--ghost:not(.is-in) .split__primary { transform: translateY(calc(106 * var(--u))); opacity: 0; }
+  .ready .split--ghost:not(.is-in) .split__secondary { transform: translateY(calc(152 * var(--u))); opacity: 0; }
+
+  .ready .split--spectre:not(.is-in) .split__media { transform: translateY(41.98%); opacity: 0; }
+  .ready .split--spectre:not(.is-in) .split__title { transform: translateX(calc(-460 * var(--u))); opacity: 0; color: var(--white); }
+  .ready .split--spectre:not(.is-in) .split__copy { transform: translateX(calc(-239 * var(--u))); opacity: 0; color: var(--grey-86); }
+  .ready .split--spectre:not(.is-in) .split__primary { transform: translateY(calc(126 * var(--u))); opacity: 0; }
+  .ready .split--spectre:not(.is-in) .split__secondary { transform: translateY(calc(223 * var(--u))); opacity: 0; }
+
+  /* Cullinan — the field settles upward as it lights; title and copy close
+     on each other; the buttons close on the centre. */
+  .motion .cullinan__image,
+  .motion .cullinan__shade-low,
+  .motion .cullinan__shade-floor,
+  .motion .cullinan__title,
+  .motion .cullinan__copy,
+  .motion .cullinan__primary,
+  .motion .cullinan__secondary {
+    transition:
+      transform var(--dur-arrive) var(--ease-gentle),
+      opacity var(--dur-arrive) var(--ease-gentle),
+      background-color var(--dur-press) var(--ease-out);
+  }
+  .ready .cullinan:not(.is-in) .cullinan__image { transform: translateY(10.83%); opacity: 0; }
+  .ready .cullinan:not(.is-in) .cullinan__shade-low,
+  .ready .cullinan:not(.is-in) .cullinan__shade-floor { opacity: 0; }
+  .ready .cullinan:not(.is-in) .cullinan__title { transform: translateY(calc(-59 * var(--u))); opacity: 0; }
+  .ready .cullinan:not(.is-in) .cullinan__copy { transform: translateY(calc(57 * var(--u))); opacity: 0; }
+  .ready .cullinan:not(.is-in) .cullinan__primary { transform: translateX(calc(-112 * var(--u))); opacity: 0; }
+  .ready .cullinan:not(.is-in) .cullinan__secondary { transform: translateX(calc(113 * var(--u))); opacity: 0; }
+
+  /* Sell — the three columns step in from the left, one after another, and
+     the two calls rise from below once they have landed. */
+  .motion .sell__points li,
+  .motion .sell .actions .btn {
+    transition:
+      transform var(--dur-enter) var(--ease-out),
+      opacity var(--dur-enter) var(--ease-out),
+      background-color var(--dur-press) var(--ease-out);
+  }
+  .motion .sell.is-in .sell__points li:nth-child(2) { transition-delay: var(--step-enter); }
+  .motion .sell.is-in .sell__points li:nth-child(3) { transition-delay: calc(var(--step-enter) * 2); }
+  .motion .sell.is-in .actions .btn:first-child { transition-delay: calc(var(--step-enter) * 3); }
+  .motion .sell.is-in .actions .btn:last-child { transition-delay: calc(var(--step-enter) * 4); }
+  .ready .sell:not(.is-in) .sell__points li:nth-child(1) { transform: translateX(-32px); opacity: 0; }
+  .ready .sell:not(.is-in) .sell__points li:nth-child(2) { transform: translateX(-48px); opacity: 0; }
+  .ready .sell:not(.is-in) .sell__points li:nth-child(3) { transform: translateX(-64px); opacity: 0; }
+  .ready .sell:not(.is-in) .actions .btn { transform: translateY(40px); opacity: 0; }
+
+  /* Inventory — the three cards climb in from below, one after another,
+     and VIEW ALL rises once they have landed. */
+  .motion .stock .card,
+  .motion .stock .actions .btn {
+    transition:
+      transform var(--dur-enter) var(--ease-out),
+      opacity var(--dur-enter) var(--ease-out),
+      background-color var(--dur-press) var(--ease-out);
+  }
+  .motion .stock.is-in .card:nth-child(2) { transition-delay: var(--step-enter); }
+  .motion .stock.is-in .card:nth-child(3) { transition-delay: calc(var(--step-enter) * 2); }
+  .motion .stock.is-in .actions .btn { transition-delay: calc(var(--step-enter) * 3); }
+  .ready .stock:not(.is-in) .card { transform: translateY(40px); opacity: 0; }
+  .ready .stock:not(.is-in) .actions .btn { transform: translateY(40px); opacity: 0; }
+
+  /* About and Service — only the photograph travels. */
+  .motion .about__media {
+    transition: transform var(--dur-arrive) var(--ease-gentle), opacity var(--dur-arrive) var(--ease-gentle);
+  }
+  .ready .about:not(.is-in) .about__media { transform: translateX(calc(533 * var(--u))); opacity: 0; }
+  .motion .service__media {
+    transition: transform var(--dur-arrive) var(--ease-gentle), opacity var(--dur-arrive) var(--ease-gentle);
+  }
+  .ready .service:not(.is-in) .service__media { transform: translateX(calc(-450 * var(--u))); opacity: 0; }
+
+  /* Black Badge — the frame opens from 991 × 557 to the full screen; after a
+     0.4s hold the mark, the line and the button rise into place. */
+  .motion .badge__frame {
+    transition: transform var(--dur-arrive) var(--ease-gentle), opacity var(--dur-arrive) var(--ease-gentle);
+  }
+  .ready .badge:not(.is-in) .badge__frame {
+    transform: translate(-2.734%, 20.6%) scale(0.5161);
+    opacity: 0;
+  }
+  /* The block climbs in from below as a staircase — each tread starts further
+     down and later — and leaves the same way (see [data-exit].is-out). */
+  .motion .badge__mark,
+  .motion .badge__copy,
+  .motion .badge__cta {
+    transition:
+      transform var(--dur-enter) var(--ease-out) 0ms,
+      opacity var(--dur-enter) var(--ease-out) 0ms,
+      background-color var(--dur-press) var(--ease-out) 0ms;
+  }
+  .motion .badge.is-in .badge__copy { transition-delay: var(--step-enter), var(--step-enter), 0ms; }
+  .motion .badge.is-in .badge__cta { transition-delay: calc(var(--step-enter) * 2), calc(var(--step-enter) * 2), 0ms; }
+  .ready .badge:not(.is-in) .badge__mark { transform: translateY(56px); opacity: 0; }
+  .ready .badge:not(.is-in) .badge__copy { transform: translateY(76px); opacity: 0; }
+  .ready .badge:not(.is-in) .badge__cta { transform: translateY(96px); opacity: 0; }
+}
+
+/* ==========================================================================
+   Header below 1200 — the seven routes no longer fit beside the mark.
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  /* Below this the seven routes stop fitting beside the mark: the bar is
+     always the condensed one. */
+  .header,
+  .header[data-scrolled] { height: 84px; --logo-w: 120px; }
+  .header__aside,
+  .header[data-scrolled] .header__aside { top: 50%; transform: translateY(-50%); }
+  .header__nav {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .header__toggle { display: block; }
+
+}
+
+/* ==========================================================================
+   Under 1024 — recomposed. One column; photographs keep the whole car;
+   the films sit in their own frames and the copy follows them.
+   ========================================================================== */
+
+@media (max-width: 1023px) {
+  :root { --gutter: 16px; }
+
+  .hero { min-height: 560px; }
+  .hero__body { top: auto; bottom: 18%; }
+  .hero__title { margin-top: 12px; }
+  .hero__cta { margin-top: 32px; }
+  .hero__scrim {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0) 60%);
+  }
+  .film-toggle { right: 16px; bottom: 16px; }
+
+  /* The section fills the screen; the panel takes what the photograph leaves
+     and centres its copy in it, rather than leaving a tail of empty ground. */
+  .split { display: flex; flex-direction: column; min-height: 100svh; }
+  .split__media { flex: none; }
+  .split__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+  .split__shade { display: none; }
+  .split__wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+    padding: 48px 0;
+  }
+  .split__copy { max-width: none; }
+  .split .actions { margin-top: 40px; }
+
+  .cullinan { --tail: 40svh; --frame: max(640px, 100svh); height: calc(var(--frame) + var(--tail)); }
+  .cullinan__field { height: var(--frame); }
+  .cullinan__image { top: 0; height: 100%; }
+  .cullinan__track { height: calc(430px + var(--tail) * 0.5); padding-top: 112px; }
+  .cullinan__body { top: 112px; }
+  .cullinan .actions { margin-top: 36px; }
+
+  .about,
+  .service { min-height: 100svh; margin-top: 0; }
+  .cullinan,
+  .badge { --cover: 0px; }
+  .about__wrap,
+  .service__wrap { display: block; padding: 96px 0 80px; }
+  .about__media,
+  .service__media { margin-top: 48px; }
+  .about .actions,
+  .service .actions { margin-top: 48px; }
+  .service__media { margin: 0 0 48px; }
+
+  .badge { --tail: 0px; display: flex; flex-direction: column; min-height: 100svh; }
+  .badge__frame { position: relative; flex: none; height: auto; aspect-ratio: 16 / 9; }
+  .badge__frame::after { display: none; }
+  .badge__track {
+    position: static;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    padding: 0;
+  }
+  .badge__body { position: static; padding: 40px 24px; }
+  .badge__copy { margin-top: 28px; }
+  .badge__cta { margin-top: 32px; }
+  .badge .film-toggle { top: calc(100vw * 9 / 16 - 60px); bottom: auto; }
+
+  .stock { min-height: 100svh; }
+  .stock .wrap { padding: 96px 0 80px; }
+  .stock .actions { margin-top: 48px; }
+
+  .sell { min-height: 100svh; }
+  .sell__field img { top: 0; height: 100%; }
+  .sell__wrap { padding: 128px 0 96px; }
+  .sell__points { grid-template-columns: none; row-gap: 40px; }
+  .sell .actions { margin-top: 48px; }
+
+  .news { min-height: 100svh; background: radial-gradient(ellipse 90% 40% at 60% 40%, #2b1d39 0%, #201927 50%, var(--grey-8) 100%); }
+  .news .wrap { padding: 96px 0; }
+  .news__list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 56px; }
+  .story { min-height: 0; padding: 0; }
+  .story:nth-child(odd)::before { display: none; }
+  .story .more { margin-bottom: 0; }
+
+  .footer { padding: 88px var(--chrome-margin) 40px; }
+  .footer__contacts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; }
+  .footer__routes { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 40px; margin-top: 40px; }
+  .footer__routes ul { margin-top: 16px; }
+  .footer__legal { flex-direction: column; margin-top: 64px; }
+}
+
+@media (max-width: 1339px) {
+  /* three cards to a row leave 260px inside each: the mark steps down so
+     it stays beside the tag and every card keeps the same height */
+  .cpo { width: 84px; height: 38px; }
+}
+@media (max-width: 1259px) {
+  .cpo { width: 76px; height: 35px; }
+}
+@media (max-width: 1199px) {
+  .stock__row .card { flex-basis: calc((100% - var(--gutter)) / 2); }
+}
+@media (max-width: 1023px) {
+  .stock__arrow { display: none; }
+  .stock__row {
+    gap: 20px;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 6px calc(50vw - 50%);
+    scroll-padding-left: calc(50vw - 50%);
+  }
+  .stock__row .card { flex-basis: min(345px, 82vw); }
+}
+
+@media (max-width: 767px) {
+  .header,
+  .header[data-scrolled] { height: 72px; --logo-w: 108px; }
+  .header__utility { display: none; }
+  .header[data-open] .header__utility { display: flex; }
+
+  .actions .btn { flex: 1 1 100%; min-width: 0; }
+
+  .news__list { grid-template-columns: none; }
+  .story + .story::before { display: none; }
+  .story + .story { padding-top: 48px; border-top: 0.5px solid var(--rule-news); }
+  .news__list { row-gap: 48px; }
+
+  .footer__routes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Mobile motion — authored, not the desktop travel scaled down: the copy steps
+   in from the left, the photographs lift a short way. */
+@media (max-width: 1023px) {
+  .motion [data-reveal] .split__media,
+  .motion [data-reveal] .about__media,
+  .motion [data-reveal] .service__media,
+  .motion [data-reveal] .badge__frame,
+  .motion [data-reveal] .cullinan__image {
+    transition: transform var(--dur-arrive) var(--ease-out), opacity var(--dur-arrive) var(--ease-out);
+  }
+  .motion [data-reveal] .split__title,
+  .motion [data-reveal] .split__copy,
+  .motion [data-reveal] .split .actions,
+  .motion [data-reveal] .cullinan__title,
+  .motion [data-reveal] .cullinan__copy,
+  .motion [data-reveal] .cullinan .actions,
+  .motion [data-reveal] .badge__mark,
+  .motion [data-reveal] .badge__copy,
+  .motion [data-reveal] .badge__cta {
+    transition: transform var(--dur-enter) var(--ease-out), opacity var(--dur-enter) var(--ease-out);
+  }
+  .motion [data-reveal] .split__copy,
+  .motion [data-reveal] .cullinan__copy,
+  .motion [data-reveal] .badge__copy { transition-delay: var(--step-enter); }
+  .motion [data-reveal] .split .actions,
+  .motion [data-reveal] .cullinan .actions,
+  .motion [data-reveal] .badge__cta { transition-delay: calc(var(--step-enter) * 2); }
+
+  .ready [data-reveal]:not(.is-in) .split__media,
+  .ready [data-reveal]:not(.is-in) .about__media,
+  .ready [data-reveal]:not(.is-in) .service__media { transform: translateY(24px); opacity: 0; }
+  .ready [data-reveal]:not(.is-in) .badge__frame,
+  .ready [data-reveal]:not(.is-in) .cullinan__image { opacity: 0; }
+  .ready [data-reveal]:not(.is-in) .split__title,
+  .ready [data-reveal]:not(.is-in) .cullinan__title,
+  .ready [data-reveal]:not(.is-in) .badge__mark { transform: translateX(-32px); opacity: 0; }
+  .ready [data-reveal]:not(.is-in) .split__copy,
+  .ready [data-reveal]:not(.is-in) .cullinan__copy,
+  .ready [data-reveal]:not(.is-in) .badge__copy { transform: translateX(-48px); opacity: 0; }
+  .ready [data-reveal]:not(.is-in) .split .actions,
+  .ready [data-reveal]:not(.is-in) .cullinan .actions,
+  .ready [data-reveal]:not(.is-in) .badge__cta { transform: translateX(-64px); opacity: 0; }
+
+  .motion .hero__title,
+  .motion .hero__cta { transition: transform var(--dur-enter) var(--ease-out), opacity var(--dur-enter) var(--ease-out); }
+  .motion .hero__cta { transition-delay: var(--step-enter); }
+  .ready .hero:not(.is-in) .hero__title { transform: translateY(16px); opacity: 0; }
+  .ready .hero:not(.is-in) .hero__cta { transform: translateY(24px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}
