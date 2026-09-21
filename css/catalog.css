@@ -178,30 +178,6 @@ main > section { position: relative; min-height: 100svh; }
 .motion.ready .dir.is-in .stand--screen { opacity: 1; transition: opacity 1.2s var(--ease-out) 0.15s, transform 2s var(--ease-out) 0.15s; }
 .motion.ready .dir.is-in .stand--phone { opacity: 1; transition: opacity 1s var(--ease-out) 0.55s, transform 1.8s var(--ease-out) 0.55s; }
 
-/* --- 5 · The close ------------------------------------------------------------ */
-
-.deck-close { padding-block: var(--floor); display: flex; align-items: center; }
-.deck-close__page { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); column-gap: clamp(3rem, 5vw, 5rem); align-items: center; }
-.deck-close__title { font-weight: 300; font-size: min(var(--h1), 9vh); line-height: 1.1; text-transform: uppercase; max-width: 12ch; }
-.deck-close .actions { margin-top: 32px; }
-.deck-close__index { display: grid; border-top: 1px solid rgba(255, 255, 255, 0.24); }
-.deck-close__index a {
-  display: grid; grid-template-columns: 3rem 1fr auto; align-items: baseline; gap: 24px;
-  padding-block: clamp(0.75rem, 2vh, 1.25rem); border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--ink-quiet); text-decoration: none; transition: color var(--dur-press) var(--ease-out);
-}
-.deck-close__index a:hover { color: var(--white); }
-.deck-close__index a > span:first-child { font-size: var(--label); letter-spacing: 0.03em; color: var(--ink-support); font-variant-numeric: tabular-nums; }
-.deck-close__index a > span:nth-child(2) { font-size: var(--h3); line-height: var(--h3-lead); text-transform: uppercase; }
-.deck-close__index a > i { width: 28px; height: 1px; background: currentColor; align-self: center; transition: width var(--dur-press) var(--ease-out); }
-.deck-close__index a:hover > i { width: 44px; }
-
-/* --- The colophon ---------------------------------------------------------------- */
-
-.deck-colophon { padding: 64px 0 calc(var(--floor) + 24px); background: var(--purple-spirit); text-align: center; }
-.deck-colophon__name { font-size: var(--small); line-height: var(--small-lead); color: var(--ink-quiet); }
-.deck-colophon__legal { margin-top: 16px; font-size: var(--label); line-height: 22px; color: var(--ink-support); }
-
 /* --- Responsive --------------------------------------------------------------- */
 
 @media (max-height: 800px) and (min-width: 1024px) {
@@ -221,7 +197,6 @@ main > section { position: relative; min-height: 100svh; }
   .stand--phone { right: 0; bottom: 24px; transform: rotateY(-8deg); }
   .stand--screen { transform: rotateY(-6deg); }
   .deck__foot { display: none; }
-  .deck-close__page { grid-template-columns: 1fr; row-gap: 40px; }
 }
 @media (max-width: 767px) {
   .deck__title { display: none; }

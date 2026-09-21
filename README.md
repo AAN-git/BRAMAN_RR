@@ -384,14 +384,14 @@ strip rise, on the page's clock.
 
 ## The catalog (`catalog.html`)
 
-The presentation of the site, for the retailer: five screens, one gesture
+The presentation of the site, for the retailer: four screens, one gesture
 each. A cover on the film's poster, then three chapters — Home, Inventory,
 Vehicle page — each a number, a name, one line and a button, with the page
 itself running inside a screen and a phone on the floor (the live page in an
 iframe, scaled to the pane via `--zoom`, scrolled slowly by the deck while
-the chapter is on screen; the pointer turns the devices a few degrees), then
-"Tell us what to change" with the three links, and a colophon. The same
-transport as the Bentley deck, rebuilt on this site's tokens and buttons.
+the chapter is on screen; the pointer turns the devices a few degrees). It
+ends on the vehicle page — no closing screen, no colophon (Alex, 2026-09-21).
+The same transport as the Bentley deck, rebuilt on this site's tokens.
 
 Where there is no fine pointer, or motion is reduced, or the viewport is
 under 1024px, the still of each page's first screen stands in
