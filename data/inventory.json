@@ -3,8 +3,8 @@
     "https://www.bramanrolls-roycepalmbeach.com/search/new-rolls-royce/?mk=54&tp=new",
     "https://www.bramanrolls-roycepalmbeach.com/search/used-rolls-royce/?mk=54&tp=used"
   ],
-  "captured": "2026-09-17",
-  "note": "Thirty vehicles as listed by the dealer: 21 new (two pages) and 9 used. price = the headline figure on the dealer card, labelled by price_label — \"MSRP\" on a new car, \"Braman Price\" on a used one; sale_price_with_fees adds the $1,189 dealer service charge and $514 electronic filing charge; msrp and lease only where the dealer shows them; special marks the dealer's \"Internet Special\". Photos are the dealer's first listing photo, cut to 4:3; stock_image marks a manufacturer render used where the dealer has no photograph. Each car carries its first six dealer photographs (assets/img/vdp/<stock>/) with their sources, the dealer's \"popular features\" list, and the spec fields from the JSON-LD; dealer_url is the listing, page is this site's vehicle page. spin: 24 frames of the dealer's 360 (DealerMade Next HD viewer, \"Middle\" camera, evenly picked from ~54 positions), 1000 wide; spin_source records the picks.",
+  "captured": "2026-09-21",
+  "note": "Twenty-nine vehicles (30 on 2026-09-17; RC-77216A sold) as listed by the dealer: 21 new (two pages) and 8 used. price = the headline figure on the dealer card, labelled by price_label — \"MSRP\" on a new car, \"Braman Price\" on a used one; sale_price_with_fees adds the $1,189 dealer service charge and $514 electronic filing charge; msrp and lease only where the dealer shows them; special marks the dealer's \"Internet Special\". Photos are the dealer's first listing photo, cut to 4:3; stock_image marks a manufacturer render used where the dealer has no photograph. Each car carries its first six dealer photographs (assets/img/vdp/<stock>/) with their sources, the dealer's \"popular features\" list, and the spec fields from the JSON-LD; dealer_url is the listing, page is this site's vehicle page. spin: 24 frames of the dealer's 360 (DealerMade Next HD viewer, \"Middle\" camera, evenly picked from ~54 positions), 1000 wide; spin_source records the picks. price_disclaimer is the dealer's own \"Details\" text beside every price; lease_terms (and lease_terms_raw) are the dealer's \"Details\" beside each lease, parsed.",
   "vehicles": [
     {
       "stock": "R77580T",
@@ -4616,7 +4616,7 @@
       "sale_price_with_fees": 534153,
       "msrp": 532450,
       "lease_month": 5693,
-      "lease_plus_tax": false,
+      "lease_plus_tax": true,
       "special": true,
       "image": "assets/img/inventory/r65004.webp",
       "image_source": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/1267/40929532670/New-2026-Rolls-Royce-Ghost-BlackBadge-ID40929532670-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTAzLTEyLzEtMjcxMjgxMDItNjliMzlkNTUyNjFhNi5qcGc=",
@@ -4828,261 +4828,21 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
-    },
-    {
-      "stock": "RC-77216A",
-      "vin": "SLA13HA01TU233477",
-      "year": 2026,
-      "model": "Cullinan",
-      "model_full": "Cullinan",
-      "trim": "",
-      "exterior": "English White",
-      "interior": "Black",
-      "mileage": 3436,
-      "condition": "used",
-      "price_label": "Braman Price",
-      "price": 427900,
-      "sale_price_with_fees": null,
-      "msrp": 486950,
-      "lease_month": 6486,
-      "lease_plus_tax": false,
-      "special": false,
-      "image": "assets/img/inventory/rc-77216a.webp",
-      "image_source": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/1267/53506886757/Used-2026-Rolls-Royce-Cullinan-ID53506886757-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzEtMjYxNjUyNjYtNmE5NWQyNzdiYWE4ZS5qcGc=",
-      "stock_image": false,
-      "title": "Used 2026 Rolls-Royce Cullinan",
-      "drivetrain": "AWD",
-      "engine": "V12",
-      "transmission": "ZF 8-Speed Automatic",
-      "mpg": "12",
-      "doors": "4",
-      "fuel": "Gasoline",
-      "description": "We are honored to offer you this Exceptional 2026 Rolls-Royce Cullinan, finished in English White over Black Leather inside. Luxurious appointments in every facet of this Jewel of the road!",
-      "features": [
-        "Sat Radio",
-        "Premium Sound",
-        "Reverse Camera",
-        "Heated Seat",
-        "Heated Steering Wheel",
-        "Navigation",
-        "Sunroof/Moonroof",
-        "Keyless Entry"
-      ],
-      "dealer_url": "https://www.bramanrolls-roycepalmbeach.com/auto/used-2026-rolls-royce-cullinan/124849233/",
-      "page": "vehicles/rc-77216a.html",
-      "photos": [
-        {
-          "src": "assets/img/vdp/rc-77216a/1.webp",
-          "thumb": "assets/img/vdp/rc-77216a/1-thumb.webp",
-          "w": 1400,
-          "h": 1050
-        },
-        {
-          "src": "assets/img/vdp/rc-77216a/2.webp",
-          "thumb": "assets/img/vdp/rc-77216a/2-thumb.webp",
-          "w": 1400,
-          "h": 1050
-        },
-        {
-          "src": "assets/img/vdp/rc-77216a/3.webp",
-          "thumb": "assets/img/vdp/rc-77216a/3-thumb.webp",
-          "w": 1400,
-          "h": 1050
-        },
-        {
-          "src": "assets/img/vdp/rc-77216a/4.webp",
-          "thumb": "assets/img/vdp/rc-77216a/4-thumb.webp",
-          "w": 1400,
-          "h": 1050
-        },
-        {
-          "src": "assets/img/vdp/rc-77216a/5.webp",
-          "thumb": "assets/img/vdp/rc-77216a/5-thumb.webp",
-          "w": 1400,
-          "h": 1050
-        },
-        {
-          "src": "assets/img/vdp/rc-77216a/6.webp",
-          "thumb": "assets/img/vdp/rc-77216a/6-thumb.webp",
-          "w": 1400,
-          "h": 1050
-        }
-      ],
-      "photo_sources": [
-        "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_1400/v1/dvp/1267/53506886757/Used-2026-Rolls-Royce-Cullinan-ID53506886757-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzEtMjYxNjUyNjYtNmE5NWQyNzdiYWE4ZS5qcGc=",
-        "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_1400/v1/dvp/1267/53506886760/Used-2026-Rolls-Royce-Cullinan-ID53506886760-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzItMjYxNjUyNjYtNmE5NWQyNzg0NWQ3MS5qcGc=",
-        "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_1400/v1/dvp/1267/53506886763/Used-2026-Rolls-Royce-Cullinan-ID53506886763-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzMtMjYxNjUyNjYtNmE5NWQyNzhkYTI3Ni5qcGc=",
-        "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_1400/v1/dvp/1267/53506886766/Used-2026-Rolls-Royce-Cullinan-ID53506886766-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzQtMjYxNjUyNjYtNmE5NWQyNzk1MmYxNy5qcGc=",
-        "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_1400/v1/dvp/1267/53506886769/Used-2026-Rolls-Royce-Cullinan-ID53506886769-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzUtMjYxNjUyNjYtNmE5NWQyN2EyODczMy5qcGc=",
-        "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_1400/v1/dvp/1267/53506886772/Used-2026-Rolls-Royce-Cullinan-ID53506886772-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTMxLzYtMjYxNjUyNjYtNmE5NWQyN2FiOTliYS5qcGc="
-      ],
-      "photo_count_at_dealer": 74,
-      "equipment": [
-        "Sat Radio",
-        "Premium Sound",
-        "Reverse Camera",
-        "Heated Seat",
-        "Heated Steering Wheel",
-        "Navigation",
-        "Sunroof/Moonroof",
-        "Keyless Entry",
-        "ABS brakes",
-        "Alloy wheels",
-        "Compass",
-        "DVD-Audio",
-        "Electronic Stability Control",
-        "Front Bucket Seats",
-        "Front dual zone A/C",
-        "Heated door mirrors",
-        "Heated Front Bucket Seats",
-        "Heated front seats",
-        "Heated rear seats",
-        "Illuminated entry",
-        "Leather Seat Trim",
-        "Low tire pressure warning",
-        "Navigation System",
-        "Power moonroof",
-        "Power passenger seat",
-        "Rear dual zone A/C",
-        "Remote keyless entry",
-        "Split folding rear seat",
-        "Traction control",
-        "Ventilated front seats"
-      ],
-      "description_raw": "We are honored to offer you this Exceptional 2026 Rolls-Royce Cullinan, finished in English White over Black Leather inside. Luxurious appointments in every facet of this Jewel of the road! For more information, please contact us at 561-926-9111.ABS brakes, Alloy wheels, Compass, DVD-Audio, Electronic Stability Control, Front Bucket Seats, Front dual zone A/C, Heated door mirrors, Heated Front Bucket Seats, Heated front seats, Heated rear seats, Illuminated entry, Leather Seat Trim, Low tire pressure warning, Navigation System, Power moonroof, Power passenger seat, Rear dual zone A/C, Remote keyless entry, Split folding rear seat, Traction control, Ventilated front seats.CARFAX One-Owner.2026Rolls-RoyceCullinanV12ZF 8-Speed AutomaticAWDProvenance Certified Pre-Owned Details:  * Transferable Warranty  * Warranty Deductible: $0  * Vehicle History  * Roadside Assistance  * Multipoint Point Inspection  * Limited Warranty Up to 24 Months, Unlimited Mileage. No limitations to the vehicle Model Year age (from MY04 onward) & 100,000 miles & clean CarFax are required for the programPriced below KBB Fair Purchase Price!",
-      "notes": [
-        "CARFAX one-owner",
-        "Priced below KBB Fair Purchase Price"
-      ],
-      "spin": [
-        "assets/img/spin/rc-77216a/00.webp",
-        "assets/img/spin/rc-77216a/01.webp",
-        "assets/img/spin/rc-77216a/02.webp",
-        "assets/img/spin/rc-77216a/03.webp",
-        "assets/img/spin/rc-77216a/04.webp",
-        "assets/img/spin/rc-77216a/05.webp",
-        "assets/img/spin/rc-77216a/06.webp",
-        "assets/img/spin/rc-77216a/07.webp",
-        "assets/img/spin/rc-77216a/08.webp",
-        "assets/img/spin/rc-77216a/09.webp",
-        "assets/img/spin/rc-77216a/10.webp",
-        "assets/img/spin/rc-77216a/11.webp",
-        "assets/img/spin/rc-77216a/12.webp",
-        "assets/img/spin/rc-77216a/13.webp",
-        "assets/img/spin/rc-77216a/14.webp",
-        "assets/img/spin/rc-77216a/15.webp",
-        "assets/img/spin/rc-77216a/16.webp",
-        "assets/img/spin/rc-77216a/17.webp",
-        "assets/img/spin/rc-77216a/18.webp",
-        "assets/img/spin/rc-77216a/19.webp",
-        "assets/img/spin/rc-77216a/20.webp",
-        "assets/img/spin/rc-77216a/21.webp",
-        "assets/img/spin/rc-77216a/22.webp",
-        "assets/img/spin/rc-77216a/23.webp"
-      ],
-      "spin_source": {
-        "viewer": "DealerMade Next HD viewer on the dealer listing",
-        "positions": 55,
-        "picked": [
-          [
-            0,
-            "7ce5e920-1c6c-4cd4-a22f-dc6e3509efce"
-          ],
-          [
-            2,
-            "338ab774-2da1-4ef0-a97f-c216fe01774f"
-          ],
-          [
-            5,
-            "ebd8202c-0f43-49b1-a3b2-d96b3e9f23e9"
-          ],
-          [
-            7,
-            "5a069da2-9991-4300-802c-dbe06a10439c"
-          ],
-          [
-            9,
-            "51a24828-dcfb-4f49-82dd-f9c549b1c0db"
-          ],
-          [
-            11,
-            "e9f5718f-24c0-4b7f-85a6-cc317c62e775"
-          ],
-          [
-            14,
-            "dfa1355e-d8a5-4dd5-ae09-04983fae9229"
-          ],
-          [
-            16,
-            "bb5a2843-18ea-4d6f-8126-dd0e3214fa87"
-          ],
-          [
-            18,
-            "25296b23-0111-4309-9afc-b5e65ac0b497"
-          ],
-          [
-            21,
-            "6d1ac5c0-ec61-4a01-b509-c684b388f976"
-          ],
-          [
-            23,
-            "31eb0c16-f5ea-471d-9cb0-70bd9e5350a2"
-          ],
-          [
-            25,
-            "45efc057-92e9-4f53-b775-1cb9fcbe2370"
-          ],
-          [
-            28,
-            "1d19de37-0e46-446b-8880-9021cd83b86f"
-          ],
-          [
-            30,
-            "b840bae9-b51e-4ade-bd99-b21f0c059cf9"
-          ],
-          [
-            32,
-            "6e66ba0d-e5a3-476d-81e3-cfdca7b9fa8e"
-          ],
-          [
-            34,
-            "b2ffa4c4-02c9-44dc-b306-3e5482e8b721"
-          ],
-          [
-            37,
-            "e3a89c84-a4c5-4021-b3cb-da2ddd6e2944"
-          ],
-          [
-            39,
-            "9e13ded1-f354-4a92-b06c-412f0b46a770"
-          ],
-          [
-            41,
-            "58a1cc86-0732-4d7c-b407-859bfb36816f"
-          ],
-          [
-            44,
-            "e8f9a5a9-89e5-40e6-9d48-a4553cddbd59"
-          ],
-          [
-            46,
-            "b911335c-de8e-4ac8-bd30-b497280fcd1b"
-          ],
-          [
-            48,
-            "e24164c6-d745-4101-ac86-143df43ea04d"
-          ],
-          [
-            50,
-            "26bc1e97-e769-46aa-a197-cb810c769d18"
-          ],
-          [
-            53,
-            "a3e80c3d-b3a6-49c3-b3a7-68824b20d679"
-          ]
-        ],
-        "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "lease_terms_raw": "Sales Price $477,000 Term 51 months Due At Signing $58,995.00 Payment: $5693.00+tax Disclaimer: Special Closed-End Lease Offer Stock #R65004 ,2026 Rolls Royce Ghost Black Badge , Residual at lease end $205,000+tax , purchase option fee $795.00 ,51 Month Term. 5000 Miles Per Year Allowed with Mileage Overage Charged at $2.50 per miles, Lessee is responsible for excess wear and tear charges as wells as a $795.00 Disposition Fee. Offer does not include sales tax, registration fees, and title agency fees .No security deposit required. Offer does include 1st month's payment, dealer and bank fees. Offer is based on Tier 1 credit with underwriting approval via Rolls-Royce Financial Services . Deal # 507918 One Car Only ,Must take delivery by 09/30/2026 or while supplies last.",
+      "lease_terms": {
+        "sales_price": 477000,
+        "term_months": 51,
+        "due_at_signing": 58995,
+        "payment": "5693.00+tax",
+        "residual": 205000,
+        "purchase_option_fee": 795,
+        "miles_per_year": 5000,
+        "overage_per_mile": "2.50",
+        "disposition_fee": 795,
+        "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
+        "deal_number": "507918",
+        "offer_ends": "09/30/2026"
       }
     },
     {
@@ -5097,12 +4857,12 @@
       "mileage": 26815,
       "condition": "used",
       "price_label": "Braman Price",
-      "price": 257900,
-      "sale_price_with_fees": 259603,
+      "price": 247900,
+      "sale_price_with_fees": 249603,
       "msrp": null,
       "lease_month": 3873,
-      "lease_plus_tax": false,
-      "special": false,
+      "lease_plus_tax": true,
+      "special": true,
       "image": "assets/img/inventory/rc-p35618.webp",
       "image_source": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/1267/50004953915/Used-2023-Rolls-Royce-Ghost-BlackBadge-ID50004953915-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA3LTA5LzEtMTE5NjY4NDktNmE1MDgwNjc3Y2U1ZC5qcGc=",
       "stock_image": false,
@@ -5298,6 +5058,21 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "lease_terms_raw": "Term 48 Months Due At Signing $39,995.00 Payment: $3873.00+tax Disclaimer: Special Closed-End Lease Offer Stock #RC-P35618 , 2023 Rolls Royce Ghost,Residual at lease end $119,956.00. Purchase option fee $795.00 ,48 Month Term. 2500 Miles Per Year Allowed with Mileage Overage Charged at $2.50 per miles, Lessee is responsible for excess wear and tear charges as wells as a $795.00 Disposition Fee. Offer does not include sales tax registration fees, and title agency fees .No security deposit required. Offer does include 1st month's payment, dealer and bank fees. Offer is based on Tier 1 credit with underwriting approval via Rolls-Royce Financial Services . Deal # 505806. One Car Only Must take delivery by 9/30/2026",
+      "lease_terms": {
+        "sales_price": null,
+        "term_months": 48,
+        "due_at_signing": 39995,
+        "payment": "3873.00+tax",
+        "residual": 119956,
+        "purchase_option_fee": 795,
+        "miles_per_year": 2500,
+        "overage_per_mile": "2.50",
+        "disposition_fee": 795,
+        "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
+        "deal_number": "505806",
+        "offer_ends": null
       }
     },
     {
@@ -5317,7 +5092,7 @@
       "msrp": null,
       "lease_month": 6749,
       "lease_plus_tax": true,
-      "special": false,
+      "special": true,
       "image": "assets/img/inventory/rc-36766a.webp",
       "image_source": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/1267/53425950492/Used-2025-Rolls-Royce-Cullinan-ID53425950492-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTA4LTI5LzEtMjAwMDM4OTctNmE5MmY2NDBhZGEyOS5qcGc=",
       "stock_image": false,
@@ -5533,6 +5308,21 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "lease_terms_raw": "Term 48 Months Due At Signing $59,995.00 Payment: $6749.00+tax Disclaimer: Special Closed-End Lease Offer Stock #RC-36766a, 2025 Rolls Royce Cullinan ,Residual at lease end $199,543.00 Purchase option fee $795.00 ,48 Month Term. 5000 Miles Per Year Allowed with Mileage Overage Charged at $2.50 per miles, Lessee is responsible for excess wear and tear charges as wells as a $795.00 Disposition Fee. Offer does not include sales tax registration fees, and title agency fees .No security deposit required. Offer does include 1st month's payment, dealer and bank fees. Offer is based on Tier 1 credit with underwriting approval via Rolls-Royce Financial Services . Deal # 507927 . One Car Only Must take delivery by 09/30/2026 or while supplies last.",
+      "lease_terms": {
+        "sales_price": null,
+        "term_months": 48,
+        "due_at_signing": 59995,
+        "payment": "6749.00+tax",
+        "residual": 199543,
+        "purchase_option_fee": 795,
+        "miles_per_year": 5000,
+        "overage_per_mile": "2.50",
+        "disposition_fee": 795,
+        "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
+        "deal_number": "507927",
+        "offer_ends": "09/30/2026"
       }
     },
     {
@@ -6036,11 +5826,11 @@
       "condition": "used",
       "price_label": "Braman Price",
       "price": 396900,
-      "sale_price_with_fees": null,
+      "sale_price_with_fees": 398603,
       "msrp": 481150,
       "lease_month": 4279,
       "lease_plus_tax": true,
-      "special": false,
+      "special": true,
       "image": "assets/img/inventory/r65386.webp",
       "image_source": "https://cloudflareimages.dealereprocess.com/resrc/images/c_limit,fl_lossy,w_auto/v1/dvp/1267/42125166842/Used-2026-Rolls-Royce-Ghost-ID42125166842-aHR0cDovL2ltYWdlcy51bml0c2ludmVudG9yeS5jb20vdXBsb2Fkcy9waG90b3MvMC8yMDI2LTAzLTI2LzEtMjczMzAwMjYtNjljNjEyM2FiOGQ4OC5qcGc=",
       "stock_image": false,
@@ -6251,6 +6041,21 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "lease_terms_raw": "Term 51 Months Due At Signing $49,995.00 Payment: $4279.00+tax Disclaimer: Special Closed-End Lease Offer Stock #R65386 2026 Rolls Royce Ghost ,Residual at lease end $195,472.50 Purchase option fee $795.00 ,51 Month Term. 2500 Miles Per Year Allowed with Mileage Overage Charged at $2.50 per miles, Lessee is responsible for excess wear and tear charges as wells as a $795.00 Disposition Fee. Offer does not include sales tax registration fees, and title agency fees .No security deposit required. Offer does include 1st month's payment, dealer and bank fees. Offer is based on Tier 1 credit with underwriting approval via Rolls-Royce Financial Services . Deal # 506751 One Car Only Must take delivery by 09/31/2026 or while supplies last.",
+      "lease_terms": {
+        "sales_price": null,
+        "term_months": 51,
+        "due_at_signing": 49995,
+        "payment": "4279.00+tax",
+        "residual": 195472,
+        "purchase_option_fee": 795,
+        "miles_per_year": 2500,
+        "overage_per_mile": "2.50",
+        "disposition_fee": 795,
+        "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
+        "deal_number": "506751",
+        "offer_ends": "09/31/2026"
       }
     },
     {
@@ -6928,5 +6733,10 @@
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
       }
     }
-  ]
+  ],
+  "captured_history": [
+    "2026-09-17",
+    "2026-09-21"
+  ],
+  "price_disclaimer": "* Prices and payments do not include tax, tag, title. The Sales Price includes a $1,189 dealer service charge, and a $514 electronic filing charge. These charges represent cost and profit to dealer. The MSRP is the manufacturer's suggested retail price, and is not binding on either Dealer or Customer. All pricing and details are believed to be accurate, but we do not warrant or guarantee such accuracy. Vehicle information is based off standard equipment and may vary from vehicle to vehicle. All specifications, prices and equipment are subject to change without notice. Call or email for complete details and information. Displayed fuel efficiency is based on applicable EPA mileage ratings. Use for comparison purposes only. Your actual mileage will vary, depending on how you drive and maintain your vehicle, the driving conditions, battery pack age/condition and other factors. While every effort has been made to ensure display of accurate data, the vehicle listings within this website may not reflect all accurate vehicle items. Accessories and color may vary. The vehicle photo displayed may be an example only. Vehicle Photos may not match exact vehicles. All inventory listed is subject to prior sale. Please confirm vehicle price and details with Dealership."
 }
