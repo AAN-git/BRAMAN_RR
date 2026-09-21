@@ -473,13 +473,13 @@
 .film__arrow:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
 /* at rest the photographs stand alone; the arrows show while the rail moves
    sideways (script sets data-scrolling), under the pointer, and on focus */
-.film__arrow { opacity: 0; }
-.film[data-scrolling] .film__arrow,
-.film__arrow:hover,
-.film__arrow:focus-visible { opacity: 1; }
+.film__nav .film__arrow { opacity: 0; }
+.film[data-scrolling] .film__nav .film__arrow,
+.film__nav .film__arrow:hover,
+.film__nav .film__arrow:focus-visible { opacity: 1; }
 .film__arrow[disabled] { cursor: default; }
-.film[data-scrolling] .film__arrow[disabled],
-.film__arrow[disabled]:hover { opacity: 0.3; }
+.film[data-scrolling] .film__nav .film__arrow[disabled],
+.film__nav .film__arrow[disabled]:hover { opacity: 0.3; }
 
 /* --- The plate: four facts, large ------------------------------------------- */
 
@@ -1025,6 +1025,8 @@ body[data-drawer] { overflow: hidden; }
 .lightbox__arrow { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(21, 21, 21, 0.4); }
 .lightbox__arrow--prev { left: 24px; }
 .lightbox__arrow--next { right: 24px; }
+.lightbox__arrow--prev svg { transform: rotate(90deg); }
+.lightbox__arrow--next svg { transform: rotate(-90deg); }
 .lightbox__count {
   position: absolute;
   left: 50%;

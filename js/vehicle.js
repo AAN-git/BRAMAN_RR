@@ -347,14 +347,14 @@
 
     /* Share: the networks, the link, the device's own sheet */
     var url = encodeURIComponent(location.href), text = encodeURIComponent(carName + " at Rolls-Royce Motor Cars Palm Beach");
-    var image = document.querySelector(".film__open img");
+    var lead = document.querySelector(".film__open img");   /* the first photograph, for Pinterest */
     var targets = {
       facebook: "https://www.facebook.com/sharer/sharer.php?u=" + url,
       x: "https://twitter.com/intent/tweet?text=" + text + "&url=" + url,
       whatsapp: "https://wa.me/?text=" + text + "%20" + url,
       telegram: "https://t.me/share/url?url=" + url + "&text=" + text,
       linkedin: "https://www.linkedin.com/sharing/share-offsite/?url=" + url,
-      pinterest: "https://pinterest.com/pin/create/button/?url=" + url + "&description=" + text + (image ? "&media=" + encodeURIComponent(image.src) : "")
+      pinterest: "https://pinterest.com/pin/create/button/?url=" + url + "&description=" + text + (lead ? "&media=" + encodeURIComponent(lead.src) : "")
     };
     Object.keys(targets).forEach(function (k) { var a = drawer.querySelector('[data-share="' + k + '"]'); if (a) a.href = targets[k]; });
     var copy = drawer.querySelector('[data-share="copy"]');
