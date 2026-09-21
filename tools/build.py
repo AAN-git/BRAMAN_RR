@@ -14,7 +14,7 @@ d = json.load(open(ROOT + 'data/inventory.json'))
 # until told otherwise. Every build stamps the css and js links with the
 # build time; a new address is a new file to the cache.
 import datetime
-STAMP = datetime.datetime.now().strftime('%Y%m%d%H%M')
+STAMP = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 def stamp(html):
     html = re.sub(r'((?:href|src)="(?:\.\./)?(?:css|js)/[^"?]+)(?:\?v=[^"]*)?"', lambda m: m.group(1) + '?v=' + STAMP + '"', html)
     return html

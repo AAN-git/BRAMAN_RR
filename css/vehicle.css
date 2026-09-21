@@ -675,18 +675,15 @@
 }
 .pricing:target { border-top-color: var(--white); }
 .pricing > .vdp__h { border-bottom: 0; padding-bottom: 0; color: var(--white); }
-.pricing__body {
+/* the lease plate keeps a column's width so its rows read; the disclaimer
+   runs the full measure beneath it */
+.pricing__body { margin-top: 32px; }
+.pricing__rows {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   column-gap: var(--gutter);
-  row-gap: 48px;
-  align-items: start;
-  margin-top: 32px;
 }
-.pricing__lease { grid-column: 1 / span 6; }
-.pricing__legal { grid-column: 8 / span 5; }
-.pricing__lease:only-child ~ .pricing__legal,
-.pricing__body > .pricing__legal:first-child { grid-column: 1 / span 7; }
+.pricing__lease + .pricing__legal { margin-top: 48px; }
 .pricing__mark { margin-left: 3px; color: var(--ink-support); }
 .pricing__rows { margin-top: 4px; }
 .pricing__rows dd { text-align: right; }
@@ -996,8 +993,7 @@ body[data-drawer] { overflow: hidden; }
   .vdp__body { display: block; margin-top: 48px; }
   .offer { position: static; margin-top: 56px; padding: 24px 20px 28px; }
   .pricing { margin-top: 64px; }
-  .pricing__body { display: block; }
-  .pricing__legal { margin-top: 40px; }
+  .pricing__lease + .pricing__legal { margin-top: 40px; }
   .vdp__enquire { display: block; margin-top: 64px; padding-bottom: 80px; }
   .enquire { margin-top: 28px; }
   .vdp__bar { display: block; }
@@ -1022,6 +1018,7 @@ body[data-drawer] { overflow: hidden; }
   .vdp__lede { max-width: none; }
   .vdp__features { grid-template-columns: none; }
   .vdp__provenance-body { grid-template-columns: none; row-gap: 20px; }
+  .pricing__rows { grid-template-columns: none; }
   .enquire { grid-template-columns: none; padding: 24px 20px; }
   .enquire__send .btn { width: 100%; }
   .lightbox__arrow { width: 40px; height: 40px; }
