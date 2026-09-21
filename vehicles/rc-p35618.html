@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="../assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="../assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="../css/tokens.css?v=20260921110307">
-<link rel="stylesheet" href="../css/main.css?v=20260921110307">
-<link rel="stylesheet" href="../css/vehicle.css?v=20260921110307">
+<link rel="stylesheet" href="../css/tokens.css?v=20260921110834">
+<link rel="stylesheet" href="../css/main.css?v=20260921110834">
+<link rel="stylesheet" href="../css/vehicle.css?v=20260921110834">
 <script>
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("motion");
@@ -89,7 +89,6 @@
       </div>
       <div class="vdp__figure">
         <p class="card__price vdp__price"><span class="card__price-label">Price</span> <span class="card__price-value">$247,900</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
-        <p class="vdp__lease">Lease $3,873 + tax / mo<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></p>
         <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
       </div>
     </header>
@@ -196,6 +195,15 @@
         </section>
       </div>
 
+      <div class="vdp__side">
+      <!-- The lease special: short, above the offer; the full terms are below -->
+      <aside class="special" aria-labelledby="special-title">
+        <p class="special__label" id="special-title">Lease special<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></p>
+        <p class="special__figure">$3,873 + tax <span>a month</span></p>
+        <p class="special__terms">48 months · $39,995 due at signing</p>
+        <p class="special__fine">Special closed-end lease offer on this one motor car. Tier 1 credit, subject to approval by Rolls-Royce Financial Services. Excludes sales tax, registration and title agency fees.</p>
+        <a class="special__route" href="#pricing">Full terms<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a>
+      </aside>
       <!-- The offer: the price, what sits around it, the two calls, the record. -->
       <aside class="offer" aria-label="The offer">
         <p class="offer__flag">Internet Special</p>
@@ -222,6 +230,7 @@
               <div><dt>Doors</dt><dd>4</dd></div>
         </dl>
       </aside>
+      </div>
     </div>
 
 
@@ -520,7 +529,7 @@
   </div>
 </footer>
 
-<script src="../js/main.js?v=20260921110307"></script>
-<script src="../js/vehicle.js?v=20260921110307"></script>
+<script src="../js/main.js?v=20260921110834"></script>
+<script src="../js/vehicle.js?v=20260921110834"></script>
 </body>
 </html>

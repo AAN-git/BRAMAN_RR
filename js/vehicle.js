@@ -407,7 +407,7 @@
   /* --- The bar ------------------------------------------------------------- */
   var bar = document.querySelector(".vdp__bar");
   var figure = document.querySelector(".vdp__figure");
-  var offer = document.querySelector(".offer");
+  var offer = document.querySelector(".vdp__side") || document.querySelector(".offer");
   var enquire = document.getElementById("enquire");
   if (bar && figure && offer) {
     bar.hidden = false;

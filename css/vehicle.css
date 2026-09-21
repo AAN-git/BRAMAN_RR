@@ -138,6 +138,61 @@
   white-space: nowrap;
 }
 
+/* --- The lease special ------------------------------------------------------
+   Short, above the offer, on the brand's purple like the lease flag on the
+   cards: the payment, the term, the money down, one line of conditions,
+   and the way to the full terms. */
+
+.special {
+  margin-bottom: 16px;
+  padding: 22px 28px 24px;
+  background: var(--purple-spirit);
+  color: var(--white);
+}
+.special__label {
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--pearl);
+}
+.special__label .asterisk { color: var(--pearl); }
+.special__figure {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+}
+.special__figure span { font-size: var(--body); color: rgba(255, 255, 255, 0.78); }
+.special__terms {
+  margin-top: 2px;
+  font-size: var(--body);
+  line-height: var(--body-lead);
+}
+.special__fine {
+  margin-top: 14px;
+  font-size: var(--label);
+  line-height: 22px;
+  color: rgba(255, 255, 255, 0.78);
+}
+.special__route {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  color: var(--white);
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-color var(--dur-press) var(--ease-out);
+}
+.special__route svg { width: 12px; height: 7px; transform: rotate(-90deg); }
+.special__route:hover { border-bottom-color: var(--white); }
+
 /* --- The photographs: a rail ---------------------------------------------------
    Frames at one height and their own proportion — nothing cropped, nothing
    letterboxed — the first on the measure, the rest running off the right
@@ -548,10 +603,12 @@
 /* the offer — the price first, then what surrounds it, then the record */
 /* the offer is a plate of its own, like the enquiry: a hairline all
    round and a breath of ground, so the right side stands apart */
-.offer {
+.vdp__side {
   grid-column: 9 / span 4;
   position: sticky;
   top: calc(112px + 24px);
+}
+.offer {
   padding: 28px 28px 32px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(255, 255, 255, 0.03);
@@ -991,7 +1048,8 @@ body[data-drawer] { overflow: hidden; }
   .plate div:nth-child(even) { padding-left: var(--gutter); border-left: 1px solid rgba(255, 255, 255, 0.12); }
   .plate div:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, 0.12); }
   .vdp__body { display: block; margin-top: 48px; }
-  .offer { position: static; margin-top: 56px; padding: 24px 20px 28px; }
+  .vdp__side { position: static; margin-top: 56px; }
+  .offer { padding: 24px 20px 28px; }
   .pricing { margin-top: 64px; }
   .pricing__lease + .pricing__legal { margin-top: 40px; }
   .vdp__enquire { display: block; margin-top: 64px; padding-bottom: 80px; }
@@ -1006,6 +1064,7 @@ body[data-drawer] { overflow: hidden; }
   .drawer__panel { padding: 24px 20px 32px; }
   .vdp__head { margin-top: 20px; padding-bottom: 20px; }
   .vdp__figure { width: 100%; max-width: none; justify-content: flex-start; }
+  .special { padding: 18px 20px 20px; }
   .vdp__confirm { width: 100%; }
   .film__launch-ring { width: 80px; height: 80px; font-size: var(--body); }
   .film { --frame: clamp(220px, 40vh, 400px); }

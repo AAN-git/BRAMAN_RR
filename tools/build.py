@@ -200,6 +200,29 @@ def vehicle_page(v):
               </div>''', open_=False)
     gallery_note = f'{v["photo_count_at_dealer"]} photographs at <a href="{e(v["dealer_url"])}">the dealer\'s listing</a>' if v['photo_count_at_dealer'] > len(photos) else ('Manufacturer image; the dealer has no photograph of this car' if v['stock_image'] else '')
 
+    # the lease special, short and above the offer: the payment, the term, the money
+    # down, one line of the dealer's conditions — the full terms stay below
+    special_box = ''
+    ltop = v.get('lease_terms') if v['lease_month'] else None
+    if v['lease_month']:
+        tax = ' + tax' if v['lease_plus_tax'] else ''
+        lines = [(money(v['lease_month']) + tax, 'a month')]
+        if ltop and ltop.get('term_months'): lines.append((str(ltop['term_months']), 'months'))
+        if ltop and ltop.get('due_at_signing'): lines.append((money(ltop['due_at_signing']), 'due at signing'))
+        conds = ['Special closed-end lease offer on this one motor car']
+        if ltop and ltop.get('credit'): conds.append('Tier 1 credit, subject to approval by Rolls-Royce Financial Services')
+        conds.append('excludes sales tax, registration and title agency fees')
+        if ltop and ltop.get('offer_ends'): conds.append(f"take delivery by {ltop['offer_ends']}")
+        terms_line = ' · '.join(f'{a} {b}' for a, b in lines[1:])
+        special_box = f'''<!-- The lease special: short, above the offer; the full terms are below -->
+      <aside class="special" aria-labelledby="special-title">
+        <p class="special__label" id="special-title">Lease special<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></p>
+        <p class="special__figure">{e(lines[0][0])} <span>{e(lines[0][1])}</span></p>
+        {f'<p class="special__terms">{e(terms_line)}</p>' if terms_line else ''}
+        <p class="special__fine">{e('. '.join(c[0].upper() + c[1:] for c in conds))}.</p>
+        <a class="special__route" href="#pricing">Full terms<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a>
+      </aside>'''
+
     # the disclosure: the dealer's own text, and the lease terms as the dealer states them
     disclaimer = d.get('price_disclaimer') or ''
     lt = v.get('lease_terms') if v['lease_month'] else None
@@ -304,7 +327,6 @@ def vehicle_page(v):
       </div>
       <div class="vdp__figure">
         <p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
-        {f'<p class="vdp__lease">{lease_text(v)}<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></p>' if v['lease_month'] else ''}
         <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
       </div>
     </header>
@@ -347,6 +369,8 @@ def vehicle_page(v):
         </section>
       </div>
 
+      <div class="vdp__side">
+      {special_box}
       <!-- The offer: the price, what sits around it, the two calls, the record. -->
       <aside class="offer" aria-label="The offer">
         {'<p class="offer__flag">Internet Special</p>' if v['special'] else ''}
@@ -364,6 +388,7 @@ def vehicle_page(v):
 {rows(facts)}
         </dl>
       </aside>
+      </div>
     </div>
 
 {pricing}

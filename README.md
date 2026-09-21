@@ -308,6 +308,13 @@ weight, so nothing led. The page now has a dominant and a rank:
   holds one line, and the figure beside it: the price tag and the lease flag;
 - **the plate** — the four facts a buyer asks first, large: exterior,
   interior, mileage, engine;
+- **the lease special**, on the cars that have one, in a Purple Spirit box
+  above the offer in the same sticky column (Alex: "short and noticeable,
+  at the top: the payment, how many months, and a disclaimer; the details
+  can stay below"): the monthly payment large, the term and the money down
+  on one line, one line of the dealer's conditions, and "Full terms" to the
+  pricing section. The lease flag that stood in the head has gone; the
+  cards keep theirs;
 - **the offer**, sticky at the right on a plate of its own (a hairline
   all round and a breath of ground, like the enquiry, so the right side
   stands apart from the copy) — the dealer's "Internet Special"
