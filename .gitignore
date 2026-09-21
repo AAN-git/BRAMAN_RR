@@ -14,3 +14,8 @@ BRAMAN_RR-handoff-SL11.zip
 # Reference screenshots dropped into the folder
 *.png
 !assets/**/*.png
+
+# Agent skills installed into the project (npx skills add …) — tooling, not the site
+.agents/
+.claude/
+skills-lock.json
