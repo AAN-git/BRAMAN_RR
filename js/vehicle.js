@@ -170,11 +170,17 @@
       if (ready) { done(); return; }
       if (loading) loading.hidden = false;
       spinFrames.forEach(function (src, i) {
-        var im = new Image();
-        im.onload = im.onerror = function () {
+        var im = new Image(), tries = 0;
+        var count = function () {
           loaded += 1;
           if (loadBar) loadBar.style.width = (loaded / n * 100) + "%";
           if (loaded === n) { ready = true; if (loading) loading.hidden = true; done(); }
+        };
+        im.onload = count;
+        im.onerror = function () {
+          /* a frame the host dropped (Pages answers 503 now and then): ask once more, then move on */
+          if (tries < 2) { tries += 1; window.setTimeout(function () { im.src = src + (src.indexOf("?") < 0 ? "?" : "&") + "r=" + tries; }, 600 * tries); return; }
+          count();
         };
         im.src = src; cache[i] = im;
       });
