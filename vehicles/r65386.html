@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="../assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="../assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="../css/tokens.css?v=20260921110834">
-<link rel="stylesheet" href="../css/main.css?v=20260921110834">
-<link rel="stylesheet" href="../css/vehicle.css?v=20260921110834">
+<link rel="stylesheet" href="../css/tokens.css?v=20260921111159">
+<link rel="stylesheet" href="../css/main.css?v=20260921111159">
+<link rel="stylesheet" href="../css/vehicle.css?v=20260921111159">
 <script>
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("motion");
@@ -249,6 +249,22 @@
       </div>
     </div>
 
+    <!-- Enquire -->
+    <section class="vdp__enquire" id="enquire" aria-labelledby="enq-title">
+      <div class="vdp__enquire-lede">
+        <h2 class="vdp__h" id="enq-title">Enquire</h2>
+        <p class="vdp__copy">A specialist will confirm availability and arrange a private viewing at 2801 Okeechobee Boulevard, West Palm Beach — or call <a href="tel:+15612038780">561-203-8780</a>.</p>
+        <p class="vdp__copy vdp__trade">Have a motor car to part with? <a class="route" href="#">Value your trade-in<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a></p>
+      </div>
+      <form class="enquire" onsubmit="return false" aria-labelledby="enq-form-title">
+        <p class="enquire__title" id="enq-form-title">Send an enquiry</p>
+        <label class="field"><span class="field__label">Name</span><input class="field__input" type="text" name="name" autocomplete="name" placeholder="Your name"></label>
+        <label class="field"><span class="field__label">Email</span><input class="field__input" type="email" name="email" autocomplete="email" placeholder="name@example.com"></label>
+        <label class="field"><span class="field__label">Telephone</span><input class="field__input" type="tel" name="tel" autocomplete="tel" placeholder="+1"></label>
+        <label class="field field--wide"><span class="field__label">Message</span><textarea class="field__input field__area" name="message" rows="3">I am interested in the 2026 Rolls-Royce Ghost, stock R65386.</textarea></label>
+        <div class="enquire__send"><button class="btn btn--white" type="submit">Send Enquiry</button></div>
+      </form>
+    </section>
 
     <!-- The disclosure: what the dealer says beside every price, and the
          lease as the dealer states it, on the page rather than behind a
@@ -277,23 +293,6 @@
           <p class="pricing__text">Prices and payments do not include tax, tag, title. The Sales Price includes a $1,189 dealer service charge, and a $514 electronic filing charge. These charges represent cost and profit to dealer. The MSRP is the manufacturer&#x27;s suggested retail price, and is not binding on either Dealer or Customer. All pricing and details are believed to be accurate, but we do not warrant or guarantee such accuracy. Vehicle information is based off standard equipment and may vary from vehicle to vehicle. All specifications, prices and equipment are subject to change without notice. Call or email for complete details and information. Displayed fuel efficiency is based on applicable EPA mileage ratings. Use for comparison purposes only. Your actual mileage will vary, depending on how you drive and maintain your vehicle, the driving conditions, battery pack age/condition and other factors. While every effort has been made to ensure display of accurate data, the vehicle listings within this website may not reflect all accurate vehicle items. Accessories and color may vary. The vehicle photo displayed may be an example only. Vehicle Photos may not match exact vehicles. All inventory listed is subject to prior sale. Please confirm vehicle price and details with Dealership.</p>
         </div>
       </div>
-    </section>
-
-    <!-- Enquire -->
-    <section class="vdp__enquire" id="enquire" aria-labelledby="enq-title">
-      <div class="vdp__enquire-lede">
-        <h2 class="vdp__h" id="enq-title">Enquire</h2>
-        <p class="vdp__copy">A specialist will confirm availability and arrange a private viewing at 2801 Okeechobee Boulevard, West Palm Beach — or call <a href="tel:+15612038780">561-203-8780</a>.</p>
-        <p class="vdp__copy vdp__trade">Have a motor car to part with? <a class="route" href="#">Value your trade-in<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a></p>
-      </div>
-      <form class="enquire" onsubmit="return false" aria-labelledby="enq-form-title">
-        <p class="enquire__title" id="enq-form-title">Send an enquiry</p>
-        <label class="field"><span class="field__label">Name</span><input class="field__input" type="text" name="name" autocomplete="name" placeholder="Your name"></label>
-        <label class="field"><span class="field__label">Email</span><input class="field__input" type="email" name="email" autocomplete="email" placeholder="name@example.com"></label>
-        <label class="field"><span class="field__label">Telephone</span><input class="field__input" type="tel" name="tel" autocomplete="tel" placeholder="+1"></label>
-        <label class="field field--wide"><span class="field__label">Message</span><textarea class="field__input field__area" name="message" rows="3">I am interested in the 2026 Rolls-Royce Ghost, stock R65386.</textarea></label>
-        <div class="enquire__send"><button class="btn btn--white" type="submit">Send Enquiry</button></div>
-      </form>
     </section>
   </div>
 
@@ -546,7 +545,7 @@
   </div>
 </footer>
 
-<script src="../js/main.js?v=20260921110834"></script>
-<script src="../js/vehicle.js?v=20260921110834"></script>
+<script src="../js/main.js?v=20260921111159"></script>
+<script src="../js/vehicle.js?v=20260921111159"></script>
 </body>
 </html>

@@ -343,8 +343,8 @@ weight, so nothing led. The page now has a dominant and a rank:
   styling to fit our design") and put on the page rather than behind a
   click: Braman shows an "ⓘ Details" popover beside the price and beside
   the lease; here the price tag, the lease flag and the offer's labels
-  carry an asterisk that is a link to a section between the offer and the
-  enquiry. In it, the lease terms as the dealer states them (term, due at
+  carry an asterisk that is a link to a section under the enquiry, before the
+  three more cars. In it, the lease terms as the dealer states them (term, due at
   signing, monthly payment, residual, purchase option fee, mileage and
   overage, disposition fee, credit tier, deal number, delivery-by date) as
   a plate of rows with the dealer's own lease disclaimer under it, verbatim;

@@ -723,8 +723,8 @@
    asterisks by the price and the lease land here; arriving lights the rule. */
 
 .pricing {
-  margin-top: 96px;
-  padding-top: 48px;
+  margin-top: 0;
+  padding: 48px 0 112px;
   border-top: 1px solid rgba(255, 255, 255, 0.24);
   scroll-margin-top: calc(112px + 24px);
   outline: none;
@@ -765,7 +765,7 @@
   column-gap: var(--gutter);
   align-items: start;
   margin-top: 96px;
-  padding: 48px 0 112px;
+  padding: 48px 0 96px;
   border-top: 1px solid rgba(255, 255, 255, 0.24);
 }
 .vdp__enquire-lede { grid-column: 1 / span 4; }
@@ -1050,7 +1050,7 @@ body[data-drawer] { overflow: hidden; }
   .vdp__body { display: block; margin-top: 48px; }
   .vdp__side { position: static; margin-top: 56px; }
   .offer { padding: 24px 20px 28px; }
-  .pricing { margin-top: 64px; }
+  .pricing { padding-bottom: 80px; }
   .pricing__lease + .pricing__legal { margin-top: 40px; }
   .vdp__enquire { display: block; margin-top: 64px; padding-bottom: 80px; }
   .enquire { margin-top: 28px; }

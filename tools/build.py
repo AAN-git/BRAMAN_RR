@@ -391,8 +391,6 @@ def vehicle_page(v):
       </div>
     </div>
 
-{pricing}
-
     <!-- Enquire -->
     <section class="vdp__enquire" id="enquire" aria-labelledby="enq-title">
       <div class="vdp__enquire-lede">
@@ -409,6 +407,7 @@ def vehicle_page(v):
         <div class="enquire__send"><button class="btn btn--white" type="submit">Send Enquiry</button></div>
       </form>
     </section>
+{pricing}
   </div>
 
   <!-- More from the collection: the same model first. -->
