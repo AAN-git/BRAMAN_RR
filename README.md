@@ -161,7 +161,16 @@ the file, all Alex's calls (2026-09-17):
 - The title is the car's name; "in West Palm Beach, FL" is its own small,
   quiet line under it. The foot is the colour, exterior over interior. Every
   card carries it, so every card ends on the same line.
-- Every card links to the car's own page in `vehicles/`.
+- **The price stack under the tag, as the dealer's own card shows it**
+  (Alex, 2026-09-21: "on the SRP the prices need the same, like details"):
+  dealer service charge, electronic filing charge, sale price, and the
+  lease where there is one, as small rows on rules; then "Pricing details"
+  and the tag's asterisk, both to the car's page at `#pricing`. For that
+  the card stopped being one link: the photograph, facts and title are
+  the link to the car's page; the offer beneath them stands on its own
+  with its own routes (a link cannot hold links).
+- The card's photograph, facts and title link to the car's own page in
+  `vehicles/`.
 
 Above the grid: eyebrow, title, count, then **four picks on one line — Year,
 Make, Model, Sort by** — each a label over a rule with the choice on it.

@@ -835,21 +835,28 @@ a { color: inherit; }
 /* Every card in a row is the same height, and its parts sit on the same
    lines: the title keeps three lines of room whether it needs them or not,
    the price row keeps the mark's height, and the colour is pinned to the foot. */
-.card { display: flex; list-style: none; }
+/* The card is a column: the photograph, the facts and the title are the
+   link to the car's page; the offer beneath them stands on its own, with
+   its own routes to the pricing details; the colour is pinned to the foot. */
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  list-style: none;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: border-color var(--dur-press) var(--ease-out);
+}
+.card:hover,
+.card:focus-within { border-color: rgba(255, 255, 255, 0.4); }
 .card[hidden] { display: none; }
 .card__link {
   display: flex;
   flex-direction: column;
-  flex: 1;
   min-width: 0;
-  border: 1px solid rgba(255, 255, 255, 0.12);
   color: inherit;
   text-decoration: none;
-  transition: border-color var(--dur-press) var(--ease-out);
 }
-.card__link:hover,
-.card__link:focus-visible { border-color: rgba(255, 255, 255, 0.4); }
-.card__link:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+.card__link:focus-visible { outline: 2px solid var(--white); outline-offset: -3px; }
 
 .card__media {
   position: relative;
@@ -886,7 +893,7 @@ a { color: inherit; }
   object-fit: cover;
   transition: transform 1400ms var(--ease-out);
 }
-.card__link:hover .card__media img { transform: scale(1.03); }
+.card:hover .card__media img { transform: scale(1.03); }
 
 /* the facts line: STOCK · MILEAGE, mono-quiet, 14px floor */
 .card__facts {
@@ -928,15 +935,51 @@ a { color: inherit; }
 /* The price is a tag — a hairline pill on the same line as the mark — so it
    reads as a figure, not as another line of copy. The label inside says which
    figure it is: MSRP on a new car, Braman Price on a pre-owned one. */
+.card__offer { padding: 0 20px 20px; }
 .card__row {
   display: flex;
   flex-wrap: wrap;                                /* on a narrow card the mark drops under the tag rather than pushing past the edge */
   align-items: center;
   justify-content: space-between;
   gap: 12px 16px;
-  min-height: calc(49px + 12px + 20px);           /* the mark's height, reserved on every card */
-  padding: 12px 20px 20px;
+  min-height: calc(49px + 12px + 16px);           /* the mark's height, reserved on every card */
+  padding: 12px 0 16px;
 }
+/* the stack as the dealer's own card shows it: the charges, the sale price, the lease */
+.card__stack { margin: 0; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.card__stack div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.card__stack dt {
+  flex: none;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 20px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-support);
+}
+.card__stack dd {
+  margin: 0;
+  font-weight: 400;
+  font-size: var(--small);
+  line-height: 20px;
+  text-align: right;
+  color: var(--white);
+}
+.card__details {
+  display: inline-flex;
+  margin-top: 12px;
+  font-size: var(--label);
+  line-height: 22px;
+  color: var(--ink-support);
+  border-bottom-color: rgba(255, 255, 255, 0.24);
+}
+.card__details:hover { color: var(--white); }
 .card__price {
   display: inline-flex;
   align-items: center;
@@ -955,8 +998,7 @@ a { color: inherit; }
 }
 .card__price-label { color: var(--ink-support); }
 .card__price-value { color: var(--white); font-size: var(--body); letter-spacing: 0.02em; }
-.card__link:hover .card__price,
-.card__link:focus-visible .card__price { border-color: var(--white); }
+.card:hover .card__price { border-color: var(--white); }
 
 /* The foot is the colour: exterior over interior, in the facts register,
    pinned under its own hairline. Every card carries it, so every card ends
@@ -995,7 +1037,21 @@ a { color: inherit; }
   color: var(--ink-legal);
   transition: color var(--dur-press) var(--ease-out);
 }
-.card__link:hover .cpo { color: var(--ink-support); }
+.card:hover .cpo { color: var(--ink-support); }
+
+/* A route: one line with the chevron turned along the line of reading. */
+.route {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--white);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  transition: border-color var(--dur-press) var(--ease-out), color var(--dur-press) var(--ease-out);
+}
+.route svg { width: 12px; height: 7px; transform: rotate(-90deg); transition: transform var(--dur-press) var(--ease-out); }
+.route:hover { border-bottom-color: var(--white); }
+.route:hover svg { transform: rotate(-90deg) translateY(3px); }
 
 /* The asterisk beside a price is the mark of a disclosure: on a vehicle
    page it is a link to the pricing details, on a card it points to the

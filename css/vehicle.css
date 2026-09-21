@@ -704,19 +704,6 @@ a.carfax:hover { opacity: 1; }
 .offer__actions .btn { width: 100%; }
 .btn--ghost { border: 1px solid rgba(255, 255, 255, 0.4); color: var(--white); background: none; transition: border-color var(--dur-press) var(--ease-out); }
 .btn--ghost:hover { border-color: var(--white); }
-/* a route: one line with the chevron turned along the line of reading */
-.route {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--white);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-  transition: border-color var(--dur-press) var(--ease-out);
-}
-.route svg { width: 12px; height: 7px; transform: rotate(-90deg); transition: transform var(--dur-press) var(--ease-out); }
-.route:hover { border-bottom-color: var(--white); }
-.route:hover svg { transform: rotate(-90deg) translateY(3px); }
 .offer__route { margin-top: 20px; font-size: var(--small); line-height: var(--small-lead); text-align: center; }
 .vdp__trade { margin-top: 16px; }
 .offer__note {

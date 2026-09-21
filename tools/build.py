@@ -54,6 +54,13 @@ def card(v, p='', eager=False):
     alt = f'{v["exterior"]} {v["year"]} Rolls-Royce {v["model"]}' + (' — manufacturer image; the dealer has no photograph of this car' if v['stock_image'] else '')
     mark = ('\n              ' + MARK) if v['condition'] == 'used' else ''
     label = 'MSRP' if v['condition'] == 'new' else 'Price'
+    # the price stack as the dealer's own card shows it: the charges, the sale price, the lease
+    stack = []
+    if v['sale_price_with_fees']:
+        stack += [('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514'), ('Sale price', money(v['sale_price_with_fees']))]
+    if v['lease_month']:
+        stack += [('Lease', f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month")]
+    stack_html = '\n'.join(f'              <div><dt>{e(k)}</dt><dd>{val}</dd></div>' for k, val in stack)
     return f'''        <li class="card" data-condition="{v['condition']}" data-year="{v['year']}" data-price="{v['price']}" data-mileage="{v['mileage']}" data-model="{e(v['model'])}" data-trim="{e(v['trim'])}" data-stock="{e(v['stock'])}" data-vin="{e(v['vin'])}">
           <a class="card__link" href="{p}{v['page']}" aria-label="{e(v['title'])}, {label} {money(v['price'])}">
             <span class="card__media">{flag}<img src="{p}{v['image']}" width="840" height="630" loading="{'eager' if eager else 'lazy'}" decoding="async" alt="{e(alt)}"></span>
@@ -62,14 +69,20 @@ def card(v, p='', eager=False):
               <div><dt>Mileage</dt> <dd>{'{:,}'.format(v['mileage'])}</dd></div>
             </dl>
             <h2 class="card__title">{e(v['title'])} <span class="card__place">in West Palm Beach, FL</span></h2>
-            <div class="card__row">
-              <p class="card__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><span class="asterisk" aria-hidden="true">*</span></p>{mark}
-            </div>
-            <dl class="card__spec">
-              <div><dt>Exterior</dt> <dd>{e(v['exterior'])}</dd></div>
-              <div><dt>Interior</dt> <dd>{e(v['interior'])}</dd></div>
-            </dl>
           </a>
+          <div class="card__offer">
+            <div class="card__row">
+              <p class="card__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><a class="asterisk" href="{p}{v['page']}#pricing" aria-label="Pricing details">*</a></p>{mark}
+            </div>
+            <dl class="card__stack">
+{stack_html}
+            </dl>
+            <a class="card__details route" href="{p}{v['page']}#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a>
+          </div>
+          <dl class="card__spec">
+            <div><dt>Exterior</dt> <dd>{e(v['exterior'])}</dd></div>
+            <div><dt>Interior</dt> <dd>{e(v['interior'])}</dd></div>
+          </dl>
         </li>'''
 
 # =========================================================================
