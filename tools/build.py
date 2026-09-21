@@ -533,3 +533,12 @@ for f in os.listdir(ROOT + 'vehicles'):
 for v in V:
     open(ROOT + v['page'], 'w').write(stamp(vehicle_page(v)))
 print(len(V), 'vehicle pages in vehicles/')
+
+# =========================================================================
+# 4. The presentation deck — nothing generated, only the links stamped
+# =========================================================================
+path = ROOT + 'catalog.html'
+if os.path.exists(path):
+    deck = open(path).read()
+    open(path, 'w').write(stamp(deck))
+    print('catalog.html stamped')
