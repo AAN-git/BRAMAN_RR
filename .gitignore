@@ -10,3 +10,7 @@ VIDEOS/
 dist/
 BRAMAN_RR-preview.zip
 BRAMAN_RR-handoff-SL11.zip
+
+# Reference screenshots dropped into the folder
+*.png
+!assets/**/*.png
