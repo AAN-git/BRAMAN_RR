@@ -78,7 +78,15 @@
   arrows.forEach(function (a) {
     a.addEventListener("click", function () { if (mode !== "spin") go(current() + (+a.dataset.dir)); });
   });
-  row.addEventListener("scroll", settle, { passive: true });
+  /* The arrows show only while the rail is moving sideways — a drag, a
+     sideways wheel, a throw, a click — and fade once it has stood still. */
+  var movingUntil = 0;
+  function moving() {
+    film.setAttribute("data-scrolling", "");
+    movingUntil = window.clearTimeout(movingUntil);
+    movingUntil = window.setTimeout(function () { film.removeAttribute("data-scrolling"); }, 900);
+  }
+  row.addEventListener("scroll", function () { moving(); settle(); }, { passive: true });
   window.addEventListener("resize", settle);
   window.addEventListener("load", settle);
   settle();
@@ -175,7 +183,7 @@
       raf = 0;
       if (auto) { angle += 0.05; paintFrame(); raf = window.requestAnimationFrame(tick); return; }
       if (Math.abs(velocity) > 0.002) {
-        angle += velocity; velocity *= 0.94; paintFrame();
+        angle += velocity; velocity *= 0.94; paintFrame(); moving();
         raf = window.requestAnimationFrame(tick);
       } else velocity = 0;
     }
@@ -201,7 +209,7 @@
       var next = hold.a - (e.clientX - hold.x) / per;
       var now = performance.now();
       hold.v = (next - angle) / Math.max(1, now - hold.t) * 16;   /* frames per tick */
-      hold.t = now; angle = next; paintFrame();
+      hold.t = now; angle = next; paintFrame(); moving();
     });
     function letGo() {
       if (!hold) return;
@@ -214,7 +222,7 @@
     stage.addEventListener("pointercancel", letGo);
     stage.addEventListener("wheel", function (e) {
       if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;   /* sideways only */
-      stopAuto(); angle += e.deltaX / 40; paintFrame(); e.preventDefault();
+      stopAuto(); angle += e.deltaX / 40; paintFrame(); moving(); e.preventDefault();
     }, { passive: false });
 
     /* the switch */
@@ -222,6 +230,7 @@
       mode = next;
       var spinning = mode === "spin";
       row.hidden = spinning; spin.hidden = !spinning;
+      film.removeAttribute("data-scrolling");
       modes.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.mode === mode ? "true" : "false"); });
       var track = film.querySelector(".film__track");
       if (track) track.style.visibility = spinning ? "hidden" : "";
@@ -238,7 +247,7 @@
 
   /* the arrows and the keyboard serve whichever view is up */
   arrows.forEach(function (a) {
-    a.addEventListener("click", function () { if (mode === "spin" && turn) turn(+a.dataset.dir); }, true);
+    a.addEventListener("click", function () { if (mode === "spin" && turn) { turn(+a.dataset.dir); moving(); } }, true);
   });
 
   /* --- Full-screen ------------------------------------------------------- */

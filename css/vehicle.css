@@ -471,7 +471,15 @@
 .film__arrow:hover,
 .film__arrow:focus-visible { border-color: var(--white); outline: none; }
 .film__arrow:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
-.film__arrow[disabled] { opacity: 0.3; cursor: default; }
+/* at rest the photographs stand alone; the arrows show while the rail moves
+   sideways (script sets data-scrolling), under the pointer, and on focus */
+.film__arrow { opacity: 0; }
+.film[data-scrolling] .film__arrow,
+.film__arrow:hover,
+.film__arrow:focus-visible { opacity: 1; }
+.film__arrow[disabled] { cursor: default; }
+.film[data-scrolling] .film__arrow[disabled],
+.film__arrow[disabled]:hover { opacity: 0.3; }
 
 /* --- The plate: four facts, large ------------------------------------------- */
 
@@ -559,12 +567,12 @@
 /* the CARFAX badge, as the dealer shows it, beside the dealer's notes */
 .vdp__marks {
   display: flex;
-  align-items: center;
+  align-items: flex-start;             /* the mark stands on the first line of the notes */
   flex-wrap: wrap;
   gap: 16px 28px;
   margin-top: 18px;
 }
-.carfax { display: block; flex: none; opacity: 0.92; transition: opacity var(--dur-press) var(--ease-out); }
+.carfax { display: block; flex: none; margin-top: 4px; /* on the cap line of the first note */ opacity: 0.92; transition: opacity var(--dur-press) var(--ease-out); }
 a.carfax:hover { opacity: 1; }
 .carfax img { display: block; width: auto; height: 40px; }
 .carfax:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
