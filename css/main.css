@@ -997,6 +997,22 @@ a { color: inherit; }
 }
 .card__link:hover .cpo { color: var(--ink-support); }
 
+/* The asterisk beside a price is the mark of a disclosure: on a vehicle
+   page it is a link to the pricing details, on a card it points to the
+   footnote under the listing. */
+.asterisk {
+  display: inline-block;
+  margin-left: 3px;
+  color: var(--ink-support);
+  font-weight: 400;
+  text-decoration: none;
+  transition: color var(--dur-press) var(--ease-out);
+}
+a.asterisk:hover,
+a.asterisk:focus-visible { color: var(--white); outline: none; }
+a.asterisk:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.card__price .asterisk { margin-left: -7px; }   /* the tag's gap is 10px; the mark hugs the figure */
+
 /* --- 7b · Inventory -------------------------------------------------------------
    The older frame's inventory section ("1920", 192:1231): three of the
    cards on the cinematic ground under a pool of purple, and one Sky pill,
@@ -1078,6 +1094,17 @@ a { color: inherit; }
 .stock__arrow:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
 .stock__arrow[disabled] { opacity: 0.3; cursor: default; }
 .stock .actions { justify-content: center; margin-top: 64px; }   /* file: 65 under the cards */
+/* the dealer's two sentences under the prices, and the way to the rest */
+.stock__legal {
+  max-width: 90ch;
+  margin: 40px auto 0;
+  font-size: var(--label);
+  line-height: 22px;
+  text-align: center;
+  color: var(--ink-legal);
+}
+.stock__legal a { color: var(--ink-support); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.24); transition: color var(--dur-press) var(--ease-out); }
+.stock__legal a:hover { color: var(--white); }
 .btn--sky { background: var(--sky); color: var(--black); }
 .btn--sky:hover { background: #a3b8bd; }
 

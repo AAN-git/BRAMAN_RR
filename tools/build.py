@@ -63,7 +63,7 @@ def card(v, p='', eager=False):
             </dl>
             <h2 class="card__title">{e(v['title'])} <span class="card__place">in West Palm Beach, FL</span></h2>
             <div class="card__row">
-              <p class="card__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span></p>{mark}
+              <p class="card__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><span class="asterisk" aria-hidden="true">*</span></p>{mark}
             </div>
             <dl class="card__spec">
               <div><dt>Exterior</dt> <dd>{e(v['exterior'])}</dd></div>
@@ -89,6 +89,9 @@ srp = re.sub(r'<ul class="grid" id="grid">.*?</ul>', lambda m: grid, srp, count=
 srp = re.sub(r'(<select class="pick__select" name="year" data-pick="year">\n).*?(\n        </select>)', lambda m: m.group(1) + options('All years', years) + m.group(2), srp, count=1, flags=re.S)
 srp = re.sub(r'(<select class="pick__select" name="model" data-pick="model">\n).*?(\n        </select>)', lambda m: m.group(1) + options('All models', models) + m.group(2), srp, count=1, flags=re.S)
 srp = re.sub(r'<span data-count>\d+</span>', f'<span data-count>{len(V)}</span>', srp)
+# the footnote under the listing: the dealer's disclosure, verbatim
+legal = d.get('price_disclaimer') or ''
+srp = re.sub(r'<p class="srp__legal" id="legal">.*?</p>', lambda m: f'<p class="srp__legal" id="legal">{e(legal)}</p>', srp, count=1, flags=re.S)
 srp = stamp(srp)
 open(path, 'w').write(srp)
 print(len(cards), 'cards in inventory.html;', len(years), 'years,', len(models), 'models')
@@ -101,6 +104,8 @@ path = ROOT + 'index.html'
 idx = open(path).read()
 if '<ul class="stock__row">' in idx:
     idx = re.sub(r'<ul class="stock__row">.*?</ul>', lambda m: home, idx, count=1, flags=re.S)
+    first_two = ' '.join(re.split(r'(?<=\.)\s+', (d.get('price_disclaimer') or ''))[:2])
+    idx = re.sub(r'<p class="stock__legal">.*?</p>', lambda m: f'<p class="stock__legal">{e(first_two)} <a href="inventory.html#legal">Full pricing details</a>.</p>', idx, count=1, flags=re.S)
     idx = stamp(idx)
     open(path, 'w').write(idx)
     print('12 cards in index.html')
@@ -195,6 +200,54 @@ def vehicle_page(v):
               </div>''', open_=False)
     gallery_note = f'{v["photo_count_at_dealer"]} photographs at <a href="{e(v["dealer_url"])}">the dealer\'s listing</a>' if v['photo_count_at_dealer'] > len(photos) else ('Manufacturer image; the dealer has no photograph of this car' if v['stock_image'] else '')
 
+    # the disclosure: the dealer's own text, and the lease terms as the dealer states them
+    disclaimer = d.get('price_disclaimer') or ''
+    lt = v.get('lease_terms') if v['lease_month'] else None
+    lease_rows = ''
+    if lt:
+        def m_(n): return money(n) if isinstance(n, int) else ''
+        pay = (lt.get('payment') or '').replace('+tax', ' + tax')
+        if pay and '.' in pay: pay = '$' + '{:,}'.format(int(float(pay.split(' ')[0]))) + pay[pay.index(' '):] if ' ' in pay else '$' + '{:,}'.format(int(float(pay)))
+        mileage = f"{'{:,}'.format(lt['miles_per_year'])} miles a year" + (f", ${lt['overage_per_mile']} a mile over" if lt.get('overage_per_mile') else '') if lt.get('miles_per_year') else ''
+        lease_rows = rows([
+            ('Lease sale price', m_(lt.get('sales_price'))),
+            ('Term', f"{lt['term_months']} months" if lt.get('term_months') else ''),
+            ('Due at signing', m_(lt.get('due_at_signing'))),
+            ('Monthly payment', (pay + ' a month') if pay else ''),
+            ('Residual at lease end', m_(lt.get('residual'))),
+            ('Purchase option fee', m_(lt.get('purchase_option_fee'))),
+            ('Mileage', mileage),
+            ('Disposition fee', m_(lt.get('disposition_fee'))),
+            ('Credit', 'Tier 1, Rolls-Royce Financial Services' if lt.get('credit') else ''),
+            ('Deal number', e(lt.get('deal_number') or '')),
+            ('Take delivery by', e(lt.get('offer_ends') or '')),
+        ])
+    # the dealer's own disclaimer sentence for the lease, verbatim
+    raw = v.get('lease_terms_raw') or ''
+    lease_fine = raw.split('Disclaimer:', 1)[1].strip() if 'Disclaimer:' in raw else raw
+    lease_fine = re.sub(r'\s+', ' ', lease_fine).replace(' ,', ',').replace(' .', '.')
+    lease_block = f'''
+      <div class="pricing__lease">
+        <h3 class="vdp__h" id="lease-terms">Lease terms<span class="pricing__mark" aria-hidden="true">*</span></h3>
+        <dl class="offer__rows pricing__rows">
+{lease_rows}
+        </dl>
+        <p class="pricing__fine">{e(lease_fine)}</p>
+      </div>''' if lt else ''
+    pricing = f'''
+    <!-- The disclosure: what the dealer says beside every price, and the
+         lease as the dealer states it, on the page rather than behind a
+         click. The asterisks by the price and the lease lead here. -->
+    <section class="pricing" id="pricing" aria-labelledby="pricing-title" tabindex="-1">
+      <h2 class="vdp__h" id="pricing-title">Pricing details</h2>
+      <div class="pricing__body">{lease_block}
+        <div class="pricing__legal">
+          <h3 class="vdp__h" id="price-terms">About the price<span class="pricing__mark" aria-hidden="true">*</span></h3>
+          <p class="pricing__text">{e(disclaimer.lstrip('* ').strip())}</p>
+        </div>
+      </div>
+    </section>'''
+
     others = [o for o in featured if o['stock'] != v['stock']]
     more = sorted(others, key=lambda o: (o['model'] != v['model'], o['condition'] != v['condition']))[:3]
     more_cards = '\n'.join(card(o, p) for o in more)
@@ -250,8 +303,8 @@ def vehicle_page(v):
         <h1 class="vdp__title">{h1}</h1>
       </div>
       <div class="vdp__figure">
-        <p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span></p>
-        {f'<p class="vdp__lease">{lease_text(v)}</p>' if v['lease_month'] else ''}
+        <p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
+        {f'<p class="vdp__lease">{lease_text(v)}<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></p>' if v['lease_month'] else ''}
         <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
       </div>
     </header>
@@ -297,20 +350,23 @@ def vehicle_page(v):
       <!-- The offer: the price, what sits around it, the two calls, the record. -->
       <aside class="offer" aria-label="The offer">
         {'<p class="offer__flag">Internet Special</p>' if v['special'] else ''}
-        <p class="offer__label">{label}</p>
+        <p class="offer__label">{label}<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
         <p class="offer__price">{money(v['price'])}</p>
-        {f'<p class="offer__lease"><span>Lease</span><span>{lease_row}</span></p>' if lease_row else ''}
+        {f'<p class="offer__lease"><span>Lease<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></span><span>{lease_row}</span></p>' if lease_row else ''}
         {f'<dl class="offer__rows">{chr(10)}{rows(around)}{chr(10)}        </dl>' if around else ''}
         <div class="offer__actions">
           <a class="btn btn--white" href="#enquire">Request a Quote</a>
           <a class="btn btn--slate" href="tel:+15612038780">Connect with a Specialist</a>
         </div>
         <p class="offer__route"><a class="route" href="#">Get pre-approved for financing<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a></p>
+        <p class="offer__route offer__route--quiet"><a class="route" href="#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a></p>
         <dl class="offer__rows offer__facts">
 {rows(facts)}
         </dl>
       </aside>
     </div>
+
+{pricing}
 
     <!-- Enquire -->
     <section class="vdp__enquire" id="enquire" aria-labelledby="enq-title">

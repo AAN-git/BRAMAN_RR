@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="../assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="../assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="../css/tokens.css?v=202609211036">
-<link rel="stylesheet" href="../css/main.css?v=202609211036">
-<link rel="stylesheet" href="../css/vehicle.css?v=202609211036">
+<link rel="stylesheet" href="../css/tokens.css?v=202609211053">
+<link rel="stylesheet" href="../css/main.css?v=202609211053">
+<link rel="stylesheet" href="../css/vehicle.css?v=202609211053">
 <script>
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("motion");
@@ -88,7 +88,7 @@
         <h1 class="vdp__title">2027 <span class="nowrap">Rolls-Royce</span> Cullinan Black Badge</h1>
       </div>
       <div class="vdp__figure">
-        <p class="card__price vdp__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$603,050</span></p>
+        <p class="card__price vdp__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$603,050</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
         
         <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
       </div>
@@ -173,7 +173,7 @@
       <!-- The offer: the price, what sits around it, the two calls, the record. -->
       <aside class="offer" aria-label="The offer">
         
-        <p class="offer__label">MSRP</p>
+        <p class="offer__label">MSRP<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
         <p class="offer__price">$603,050</p>
         
         <dl class="offer__rows">
@@ -186,6 +186,7 @@
           <a class="btn btn--slate" href="tel:+15612038780">Connect with a Specialist</a>
         </div>
         <p class="offer__route"><a class="route" href="#">Get pre-approved for financing<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a></p>
+        <p class="offer__route offer__route--quiet"><a class="route" href="#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a></p>
         <dl class="offer__rows offer__facts">
               <div><dt>Stock</dt><dd>R77519</dd></div>
               <div><dt>VIN</dt><dd><span class="vdp__vin">SLA33HA06VU237519</span></dd></div>
@@ -196,6 +197,20 @@
         </dl>
       </aside>
     </div>
+
+
+    <!-- The disclosure: what the dealer says beside every price, and the
+         lease as the dealer states it, on the page rather than behind a
+         click. The asterisks by the price and the lease lead here. -->
+    <section class="pricing" id="pricing" aria-labelledby="pricing-title" tabindex="-1">
+      <h2 class="vdp__h" id="pricing-title">Pricing details</h2>
+      <div class="pricing__body">
+        <div class="pricing__legal">
+          <h3 class="vdp__h" id="price-terms">About the price<span class="pricing__mark" aria-hidden="true">*</span></h3>
+          <p class="pricing__text">Prices and payments do not include tax, tag, title. The Sales Price includes a $1,189 dealer service charge, and a $514 electronic filing charge. These charges represent cost and profit to dealer. The MSRP is the manufacturer&#x27;s suggested retail price, and is not binding on either Dealer or Customer. All pricing and details are believed to be accurate, but we do not warrant or guarantee such accuracy. Vehicle information is based off standard equipment and may vary from vehicle to vehicle. All specifications, prices and equipment are subject to change without notice. Call or email for complete details and information. Displayed fuel efficiency is based on applicable EPA mileage ratings. Use for comparison purposes only. Your actual mileage will vary, depending on how you drive and maintain your vehicle, the driving conditions, battery pack age/condition and other factors. While every effort has been made to ensure display of accurate data, the vehicle listings within this website may not reflect all accurate vehicle items. Accessories and color may vary. The vehicle photo displayed may be an example only. Vehicle Photos may not match exact vehicles. All inventory listed is subject to prior sale. Please confirm vehicle price and details with Dealership.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Enquire -->
     <section class="vdp__enquire" id="enquire" aria-labelledby="enq-title">
@@ -230,7 +245,7 @@
             </dl>
             <h2 class="card__title">New 2027 Rolls-Royce Cullinan Black Badge <span class="card__place">in West Palm Beach, FL</span></h2>
             <div class="card__row">
-              <p class="card__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$539,725</span></p>
+              <p class="card__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$539,725</span><span class="asterisk" aria-hidden="true">*</span></p>
             </div>
             <dl class="card__spec">
               <div><dt>Exterior</dt> <dd>Arctic White</dd></div>
@@ -247,7 +262,7 @@
             </dl>
             <h2 class="card__title">New 2027 Rolls-Royce Cullinan Black Badge <span class="card__place">in West Palm Beach, FL</span></h2>
             <div class="card__row">
-              <p class="card__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$565,550</span></p>
+              <p class="card__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$565,550</span><span class="asterisk" aria-hidden="true">*</span></p>
             </div>
             <dl class="card__spec">
               <div><dt>Exterior</dt> <dd>Midnight Sapphire</dd></div>
@@ -264,7 +279,7 @@
             </dl>
             <h2 class="card__title">New 2027 Rolls-Royce Cullinan Black Badge <span class="card__place">in West Palm Beach, FL</span></h2>
             <div class="card__row">
-              <p class="card__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$572,150</span></p>
+              <p class="card__price"><span class="card__price-label">MSRP</span> <span class="card__price-value">$572,150</span><span class="asterisk" aria-hidden="true">*</span></p>
             </div>
             <dl class="card__spec">
               <div><dt>Exterior</dt> <dd>Iguazu Blue</dd></div>
@@ -432,7 +447,7 @@
   </div>
 </footer>
 
-<script src="../js/main.js?v=202609211036"></script>
-<script src="../js/vehicle.js?v=202609211036"></script>
+<script src="../js/main.js?v=202609211053"></script>
+<script src="../js/vehicle.js?v=202609211053"></script>
 </body>
 </html>

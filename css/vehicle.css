@@ -113,9 +113,12 @@
 .vdp__title .nowrap { white-space: nowrap; }
 .vdp__figure {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-end;
   gap: 12px;
-  flex: none;
+  flex: 0 1 auto;
+  max-width: 52%;                 /* the name keeps its two lines; the figure wraps first */
   padding-bottom: 8px;
 }
 .vdp__confirm { height: 46px; min-width: 0; padding: 0 22px; }
@@ -657,6 +660,49 @@
 .offer__facts { margin-top: 28px; border-top: 1px solid rgba(255, 255, 255, 0.24); }
 .vdp__vin { font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
 
+/* --- Pricing details ----------------------------------------------------------
+   The disclosure on the page, not behind a click: the lease terms as a
+   plate of rows, the dealer's paragraph beside them, on a rule. The
+   asterisks by the price and the lease land here; arriving lights the rule. */
+
+.pricing {
+  margin-top: 96px;
+  padding-top: 48px;
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  scroll-margin-top: calc(112px + 24px);
+  outline: none;
+  transition: border-color var(--dur-enter) var(--ease-out);
+}
+.pricing:target { border-top-color: var(--white); }
+.pricing > .vdp__h { border-bottom: 0; padding-bottom: 0; color: var(--white); }
+.pricing__body {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 48px;
+  align-items: start;
+  margin-top: 32px;
+}
+.pricing__lease { grid-column: 1 / span 6; }
+.pricing__legal { grid-column: 8 / span 5; }
+.pricing__lease:only-child ~ .pricing__legal,
+.pricing__body > .pricing__legal:first-child { grid-column: 1 / span 7; }
+.pricing__mark { margin-left: 3px; color: var(--ink-support); }
+.pricing__rows { margin-top: 4px; }
+.pricing__rows dd { text-align: right; }
+.pricing__fine,
+.pricing__text {
+  margin-top: 16px;
+  font-size: var(--label);
+  line-height: 22px;
+  color: var(--ink-support);
+}
+.pricing__text { margin-top: 20px; }
+.offer__route--quiet { margin-top: 10px; }
+.offer__route--quiet .route { color: var(--ink-support); border-bottom-color: rgba(255, 255, 255, 0.24); }
+.offer__route--quiet .route:hover { color: var(--white); }
+.offer__label .asterisk { margin-left: 2px; }
+
 /* --- Enquire ------------------------------------------------------------------ */
 
 .vdp__enquire {
@@ -949,6 +995,9 @@ body[data-drawer] { overflow: hidden; }
   .plate div:nth-child(n + 3) { border-top: 1px solid rgba(255, 255, 255, 0.12); }
   .vdp__body { display: block; margin-top: 48px; }
   .offer { position: static; margin-top: 56px; padding: 24px 20px 28px; }
+  .pricing { margin-top: 64px; }
+  .pricing__body { display: block; }
+  .pricing__legal { margin-top: 40px; }
   .vdp__enquire { display: block; margin-top: 64px; padding-bottom: 80px; }
   .enquire { margin-top: 28px; }
   .vdp__bar { display: block; }
@@ -960,7 +1009,7 @@ body[data-drawer] { overflow: hidden; }
   .tools { gap: 20px; }
   .drawer__panel { padding: 24px 20px 32px; }
   .vdp__head { margin-top: 20px; padding-bottom: 20px; }
-  .vdp__figure { flex-wrap: wrap; width: 100%; }
+  .vdp__figure { width: 100%; max-width: none; justify-content: flex-start; }
   .vdp__confirm { width: 100%; }
   .film__launch-ring { width: 80px; height: 80px; font-size: var(--body); }
   .film { --frame: clamp(220px, 40vh, 400px); }

@@ -197,8 +197,10 @@ photographs in `assets/img/models/`. The markup to put back, inside
 </section>
 ```
 
-**The cars are the dealer's real inventory** — thirty Rolls-Royce, 21 new
-and 9 pre-owned, as listed at bramanrolls-roycepalmbeach.com on 2026-09-17
+**The cars are the dealer's real inventory** — 29 Rolls-Royce, 21 new and
+8 pre-owned, as listed at bramanrolls-roycepalmbeach.com on 2026-09-21 (30
+on 2026-09-17; the Cullinan RC-77216A sold between the two captures, and
+prices moved — refresh before any client review: scrape, then `build.py`)
 (`/search/new-rolls-royce/`, two pages, and `/search/used-rolls-royce/`),
 captured to `data/inventory.json` with the source URLs and date. Each record
 carries the headline figure the dealer shows (`price`, labelled by
@@ -328,6 +330,24 @@ weight, so nothing led. The page now has a dominant and a rank:
   a pre-owned car, folded by default. Where the dealer wrote no prose, the
   description group is one sentence assembled from the record and nothing
   else;
+- **Pricing details** — the dealer's price disclosure, mimicked from
+  bramanrolls-roycepalmbeach.com (the client's brief, 2026-09-21: "look at
+  how they handled their price disclosures and mimic that but update the
+  styling to fit our design") and put on the page rather than behind a
+  click: Braman shows an "ⓘ Details" popover beside the price and beside
+  the lease; here the price tag, the lease flag and the offer's labels
+  carry an asterisk that is a link to a section between the offer and the
+  enquiry. In it, the lease terms as the dealer states them (term, due at
+  signing, monthly payment, residual, purchase option fee, mileage and
+  overage, disposition fee, credit tier, deal number, delivery-by date) as
+  a plate of rows with the dealer's own lease disclaimer under it, verbatim;
+  and beside it "About the price" — the dealer's disclosure paragraph,
+  verbatim (`price_disclaimer` in the data). Arriving by an asterisk lights
+  the section's rule. On the listing every tag carries the asterisk and
+  the paragraph sits once under the grid as a footnote (`#legal`); on the
+  home rail the dealer's first two sentences with a route to the rest.
+  One dealer typo is rendered as the dealer wrote it: R65386's "take
+  delivery by 09/31/2026".
 - **Enquire** — one band: the lede with the telephone and the trade-in
   route at the left; at the right the form as an object of its own — a
   plate on a hairline with boxed fields (name, email, telephone on a line,
