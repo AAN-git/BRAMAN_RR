@@ -549,8 +549,9 @@
   gap: 16px 28px;
   margin-top: 18px;
 }
-.carfax { display: block; flex: none; }
-.carfax img { display: block; width: 135px; height: 90px; }
+.carfax { display: block; flex: none; opacity: 0.92; transition: opacity var(--dur-press) var(--ease-out); }
+a.carfax:hover { opacity: 1; }
+.carfax img { display: block; width: auto; height: 40px; }
 .carfax:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
 .vdp__marks .vdp__notes { flex: 1 1 200px; flex-direction: column; gap: 6px; margin-top: 0; }
 .vdp__notes {

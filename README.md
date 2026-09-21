@@ -329,10 +329,12 @@ weight, so nothing led. The page now has a dominant and a rank:
   Value your trade-in in the enquiry's lede;
 - **Description**, beside the offer, as an accordion (Alex: "a separate
   section for the description, all the options, as an accordion"): the
-  dealer's prose, the CARFAX partner badge the dealer shows (1-Owner, or
-  "Show me the CARFAX") linking to the car's history report, and the
-  dealer's other notes (priced below KBB, odometer below market — where
-  the dealer says them);
+  dealer's prose, the CARFAX mark (the SVG wordmark from Alex's WORK
+  library, `assets/icons/carfax/carfax.svg`) on every pre-owned car,
+  linking to the car's CARFAX report where the dealer's listing has one
+  (seven of eight; R65386 has none, so its mark is not a link), and the
+  dealer's notes beside it (one-owner, clean CARFAX, priced below KBB,
+  odometer below market — where the dealer says them);
   **Equipment & options**, the dealer's popular features merged with the
   equipment list in its description where there is one (up to 30 items,
   two columns of rows on rules); and the Provenance terms with the mark on

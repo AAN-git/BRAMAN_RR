@@ -178,12 +178,17 @@ def vehicle_page(v):
     ]
 
     prose = strip_spec_sentence(v['description'])
-    cf = v.get('carfax')
-    # the CARFAX badge says one-owner or "show me" itself; the text notes keep the rest
-    notes_list = [n for n in v['notes'] if not (cf and 'CARFAX' in n)]
-    notes = ''.join(f'<li>{e(n)}</li>' for n in notes_list)
-    badge_alt = {'1own': 'Show me the CARFAX: 1-Owner. Opens the vehicle history report', 'showme': 'Show me the CARFAX. Opens the vehicle history report'}
-    carfax = f'<a class="carfax" href="{e(cf["report"])}" target="_blank" rel="noopener"><img src="{p}assets/icons/carfax/{cf["badge"]}.svg" width="135" height="90" alt="{badge_alt.get(cf["badge"], "CARFAX")}"></a>' if cf else ''
+    cf = v.get('carfax') if used else None
+    # the CARFAX mark on every pre-owned car: a link to the report where the dealer
+    # has one; the dealer's notes (one-owner, clean) stay as text beside it
+    notes = ''.join(f'<li>{e(n)}</li>' for n in v['notes'])
+    mark_img = f'<img src="{p}assets/icons/carfax/carfax.svg" width="169" height="40" alt="CARFAX vehicle history reports">'
+    if cf and cf.get('report'):
+        carfax = f'<a class="carfax" href="{e(cf["report"])}" target="_blank" rel="noopener" aria-label="CARFAX vehicle history report for this motor car">{mark_img}</a>'
+    elif cf:
+        carfax = f'<span class="carfax">{mark_img}</span>'
+    else:
+        carfax = ''
     equipment = '\n'.join(f'              <li>{e(x)}</li>' for x in v['equipment'])
     def fold(key, title, body, open_=True):
         return f'''

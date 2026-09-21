@@ -6098,7 +6098,11 @@
         "deal_number": "506751",
         "offer_ends": "09/31/2026"
       },
-      "carfax": null
+      "carfax": {
+        "badge": null,
+        "report": null,
+        "source": "no CARFAX badge or report link on the dealer listing, 2026-09-21"
+      }
     },
     {
       "stock": "RC-35464A",
