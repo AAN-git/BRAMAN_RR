@@ -405,7 +405,7 @@
   grid-template-areas: "track" "mode";
   align-items: center;
   column-gap: 32px;
-  row-gap: 8px;
+  row-gap: 32px;                       /* the pills centred between the track and the plate */
   padding-top: 20px;
 }
 .film__track {
@@ -486,7 +486,7 @@
 .plate {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin: 56px 0 0;
+  margin: 32px 0 0;
   border-top: 1px solid rgba(255, 255, 255, 0.24);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
@@ -1067,7 +1067,7 @@ body[data-drawer] { overflow: hidden; }
   .vdp__head { flex-wrap: wrap; align-items: flex-start; }
   .vdp__figure { padding-bottom: 0; }
   .film { --frame: clamp(300px, 52vh, 560px); }
-  .plate { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 40px; }
+  .plate { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
   .plate div { padding: 18px var(--gutter) 20px 0; }
   .plate div + div { padding-left: 0; border-left: 0; }
   .plate div:nth-child(even) { padding-left: var(--gutter); border-left: 1px solid rgba(255, 255, 255, 0.12); }
@@ -1095,7 +1095,7 @@ body[data-drawer] { overflow: hidden; }
   .film { --frame: clamp(220px, 40vh, 400px); }
   .film__row { gap: 8px; }
   .film__expand { right: 10px; bottom: 10px; width: 34px; height: 34px; }
-  .film__foot { padding-top: 16px; }
+  .film__foot { padding-top: 16px; row-gap: 24px; }
   .film__nav { display: none; }
   .spin__stage { width: 100%; height: auto; aspect-ratio: 3 / 2; }
   .plate dd { font-size: var(--h4); line-height: var(--h4-lead); }
