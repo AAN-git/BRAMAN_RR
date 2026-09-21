@@ -382,6 +382,24 @@ form is in view; on a desktop the sticky offer is the bar, so there is none.
 The name steps in from the left, the figure lands, then the stage and the
 strip rise, on the page's clock.
 
+## The catalog (`catalog.html`)
+
+The presentation of the site, for the retailer: five screens, one gesture
+each. A cover on the film's poster, then three chapters — Home, Inventory,
+Vehicle page — each a number, a name, one line and a button, with the page
+itself running inside a screen and a phone on the floor (the live page in an
+iframe, scaled to the pane via `--zoom`, scrolled slowly by the deck while
+the chapter is on screen; the pointer turns the devices a few degrees), then
+"Tell us what to change" with the three links, and a colophon. The same
+transport as the Bentley deck, rebuilt on this site's tokens and buttons.
+
+Where there is no fine pointer, or motion is reduced, or the viewport is
+under 1024px, the still of each page's first screen stands in
+(`assets/present/{home,inventory,vehicle}-{hero,mobile}.jpg`, captured at
+1440×900 and 390×844) and the page reads by ordinary scrolling. Re-capture
+the stills after a visible change to a first screen. `tools/build.py`
+stamps its css/js links like the other pages; nothing in it is generated.
+
 ## Where it lives
 
 The code is at **https://github.com/AAN-git/BRAMAN_RR** and GitHub Pages
@@ -392,11 +410,11 @@ or two. After any edit: `python3 tools/build.py`, commit, push.
 
 ## For the server
 
-`dist/` is the site and nothing else: the two pages, `vehicles/`, `css/`,
+`dist/` is the site and nothing else: the two pages, the catalog, `vehicles/`, `css/`,
 `js/`, `assets/`, `data/`. It is a copy, so re-copy it after any edit:
 
 ```
-rm -rf dist && mkdir dist && cp index.html inventory.html dist/ && cp -R vehicles css js assets data dist/
+rm -rf dist && mkdir dist && cp index.html inventory.html catalog.html dist/ && cp -R vehicles css js assets data dist/
 ```
 
 **The preview server sends every file with `cache-control: max-age=31536000`
