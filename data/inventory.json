@@ -234,7 +234,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77686",
@@ -464,7 +465,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77099",
@@ -694,7 +696,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77509",
@@ -924,7 +927,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77405",
@@ -1152,7 +1156,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R76827",
@@ -1380,7 +1385,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77503",
@@ -1608,7 +1614,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77506",
@@ -1838,7 +1845,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R76760",
@@ -2068,7 +2076,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77436",
@@ -2298,7 +2307,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77341",
@@ -2528,7 +2538,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77153",
@@ -2758,7 +2769,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77527",
@@ -2988,7 +3000,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77161",
@@ -3218,7 +3231,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77491",
@@ -3448,7 +3462,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77641",
@@ -3678,7 +3693,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77438",
@@ -3908,7 +3924,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77519",
@@ -4138,7 +4155,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77280",
@@ -4368,7 +4386,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R77218",
@@ -4598,7 +4617,8 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "R65004",
@@ -4843,7 +4863,8 @@
         "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
         "deal_number": "507918",
         "offer_ends": "09/30/2026"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "RC-P35618",
@@ -5073,6 +5094,11 @@
         "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
         "deal_number": "505806",
         "offer_ends": null
+      },
+      "carfax": {
+        "badge": "1own",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/27DNMvBSIuPnqwcVGbMUZQedDNMDxKWff6c24h2UqbDPWDd038E_mtJvg5X3_Z6LqHKU4uB7qWwzZ3FX2u2QD9R8Cww-MHA6oJ0Rv5gY",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     },
     {
@@ -5323,6 +5349,11 @@
         "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
         "deal_number": "507927",
         "offer_ends": "09/30/2026"
+      },
+      "carfax": {
+        "badge": "1own",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/h69Olnp1bhiQthCmbif0K9TcQHNC4PewUKa-J8Rt_cvDJejSawP1hJ8C8846VS73H3pAIYNt7c5PbtuuU4AjMUsBAdR5S1D63u4T7icX",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     },
     {
@@ -5579,6 +5610,11 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "carfax": {
+        "badge": "1own",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/T8QsHrhiOzd9z7J7hc-oRDub3pEltioFQ9OcVAiLgxgBgxIptx0AVSQ6VfQFgRV-AStBcxtAeZIPXWIMM1CDX9P-HBfGOqk63fhkfxIr",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     },
     {
@@ -5811,6 +5847,11 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "carfax": {
+        "badge": "showme",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/Sm9uW9k4zXsfdx0elqxjvh3_A_HS95PFvDVCKjRdVYurGyyX3374dq_0KvJRBTLbe3SUQUGCGBTC7ZEdzN0DAor9DRNzTxIPBB9aaCD-",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     },
     {
@@ -6056,7 +6097,8 @@
         "credit": "Tier 1 credit with underwriting approval via Rolls-Royce Financial Services",
         "deal_number": "506751",
         "offer_ends": "09/31/2026"
-      }
+      },
+      "carfax": null
     },
     {
       "stock": "RC-35464A",
@@ -6303,6 +6345,11 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "carfax": {
+        "badge": "1own",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/Nxs0x934J8eXW75RuYQ4_y5rk202aR_fCYNErX-VGTV_hGWERlJfp5z2shyQY59gAQljRJBSUoYEgRLDK2tV-kKtYRP2kKnG6cq23JRL",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     },
     {
@@ -6536,6 +6583,11 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "carfax": {
+        "badge": "1own",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/IdFO3TC-a5rIOaR6TFfr5erXICKyLJPbOa6CWbnJYKvrg_twB3G_BIhU0_UgHIZCy9IeiieEo8zNATOTu5avJFUmLf2bIiRYXtte-6FE",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     },
     {
@@ -6731,6 +6783,11 @@
           ]
         ],
         "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
+      },
+      "carfax": {
+        "badge": "showme",
+        "report": "https://www.carfax.com/vehiclehistory/ar20/Vb54oK8m-KoG-bX1kel890GsJkbFgQfPO1xX5USOYLRc9HNwbd3Zjr7xh3duCoQTZ7seQrsI3JrQ2VNBoqsyYEd5uezlzWOCudf_vZ3V",
+        "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
       }
     }
   ],

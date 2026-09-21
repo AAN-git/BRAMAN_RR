@@ -178,7 +178,12 @@ def vehicle_page(v):
     ]
 
     prose = strip_spec_sentence(v['description'])
-    notes = ''.join(f'<li>{e(n)}</li>' for n in v['notes'])
+    cf = v.get('carfax')
+    # the CARFAX badge says one-owner or "show me" itself; the text notes keep the rest
+    notes_list = [n for n in v['notes'] if not (cf and 'CARFAX' in n)]
+    notes = ''.join(f'<li>{e(n)}</li>' for n in notes_list)
+    badge_alt = {'1own': 'Show me the CARFAX: 1-Owner. Opens the vehicle history report', 'showme': 'Show me the CARFAX. Opens the vehicle history report'}
+    carfax = f'<a class="carfax" href="{e(cf["report"])}" target="_blank" rel="noopener"><img src="{p}assets/icons/carfax/{cf["badge"]}.svg" width="135" height="90" alt="{badge_alt.get(cf["badge"], "CARFAX")}"></a>' if cf else ''
     equipment = '\n'.join(f'              <li>{e(x)}</li>' for x in v['equipment'])
     def fold(key, title, body, open_=True):
         return f'''
@@ -190,7 +195,10 @@ def vehicle_page(v):
           </details>'''
     description = ''
     if prose or notes:
-        description = fold('description', 'Vehicle description', (f'              <p class="vdp__copy">{e(prose)}</p>' if prose else '') + (f'\n              <ul class="vdp__notes">{notes}</ul>' if notes else ''))
+        marks = ''
+        if carfax or notes:
+            marks = f'\n              <div class="vdp__marks">{carfax}' + (f'<ul class="vdp__notes">{notes}</ul>' if notes else '') + '</div>'
+        description = fold('description', 'Vehicle description', (f'              <p class="vdp__copy">{e(prose)}</p>' if prose else '') + marks)
     options = fold('equipment', 'Equipment &amp; options', f'              <ul class="vdp__features">\n{equipment}\n              </ul>') if v['equipment'] else ''
     provenance = ''
     if used:

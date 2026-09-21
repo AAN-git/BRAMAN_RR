@@ -541,6 +541,18 @@
 .fold[open] .fold__chevron { transform: rotate(180deg); }
 .fold__body { padding: 0 0 24px; }
 .fold__body .vdp__copy { margin-top: 0; }
+/* the CARFAX badge, as the dealer shows it, beside the dealer's notes */
+.vdp__marks {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px 28px;
+  margin-top: 18px;
+}
+.carfax { display: block; flex: none; }
+.carfax img { display: block; width: 135px; height: 90px; }
+.carfax:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+.vdp__marks .vdp__notes { flex: 1 1 200px; flex-direction: column; gap: 6px; margin-top: 0; }
 .vdp__notes {
   display: flex;
   flex-wrap: wrap;
