@@ -341,7 +341,7 @@ weight, so nothing led. The page now has a dominant and a rank:
   signing, monthly payment, residual, purchase option fee, mileage and
   overage, disposition fee, credit tier, deal number, delivery-by date) as
   a plate of rows with the dealer's own lease disclaimer under it, verbatim;
-  and beside it "About the price" — the dealer's disclosure paragraph,
+  and beside it "Disclaimer" — the dealer's disclosure paragraph,
   verbatim (`price_disclaimer` in the data). Arriving by an asterisk lights
   the section's rule. On the listing every tag carries the asterisk and
   the paragraph sits once under the grid as a footnote (`#legal`); on the

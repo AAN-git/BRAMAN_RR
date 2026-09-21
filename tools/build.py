@@ -242,7 +242,7 @@ def vehicle_page(v):
       <h2 class="vdp__h" id="pricing-title">Pricing details</h2>
       <div class="pricing__body">{lease_block}
         <div class="pricing__legal">
-          <h3 class="vdp__h" id="price-terms">About the price<span class="pricing__mark" aria-hidden="true">*</span></h3>
+          <h3 class="vdp__h" id="price-terms">Disclaimer<span class="pricing__mark" aria-hidden="true">*</span></h3>
           <p class="pricing__text">{e(disclaimer.lstrip('* ').strip())}</p>
         </div>
       </div>
