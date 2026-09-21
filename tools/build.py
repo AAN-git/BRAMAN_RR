@@ -170,8 +170,9 @@ def vehicle_page(v):
     if v['spin']:
         spin_tile = f'''
       <li class="film__frame film__frame--spin"><button class="film__launch" type="button" aria-label="View the motor car in 360°"><img src="{p}{v['spin'][0]}" width="1000" height="667" loading="lazy" decoding="async" alt=""><span class="film__launch-mark"><span class="film__launch-ring"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M12 48a36 36 0 1 0 6-20"/><path d="M14 20l4 9 9-4"/></svg><span>360°</span></span><span class="film__launch-label">View in 360°</span></span></button></li>'''
+    lease_flag = f'<span class="card__flag film__flag">{lease_text(v)}</span>' if v['lease_month'] else ''
     frames = '\n'.join(
-        f'''      <li class="film__frame"><button class="film__open" type="button" data-index="{i}" aria-label="Photograph {i + 1} of {len(photos)} — open full-screen"><img src="{p}{ph['src']}" width="{ph['w']}" height="{ph['h']}" loading="{'eager' if i < 2 else 'lazy'}" decoding="async" alt="{e(v['exterior'])} {e(name)}{stock_note if i == 0 else ''}"><span class="film__expand" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" focusable="false"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg></span></button></li>''' + (spin_tile if i == 0 else '')
+        f'''      <li class="film__frame"><button class="film__open" type="button" data-index="{i}" aria-label="Photograph {i + 1} of {len(photos)} — open full-screen"><img src="{p}{ph['src']}" width="{ph['w']}" height="{ph['h']}" loading="{'eager' if i < 2 else 'lazy'}" decoding="async" alt="{e(v['exterior'])} {e(name)}{stock_note if i == 0 else ''}"><span class="film__expand" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" focusable="false"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg></span></button>{lease_flag if i == 0 else ''}</li>''' + (spin_tile if i == 0 else '')
         for i, ph in enumerate(photos))
     sources = json.dumps([f"{p}{ph['src']}" for ph in photos])
     features = '\n'.join(f'              <li>{e(f)}</li>' for f in v['features'])
@@ -364,18 +365,20 @@ def vehicle_page(v):
        edge. It drags, scrolls and snaps; the line beneath says where it is;
        any frame opens full-screen. -->
   <section class="film" aria-label="Photographs" data-photos='{sources}' data-spin='{spin}'>
-    <ul class="film__row">
+    <div class="film__stage">
+      <ul class="film__row">
 {frames}
-    </ul>
-    {spin_block}
-    <div class="wrap film__foot">
-      <div class="film__track" aria-hidden="true"><span class="film__thumb"></span></div>
-      {mode_block}
-      <p class="film__count"><span data-index>1</span><span class="film__total"> / {len(photos)}</span></p>
+      </ul>
+      {spin_block}
       <div class="film__nav">
         <button class="film__arrow film__arrow--prev" type="button" data-dir="-1" aria-label="Previous photograph" disabled><svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></button>
         <button class="film__arrow film__arrow--next" type="button" data-dir="1" aria-label="Next photograph"><svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></button>
       </div>
+    </div>
+    <div class="wrap film__foot">
+      <div class="film__track" aria-hidden="true"><span class="film__thumb"></span></div>
+      {mode_block}
+      <p class="film__count sr-only" aria-live="polite">Photograph <span data-index>1</span><span class="film__total"> of {len(photos)}</span></p>
     </div>
   </section>
 

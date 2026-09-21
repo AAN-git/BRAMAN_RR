@@ -268,6 +268,8 @@
    frame, dimmed, under a ring that says 360° and a label. The switch in
    the foot is the second way in. */
 .film__frame { position: relative; }
+/* the lease flag on the first frame, as on the card */
+.film__flag { z-index: 2; pointer-events: none; }
 .film__launch {
   position: relative;
   display: block;
@@ -372,32 +374,35 @@
   background: rgba(255, 255, 255, 0.12);
 }
 .spin__loading span { display: block; height: 100%; width: 0; background: var(--white); transition: width 200ms linear; }
-.film__mode { grid-area: mode; display: flex; gap: 20px; }
+/* the view switch: two pills, the pressed one filled */
+.film__mode { grid-area: mode; display: flex; gap: 8px; }
 .film__mode-button {
-  position: relative;
-  padding: 6px 0;
-  margin: -6px 0;
-  border: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-pill);
   background: none;
-  color: var(--ink-support);
+  color: var(--white);
   font: inherit;
   font-weight: 400;
   font-size: var(--label);
   line-height: 22px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
-  transition: color var(--dur-press) var(--ease-out);
+  transition: border-color var(--dur-press) var(--ease-out), background-color var(--dur-press) var(--ease-out), color var(--dur-press) var(--ease-out);
 }
-.film__mode-button:hover,
-.film__mode-button[aria-pressed="true"] { color: var(--white); }
-.film__mode-button[aria-pressed="true"]::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 1px; background: var(--white); }
-.film__mode-button:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+.film__mode-button:hover { border-color: var(--white); }
+.film__mode-button[aria-pressed="true"] { border-color: var(--white); background: var(--white); color: var(--black); }
+.film__mode-button:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
 
 .film__foot {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto auto;
-  grid-template-areas: "track track nav" "mode count nav";
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "track" "mode";
   align-items: center;
   column-gap: 32px;
   row-gap: 8px;
@@ -435,22 +440,32 @@
 }
 .film__note a { color: var(--white); text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.4); }
 .film__note a:hover { border-bottom-color: var(--white); }
-.film__nav { grid-area: nav; display: flex; gap: 10px; }
+.film__stage { position: relative; }
+.film__nav { position: absolute; inset: 0; pointer-events: none; }
 .film__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  pointer-events: auto;
+  transform: translateY(-50%);
   display: flex;
   align-items: center;
   justify-content: center;
   width: 48px;
   height: 48px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 50%;
-  background: none;
+  background: rgba(21, 21, 21, 0.4);
   color: var(--white);
   cursor: pointer;
-  transition: border-color var(--dur-press) var(--ease-out), opacity var(--dur-press) var(--ease-out);
+  transition: border-color var(--dur-press) var(--ease-out), background-color var(--dur-press) var(--ease-out), opacity var(--dur-press) var(--ease-out);
 }
+.film__arrow:hover,
+.film__arrow:focus-visible { background: rgba(21, 21, 21, 0.65); }
 .film__arrow svg { width: 16px; height: 10px; }
+.film__arrow--prev { left: calc(max(var(--page-margin), (100% - 1320px) / 2) + 24px); }
+.film__arrow--next { right: 24px; }
 .film__arrow--prev svg { transform: rotate(90deg); }
 .film__arrow--next svg { transform: rotate(-90deg); }
 .film__arrow:hover,
@@ -999,7 +1014,7 @@ body[data-drawer] { overflow: hidden; }
 .lightbox__close svg { width: 14px; height: 14px; }
 .lightbox__close:hover,
 .lightbox__close:focus-visible { border-color: var(--white); outline: none; }
-.lightbox__arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(21, 21, 21, 0.4); }
+.lightbox__arrow { position: fixed; top: 50%; transform: translateY(-50%); background: rgba(21, 21, 21, 0.4); }
 .lightbox__arrow--prev { left: 24px; }
 .lightbox__arrow--next { right: 24px; }
 .lightbox__count {
@@ -1070,7 +1085,7 @@ body[data-drawer] { overflow: hidden; }
   .film { --frame: clamp(220px, 40vh, 400px); }
   .film__row { gap: 8px; }
   .film__expand { right: 10px; bottom: 10px; width: 34px; height: 34px; }
-  .film__foot { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "track track" "mode count"; padding-top: 16px; }
+  .film__foot { padding-top: 16px; }
   .film__nav { display: none; }
   .spin__stage { width: 100%; height: auto; aspect-ratio: 3 / 2; }
   .plate dd { font-size: var(--h4); line-height: var(--h4-lead); }

@@ -17,7 +17,7 @@
   var frames = Array.prototype.slice.call(film.querySelectorAll(".film__frame"));
   var opens = Array.prototype.slice.call(film.querySelectorAll(".film__open"));
   var arrows = Array.prototype.slice.call(film.querySelectorAll(".film__nav .film__arrow"));
-  var counter = film.querySelector(".film__count [data-index]");
+  var counter = film.querySelector(".film__count [data-index]");   /* read out, not shown */
   var thumb = film.querySelector(".film__thumb");
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   var motion = document.documentElement.classList.contains("motion");
