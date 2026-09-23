@@ -237,22 +237,28 @@
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: var(--gutter);
-    align-items: start;
+    row-gap: clamp(44px, 7vh, 84px);     /* air under the title, before the two columns */
+    align-items: stretch;
   }
-  .sell__head { grid-column: 1 / span 6; max-width: none; }
+  /* both columns begin on the same line and end on the same line */
+  .sell__head { grid-row: 1; grid-column: 1 / span 6; max-width: none; }
   .sell__points {
+    grid-row: 2;
     grid-column: 1 / span 6;
     grid-template-columns: 1fr;
+    align-content: space-between;        /* the three points spread to the column's height */
     row-gap: 24px;
-    margin-top: 34px;
+    margin-top: 0;
   }
   .sell__points h3 { margin-top: 16px; }
   .sell__points p { margin-top: 10px; }
   .sell__form {
+    grid-row: 2;
     grid-column: 8 / span 5;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: space-between;
     max-width: none;
-    margin-top: 8px;
+    margin-top: 0;
   }
   .sell__form .field--wide { grid-column: 1 / -1; }
 }
