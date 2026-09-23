@@ -11,9 +11,9 @@
 <link rel="preload" href="assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/img/hero-phantom-1920.webp" as="image" media="(min-width: 1280px)">
 <link rel="preload" href="assets/img/hero-phantom-1280.webp" as="image" media="(min-width: 768px) and (max-width: 1279px)">
-<link rel="stylesheet" href="css/tokens.css?v=20260923153436">
-<link rel="stylesheet" href="css/main.css?v=20260923153436">
-<link rel="stylesheet" href="css/home-v2.css?v=20260923153436">
+<link rel="stylesheet" href="css/tokens.css?v=20260923154212">
+<link rel="stylesheet" href="css/main.css?v=20260923154212">
+<link rel="stylesheet" href="css/home-v2.css?v=20260923154212">
 <script>
   /* Entrance states exist only when this runs and motion is allowed, so the
      page without scripts — and with reduced motion — is the final composition. */
@@ -794,11 +794,11 @@
            mail app, and the retailer's address goes in one place on the day
            they give it (data-inbox). -->
       <form class="sell__form" data-inbox novalidate>
-        <p class="sell__form-title">Tell us about your motor car</p>
-        <div class="field">
+        <p class="sell__form-label">Private submission</p>
+        <div class="field field--wide">
           <label class="field__label" for="sell-model">Model</label>
           <select class="field__input" id="sell-model" name="model">
-            <option value="">Select</option>
+            <option value="">Any</option>
             <option>Phantom</option>
             <option>Ghost</option>
             <option>Cullinan</option>
@@ -810,23 +810,23 @@
         </div>
         <div class="field">
           <label class="field__label" for="sell-year">Year</label>
-          <input class="field__input" id="sell-year" name="year" inputmode="numeric" autocomplete="off" placeholder="2023">
+          <input class="field__input" id="sell-year" name="year" inputmode="numeric" autocomplete="off">
         </div>
         <div class="field">
           <label class="field__label" for="sell-mileage">Mileage</label>
-          <input class="field__input" id="sell-mileage" name="mileage" inputmode="numeric" autocomplete="off" placeholder="12,400">
+          <input class="field__input" id="sell-mileage" name="mileage" inputmode="numeric" autocomplete="off">
         </div>
-        <div class="field">
+        <div class="field field--wide">
           <label class="field__label" for="sell-name">Name</label>
-          <input class="field__input" id="sell-name" name="name" autocomplete="name" placeholder="Your name">
+          <input class="field__input" id="sell-name" name="name" autocomplete="name">
         </div>
         <div class="field">
           <label class="field__label" for="sell-email">Email</label>
-          <input class="field__input" id="sell-email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+          <input class="field__input" id="sell-email" name="email" type="email" autocomplete="email">
         </div>
         <div class="field">
           <label class="field__label" for="sell-phone">Telephone</label>
-          <input class="field__input" id="sell-phone" name="phone" type="tel" autocomplete="tel" placeholder="561-000-0000">
+          <input class="field__input" id="sell-phone" name="phone" type="tel" autocomplete="tel">
         </div>
         <div class="sell__send">
           <a class="route sell__route" href="tel:+15612038780">Or speak with us &#183; 561-203-8780<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a>
@@ -962,6 +962,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260923153436"></script>
+<script src="js/main.js?v=20260923154212"></script>
 </body>
 </html>
