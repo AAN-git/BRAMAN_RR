@@ -13,6 +13,7 @@ d = json.load(open(ROOT + 'data/inventory.json'))
 # so a browser that saw an earlier build keeps its stylesheet and script
 # until told otherwise. Every build stamps the css and js links with the
 # build time; a new address is a new file to the cache.
+import collections
 import datetime
 STAMP = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 def stamp(html):
@@ -173,6 +174,45 @@ if os.path.exists(path):
     v2, n = re.subn(r'(<div class="doors[^"]*" data-doors="([a-z-]+)">).*?</div>', fill, v2, flags=re.S)
     open(path, 'w').write(stamp(v2))
     print(n, 'door rows in index_v2.html')
+
+# =========================================================================
+# 2c. Bespoke by Braman — the retailer's own motor cars whose paint was
+#     specified rather than picked from a list: the two-tone finishes first,
+#     then the rarest single colours. Everything shown is the listing's own
+#     (the photograph, the colours, the name), so nothing here is invented.
+# =========================================================================
+FEATURE = 'R65386'          # the Moonstone Pearl Ghost — the retailer's own Bespoke Project
+
+def bespoke_blocks():
+    v = next((x for x in V if x['stock'] == FEATURE), None)
+    if not v: return None, None, None
+    # the retailer's own photographs of the project, from their Bespoke page —
+    # the motor car on a Palm Beach street and the paint at arm's length,
+    # rather than the turntable frames the listing carries
+    shots = [('assets/img/bespoke/moonstone-street.webp', 1800, 911, 'bespoke__frame--lead',
+              f"{e(name_of(v))} in {e(v['exterior'])}, on a Palm Beach street"),
+             ('assets/img/bespoke/moonstone-detail.webp', 1000, 1332, 'bespoke__frame--inside',
+              f"The Moonstone Pearl finish at arm's length, shifting between silver and pale blue")]
+    frames = '\n'.join(
+        f'''          <figure class="bespoke__frame {cls}"><img src="{src}" width="{w}" height="{h}" loading="lazy" decoding="async" alt="{alt}"></figure>'''
+        for src, w, h, cls, alt in shots)
+    rows = [('Motor car', e(name_of(v))), ('Exterior', e(v['exterior'])), ('Interior', e(v['interior'])),
+            ('Mileage', '{:,} miles'.format(v['mileage'])), ('Stock #', e(v['stock']))]
+    spec = '\n'.join(f'            <div><dt>{k}</dt><dd>{val}</dd></div>' for k, val in rows)
+    return frames, spec, v['page']
+
+path = ROOT + 'index_v2.html'
+if os.path.exists(path):
+    v2 = open(path).read()
+    frames, spec, page = bespoke_blocks()
+    if frames and 'data-commissions' in v2:
+        v2 = re.sub(r'(<div class="bespoke__frames" data-commissions>).*?(</div>)',
+                    lambda m: m.group(1) + '\n' + frames + '\n        ' + m.group(2), v2, count=1, flags=re.S)
+        v2 = re.sub(r'(<dl class="bespoke__spec" data-spec>).*?(</dl>)',
+                    lambda m: m.group(1) + '\n' + spec + '\n          ' + m.group(2), v2, count=1, flags=re.S)
+        v2 = re.sub(r'<a class="btn btn--white" data-see href="[^"]*">', f'<a class="btn btn--white" data-see href="{page}">', v2, count=1)
+        open(path, 'w').write(stamp(v2))
+        print('Bespoke by Braman:', FEATURE)
 
 # =========================================================================
 # 3. The vehicle pages — the SRP's head, header and footer, paths lifted a

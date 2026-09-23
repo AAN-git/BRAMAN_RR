@@ -267,3 +267,100 @@
   .sell__points { grid-column: 1 / span 5; }
   .sell__form { grid-column: 7 / span 6; }
 }
+
+/* --- Bespoke by Braman --------------------------------------------------------
+   The closing chapter is the retailer's own Bespoke Project rather than the
+   marque's press office — today, the Moonstone Pearl Ghost they feature under
+   BESPOKE PROJECTS on their own site. One motor car told properly: the
+   photograph large on the left, their story and the specification on the
+   right. When they send the next commission, this holds it unchanged. */
+.bespoke {
+  position: relative;
+  padding: clamp(88px, 12vh, 140px) 0 clamp(80px, 10vh, 120px);
+  background:
+    radial-gradient(70% 44% at 24% 0%, rgba(109, 48, 167, 0.3) 0%, rgba(40, 20, 50, 0.14) 48%, rgba(21, 21, 21, 0) 100%),
+    var(--grey-8);
+  color: var(--white);
+}
+.bespoke__label {
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-support);
+}
+.bespoke__title {
+  margin-top: 12px;
+  font-weight: 300;
+  font-size: var(--h3);
+  line-height: var(--h3-lead);
+  text-transform: uppercase;
+}
+.bespoke__page {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 40px;
+  margin-top: clamp(36px, 5vh, 56px);
+  align-items: start;
+}
+.bespoke__frames { grid-column: 1 / span 7; display: grid; gap: var(--gutter); }
+.bespoke__frame { margin: 0; overflow: hidden; background: var(--noir); }
+.bespoke__frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bespoke__frame--lead img { aspect-ratio: 1800 / 911; }
+.bespoke__frame--inside { display: none; }
+.bespoke__story { grid-column: 8 / span 5; }
+.bespoke__lede {
+  font-weight: 300;
+  font-size: var(--h4);
+  line-height: var(--h4-lead);
+  letter-spacing: var(--h4-track);
+  text-transform: uppercase;
+}
+.bespoke__copy { margin-top: 18px; color: var(--ink-quiet); }
+.bespoke__spec {
+  display: grid;
+  row-gap: 2px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 24px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.bespoke__spec div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: 16px; align-items: baseline; }
+.bespoke__spec dt { color: var(--ink-support); }
+.bespoke__spec dd { margin: 0; color: var(--white); font-variant-numeric: tabular-nums; }
+.bespoke__routes { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 28px; margin-top: 32px; }
+.bespoke__route { color: var(--ink-quiet); }
+.bespoke__route:hover { color: var(--white); }
+
+@media (min-width: 1280px) {
+  /* the paint in close-up stands under the street frame once there is room */
+  .bespoke__frames { grid-column: 1 / span 7; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .bespoke__frame--lead { grid-column: 1 / -1; }
+  .bespoke__frame--inside { display: block; grid-column: 1 / span 1; }
+  .bespoke__frame--inside img { aspect-ratio: 3 / 4; }
+}
+@media (max-width: 1023px) {
+  .bespoke__frames { grid-column: 1 / -1; }
+  .bespoke__story { grid-column: 1 / -1; }
+}
+/* --- The model chapters, now that they carry doors ----------------------------
+   Three more pills under the button lengthened the standing block, and on the
+   Cullinan and the Black Badge that block sits over a motor car: it had come
+   down onto the roof. The copy closes to one line where there is room, the
+   gaps inside the block tighten, and the block itself stands higher. */
+@media (min-width: 768px) {
+  .cullinan__copy .line { display: inline-block; }
+  .cullinan__copy .line + .line { margin-left: 0.32em; }
+  .cullinan__body { top: calc(var(--h-full) * 0.104); }
+  .cullinan .actions { margin-top: 30px; }
+}
+.cullinan .doors,
+.badge .doors { margin-top: 16px; }
+.badge__copy + .badge__cta,
+.badge__cta { margin-top: 30px; }
