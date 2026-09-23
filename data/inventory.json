@@ -469,8 +469,8 @@
     "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
    },
    "carfax": null,
-   "status": null,
-   "status_source": null
+   "status": "new arrival",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "R77099",
@@ -1628,8 +1628,8 @@
     "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
    },
    "carfax": null,
-   "status": null,
-   "status_source": null
+   "status": "new arrival",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "R77506",
@@ -2094,8 +2094,8 @@
     "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
    },
    "carfax": null,
-   "status": null,
-   "status_source": null
+   "status": "sale pending",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "R77436",
@@ -3026,8 +3026,8 @@
     "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
    },
    "carfax": null,
-   "status": null,
-   "status_source": null
+   "status": "new arrival",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "R77161",
@@ -3725,7 +3725,7 @@
     "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
    },
    "carfax": null,
-   "status": "new arrival",
+   "status": "sale pending",
    "status_source": "placeholder, 2026-09-23"
   },
   {
@@ -4424,8 +4424,8 @@
     "frame_url": "https://dm-next-images.s3.us-east-2.amazonaws.com/vehicle-pictures/<id>/3-2_large.jpg"
    },
    "carfax": null,
-   "status": null,
-   "status_source": null
+   "status": "new arrival",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "R77218",
@@ -5901,8 +5901,8 @@
     "report": "https://www.carfax.com/vehiclehistory/ar20/Sm9uW9k4zXsfdx0elqxjvh3_A_HS95PFvDVCKjRdVYurGyyX3374dq_0KvJRBTLbe3SUQUGCGBTC7ZEdzN0DAor9DRNzTxIPBB9aaCD-",
     "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
    },
-   "status": null,
-   "status_source": null
+   "status": "sold",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "R65386",
@@ -6647,8 +6647,8 @@
     "report": "https://www.carfax.com/vehiclehistory/ar20/IdFO3TC-a5rIOaR6TFfr5erXICKyLJPbOa6CWbnJYKvrg_twB3G_BIhU0_UgHIZCy9IeiieEo8zNATOTu5avJFUmLf2bIiRYXtte-6FE",
     "source": "the CARFAX partner badge and report link on the dealer listing, 2026-09-21"
    },
-   "status": null,
-   "status_source": null
+   "status": "sold",
+   "status_source": "placeholder, 2026-09-23"
   },
   {
    "stock": "RC-P35652A",
