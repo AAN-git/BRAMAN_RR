@@ -17,12 +17,12 @@
   .hero__title { text-wrap: balance; }
 }
 
-/* --- The hero photograph — Spectre Series II ----------------------------------
+/* --- The hero photograph — Phantom Regatta ----------------------------------
    The film gives way to the retailer's own frame of the Series II. Three
    frames, not one crop: the whole scene at desktop, a smaller encode under
    1280, and a frame of its own on a phone — the coast road is 16:9, and a
    full-bleed portrait crop of it would cut the motor car in half. */
-.hero { background-image: url("../assets/img/hero-spectre-1280.webp"); }
+.hero { background-image: url("../assets/img/hero-phantom-1280.webp"); }
 
 /* The sky in this frame is bright where the navigation sits and the copy
    stands over palms and road. Legibility is fixed at the background layer
@@ -31,9 +31,29 @@
    rejected on the dune films. */
 .hero__scrim {
   background:
-    linear-gradient(to bottom, rgba(10, 8, 14, 0.7) 0%, rgba(10, 8, 14, 0.46) 12%, rgba(10, 8, 14, 0.22) 26%, rgba(10, 8, 14, 0) 42%),
+    linear-gradient(to bottom, rgba(10, 8, 14, 0.38) 0%, rgba(10, 8, 14, 0.18) 16%, rgba(10, 8, 14, 0) 36%),
     linear-gradient(to top, rgba(10, 8, 14, 0.62) 0%, rgba(10, 8, 14, 0.3) 22%, rgba(10, 8, 14, 0) 46%);
 }
+
+/* The bar carries its own ground while it stands on the picture. The hero
+   photograph changes whenever the retailer sends a new one — a sunset sky
+   one week, a dark road the next — so the navigation cannot depend on the
+   frame behind it for legibility. The gradient gives way to the glass as
+   soon as the page moves under the bar, and at rest the bar is only ever
+   over the hero, never over a pale section. */
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: calc(100% + 48px);
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(10, 8, 14, 0.8) 0%, rgba(10, 8, 14, 0.62) 46%, rgba(10, 8, 14, 0.24) 78%, rgba(10, 8, 14, 0) 100%);
+  pointer-events: none;
+  transition: opacity var(--dur-bar) var(--ease-out);
+}
+.header[data-scrolled]::after { opacity: 0; }
 
 /* The lockup stands under the motor car, on the road it leaves behind: in
    this frame the car holds the upper middle and the lower half is open
@@ -52,7 +72,57 @@
     gap: clamp(28px, 6vh, 56px);
     background: var(--grey-8);
   }
-  .hero__film { position: static; inset: auto; height: auto; aspect-ratio: 1100 / 905; }
+  .hero__film { position: static; inset: auto; height: auto; aspect-ratio: 1100 / 880; }
   .hero__body { position: static; top: auto; bottom: auto; }
   .hero__scrim { display: none; }
+}
+
+/* --- The doors ----------------------------------------------------------------
+   Three routes at the foot of every model chapter, and of the inventory rail:
+   the new motor cars of that model, the Provenance pre-owned ones, and a
+   Bespoke commission. They are one step quieter than the chapter's own
+   button, because they are routes out, not the chapter's subject. The count
+   is the retailer's real stock, written at build time; a door with nothing
+   behind it is not drawn at all. Ink and rule come from the section, so the
+   same door reads on the pale grounds and on the dark ones. */
+.doors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 28px;
+}
+.doors--centre { justify-content: center; }
+.door {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid color-mix(in srgb, currentColor 42%, transparent);
+  border-radius: var(--radius-pill);
+  color: inherit;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: border-color var(--dur-press) var(--ease-out), background-color var(--dur-press) var(--ease-out);
+}
+.door:hover { border-color: currentColor; }
+.door:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.door__n {
+  margin-left: 10px;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, currentColor 62%, transparent);
+}
+.door__n::before { content: "·"; margin-right: 10px; }
+/* the inventory rail keeps the file's own Sky pill, now on the first door */
+.door--lead { border-color: transparent; background: var(--sky); color: var(--black); }
+.door--lead:hover { border-color: transparent; background: var(--white); }
+.door--lead .door__n { color: rgba(21, 21, 21, 0.6); }
+
+@media (max-width: 767px) {
+  .doors { gap: 8px; }
+  .door { height: 38px; padding: 0 14px; }
 }

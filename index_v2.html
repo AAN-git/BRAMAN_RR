@@ -9,11 +9,11 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="assets/img/hero-spectre-1920.webp" as="image" media="(min-width: 1280px)">
-<link rel="preload" href="assets/img/hero-spectre-1280.webp" as="image" media="(min-width: 768px) and (max-width: 1279px)">
-<link rel="stylesheet" href="css/tokens.css?v=20260923145323">
-<link rel="stylesheet" href="css/main.css?v=20260923145323">
-<link rel="stylesheet" href="css/home-v2.css?v=20260923145323">
+<link rel="preload" href="assets/img/hero-phantom-1920.webp" as="image" media="(min-width: 1280px)">
+<link rel="preload" href="assets/img/hero-phantom-1280.webp" as="image" media="(min-width: 768px) and (max-width: 1279px)">
+<link rel="stylesheet" href="css/tokens.css?v=20260923151906">
+<link rel="stylesheet" href="css/main.css?v=20260923151906">
+<link rel="stylesheet" href="css/home-v2.css?v=20260923151906">
 <script>
   /* Entrance states exist only when this runs and motion is allowed, so the
      page without scripts — and with reduced motion — is the final composition. */
@@ -80,14 +80,14 @@
        are the prototype's hero1 Default → Variant2 (1s, ease-out). -->
   <section class="hero" id="models" data-ground="dark" data-reveal aria-labelledby="hero-title">
     <picture>
-      <source media="(max-width: 767px)" srcset="assets/img/hero-spectre-phone.webp" width="1100" height="905">
-      <source media="(max-width: 1279px)" srcset="assets/img/hero-spectre-1280.webp" width="1280" height="720">
-      <img class="hero__film" src="assets/img/hero-spectre-1920.webp" alt="A Rolls-Royce Spectre Series II on a palm-lined coast road at dusk" width="1920" height="1080" fetchpriority="high" decoding="async">
+      <source media="(max-width: 767px)" srcset="assets/img/hero-phantom-phone.webp" width="1100" height="880">
+      <source media="(max-width: 1279px)" srcset="assets/img/hero-phantom-1280.webp" width="1280" height="720">
+      <img class="hero__film" src="assets/img/hero-phantom-1920.webp" alt="Phantom Regatta, finished in Regatta Blue over English White, standing on a quay above the water at dusk" width="1920" height="1080" fetchpriority="high" decoding="async">
     </picture>
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__body">
-      <p class="hero__model">Spectre Series II</p>
-      <h1 class="hero__title" id="hero-title">The Relentless Pursuit<br> of Perfection Continues</h1>
+      <p class="hero__model">Phantom Regatta</p>
+      <h1 class="hero__title" id="hero-title">An Elegant Story in Paint,<br> Leather, Wood and Metal</h1>
       <a class="btn btn--slate hero__cta" href="#">Discover</a>
     </div>
   </section>
@@ -105,7 +105,11 @@
         <p class="split__copy">An emblem of expression, matching your energy and infusing vitality back into the world.</p>
         <div class="actions">
           <a class="btn btn--slate split__primary" href="#">Discover</a>
-          <a class="btn btn--white btn--compact split__secondary" href="#">Inquire</a>
+        </div>
+        <div class="doors" data-doors="ghost">
+          <a class="door" href="inventory.html?model=ghost&amp;new" aria-label="New Ghost inventory, 11 motor cars">New<span class="door__n">11</span></a>
+          <a class="door" href="inventory.html?model=ghost&amp;provenance" aria-label="Provenance pre-owned Ghost, 2 motor cars">Provenance<span class="door__n">2</span></a>
+          <a class="door" href="#">Bespoke commission</a>
         </div>
       </div>
     </div>
@@ -124,7 +128,10 @@
         <p class="split__copy">A super coupé of sculptural elegance. A symphony of beauty and strength.</p>
         <div class="actions">
           <a class="btn btn--slate split__primary" href="#">Discover</a>
-          <a class="btn btn--white btn--compact split__secondary" href="#">Inquire</a>
+        </div>
+        <div class="doors" data-doors="spectre">
+          <a class="door" href="inventory.html?model=spectre&amp;provenance" aria-label="Provenance pre-owned Spectre, 1 motor car">Provenance<span class="door__n">1</span></a>
+          <a class="door" href="#">Bespoke commission</a>
         </div>
       </div>
     </div>
@@ -146,7 +153,11 @@
         <p class="cullinan__copy"><span class="line">Poised with elegance.</span><span class="line">A refined emblem of fine materials and peerless craftsmanship.</span></p>
         <div class="actions actions--centre">
           <a class="btn btn--slate cullinan__primary" href="#">Discover</a>
-          <a class="btn btn--white cullinan__secondary" href="#">Inquire</a>
+        </div>
+        <div class="doors doors--centre" data-doors="cullinan">
+          <a class="door" href="inventory.html?model=cullinan&amp;new" aria-label="New Cullinan inventory, 7 motor cars">New<span class="door__n">7</span></a>
+          <a class="door" href="inventory.html?model=cullinan&amp;provenance" aria-label="Provenance pre-owned Cullinan, 4 motor cars">Provenance<span class="door__n">4</span></a>
+          <a class="door" href="#">Bespoke commission</a>
         </div>
       </div>
     </div>
@@ -191,6 +202,11 @@
       </h2>
       <p class="badge__copy">Black Badge is a formidable alter ego. Boldly crafted and designed with enhanced power, torque, and control.</p>
         <a class="btn btn--white badge__cta" href="#">Inquire</a>
+        <div class="doors doors--centre" data-doors="black-badge">
+          <a class="door" href="inventory.html?trim=black-badge&amp;new" aria-label="New Black Badge inventory, 13 motor cars">New<span class="door__n">13</span></a>
+          <a class="door" href="inventory.html?trim=black-badge&amp;provenance" aria-label="Provenance pre-owned Black Badge, 3 motor cars">Provenance<span class="door__n">3</span></a>
+          <a class="door" href="#">Bespoke commission</a>
+        </div>
       </div>
     </div>
   </section>
@@ -738,7 +754,11 @@
         </button>
       </div>
       <div class="actions">
-        <a class="btn btn--sky" href="inventory.html">View All<span class="sr-only"> inventory</span></a>
+        <div class="doors doors--centre" data-doors="all">
+          <a class="door door--lead" href="inventory.html?new" aria-label="New Rolls-Royce inventory, 21 motor cars">New<span class="door__n">21</span></a>
+          <a class="door" href="inventory.html?provenance" aria-label="Provenance pre-owned Rolls-Royce, 8 motor cars">Provenance<span class="door__n">8</span></a>
+          <a class="door" href="#">Bespoke commission</a>
+        </div>
       </div>
       <p class="stock__legal">* Prices and payments do not include tax, tag, title. The Sales Price includes a $1,189 dealer service charge, and a $514 electronic filing charge. <a href="inventory.html#legal">Full pricing details</a>.</p>
     </div>
@@ -901,6 +921,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260923145323"></script>
+<script src="js/main.js?v=20260923151906"></script>
 </body>
 </html>

@@ -128,6 +128,51 @@ for page in ('index.html', 'index_v2.html'):
     print('12 cards in', page)
 
 # =========================================================================
+# 2b. The doors — three routes per model chapter on the second home page, with
+#     the count the retailer actually holds. A door with no motor cars behind
+#     it is not drawn: a button into an empty list is the worst thing a
+#     buyer can be handed.
+# =========================================================================
+GROUPS = {
+    'ghost':       ('model', 'Ghost',       'Ghost'),
+    'spectre':     ('model', 'Spectre',     'Spectre'),
+    'cullinan':    ('model', 'Cullinan',    'Cullinan'),
+    'phantom':     ('model', 'Phantom',     'Phantom'),
+    'black-badge': ('trim',  'Black Badge', 'Black Badge'),
+    'all':         (None,    None,          'Rolls-Royce'),
+}
+
+def doors_for(slug):
+    field, value, _ = GROUPS[slug]
+    def holds(v, cond):
+        if v['condition'] != cond: return False
+        if field is None: return True
+        if field == 'model': return v['model'] == value
+        return value in (v.get('trim') or '')
+    n_new = sum(1 for v in V if holds(v, 'new'))
+    n_pre = sum(1 for v in V if holds(v, 'used'))
+    q = '?' if field is None else f'?{field}={value.lower().replace(" ", "-")}&amp;'
+    what = GROUPS[slug][2] or 'the'
+    lead = ' door--lead' if slug == 'all' else ''
+    out = []
+    if n_new:
+        out.append(f'<a class="door{lead}" href="inventory.html{q}new" aria-label="New {what} inventory, {n_new} motor {"car" if n_new == 1 else "cars"}">New<span class="door__n">{n_new}</span></a>')
+    if n_pre:
+        out.append(f'<a class="door" href="inventory.html{q}provenance" aria-label="Provenance pre-owned {what}, {n_pre} motor {"car" if n_pre == 1 else "cars"}">Provenance<span class="door__n">{n_pre}</span></a>')
+    out.append('<a class="door" href="#">Bespoke commission</a>')
+    return '\n          '.join(out)
+
+path = ROOT + 'index_v2.html'
+if os.path.exists(path):
+    v2 = open(path).read()
+    def fill(m):
+        slug = m.group(2)
+        return f'{m.group(1)}\n          {doors_for(slug)}\n        </div>'
+    v2, n = re.subn(r'(<div class="doors[^"]*" data-doors="([a-z-]+)">).*?</div>', fill, v2, flags=re.S)
+    open(path, 'w').write(stamp(v2))
+    print(n, 'door rows in index_v2.html')
+
+# =========================================================================
 # 3. The vehicle pages — the SRP's head, header and footer, paths lifted a
 #    level, and the car between them.
 # =========================================================================

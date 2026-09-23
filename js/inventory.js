@@ -30,9 +30,55 @@
     "model":      function (a, b) { return a.dataset.model.localeCompare(b.dataset.model); }
   };
 
+  /* --- The route ---------------------------------------------------------
+     The home page's doors arrive with the choice already made:
+     ?model=ghost&new · ?trim=black-badge&provenance · ?new · ?provenance.
+     A model the picks already carry is set on the pick, so the visitor sees
+     it where they would have chosen it; condition and trim have no pick of
+     their own and are held here, named above the grid, and dropped by
+     "Show all". Without a query none of this exists and the page is the
+     page it was. */
+  var routeLine = document.querySelector(".srp__route");
+  var routeName = routeLine && routeLine.querySelector("[data-route]");
+  var routeClear = routeLine && routeLine.querySelector(".srp__route-clear");
+  var route = {};                      /* { condition: "new", trim: "Black Badge" } */
+
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-"); }
+
+  function readRoute() {
+    var q = new URLSearchParams(window.location.search);
+    var words = [];
+    if (q.has("new")) { route.condition = "new"; words.push("new"); }
+    else if (q.has("provenance") || q.get("condition") === "used") { route.condition = "used"; words.push("Provenance pre-owned"); }
+    else if (q.get("condition") === "new") { route.condition = "new"; words.push("new"); }
+
+    var wanted = q.get("model");
+    if (wanted) {
+      var pick = picks.filter(function (p) { return p.dataset.pick === "model"; })[0];
+      var option = pick && Array.prototype.filter.call(pick.options, function (o) { return slug(o.value) === slug(wanted); })[0];
+      if (option) { pick.value = option.value; words.push(option.value); }
+      else { route.model = wanted; words.push(wanted); }
+    }
+    var trim = q.get("trim");
+    if (trim) {
+      var match = cards.map(function (c) { return c.dataset.trim; })
+        .filter(function (t) { return t && slug(t) === slug(trim); })[0];
+      if (match) { route.trim = match; words.push(match); }
+    }
+    if (routeLine && words.length) {
+      routeName.textContent = words.join(" · ");
+      routeLine.hidden = false;
+    }
+  }
+
   /* A pick left on its first option asks for nothing. Make has one option —
      every card is a Rolls-Royce — so it never narrows. */
   function matches(card) {
+    for (var key in route) {
+      if (!Object.prototype.hasOwnProperty.call(route, key)) continue;
+      var have = card.dataset[key];
+      if (key === "trim" ? String(have).indexOf(route[key]) === -1 : slug(have) !== slug(route[key])) return false;
+    }
     return picks.every(function (p) {
       var want = p.value;
       if (!want) return true;
@@ -75,11 +121,18 @@
 
   picks.forEach(function (p) { p.addEventListener("change", render); });
   select.addEventListener("change", render);
-  clear.addEventListener("click", function () {
+  function showAll() {
+    route = {};
     picks.forEach(function (p) { p.value = ""; });
+    if (routeLine) routeLine.hidden = true;
+    if (window.history.replaceState) window.history.replaceState(null, "", window.location.pathname);
     render();
-    picks[0].focus();
-  });
+  }
+  clear.addEventListener("click", function () { showAll(); picks[0].focus(); });
+  if (routeClear) routeClear.addEventListener("click", function () { showAll(); picks[0].focus(); });
+
+  readRoute();
+  if (Object.keys(route).length || picks.some(function (p) { return p.value; })) render();
 
   /* First paint: the cards climb in. */
   if (motion) {

@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="css/tokens.css?v=20260923145323">
-<link rel="stylesheet" href="css/main.css?v=20260923145323">
-<link rel="stylesheet" href="css/inventory.css?v=20260923145323">
+<link rel="stylesheet" href="css/tokens.css?v=20260923151906">
+<link rel="stylesheet" href="css/main.css?v=20260923151906">
+<link rel="stylesheet" href="css/inventory.css?v=20260923151906">
 <script>
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("motion");
@@ -86,6 +86,9 @@
       <p class="srp__eyebrow">New and Provenance certified pre-owned</p>
       <h1 class="srp__title">Inventory</h1>
       <p class="srp__count" aria-live="polite"><span data-count>29</span> motor cars in West Palm Beach</p>
+      <!-- Set when the visitor arrives from one of the home page's doors
+           (inventory.html?model=ghost&new); silent otherwise. -->
+      <p class="srp__route" hidden>Showing <span data-route></span> <button class="srp__route-clear" type="button">Show all</button></p>
     </header>
 
     <!-- Four picks on one line: year, make, model, sort. Each is a rule with
@@ -1219,7 +1222,7 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260923145323"></script>
-<script src="js/inventory.js?v=20260923145323"></script>
+<script src="js/main.js?v=20260923151906"></script>
+<script src="js/inventory.js?v=20260923151906"></script>
 </body>
 </html>

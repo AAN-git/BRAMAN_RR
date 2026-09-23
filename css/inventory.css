@@ -322,3 +322,28 @@
   .srp__tools { grid-template-columns: none; gap: 20px; margin-top: 36px; }
   .grid { grid-template-columns: none; gap: 32px; }
 }
+
+/* The line that says which door the visitor came through, and the way back
+   to the whole list. Present only when the address asked for something. */
+.srp__route {
+  margin-top: 10px;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-support);
+}
+.srp__route [data-route] { color: var(--white); }
+.srp__route-clear {
+  margin-left: 14px;
+  padding: 0 0 2px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  background: none;
+  color: var(--white);
+  cursor: pointer;
+  transition: border-color var(--dur-press) var(--ease-out);
+}
+.srp__route-clear:hover { border-bottom-color: var(--white); }
+.srp__route-clear:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
