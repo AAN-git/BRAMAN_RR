@@ -246,7 +246,7 @@ head = re.search(r'<head>.*?</head>', srp, re.S).group(0)
 header = re.search(r'<a class="skip".*?</header>', srp, re.S).group(0)
 footer = re.search(r'<!-- LAST MASS.*?</footer>', srp, re.S).group(0)
 def lift(s):
-    s = re.sub(r'(href|src)="(assets/|css/|js/|index\.html|inventory\.html)', r'\1="../\2', s)
+    s = re.sub(r'(href|src)="(assets/|css/|js/|index\.html|index_v2\.html|inventory\.html)', r'\1="../\2', s)
     s = s.replace('href="./"', 'href="../"')
     return s
 head = re.sub(r'href="\.\./css/inventory\.css[^"]*"', 'href="../css/vehicle.css"', lift(head))   # the vehicle page has its own sheet
@@ -481,7 +481,7 @@ def vehicle_page(v):
 
     <div class="vdp__top">
       <nav class="vdp__crumbs" aria-label="Breadcrumb">
-        <a href="../index.html">Home</a><span aria-hidden="true">/</span><a href="../inventory.html">Inventory</a><span aria-hidden="true">/</span><span aria-current="page">{e(name)}</span>
+        <a href="../index_v2.html">Home</a><span aria-hidden="true">/</span><a href="../inventory.html">Inventory</a><span aria-hidden="true">/</span><span aria-current="page">{e(name)}</span>
       </nav>
       <!-- Save · Email · Text · Share — Save keeps the car; the other three open the drawer -->
       <ul class="tools" data-stock="{e(v['stock'])}" data-name="{e(name)}">

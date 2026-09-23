@@ -408,6 +408,11 @@ new work goes; the first version stays put so the two can be held side by
 side. The copy differs in three lines only: `noindex`, the mark leading to
 itself rather than to `./`, and a second stylesheet.
 
+**The pages are one site, and that site is v2** (2026-09-23): the mark in the
+bar, the breadcrumb on a vehicle page and the catalog's first chapter all lead
+to `index_v2.html`. `index.html` stays reachable by its own address as the
+version the client first signed off, and its own links keep it there.
+
 **Every v2 change of styling lives in `css/home-v2.css`**, loaded after
 `main.css`; a change that is structural lives in `index_v2.html` itself.
 Nothing in `main.css` or in the shared sections may be edited for v2 — that
