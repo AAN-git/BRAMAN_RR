@@ -844,26 +844,15 @@ a { color: inherit; }
   min-width: 0;
   list-style: none;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  transition: border-color var(--dur-press) var(--ease-out);
+  transition: border-color var(--dur-press) var(--ease-out), box-shadow var(--dur-press) var(--ease-out);
 }
-.card:hover,
-.card:focus-within { border-color: rgba(255, 255, 255, 0.4); }
-/* The photograph bleeds a pixel over the card's own line (the media carries a
-   -1px margin), and the banner along its foot took the line with it. So the
-   frame is drawn again on top of everything — all four sides unbroken,
-   including where the banner crosses them. */
+/* Under the pointer the card does not brighten its line — it lifts off the
+   page: a short, tight shadow, close under the card. (The white frame that
+   used to answer the pointer is gone; the keyboard keeps its own ring on
+   .card__link:focus-visible.) */
 .card { position: relative; }
-.card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  border: 1px solid transparent;
-  transition: border-color var(--dur-press) var(--ease-out);
-}
-.card:hover::after,
-.card:focus-within::after { border-color: var(--white); }
+.card:hover,
+.card:focus-within { box-shadow: 0 8px 18px rgba(0, 0, 0, 0.55); }
 .card[hidden] { display: none; }
 .card__link {
   display: flex;
