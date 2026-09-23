@@ -276,7 +276,12 @@
    right. When they send the next commission, this holds it unchanged. */
 .bespoke {
   position: relative;
-  padding: clamp(88px, 12vh, 140px) 0 clamp(80px, 10vh, 120px);
+  /* the chapter stands inside one screen at any height: the picture takes
+     what the words leave, never the other way round */
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  padding: clamp(84px, 11svh, 132px) 0 clamp(56px, 8svh, 104px);
   background:
     radial-gradient(70% 44% at 24% 0%, rgba(109, 48, 167, 0.3) 0%, rgba(40, 20, 50, 0.14) 48%, rgba(21, 21, 21, 0) 100%),
     var(--grey-8);
@@ -301,14 +306,14 @@
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--gutter);
-  row-gap: 40px;
-  margin-top: clamp(36px, 5vh, 56px);
+  row-gap: clamp(20px, 3.4svh, 40px);
+  margin-top: clamp(24px, 4svh, 52px);
   align-items: start;
 }
 .bespoke__frames { grid-column: 1 / span 7; display: grid; gap: var(--gutter); }
 .bespoke__frame { margin: 0; overflow: hidden; background: var(--noir); }
 .bespoke__frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.bespoke__frame--lead img { aspect-ratio: 1800 / 911; }
+.bespoke__frame--lead img { aspect-ratio: 1800 / 911; max-height: 46svh; }
 .bespoke__frame--inside { display: none; }
 .bespoke__story { grid-column: 8 / span 5; }
 .bespoke__lede {
@@ -318,12 +323,12 @@
   letter-spacing: var(--h4-track);
   text-transform: uppercase;
 }
-.bespoke__copy { margin-top: 18px; color: var(--ink-quiet); }
+.bespoke__copy { margin-top: clamp(12px, 2.2svh, 18px); color: var(--ink-quiet); }
 .bespoke__spec {
   display: grid;
   row-gap: 2px;
-  margin-top: 28px;
-  padding-top: 20px;
+  margin-top: clamp(18px, 3svh, 28px);
+  padding-top: clamp(14px, 2.4svh, 20px);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 400;
   font-size: var(--label);
@@ -334,7 +339,7 @@
 .bespoke__spec div { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr); column-gap: 16px; align-items: baseline; }
 .bespoke__spec dt { color: var(--ink-support); }
 .bespoke__spec dd { margin: 0; color: var(--white); font-variant-numeric: tabular-nums; }
-.bespoke__routes { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 28px; margin-top: 32px; }
+.bespoke__routes { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: clamp(20px, 3.4svh, 32px); }
 .bespoke__route { color: var(--ink-quiet); }
 .bespoke__route:hover { color: var(--white); }
 
@@ -348,6 +353,14 @@
 @media (max-width: 1023px) {
   .bespoke__frames { grid-column: 1 / -1; }
   .bespoke__story { grid-column: 1 / -1; }
+  .bespoke__frame--lead img { max-height: 32svh; }
+  /* the specification pairs up rather than running five rows down the page */
+  .bespoke__spec { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 6px; }
+  .bespoke__spec div { grid-template-columns: 1fr; }
+  .bespoke__spec div:first-child { grid-column: 1 / -1; }
+}
+@media (max-height: 720px) and (min-width: 1024px) {
+  .bespoke__frame--lead img { max-height: 42svh; }
 }
 /* --- The model chapters, now that they carry doors ----------------------------
    Three more pills under the button lengthened the standing block, and on the
@@ -364,3 +377,428 @@
 .badge .doors { margin-top: 16px; }
 .badge__copy + .badge__cta,
 .badge__cta { margin-top: 30px; }
+
+/* The chapter has to stand inside one screen on a telephone too, and a phone
+   screen is mostly text height: the picture gives up the most, the lede drops
+   to reading size, and the specification puts its label and its value on one
+   line. Nothing is removed — the same words are on every screen. */
+@media (max-width: 639px) {
+  .bespoke { padding: clamp(52px, 7svh, 84px) 0 clamp(32px, 5svh, 56px); }
+  .bespoke__title { margin-top: 8px; }
+  .bespoke__page { margin-top: clamp(16px, 2.6svh, 32px); row-gap: clamp(14px, 2.4svh, 24px); }
+  .bespoke__frame--lead img { max-height: 25svh; }
+  .bespoke__lede { font-size: var(--body); line-height: 1.38; letter-spacing: 0.02em; }
+  .bespoke__copy { margin-top: 10px; font-size: var(--small); line-height: var(--small-lead); }
+  .bespoke__spec {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+    margin-top: 16px;
+    padding-top: 14px;
+    line-height: 22px;
+  }
+  .bespoke__spec div,
+  .bespoke__spec div:first-child { grid-column: 1 / -1; grid-template-columns: 6.6rem minmax(0, 1fr); column-gap: 12px; }
+  .bespoke__routes { margin-top: 18px; gap: 12px 20px; }
+  .bespoke__routes .btn { width: 100%; }
+}
+
+/* ==============================================================================
+   ONE CHAPTER, ONE SCREEN — the client's rule for the second home page.
+   Every chapter but the inventory rail stands inside the viewport at any
+   height, on any width. Nothing is removed to achieve it: the paddings and
+   the pictures give way first, the gaps second, and only on a telephone does
+   the type step down a size (never under the 14px floor). Measured, not
+   eyeballed — see the sizes in the report.
+   ============================================================================== */
+
+/* --- About and Service: photograph beside the copy ----------------------------- */
+.about__wrap,
+.service__wrap {
+  padding-top: clamp(96px, 13svh, 190px);
+  padding-bottom: clamp(40px, 6svh, 80px);
+  align-items: center;
+}
+.about__media,
+.service__media { max-height: 66svh; }
+.about__media img,
+.service__media img { max-height: 66svh; }
+.about__copy,
+.service__copy { margin-top: clamp(16px, 2.6svh, 30px); }
+.about__copy + .about__copy,
+.service__copy + .service__copy { margin-top: clamp(14px, 2.2svh, 26px); }
+.about .more,
+.service .more { margin-top: clamp(18px, 3svh, 40px); }
+.about .actions { margin-top: clamp(24px, 4svh, 66px); }
+.service__contacts { margin-top: clamp(16px, 2.6svh, 30px); }
+.service .actions { margin-top: clamp(20px, 3.4svh, 40px); }
+
+@media (max-width: 1023px) {
+  /* stacked: the photograph takes what the words leave */
+  .about__wrap,
+  .service__wrap { padding: clamp(84px, 11svh, 110px) 0 clamp(32px, 5svh, 56px); }
+  .about__media,
+  .service__media { margin-top: clamp(20px, 3svh, 48px); max-height: 34svh; }
+  .service__media { margin: 0 0 clamp(20px, 3svh, 48px); }
+  .about__media img,
+  .service__media img { max-height: 34svh; }
+  .about .actions,
+  .service .actions { margin-top: clamp(20px, 3.4svh, 48px); }
+}
+@media (max-width: 639px) {
+  .about__media,
+  .service__media,
+  .about__media img,
+  .service__media img { max-height: 26svh; }
+  .service__contacts { font-size: var(--label); line-height: 20px; }
+}
+
+/* --- Sell: the service on one side, the submission on the other ---------------- */
+@media (max-width: 1023px) {
+  .sell__wrap { padding: clamp(84px, 11svh, 120px) 0 clamp(32px, 5svh, 56px); }
+  .sell__points { row-gap: clamp(14px, 2.4svh, 24px); margin-top: clamp(20px, 3svh, 34px); }
+  .sell__points h3 { margin-top: clamp(8px, 1.4svh, 16px); }
+  .sell__points p { margin-top: 6px; }
+  .sell__form { margin-top: clamp(20px, 3svh, 40px); gap: clamp(14px, 2.2svh, 22px) var(--gutter); }
+}
+@media (max-width: 639px) {
+  .sell__lede { font-size: var(--body); line-height: 1.38; letter-spacing: 0.02em; }
+  .sell__points h3 { font-size: var(--body); }
+  .sell__points p { font-size: var(--small); line-height: var(--small-lead); }
+  .sell__form .field__input { height: 34px; font-size: var(--body); }
+  .sell__form .field { gap: 2px; }
+  .sell__send { margin-top: 8px; }
+}
+
+/* --- One chapter, one screen: the second pass, from the measurements ----------- */
+.sell__wrap { padding: clamp(72px, 10svh, 132px) 0 clamp(36px, 5svh, 64px) !important; }
+@media (min-width: 1024px) {
+  .sell__wrap { row-gap: clamp(28px, 4.6svh, 72px); }
+  .sell__form { gap: clamp(16px, 2.6svh, 24px) var(--gutter); }
+  .sell__form .field__input { height: clamp(34px, 4.4svh, 40px); }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .about__media, .about__media img,
+  .service__media, .service__media img { max-height: 46svh; }
+  .service__copy, .about__copy { font-size: var(--small); line-height: var(--small-lead); }
+}
+@media (max-height: 780px) and (min-width: 1024px) {
+  .about__media, .about__media img,
+  .service__media, .service__media img { max-height: 54svh; }
+  .bespoke__frame--lead img { max-height: 38svh; }
+  .bespoke__copy { font-size: var(--small); line-height: var(--small-lead); }
+  .service__copy, .about__copy { font-size: var(--small); line-height: var(--small-lead); }
+}
+
+/* --- The telephone: the tightest room there is --------------------------------- */
+@media (max-width: 639px) {
+  .about__wrap,
+  .service__wrap { padding: clamp(72px, 10svh, 96px) 0 clamp(24px, 4svh, 40px); }
+  .about__title,
+  .service__title,
+  .sell__title { font-size: var(--h4); line-height: var(--h4-lead); }
+  .about__copy,
+  .service__copy { font-size: var(--small); line-height: var(--small-lead); margin-top: clamp(10px, 1.8svh, 16px); }
+  .about__media, .about__media img,
+  .service__media, .service__media img { max-height: 22svh; }
+  .service__contacts { margin-top: clamp(10px, 1.8svh, 16px); padding: 6px 0; }
+  .service__lines { gap: 4px 20px; }
+  .about .actions,
+  .service .actions { margin-top: clamp(14px, 2.4svh, 24px); gap: 10px; }
+  .about .actions .btn,
+  .service .actions .btn { min-width: 0; flex: 1 1 46%; padding-inline: 14px; }
+
+  /* Sell: the form pairs its fields so the chapter keeps to one screen */
+  .sell__points { row-gap: clamp(10px, 1.8svh, 18px); margin-top: clamp(14px, 2.4svh, 24px); }
+  .sell__points li::before { width: 22px; }
+  .sell__points h3 { margin-top: 8px; }
+  .sell__points p { margin-top: 4px; }
+  .sell__form { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(12px, 2svh, 18px) var(--gutter); margin-top: clamp(16px, 2.6svh, 28px); }
+  .sell__form .field--wide { grid-column: 1 / -1; }
+  .sell__form .field__input { height: 32px; font-size: var(--body); }
+  .sell__form-label { margin-bottom: 0; }
+}
+
+/* --- One chapter, one screen: the third pass ----------------------------------- */
+/* Service carries the most words of any chapter — three paragraphs, the
+   telephone lines and two actions — so it gives up the most room. */
+@media (max-width: 1279px) {
+  .service__media, .service__media img { max-height: 40svh; }
+  .service .actions,
+  .about .actions { flex-wrap: nowrap; gap: 12px; }
+  .service .actions .btn,
+  .about .actions .btn { min-width: 0; flex: 1 1 50%; padding-inline: 16px; }
+  .service__contacts { padding: 6px 0; font-size: var(--label); line-height: 20px; }
+  .service__lines { gap: 2px 18px; }
+}
+@media (max-height: 820px) {
+  .service__title, .about__title { font-size: var(--h4); line-height: var(--h4-lead); }
+  .service__copy, .about__copy { margin-top: clamp(10px, 1.8svh, 20px); }
+  .service .more, .about .more { margin-top: clamp(12px, 2svh, 22px); }
+  .bespoke__frame--lead img { max-height: 34svh; }
+  .bespoke__spec { line-height: 22px; }
+  .sell__form .field__input { height: 32px; }
+  .sell__form { gap: 14px var(--gutter); }
+}
+@media (max-width: 639px) {
+  .service__media, .service__media img,
+  .about__media, .about__media img { max-height: 18svh; }
+  .service__copy, .about__copy { margin-top: 8px; }
+  .service .more, .about .more { margin-top: 12px; }
+  .sell__points p br { display: none; }
+  .sell__points p { font-size: var(--label); line-height: 20px; }
+  .bespoke__frame--lead img { max-height: 22svh; }
+  .bespoke__copy { margin-top: 8px; }
+  .bespoke__spec { margin-top: 12px; padding-top: 10px; line-height: 21px; }
+}
+
+/* --- One chapter, one screen: the fourth pass ---------------------------------- */
+@media (max-height: 820px) {
+  .about__wrap,
+  .service__wrap { padding-top: clamp(72px, 9svh, 104px); padding-bottom: clamp(24px, 4svh, 40px); }
+  .sell__wrap { padding: clamp(64px, 8svh, 96px) 0 clamp(24px, 4svh, 44px) !important; }
+  .bespoke { padding: clamp(60px, 8svh, 96px) 0 clamp(28px, 4svh, 48px); }
+  .bespoke__page { margin-top: clamp(16px, 2.6svh, 32px); }
+}
+@media (max-width: 1023px) {
+  .about__media, .about__media img,
+  .service__media, .service__media img { max-height: 30svh; }
+}
+@media (max-width: 639px) {
+  /* the three points become three lines: the rule, the name, the promise */
+  .sell__points li { display: grid; grid-template-columns: 20px minmax(0, 1fr); column-gap: 10px; align-items: start; }
+  .sell__points li::before { grid-column: 1; margin-top: 11px; width: 20px; }
+  .sell__points h3 { grid-column: 2; margin: 0; font-size: var(--label); line-height: 22px; letter-spacing: 0.03em; }
+  .sell__points p { grid-column: 2; margin-top: 2px; }
+  .sell__form-label { display: none; }          /* the chapter's own label already says it */
+  .sell__form .field__input { height: 30px; }
+  .sell__form { gap: 10px var(--gutter); }
+  .sell__send { gap: 8px 16px; margin-top: 4px; }
+  .sell__send .btn { height: 44px; }
+  .service__copy, .about__copy { font-size: var(--label); line-height: 20px; }
+  .service .actions .btn, .about .actions .btn { height: 44px; }
+}
+
+/* ==============================================================================
+   THE BAR NEVER CROSSES THE WORDS.
+   The header is fixed, so every chapter's first line has to begin below it —
+   at rest, not only once the page has moved. One measure, declared here and
+   used by each chapter, so the two rules (one chapter, one screen; the bar
+   over nothing) are solved together rather than against each other.
+   ============================================================================== */
+:root { --bar: 139px; }
+@media (max-width: 1023px) { :root { --bar: 84px; } }
+@media (max-width: 767px)  { :root { --bar: 72px; } }
+
+.about__wrap,
+.service__wrap { padding-top: max(calc(var(--bar) + 20px), clamp(72px, 9svh, 104px)) !important; }
+.sell__wrap { padding-top: max(calc(var(--bar) + 20px), clamp(64px, 8svh, 96px)) !important; }
+.bespoke { padding-top: max(calc(var(--bar) + 20px), clamp(60px, 8svh, 96px)); }
+.stock { scroll-margin-top: var(--bar); }
+
+/* --- Bespoke: the close-up laid over the street frame --------------------------
+   Two frames, not a row of two: the motor car on its street, and the paint at
+   arm's length laid over its lower corner, the way a print would be placed on
+   a board. The overhang is held by the stage's own padding, so nothing below
+   is pushed about, and each frame answers the pointer by growing a little
+   inside its own edge. */
+.bespoke__frames {
+  position: relative;
+  display: block;
+  padding-bottom: 13%;
+  padding-right: 4%;
+}
+.bespoke__frame { position: relative; overflow: hidden; }
+.bespoke__frame--lead { width: 84%; }
+.bespoke__frame--inside {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 42%;
+  box-shadow: -18px -18px 40px rgba(10, 8, 14, 0.5);
+}
+.bespoke__frame img,
+.bespoke__frame--lead img,
+.bespoke__frame--inside img {
+  max-height: none;
+  aspect-ratio: auto;
+  object-fit: cover;
+  transition: transform 900ms var(--ease-out);
+}
+.bespoke__frame--lead img { height: clamp(200px, 34svh, 400px); }
+.bespoke__frame--inside img { height: clamp(150px, 26svh, 300px); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .bespoke__frame:hover img { transform: scale(1.06); }
+}
+@media (max-width: 639px) {
+  .bespoke__frames { padding-bottom: 16%; padding-right: 2%; }
+  .bespoke__frame--lead img { height: clamp(140px, 22svh, 240px); }
+  .bespoke__frame--inside img { height: clamp(110px, 17svh, 180px); }
+}
+
+/* --- Service and Sell: the last of the room ------------------------------------ */
+@media (max-width: 1279px) {
+  .service__copy:last-of-type { margin-top: 6px; }
+  .service .more { margin-top: 14px; }
+}
+@media (max-width: 639px) {
+  .service__media, .service__media img,
+  .about__media, .about__media img { max-height: 15svh; }
+  .service__contacts { line-height: 18px; }
+  .service__lines { gap: 0 16px; }
+  .sell__points { row-gap: 8px; }
+  .sell__points p { line-height: 18px; }
+  .sell__form { gap: 8px var(--gutter); margin-top: 14px; }
+  .sell__form .field__label { line-height: 18px; }
+}
+@media (max-height: 780px) and (min-width: 1024px) {
+  .sell__form { gap: 12px var(--gutter); }
+  .sell__points { row-gap: 14px; }
+  .sell__form .field__input { height: 30px; }
+}
+
+/* --- Short screens: the last eighty pixels ------------------------------------- */
+@media (max-height: 830px) and (min-width: 640px) {
+  .sell__lede { font-size: var(--body); line-height: 1.4; letter-spacing: 0.02em; }
+  .sell__points { row-gap: 10px; }
+  .sell__points p { font-size: var(--small); line-height: var(--small-lead); }
+  .sell__form { gap: 10px var(--gutter); }
+  .sell__form .field { gap: 4px; }
+  .sell__form .field__label { line-height: 18px; }
+  .sell__form .field__input { height: 28px; }
+  .sell__send { margin-top: 6px; }
+  .sell__wrap { padding-bottom: 20px !important; }
+  .service__copy, .about__copy { font-size: var(--small); line-height: var(--small-lead); }
+  .service__contacts { line-height: 19px; }
+  .service__media, .service__media img,
+  .about__media, .about__media img { max-height: 36svh; }
+  .bespoke__frame--lead img { height: clamp(180px, 30svh, 340px); }
+  .bespoke__frame--inside img { height: clamp(130px, 22svh, 250px); }
+  .bespoke { padding-bottom: clamp(20px, 3svh, 40px); }
+}
+@media (max-width: 639px) {
+  .bespoke__frame img,
+  .bespoke__frame--lead img,
+  .bespoke__frame--inside img { height: clamp(120px, 17svh, 200px); }
+  .bespoke__lede { font-size: var(--small); line-height: 1.4; }
+  .bespoke__copy { font-size: var(--label); line-height: 19px; }
+  .bespoke__spec { line-height: 19px; }
+  .service__title, .about__title, .sell__title { font-size: var(--h4); }
+  .service__copy, .about__copy { line-height: 19px; }
+  .sell__form .field__input { height: 28px; }
+}
+
+/* --- The tightest screens: one more notch -------------------------------------- */
+@media (max-height: 760px) {
+  .sell__wrap,
+  .about__wrap,
+  .service__wrap { padding-top: max(calc(var(--bar) + 12px), 64px) !important; padding-bottom: 16px !important; }
+  .bespoke { padding-top: max(calc(var(--bar) + 12px), 56px); padding-bottom: 18px; }
+  .sell__form .field__input { height: 26px; }
+  .sell__form { gap: 8px var(--gutter); }
+  .service__media, .service__media img,
+  .about__media, .about__media img { max-height: 30svh; }
+  .bespoke__frame--lead img { height: clamp(150px, 26svh, 300px); }
+  .bespoke__frame--inside img { height: clamp(110px, 19svh, 220px); }
+  .bespoke__copy { margin-top: 8px; }
+  .bespoke__spec { margin-top: 12px; padding-top: 12px; }
+  .bespoke__routes { margin-top: 16px; }
+  .service__contacts { margin-top: 10px; }
+  .service .actions, .about .actions { margin-top: 14px; }
+}
+@media (max-width: 400px) {
+  .service__media, .service__media img,
+  .about__media, .about__media img { max-height: 13svh; }
+  .service__copy:nth-of-type(2) { margin-top: 6px; }
+  .sell__points p { font-size: var(--label); }
+  .bespoke__frame--lead img { height: clamp(110px, 15svh, 180px); }
+  .bespoke__frame--inside img { height: clamp(84px, 11svh, 140px); }
+}
+
+/* the last three: a short tablet, and the smallest telephone still sold */
+@media (max-width: 1023px) and (max-height: 800px) {
+  .bespoke__frame--lead img { height: clamp(140px, 22svh, 240px); }
+  .bespoke__frame--inside img { height: clamp(100px, 16svh, 180px); }
+  .bespoke__page { margin-top: 16px; }
+}
+@media (max-width: 380px) {
+  .service__copy, .about__copy { margin-top: 6px; }
+  .service__title, .about__title, .sell__title, .bespoke__title { font-size: var(--body); line-height: 1.25; }
+  .sell__points li::before { margin-top: 9px; }
+  .sell__points { row-gap: 6px; }
+  .sell__form { gap: 6px var(--gutter); margin-top: 12px; }
+  .sell__send { margin-top: 2px; }
+  .sell__send .btn { height: 40px; }
+  .bespoke__frame--lead img { height: clamp(100px, 13svh, 150px); }
+  .bespoke__frame--inside img { height: clamp(76px, 10svh, 120px); }
+  .bespoke__spec { margin-top: 10px; padding-top: 8px; }
+  .bespoke__routes { margin-top: 12px; }
+}
+
+/* six pixels and fourteen: the rounding at the very smallest sizes */
+@media (max-width: 380px) {
+  .service__contacts { margin-top: 8px; }
+  .sell__form { margin-top: 10px; }
+}
+@media (max-width: 1023px) and (max-height: 800px) {
+  .bespoke__routes { margin-top: 14px; }
+  .bespoke__spec { margin-top: 12px; }
+}
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  .bespoke__frame--lead img { height: clamp(150px, 28svh, 300px); }
+  .bespoke__frame--inside img { height: clamp(112px, 20svh, 220px); }
+}
+@media (max-width: 380px) {
+  .service__wrap, .sell__wrap { padding-bottom: 10px !important; }
+}
+
+/* the overlaid pair needs its own budget on the narrow and the short screens */
+@media (max-width: 1023px) {
+  .bespoke__frames { padding-bottom: 11%; }
+  .bespoke__frame--lead img { height: clamp(140px, 24svh, 260px); }
+  .bespoke__frame--inside img { height: clamp(104px, 18svh, 200px); }
+}
+@media (max-width: 1023px) and (max-height: 800px) {
+  .bespoke__frame--lead img { height: clamp(130px, 20svh, 220px); }
+  .bespoke__frame--inside img { height: clamp(96px, 15svh, 170px); }
+}
+@media (min-width: 1024px) and (max-height: 800px) {
+  .bespoke__frames { padding-bottom: 11%; }
+  .bespoke__frame--lead img { height: clamp(150px, 26svh, 300px); }
+  .bespoke__frame--inside img { height: clamp(112px, 19svh, 220px); }
+}
+@media (max-width: 380px) {
+  .bespoke__frames { padding-bottom: 13%; }
+  .bespoke__frame--lead img { height: clamp(100px, 14svh, 160px); }
+  .bespoke__frame--inside img { height: clamp(76px, 11svh, 130px); }
+}
+
+@media (min-width: 1024px) and (max-width: 1140px) and (max-height: 830px) {
+  .bespoke__routes { margin-top: 12px; }
+  .bespoke__frames { padding-bottom: 6%; }
+  .bespoke__frame--lead img { height: clamp(126px, 18svh, 210px); }
+  .bespoke__frame--inside img { height: clamp(94px, 14svh, 160px); }
+  .bespoke__copy { font-size: var(--label); line-height: 20px; }
+}
+@media (max-width: 380px) {
+  .bespoke__frames { padding-bottom: 11%; }
+  .bespoke__frame--lead img { height: clamp(92px, 12svh, 140px); }
+  .bespoke__frame--inside img { height: clamp(70px, 9svh, 110px); }
+  .bespoke__lede { font-size: var(--label); line-height: 19px; }
+  .service__lines dd { line-height: 18px; }
+  .sell__points p { line-height: 17px; }
+}
+
+/* the last of the rounding — a few pixels at four sizes */
+@media (max-width: 1279px) { .bespoke__frames { padding-bottom: 8%; } }
+@media (max-width: 1023px) { .bespoke__frames { padding-bottom: 9%; } }
+@media (max-width: 800px) {
+  .split__body .split__copy { margin-top: 12px; }
+  .split__body .actions { margin-top: 20px; }
+  .sell__send { margin-top: 0; }
+}
+@media (max-width: 380px) {
+  .service__copy:last-of-type { margin-top: 4px; }
+  .bespoke__frames { padding-bottom: 9%; }
+}
