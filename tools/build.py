@@ -159,7 +159,9 @@ def doors_for(slug):
         out.append(f'<a class="door{lead}" href="inventory.html{q}new" aria-label="New {what} inventory, {n_new} motor {"car" if n_new == 1 else "cars"}">New<span class="door__n">{n_new}</span></a>')
     if n_pre:
         out.append(f'<a class="door" href="inventory.html{q}provenance" aria-label="Provenance pre-owned {what}, {n_pre} motor {"car" if n_pre == 1 else "cars"}">Provenance<span class="door__n">{n_pre}</span></a>')
-    out.append('<a class="door" href="#">Bespoke commission</a>')
+    # the destination is the retailer's to give; every Bespoke route carries the
+    # same mark so it is one replacement when they do
+    out.append('<a class="door" href="#" data-bespoke>Bespoke commission</a>')
     return '\n          '.join(out)
 
 path = ROOT + 'index_v2.html'
