@@ -1136,3 +1136,42 @@ body[data-drawer] { overflow: hidden; }
 /* the banner takes the foot of the first frame, so the view-large mark steps
    above it rather than hiding behind it */
 .film__frame:has(> .film__flag) .film__expand { bottom: 52px; }
+
+/* --- The record ----------------------------------------------------------------
+   Stock, VIN, transmission, drivetrain, economy — the rest of what the plate
+   above does not say. It used to sit at the foot of the offer, under Connect
+   with a Specialist, where nobody found it; it belongs with the other facts
+   about the motor car, directly under the four large ones. */
+.record {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--gutter);
+  row-gap: 2px;
+  margin: 0 0 40px;
+}
+.record div {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  column-gap: 16px;
+  align-items: baseline;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.record dt {
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--ink-support);
+}
+.record dd { margin: 0; font-size: var(--body); line-height: 22px; color: var(--white); }
+.record .vdp__vin { font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+
+@media (max-width: 1023px) {
+  .record { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 32px; }
+}
+@media (max-width: 639px) {
+  .record { grid-template-columns: 1fr; margin-bottom: 26px; }
+  .record div { grid-template-columns: 7.5rem minmax(0, 1fr); padding: 7px 0; }
+}

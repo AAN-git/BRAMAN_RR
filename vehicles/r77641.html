@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="../assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="../assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="../css/tokens.css?v=20260923170533">
-<link rel="stylesheet" href="../css/main.css?v=20260923170533">
-<link rel="stylesheet" href="../css/vehicle.css?v=20260923170533">
+<link rel="stylesheet" href="../css/tokens.css?v=20260923170833">
+<link rel="stylesheet" href="../css/main.css?v=20260923170833">
+<link rel="stylesheet" href="../css/vehicle.css?v=20260923170833">
 <script>
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("motion");
@@ -145,6 +145,17 @@
 
     <div class="vdp__body">
       <div class="vdp__main">
+        <!-- The rest of the record stands at the head of the left column,
+             above the description — it used to sit at the foot of the offer,
+             under Connect with a Specialist, where nobody found it. -->
+        <dl class="record">
+              <div><dt>Stock</dt><dd>R77641</dd></div>
+              <div><dt>VIN</dt><dd><span class="vdp__vin">SLA33HA03VU237641</span></dd></div>
+              <div><dt>Transmission</dt><dd>ZF 8-Speed Automatic</dd></div>
+              <div><dt>Drivetrain</dt><dd>AWD</dd></div>
+              <div><dt>Fuel economy</dt><dd>12 mpg</dd></div>
+              <div><dt>Doors</dt><dd>4</dd></div>
+        </dl>
         <section class="vdp__section" aria-labelledby="desc-title">
           <h2 class="sr-only" id="desc-title">Description</h2>
           <details class="fold" open>
@@ -191,14 +202,6 @@
         </div>
         <p class="offer__route"><a class="route" href="#">Get pre-approved for financing<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a></p>
         <p class="offer__route offer__route--quiet"><a class="route" href="#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a></p>
-        <dl class="offer__rows offer__facts">
-              <div><dt>Stock</dt><dd>R77641</dd></div>
-              <div><dt>VIN</dt><dd><span class="vdp__vin">SLA33HA03VU237641</span></dd></div>
-              <div><dt>Transmission</dt><dd>ZF 8-Speed Automatic</dd></div>
-              <div><dt>Drivetrain</dt><dd>AWD</dd></div>
-              <div><dt>Fuel economy</dt><dd>12 mpg</dd></div>
-              <div><dt>Doors</dt><dd>4</dd></div>
-        </dl>
       </aside>
       </div>
     </div>
@@ -475,7 +478,7 @@
   </div>
 </footer>
 
-<script src="../js/main.js?v=20260923170533"></script>
-<script src="../js/vehicle.js?v=20260923170533"></script>
+<script src="../js/main.js?v=20260923170833"></script>
+<script src="../js/vehicle.js?v=20260923170833"></script>
 </body>
 </html>

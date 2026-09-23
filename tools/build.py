@@ -510,6 +510,12 @@ def vehicle_page(v):
 
     <div class="vdp__body">
       <div class="vdp__main">
+        <!-- The rest of the record stands at the head of the left column,
+             above the description — it used to sit at the foot of the offer,
+             under Connect with a Specialist, where nobody found it. -->
+        <dl class="record">
+{rows(facts)}
+        </dl>
         <section class="vdp__section" aria-labelledby="desc-title">
           <h2 class="sr-only" id="desc-title">Description</h2>{description}{options}{provenance}
         </section>
@@ -530,9 +536,6 @@ def vehicle_page(v):
         </div>
         <p class="offer__route"><a class="route" href="#">Get pre-approved for financing<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a></p>
         <p class="offer__route offer__route--quiet"><a class="route" href="#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a></p>
-        <dl class="offer__rows offer__facts">
-{rows(facts)}
-        </dl>
       </aside>
       </div>
     </div>
