@@ -113,15 +113,19 @@ print(len(cards), 'cards in inventory.html;', len(years), 'years,', len(models),
 # 2. The home page: the first twelve of the featured order on the rail
 # =========================================================================
 home = '<ul class="stock__row">\n' + '\n'.join(cards[:12]) + '\n        </ul>'
-path = ROOT + 'index.html'
-idx = open(path).read()
-if '<ul class="stock__row">' in idx:
+# both versions of the home page carry the same rail: index.html as the client
+# first saw it, index_v2.html where the changes go
+for page in ('index.html', 'index_v2.html'):
+    path = ROOT + page
+    if not os.path.exists(path): continue
+    idx = open(path).read()
+    if '<ul class="stock__row">' not in idx: continue
     idx = re.sub(r'<ul class="stock__row">.*?</ul>', lambda m: home, idx, count=1, flags=re.S)
     first_two = ' '.join(re.split(r'(?<=\.)\s+', (d.get('price_disclaimer') or ''))[:2])
     idx = re.sub(r'<p class="stock__legal">.*?</p>', lambda m: f'<p class="stock__legal">{e(first_two)} <a href="inventory.html#legal">Full pricing details</a>.</p>', idx, count=1, flags=re.S)
     idx = stamp(idx)
     open(path, 'w').write(idx)
-    print('12 cards in index.html')
+    print('12 cards in', page)
 
 # =========================================================================
 # 3. The vehicle pages — the SRP's head, header and footer, paths lifted a

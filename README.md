@@ -400,6 +400,20 @@ under 1024px, the still of each page's first screen stands in
 the stills after a visible change to a first screen. `tools/build.py`
 stamps its css/js links like the other pages; nothing in it is generated.
 
+## Two home pages
+
+`index.html` is the home page as the client first saw it. `index_v2.html`
+is the same page with the client's September changes on top — it is where
+new work goes; the first version stays put so the two can be held side by
+side. The copy differs in three lines only: `noindex`, the mark leading to
+itself rather than to `./`, and a second stylesheet.
+
+**Every v2 change of styling lives in `css/home-v2.css`**, loaded after
+`main.css`; a change that is structural lives in `index_v2.html` itself.
+Nothing in `main.css` or in the shared sections may be edited for v2 — that
+would change the first version too. `tools/build.py` fills the inventory
+rail and stamps both pages.
+
 ## Where it lives
 
 The code is at **https://github.com/AAN-git/BRAMAN_RR** and GitHub Pages
@@ -414,7 +428,7 @@ or two. After any edit: `python3 tools/build.py`, commit, push.
 `js/`, `assets/`, `data/`. It is a copy, so re-copy it after any edit:
 
 ```
-rm -rf dist && mkdir dist && cp index.html inventory.html catalog.html dist/ && cp -R vehicles css js assets data dist/
+rm -rf dist && mkdir dist && cp index.html index_v2.html inventory.html catalog.html dist/ && cp -R vehicles css js assets data dist/
 ```
 
 **The preview server sends every file with `cache-control: max-age=31536000`
