@@ -848,6 +848,22 @@ a { color: inherit; }
 }
 .card:hover,
 .card:focus-within { border-color: rgba(255, 255, 255, 0.4); }
+/* The photograph bleeds a pixel over the card's own line (the media carries a
+   -1px margin), and the banner along its foot took the line with it. So the
+   frame is drawn again on top of everything — all four sides unbroken,
+   including where the banner crosses them. */
+.card { position: relative; }
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transition: border-color var(--dur-press) var(--ease-out);
+}
+.card:hover::after,
+.card:focus-within::after { border-color: var(--white); }
 .card[hidden] { display: none; }
 .card__link {
   display: flex;
