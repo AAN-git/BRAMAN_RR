@@ -83,6 +83,32 @@
     }
   });
 
+  /* --- The private submission ------------------------------------------------
+     Only the second home page carries it. Nothing is posted anywhere: the
+     details are handed to the visitor's own mail application, with the
+     retailer's address left for the day they give one. */
+  var sellForm = document.querySelector(".sell__form");
+  if (sellForm) {
+    sellForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var f = sellForm.elements;
+      var car = [f.year.value.trim(), f.model.value, f.mileage.value.trim() && f.mileage.value.trim() + " miles"]
+        .filter(Boolean).join(" · ");
+      var lines = [
+        "A motor car offered to Rolls-Royce Motor Cars Palm Beach.",
+        "",
+        "Motor car: " + (car || "—"),
+        "From: " + (f.name.value.trim() || "—"),
+        "Email: " + (f.email.value.trim() || "—"),
+        "Telephone: " + (f.phone.value.trim() || "—")
+      ];
+      var inbox = sellForm.getAttribute("data-inbox") || "";
+      window.location.href = "mailto:" + inbox +
+        "?subject=" + encodeURIComponent("Private submission — " + (car || "a Rolls-Royce")) +
+        "&body=" + encodeURIComponent(lines.join("\n"));
+    });
+  }
+
   /* --- Films ----------------------------------------------------------------
      Sources are chosen once by width (720p under 1024). A film plays while its
      section is on screen and pauses when it leaves. The visitor's own pause

@@ -11,9 +11,9 @@
 <link rel="preload" href="assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/img/hero-phantom-1920.webp" as="image" media="(min-width: 1280px)">
 <link rel="preload" href="assets/img/hero-phantom-1280.webp" as="image" media="(min-width: 768px) and (max-width: 1279px)">
-<link rel="stylesheet" href="css/tokens.css?v=20260923153049">
-<link rel="stylesheet" href="css/main.css?v=20260923153049">
-<link rel="stylesheet" href="css/home-v2.css?v=20260923153049">
+<link rel="stylesheet" href="css/tokens.css?v=20260923153436">
+<link rel="stylesheet" href="css/main.css?v=20260923153436">
+<link rel="stylesheet" href="css/home-v2.css?v=20260923153436">
 <script>
   /* Entrance states exist only when this runs and motion is allowed, so the
      page without scripts — and with reduced motion — is the final composition. */
@@ -771,6 +771,7 @@
     </div>
     <div class="wrap sell__wrap">
       <header class="sell__head">
+        <p class="sell__label">Sell your motor car</p>
         <h2 class="sell__title" id="sell-title">White Glove Acquisition &amp; Concierge</h2>
         <p class="sell__lede">A discreet, private way to sell your Rolls-Royce — handled end-to-end.</p>
       </header>
@@ -788,10 +789,50 @@
           <p>Valuation · Logistics · Documentation<br> You never deal with the process — we do</p>
         </li>
       </ul>
-      <div class="actions">
-        <a class="btn btn--white btn--wide" href="#">Request Consultation</a>
-        <a class="btn btn--slate btn--wide" href="#">Private Submission</a>
-      </div>
+      <!-- The private submission itself, rather than a button that promises it.
+           Nothing leaves the page: the details are handed to the visitor's own
+           mail app, and the retailer's address goes in one place on the day
+           they give it (data-inbox). -->
+      <form class="sell__form" data-inbox novalidate>
+        <p class="sell__form-title">Tell us about your motor car</p>
+        <div class="field">
+          <label class="field__label" for="sell-model">Model</label>
+          <select class="field__input" id="sell-model" name="model">
+            <option value="">Select</option>
+            <option>Phantom</option>
+            <option>Ghost</option>
+            <option>Cullinan</option>
+            <option>Spectre</option>
+            <option>Dawn</option>
+            <option>Wraith</option>
+            <option>Another marque</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="sell-year">Year</label>
+          <input class="field__input" id="sell-year" name="year" inputmode="numeric" autocomplete="off" placeholder="2023">
+        </div>
+        <div class="field">
+          <label class="field__label" for="sell-mileage">Mileage</label>
+          <input class="field__input" id="sell-mileage" name="mileage" inputmode="numeric" autocomplete="off" placeholder="12,400">
+        </div>
+        <div class="field">
+          <label class="field__label" for="sell-name">Name</label>
+          <input class="field__input" id="sell-name" name="name" autocomplete="name" placeholder="Your name">
+        </div>
+        <div class="field">
+          <label class="field__label" for="sell-email">Email</label>
+          <input class="field__input" id="sell-email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label class="field__label" for="sell-phone">Telephone</label>
+          <input class="field__input" id="sell-phone" name="phone" type="tel" autocomplete="tel" placeholder="561-000-0000">
+        </div>
+        <div class="sell__send">
+          <a class="route sell__route" href="tel:+15612038780">Or speak with us &#183; 561-203-8780<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a>
+          <button class="btn btn--white" type="submit">Send details</button>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -921,6 +962,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260923153049"></script>
+<script src="js/main.js?v=20260923153436"></script>
 </body>
 </html>
