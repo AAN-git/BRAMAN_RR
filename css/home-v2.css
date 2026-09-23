@@ -605,16 +605,15 @@
   position: relative;
   display: block;
   padding-bottom: 13%;
-  padding-right: 4%;
 }
 .bespoke__frame { position: relative; overflow: hidden; }
 .bespoke__frame--lead { width: 84%; }
 .bespoke__frame--inside {
   display: block;
   position: absolute;
-  right: 0;
+  right: clamp(48px, 9%, 120px);   /* the close-up keeps its distance from the words */
   bottom: 0;
-  width: 42%;
+  width: 40%;
   box-shadow: -18px -18px 40px rgba(10, 8, 14, 0.5);
 }
 .bespoke__frame img,
@@ -631,7 +630,8 @@
   .bespoke__frame:hover img { transform: scale(1.06); }
 }
 @media (max-width: 639px) {
-  .bespoke__frames { padding-bottom: 16%; padding-right: 2%; }
+  .bespoke__frames { padding-bottom: 16%; }
+  .bespoke__frame--inside { right: clamp(16px, 5%, 40px); }
   .bespoke__frame--lead img { height: clamp(140px, 22svh, 240px); }
   .bespoke__frame--inside img { height: clamp(110px, 17svh, 180px); }
 }
