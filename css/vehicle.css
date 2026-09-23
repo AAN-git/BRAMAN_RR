@@ -1126,8 +1126,8 @@ body[data-drawer] { overflow: hidden; }
   color: var(--white);
 }
 .offer__status i { display: block; width: 18px; height: 2px; background: var(--white); flex: none; }
-.offer__status--arrival i { background: var(--sky); }
-.offer__status--pending i { background: var(--ultraviolet); }
+.offer__status--arrival { color: var(--aqua); }
+.offer__status--pending { color: var(--amber); }
 .offer__status--sold { color: var(--ink-support); }
 .offer__status--sold i { background: rgba(255, 255, 255, 0.5); }
 /* a sold motor car keeps its page, and the page stops selling it */

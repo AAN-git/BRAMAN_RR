@@ -928,8 +928,8 @@ a { color: inherit; }
   letter-spacing: 0.04em;
 }
 .card__flag--foot i { display: block; width: 18px; height: 2px; background: var(--white); flex: none; }
-.card__flag--arrival i { background: var(--sky); }
-.card__flag--pending i { background: var(--ultraviolet); }
+.card__flag--arrival i { background: var(--aqua); }
+.card__flag--pending i { background: var(--amber); }
 .card__flag--sold i { background: rgba(255, 255, 255, 0.5); }
 .card__flag--sold { color: rgba(255, 255, 255, 0.86); }
 
@@ -946,14 +946,17 @@ a { color: inherit; }
   gap: 0;
   padding: 0 16px;
   border-radius: 0;
-  background: var(--purple-spirit);
-  color: var(--white);
+  background: var(--ultraviolet);      /* the lease — the accent the guidelines keep for a dialled-down voice */
+  color: var(--frost);
   letter-spacing: 0.04em;
 }
 .card__flag--banner i { display: none; }
-.card__flag--banner.card__flag--arrival { background: var(--sky); color: var(--black); }
-.card__flag--banner.card__flag--pending { background: var(--ultraviolet); color: var(--white); }
-.card__flag--banner.card__flag--sold { background: rgba(10, 8, 14, 0.92); color: rgba(255, 255, 255, 0.9); }
+/* Four banners, four colours, all from the brand's own sheet, each with the
+   ink it can carry: Aqua 12.6:1, Amber 7.1:1, Noir 21:1, Ultraviolet
+   7.3:1 — measured, and the word says the state as well as the colour. */
+.card__flag--banner.card__flag--arrival { background: var(--aqua); color: var(--noir); }
+.card__flag--banner.card__flag--pending { background: var(--amber); color: var(--noir); }
+.card__flag--banner.card__flag--sold { background: var(--noir); color: var(--frost); }
 /* a sold motor car is history and reads as history: the price is struck, the
    photograph steps back, and the card stops asking to be clicked */
 .card--sold .card__media img { filter: saturate(0.5) brightness(0.82); }
