@@ -887,6 +887,40 @@ a { color: inherit; }
   text-transform: uppercase;
   white-space: nowrap;
 }
+
+/* The retailer's word on where the motor car stands. One mark to a
+   photograph: a status takes the corner from the lease, and the monthly
+   payment keeps its row in the price stack. Colour is never the only
+   carrier — each mark says what it is. (Miller run a ribbon and a banner
+   across every photograph; the motor car is the picture, not the poster.) */
+/* The mark lies along the foot of the photograph rather than in its corner:
+   the retailer asked for the reference's bottom banner, and this is that
+   reading without the solid bar — a gradient that belongs to the picture,
+   the word in the page's own caps register, and a short rule in the colour
+   of the state. The motor car keeps its whole frame. */
+.card__flag--foot {
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto;
+  gap: 10px;
+  padding: 30px 16px 13px;
+  border-radius: 0;
+  background: linear-gradient(to top, rgba(10, 8, 14, 0.82) 0%, rgba(10, 8, 14, 0.55) 45%, rgba(10, 8, 14, 0) 100%);
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+.card__flag--foot i { display: block; width: 18px; height: 2px; background: var(--white); flex: none; }
+.card__flag--arrival i { background: var(--sky); }
+.card__flag--pending i { background: var(--ultraviolet); }
+.card__flag--sold i { background: rgba(255, 255, 255, 0.5); }
+.card__flag--sold { color: rgba(255, 255, 255, 0.86); }
+/* a sold motor car is history and reads as history: the price is struck, the
+   photograph steps back, and the card stops asking to be clicked */
+.card--sold .card__media img { filter: saturate(0.5) brightness(0.82); }
+.card--sold .card__price-value { text-decoration: line-through; text-decoration-thickness: 1px; text-underline-offset: 2px; color: var(--ink-support); }
+.card--sold .card__stack dd { color: var(--ink-support); }
 .card__media img {
   width: 100%;
   height: 100%;

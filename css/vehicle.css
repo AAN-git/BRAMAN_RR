@@ -1110,3 +1110,25 @@ body[data-drawer] { overflow: hidden; }
   .lightbox__arrow--next { right: 12px; }
   .lightbox__close { top: 12px; right: 12px; width: 40px; height: 40px; }
 }
+
+/* Where the motor car stands, said once in the offer as well as on the
+   photograph: the word, and a short rule in the colour of the state. */
+.offer__status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-weight: 400;
+  font-size: var(--label);
+  line-height: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.offer__status i { display: block; width: 18px; height: 2px; background: var(--white); flex: none; }
+.offer__status--arrival i { background: var(--sky); }
+.offer__status--pending i { background: var(--ultraviolet); }
+.offer__status--sold { color: var(--ink-support); }
+.offer__status--sold i { background: rgba(255, 255, 255, 0.5); }
+/* a sold motor car keeps its page, and the page stops selling it */
+.offer__status--sold ~ .offer__price { text-decoration: line-through; text-decoration-thickness: 1px; text-underline-offset: 4px; color: var(--ink-support); }

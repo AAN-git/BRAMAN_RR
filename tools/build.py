@@ -49,9 +49,31 @@ def lease_text(v, short=True):
     tax = ' + tax' if v['lease_plus_tax'] else ''
     return f"Lease {money(v['lease_month'])}{tax} / mo" if short else f"{money(v['lease_month'])}{tax} / month"
 
+# The retailer's own word on where a motor car stands. One mark to a
+# photograph: a status outranks the lease, because a car that is sold or
+# spoken for makes its monthly payment beside the point. The lease keeps its
+# row in the price stack either way.
+STATUS = {
+    'new arrival':  ('New arrival',  'card__flag--arrival'),
+    'sale pending': ('Sale pending', 'card__flag--pending'),
+    'sold':         ('Sold',         'card__flag--sold'),
+}
+
+def flag_of(v, extra=''):
+    # the mark lies along the foot of the photograph, on a gradient of its own,
+    # so the motor car is never cut by a bar (which is what the reference does)
+    st = STATUS.get((v.get('status') or '').lower())
+    cls = ('card__flag card__flag--foot ' + extra).strip()
+    if st:
+        text, mod = st
+        return f'<span class="{cls} {mod}"><i aria-hidden="true"></i>{text}</span>'
+    if v['lease_month']:
+        return f'<span class="{cls}"><i aria-hidden="true"></i>{lease_text(v)}</span>'
+    return ''
+
 # --- One card. `p` is the path prefix to the site root ('' or '../').
-def card(v, p='', eager=False):
-    flag = f'<span class="card__flag">{lease_text(v)}</span>' if v['lease_month'] else ''
+def card(v, p='', eager=False, status=True):
+    flag = flag_of(v) if status else (f'<span class="card__flag">{lease_text(v)}</span>' if v['lease_month'] else '')
     alt = f'{v["exterior"]} {v["year"]} Rolls-Royce {v["model"]}' + (' — manufacturer image; the dealer has no photograph of this car' if v['stock_image'] else '')
     mark = ('\n              ' + MARK) if v['condition'] == 'used' else ''
     label = 'MSRP' if v['condition'] == 'new' else 'Price'
@@ -62,7 +84,8 @@ def card(v, p='', eager=False):
     if v['lease_month']:
         stack += [('Lease', f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month")]
     stack_html = '\n'.join(f'              <div><dt>{e(k)}</dt><dd>{val}</dd></div>' for k, val in stack)
-    return f'''        <li class="card" data-condition="{v['condition']}" data-year="{v['year']}" data-price="{v['price']}" data-mileage="{v['mileage']}" data-model="{e(v['model'])}" data-trim="{e(v['trim'])}" data-stock="{e(v['stock'])}" data-vin="{e(v['vin'])}">
+    sold = (v.get('status') or '').lower() == 'sold' and status
+    return f'''        <li class="card{' card--sold' if sold else ''}" data-status="{e(v.get('status') or '')}" data-condition="{v['condition']}" data-year="{v['year']}" data-price="{v['price']}" data-mileage="{v['mileage']}" data-model="{e(v['model'])}" data-trim="{e(v['trim'])}" data-stock="{e(v['stock'])}" data-vin="{e(v['vin'])}">
           <a class="card__link" href="{p}{v['page']}" aria-label="{e(v['title'])}, {label} {money(v['price'])}">
             <span class="card__media">{flag}<img src="{p}{v['image']}" width="840" height="630" loading="{'eager' if eager else 'lazy'}" decoding="async" alt="{e(alt)}"></span>
             <dl class="card__facts">
@@ -114,6 +137,7 @@ print(len(cards), 'cards in inventory.html;', len(years), 'years,', len(models),
 # 2. The home page: the first twelve of the featured order on the rail
 # =========================================================================
 home = '<ul class="stock__row">\n' + '\n'.join(cards[:12]) + '\n        </ul>'
+home_v1 = '<ul class="stock__row">\n' + '\n'.join(card(v, '', eager=i < 3, status=False) for i, v in enumerate(featured[:12])) + '\n        </ul>'
 # both versions of the home page carry the same rail: index.html as the client
 # first saw it, index_v2.html where the changes go
 for page in ('index.html', 'index_v2.html'):
@@ -121,7 +145,7 @@ for page in ('index.html', 'index_v2.html'):
     if not os.path.exists(path): continue
     idx = open(path).read()
     if '<ul class="stock__row">' not in idx: continue
-    idx = re.sub(r'<ul class="stock__row">.*?</ul>', lambda m: home, idx, count=1, flags=re.S)
+    idx = re.sub(r'<ul class="stock__row">.*?</ul>', lambda m: (home if page == 'index_v2.html' else home_v1), idx, count=1, flags=re.S)
     first_two = ' '.join(re.split(r'(?<=\.)\s+', (d.get('price_disclaimer') or ''))[:2])
     idx = re.sub(r'<p class="stock__legal">.*?</p>', lambda m: f'<p class="stock__legal">{e(first_two)} <a href="inventory.html#legal">Full pricing details</a>.</p>', idx, count=1, flags=re.S)
     idx = stamp(idx)
@@ -261,7 +285,9 @@ def vehicle_page(v):
     if v['spin']:
         spin_tile = f'''
       <li class="film__frame film__frame--spin"><button class="film__launch" type="button" aria-label="View the motor car in 360°"><img src="{p}{v['spin'][0]}" width="1000" height="667" loading="lazy" decoding="async" alt=""><span class="film__launch-mark"><span class="film__launch-ring"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M12 48a36 36 0 1 0 6-20"/><path d="M14 20l4 9 9-4"/></svg><span>360°</span></span><span class="film__launch-label">View in 360°</span></span></button></li>'''
-    lease_flag = f'<span class="card__flag film__flag">{lease_text(v)}</span>' if v['lease_month'] else ''
+    lease_flag = flag_of(v, 'film__flag')
+    st = STATUS.get((v.get('status') or '').lower())
+    status_line = f'<p class="offer__status offer__status--{st[1].split("--")[1]}"><i aria-hidden="true"></i>{st[0]}</p>\n        ' if st else ''
     frames = '\n'.join(
         f'''      <li class="film__frame"><button class="film__open" type="button" data-index="{i}" aria-label="Photograph {i + 1} of {len(photos)} — open full-screen"><img src="{p}{ph['src']}" width="{ph['w']}" height="{ph['h']}" loading="{'eager' if i < 2 else 'lazy'}" decoding="async" alt="{e(v['exterior'])} {e(name)}{stock_note if i == 0 else ''}"><span class="film__expand" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" focusable="false"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg></span></button>{lease_flag if i == 0 else ''}</li>''' + (spin_tile if i == 0 else '')
         for i, ph in enumerate(photos))
@@ -493,7 +519,7 @@ def vehicle_page(v):
       {special_box}
       <!-- The offer: the price, what sits around it, the two calls, the record. -->
       <aside class="offer" aria-label="The offer">
-        {'<p class="offer__flag">Internet Special</p>' if v['special'] else ''}
+        {status_line}{'<p class="offer__flag">Internet Special</p>' if v['special'] else ''}
         <p class="offer__label">{label}<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
         <p class="offer__price">{money(v['price'])}</p>
         {f'<p class="offer__lease"><span>Lease<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></span><span>{lease_row}</span></p>' if lease_row else ''}

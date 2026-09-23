@@ -802,3 +802,9 @@
   .service__copy:last-of-type { margin-top: 4px; }
   .bespoke__frames { padding-bottom: 9%; }
 }
+
+/* The inventory rail is the one chapter allowed to run past a screen, but its
+   title still begins below the bar like every other. */
+.stock .wrap { padding-top: max(calc(var(--bar) + 28px), 120px); padding-bottom: clamp(48px, 7svh, 88px); }
+@media (max-height: 820px) { .stock .wrap { padding-top: max(calc(var(--bar) + 20px), 96px); } }
+@media (max-width: 1023px) { .stock .wrap { padding-top: max(calc(var(--bar) + 24px), 96px); } }

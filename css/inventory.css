@@ -150,7 +150,9 @@
 
 .srp__head {
   max-width: 645px;
-  padding-top: 56px;
+  /* the bar is fixed and 139px tall at rest: the first line begins under it,
+     with air of its own, not against it */
+  padding-top: 88px;
 }
 .srp__eyebrow {
   font-weight: 400;
@@ -318,7 +320,7 @@
   .tile__tag,
   .tile__cta { display: none; }
   .tile__body { padding-top: 28px; }
-  .srp__head { padding-top: 36px; }
+  .srp__head { padding-top: 52px; }
   .srp__tools { grid-template-columns: none; gap: 20px; margin-top: 36px; }
   .grid { grid-template-columns: none; gap: 32px; }
 }
