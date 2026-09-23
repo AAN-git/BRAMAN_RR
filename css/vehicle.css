@@ -1111,27 +1111,24 @@ body[data-drawer] { overflow: hidden; }
   .lightbox__close { top: 12px; right: 12px; width: 40px; height: 40px; }
 }
 
-/* Where the motor car stands, said once in the offer as well as on the
-   photograph: the word, and a short rule in the colour of the state. */
-.offer__status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
+/* Where the motor car stands, said at the head of the offer in the same
+   object as the banner on the photograph: one strip, edge to edge of the
+   plate, in the state's own colour. A sold motor car does not also carry an
+   Internet Special, and its price reads as the price it went for. */
+.offer__state {
+  display: block;
+  margin: -28px -28px 22px;
+  padding: 10px 28px;
+  background: var(--noir);
+  color: var(--frost);
   font-weight: 400;
   font-size: var(--label);
   line-height: 22px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--white);
 }
-.offer__status i { display: block; width: 18px; height: 2px; background: var(--white); flex: none; }
-.offer__status--arrival { color: var(--aqua); }
-.offer__status--pending { color: var(--amber); }
-.offer__status--sold { color: var(--ink-support); }
-.offer__status--sold i { background: rgba(255, 255, 255, 0.5); }
-/* a sold motor car keeps its page, and the page stops selling it */
-.offer__status--sold ~ .offer__price { text-decoration: line-through; text-decoration-thickness: 1px; text-underline-offset: 4px; color: var(--ink-support); }
+.offer__state--arrival { background: var(--aqua); color: var(--noir); }
+.offer__state--pending { background: var(--amber); color: var(--noir); }
 
 /* the banner takes the foot of the first frame, so the view-large mark steps
    above it rather than hiding behind it */
@@ -1175,3 +1172,14 @@ body[data-drawer] { overflow: hidden; }
   .record { grid-template-columns: 1fr; margin-bottom: 26px; }
   .record div { grid-template-columns: 7.5rem minmax(0, 1fr); padding: 7px 0; }
 }
+
+/* A sold motor car: the plate says so and stops there. */
+.offer__gone {
+  font-weight: 300;
+  font-size: var(--h4);
+  line-height: var(--h4-lead);
+  letter-spacing: var(--h4-track);
+  text-transform: uppercase;
+  color: var(--ink-quiet);
+}
+.offer__gone + .offer__actions { margin-top: 24px; }

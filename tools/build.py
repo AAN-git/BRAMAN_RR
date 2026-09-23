@@ -287,7 +287,8 @@ def vehicle_page(v):
       <li class="film__frame film__frame--spin"><button class="film__launch" type="button" aria-label="View the motor car in 360°"><img src="{p}{v['spin'][0]}" width="1000" height="667" loading="lazy" decoding="async" alt=""><span class="film__launch-mark"><span class="film__launch-ring"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M12 48a36 36 0 1 0 6-20"/><path d="M14 20l4 9 9-4"/></svg><span>360°</span></span><span class="film__launch-label">View in 360°</span></span></button></li>'''
     lease_flag = flag_of(v, 'film__flag')
     st = STATUS.get((v.get('status') or '').lower())
-    status_line = f'<p class="offer__status offer__status--{st[1].split("--")[1]}">{st[0]}</p>\n        ' if st else ''
+    state = st[1].split('--')[1] if st else ''
+    status_line = f'<p class="offer__state offer__state--{state}">{st[0]}</p>\n        ' if st else ''
     frames = '\n'.join(
         f'''      <li class="film__frame"><button class="film__open" type="button" data-index="{i}" aria-label="Photograph {i + 1} of {len(photos)} — open full-screen"><img src="{p}{ph['src']}" width="{ph['w']}" height="{ph['h']}" loading="{'eager' if i < 2 else 'lazy'}" decoding="async" alt="{e(v['exterior'])} {e(name)}{stock_note if i == 0 else ''}"><span class="film__expand" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" focusable="false"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg></span></button>{lease_flag if i == 0 else ''}</li>''' + (spin_tile if i == 0 else '')
         for i, ph in enumerate(photos))
@@ -302,6 +303,34 @@ def vehicle_page(v):
         around += [('MSRP', money(v['msrp'])), ('You save', f"− {money(v['msrp'] - v['price'])}")]
     if v['sale_price_with_fees']:
         around += [('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514'), ('Sale price', money(v['sale_price_with_fees']))]
+    # The body of the offer. A sold motor car is not for sale: no price, no
+    # lease, no charges, no quote — only the way to reach the retailer about
+    # another one. The listed figure is not what it sold for, and that figure
+    # is not ours to invent, so nothing stands in its place.
+    chev = f'<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg>'
+    if state == 'sold':
+        offer_body = ('<p class="offer__gone">This motor car has been sold.</p>\n'
+                      '        <div class="offer__actions">\n'
+                      '          <a class="btn btn--white" href="#more">See other motor cars</a>\n'
+                      '          <a class="btn btn--slate" href="tel:+15612038780">Connect with a Specialist</a>\n'
+                      '        </div>')
+    else:
+        special = '<p class="offer__flag">Internet Special</p>\n        ' if v['special'] else ''
+        lease_line = (f'<p class="offer__lease"><span>Lease<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></span>'
+                      f'<span>{lease_row}</span></p>\n        ') if lease_row else ''
+        rows_block = (f'<dl class="offer__rows">\n{rows(around)}\n        </dl>\n        ') if around else ''
+        offer_body = (
+            f'{special}'
+            f'<p class="offer__label">{label}<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>\n        '
+            f'<p class="offer__price">{money(v["price"])}</p>\n        '
+            f'{lease_line}{rows_block}'
+            '<div class="offer__actions">\n'
+            '          <a class="btn btn--white" href="#enquire">Request a Quote</a>\n'
+            '          <a class="btn btn--slate" href="tel:+15612038780">Connect with a Specialist</a>\n'
+            '        </div>\n        '
+            f'<p class="offer__route"><a class="route" href="#">Get pre-approved for financing{chev}</a></p>\n        '
+            f'<p class="offer__route offer__route--quiet"><a class="route" href="#pricing">Pricing details{chev}</a></p>')
+
     facts = [
         ('Stock', e(v['stock'])), ('VIN', f'<span class="vdp__vin">{e(v["vin"])}</span>'),
         ('Transmission', e(v['transmission'] or '')), ('Drivetrain', e(v['drivetrain'] or '')),
@@ -525,17 +554,7 @@ def vehicle_page(v):
       {special_box}
       <!-- The offer: the price, what sits around it, the two calls, the record. -->
       <aside class="offer" aria-label="The offer">
-        {status_line}{'<p class="offer__flag">Internet Special</p>' if v['special'] else ''}
-        <p class="offer__label">{label}<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
-        <p class="offer__price">{money(v['price'])}</p>
-        {f'<p class="offer__lease"><span>Lease<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></span><span>{lease_row}</span></p>' if lease_row else ''}
-        {f'<dl class="offer__rows">{chr(10)}{rows(around)}{chr(10)}        </dl>' if around else ''}
-        <div class="offer__actions">
-          <a class="btn btn--white" href="#enquire">Request a Quote</a>
-          <a class="btn btn--slate" href="tel:+15612038780">Connect with a Specialist</a>
-        </div>
-        <p class="offer__route"><a class="route" href="#">Get pre-approved for financing<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a></p>
-        <p class="offer__route offer__route--quiet"><a class="route" href="#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false">{CHEVRON}</svg></a></p>
+        {status_line}{offer_body}
       </aside>
       </div>
     </div>
@@ -560,7 +579,7 @@ def vehicle_page(v):
   </div>
 
   <!-- More from the collection: the same model first. -->
-  <section class="stock stock--more" data-reveal aria-labelledby="more-title">
+  <section class="stock stock--more" id="more" data-reveal aria-labelledby="more-title">
     <div class="wrap">
       <h2 class="stock__title" id="more-title">More from the collection</h2>
       <div class="stock__rail">
