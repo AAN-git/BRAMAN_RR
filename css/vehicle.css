@@ -1132,3 +1132,7 @@ body[data-drawer] { overflow: hidden; }
 .offer__status--sold i { background: rgba(255, 255, 255, 0.5); }
 /* a sold motor car keeps its page, and the page stops selling it */
 .offer__status--sold ~ .offer__price { text-decoration: line-through; text-decoration-thickness: 1px; text-underline-offset: 4px; color: var(--ink-support); }
+
+/* the banner takes the foot of the first frame, so the view-large mark steps
+   above it rather than hiding behind it */
+.film__frame:has(> .film__flag) .film__expand { bottom: 52px; }

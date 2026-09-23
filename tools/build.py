@@ -63,12 +63,12 @@ def flag_of(v, extra=''):
     # the mark lies along the foot of the photograph, on a gradient of its own,
     # so the motor car is never cut by a bar (which is what the reference does)
     st = STATUS.get((v.get('status') or '').lower())
-    cls = ('card__flag card__flag--foot ' + extra).strip()
+    cls = ('card__flag card__flag--banner ' + extra).strip()
     if st:
         text, mod = st
-        return f'<span class="{cls} {mod}"><i aria-hidden="true"></i>{text}</span>'
+        return f'<span class="{cls} {mod}">{text}</span>'
     if v['lease_month']:
-        return f'<span class="{cls}"><i aria-hidden="true"></i>{lease_text(v)}</span>'
+        return f'<span class="{cls}">{lease_text(v)}</span>'
     return ''
 
 # --- One card. `p` is the path prefix to the site root ('' or '../').
@@ -287,7 +287,7 @@ def vehicle_page(v):
       <li class="film__frame film__frame--spin"><button class="film__launch" type="button" aria-label="View the motor car in 360°"><img src="{p}{v['spin'][0]}" width="1000" height="667" loading="lazy" decoding="async" alt=""><span class="film__launch-mark"><span class="film__launch-ring"><svg viewBox="0 0 96 96" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M12 48a36 36 0 1 0 6-20"/><path d="M14 20l4 9 9-4"/></svg><span>360°</span></span><span class="film__launch-label">View in 360°</span></span></button></li>'''
     lease_flag = flag_of(v, 'film__flag')
     st = STATUS.get((v.get('status') or '').lower())
-    status_line = f'<p class="offer__status offer__status--{st[1].split("--")[1]}"><i aria-hidden="true"></i>{st[0]}</p>\n        ' if st else ''
+    status_line = f'<p class="offer__status offer__status--{st[1].split("--")[1]}">{st[0]}</p>\n        ' if st else ''
     frames = '\n'.join(
         f'''      <li class="film__frame"><button class="film__open" type="button" data-index="{i}" aria-label="Photograph {i + 1} of {len(photos)} — open full-screen"><img src="{p}{ph['src']}" width="{ph['w']}" height="{ph['h']}" loading="{'eager' if i < 2 else 'lazy'}" decoding="async" alt="{e(v['exterior'])} {e(name)}{stock_note if i == 0 else ''}"><span class="film__expand" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2" focusable="false"><path d="M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5"/></svg></span></button>{lease_flag if i == 0 else ''}</li>''' + (spin_tile if i == 0 else '')
         for i, ph in enumerate(photos))

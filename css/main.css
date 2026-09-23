@@ -916,6 +916,28 @@ a { color: inherit; }
 .card__flag--pending i { background: var(--ultraviolet); }
 .card__flag--sold i { background: rgba(255, 255, 255, 0.5); }
 .card__flag--sold { color: rgba(255, 255, 255, 0.86); }
+
+/* The other reading of the same requirement — the reference's own: a solid
+   banner laid on the bottom edge of the photograph, the colour carrying the
+   state. Kept here so the two can be held side by side; the build chooses
+   which one it writes (flag_of, tools/build.py). */
+.card__flag--banner {
+  top: auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 36px;
+  gap: 0;
+  padding: 0 16px;
+  border-radius: 0;
+  background: var(--purple-spirit);
+  color: var(--white);
+  letter-spacing: 0.04em;
+}
+.card__flag--banner i { display: none; }
+.card__flag--banner.card__flag--arrival { background: var(--sky); color: var(--black); }
+.card__flag--banner.card__flag--pending { background: var(--ultraviolet); color: var(--white); }
+.card__flag--banner.card__flag--sold { background: rgba(10, 8, 14, 0.92); color: rgba(255, 255, 255, 0.9); }
 /* a sold motor car is history and reads as history: the price is struck, the
    photograph steps back, and the card stops asking to be clicked */
 .card--sold .card__media img { filter: saturate(0.5) brightness(0.82); }
