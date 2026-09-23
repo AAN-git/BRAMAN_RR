@@ -7,3 +7,52 @@
 
    Nothing here yet: the file is the shelf, not the change.
    ========================================================================== */
+
+/* --- The hero — Spectre Series II --------------------------------------------
+   The desktop break is authored ("The Relentless Pursuit / of Perfection
+   Continues"); on a phone that same break leaves PURSUIT alone on a line, so
+   the break is dropped there and the browser balances the three lines. */
+@media (max-width: 767px) {
+  .hero__title br { display: none; }
+  .hero__title { text-wrap: balance; }
+}
+
+/* --- The hero photograph — Spectre Series II ----------------------------------
+   The film gives way to the retailer's own frame of the Series II. Three
+   frames, not one crop: the whole scene at desktop, a smaller encode under
+   1280, and a frame of its own on a phone — the coast road is 16:9, and a
+   full-bleed portrait crop of it would cut the motor car in half. */
+.hero { background-image: url("../assets/img/hero-spectre-1280.webp"); }
+
+/* The sky in this frame is bright where the navigation sits and the copy
+   stands over palms and road. Legibility is fixed at the background layer
+   (color-taste I1/I4): a directional gradient at the head and a soft pool
+   under the lockup — not a wash over the photograph, which is what was
+   rejected on the dune films. */
+.hero__scrim {
+  background:
+    linear-gradient(to bottom, rgba(10, 8, 14, 0.7) 0%, rgba(10, 8, 14, 0.46) 12%, rgba(10, 8, 14, 0.22) 26%, rgba(10, 8, 14, 0) 42%),
+    linear-gradient(to top, rgba(10, 8, 14, 0.62) 0%, rgba(10, 8, 14, 0.3) 22%, rgba(10, 8, 14, 0) 46%);
+}
+
+/* The lockup stands under the motor car, on the road it leaves behind: in
+   this frame the car holds the upper middle and the lower half is open
+   asphalt. Text belongs in that air, never on the car's face. */
+@media (min-width: 768px) {
+  .hero__body { top: auto; bottom: 8%; }
+}
+
+@media (max-width: 767px) {
+  /* On a phone the photograph is a band and the lockup stands under it on the
+     house ground: the motor car stays whole, which a cover crop cannot do. */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(28px, 6vh, 56px);
+    background: var(--grey-8);
+  }
+  .hero__film { position: static; inset: auto; height: auto; aspect-ratio: 1100 / 905; }
+  .hero__body { position: static; top: auto; bottom: auto; }
+  .hero__scrim { display: none; }
+}

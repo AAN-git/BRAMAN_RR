@@ -9,10 +9,11 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="assets/img/hero-poster.webp" as="image">
-<link rel="stylesheet" href="css/tokens.css?v=20260923135042">
-<link rel="stylesheet" href="css/main.css?v=20260923135042">
-<link rel="stylesheet" href="css/home-v2.css?v=20260923135042">
+<link rel="preload" href="assets/img/hero-spectre-1920.webp" as="image" media="(min-width: 1280px)">
+<link rel="preload" href="assets/img/hero-spectre-1280.webp" as="image" media="(min-width: 768px) and (max-width: 1279px)">
+<link rel="stylesheet" href="css/tokens.css?v=20260923145323">
+<link rel="stylesheet" href="css/main.css?v=20260923145323">
+<link rel="stylesheet" href="css/home-v2.css?v=20260923145323">
 <script>
   /* Entrance states exist only when this runs and motion is allowed, so the
      page without scripts — and with reduced motion — is the final composition. */
@@ -66,6 +67,7 @@
         <li><a href="#sell">Sell Your Car</a></li>
         <li><a href="#service">Parts / Service</a></li>
         <li><a href="#">Finance</a></li>
+        <li><a href="#blog">Blog</a></li>
         <li><a href="#about">About</a></li>
       </ul>
     </nav>
@@ -77,19 +79,17 @@
   <!-- 1 · HERO — Phantom film. Headline, button and the rise of the model name
        are the prototype's hero1 Default → Variant2 (1s, ease-out). -->
   <section class="hero" id="models" data-ground="dark" data-reveal aria-labelledby="hero-title">
-    <video class="hero__film" muted loop playsinline preload="none"
-           poster="assets/img/hero-poster.webp"
-           data-src="assets/video/hero-1080.mp4" data-src-small="assets/video/hero-720.mp4"
-           aria-hidden="true"></video>
+    <picture>
+      <source media="(max-width: 767px)" srcset="assets/img/hero-spectre-phone.webp" width="1100" height="905">
+      <source media="(max-width: 1279px)" srcset="assets/img/hero-spectre-1280.webp" width="1280" height="720">
+      <img class="hero__film" src="assets/img/hero-spectre-1920.webp" alt="A Rolls-Royce Spectre Series II on a palm-lined coast road at dusk" width="1920" height="1080" fetchpriority="high" decoding="async">
+    </picture>
     <div class="hero__scrim" aria-hidden="true"></div>
     <div class="hero__body">
-      <p class="hero__model">Phantom</p>
-      <h1 class="hero__title" id="hero-title">The Ultimate Expression<br> of Individuality.</h1>
+      <p class="hero__model">Spectre Series II</p>
+      <h1 class="hero__title" id="hero-title">The Relentless Pursuit<br> of Perfection Continues</h1>
       <a class="btn btn--slate hero__cta" href="#">Discover</a>
     </div>
-    <button class="film-toggle" type="button" aria-pressed="false" aria-label="Pause film" hidden>
-      <span class="film-toggle__glyph" aria-hidden="true"></span>
-    </button>
   </section>
 
   <!-- 2 · GHOST — photograph left, plum right. Ghost Default → Variant2 (2.68s). -->
@@ -178,9 +178,7 @@
        rises. brake black badge Default → Variant2 (1.02s) → +0.4s → Variant3 (1.28s). -->
   <section class="badge" data-ground="photo" data-reveal data-exit aria-labelledby="badge-title">
     <div class="badge__frame" aria-hidden="true">
-      <video class="badge__film" muted loop playsinline preload="none"
-             poster="assets/img/black-badge-poster.webp"
-             data-src="assets/video/black-badge-1080.mp4" data-src-small="assets/video/black-badge-720.mp4"></video>
+      <img class="badge__film" src="assets/img/black-badge-poster.webp" alt="" width="1920" height="1080" loading="lazy" decoding="async">
     </div>
     <div class="badge__track">
       <div class="badge__body">
@@ -195,9 +193,6 @@
         <a class="btn btn--white badge__cta" href="#">Inquire</a>
       </div>
     </div>
-    <button class="film-toggle" type="button" aria-pressed="false" aria-label="Pause film" hidden>
-      <span class="film-toggle__glyph" aria-hidden="true"></span>
-    </button>
   </section>
 
   <!-- 7 · SERVICE & PARTS — service and parts Default → Variant2 (1.92s): the
@@ -781,7 +776,7 @@
   </section>
 
   <!-- 9 · NEWS — four stories, equal because they are equal in rank. -->
-  <section class="news" data-ground="dark" aria-labelledby="news-title">
+  <section class="news" id="blog" data-ground="dark" aria-labelledby="news-title">
     <div class="wrap">
       <h2 class="news__title" id="news-title">Latest News and Events</h2>
       <div class="news__list">
@@ -906,6 +901,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=20260923135042"></script>
+<script src="js/main.js?v=20260923145323"></script>
 </body>
 </html>
