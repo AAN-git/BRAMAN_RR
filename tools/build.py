@@ -107,7 +107,7 @@ def flag_of(v, extra=''):
 
 # --- One card. `p` is the path prefix to the site root ('' or '../').
 def card(v, p='', eager=False, status=True):
-    flag = flag_of(v) if status else (f'<span class="card__flag">{lease_text(v)}</span>' if v['lease_month'] else '')
+    flag = flag_of(v) if status else ((f'<span class="card__flag card__flag--stack"><span>{lease_text(v)}</span>' + (f'<span class="card__flag-due">{due_text(v)}</span>' if due_text(v) else '') + '</span>') if v['lease_month'] else '')
     alt = f'{v["exterior"]} {v["year"]} Rolls-Royce {v["model"]}' + (' — manufacturer image; the dealer has no photograph of this car' if v['stock_image'] else '')
     mark = ('\n              ' + MARK) if v['condition'] == 'used' else ''
     label = lead_label(v)
@@ -531,7 +531,7 @@ def vehicle_page(v):
         <button class="film__mode-button" type="button" data-mode="spin" aria-pressed="false">360° view</button>
       </div>'''
     title = f"{v['title']} | Rolls-Royce Motor Cars Palm Beach"
-    desc_meta = f"{v['title']}, {v['exterior']} over {v['interior']}, {'{:,}'.format(v['mileage'])} miles, {label} {money(v['price'])} at Rolls-Royce Motor Cars Palm Beach, West Palm Beach, Florida."
+    desc_meta = f"{v['title']}, {v['exterior']} over {v['interior']}, {'{:,}'.format(v['mileage'])} miles, {('sold' if is_sold(v) else label + ' ' + money(lead_price(v)))} at Rolls-Royce Motor Cars Palm Beach, West Palm Beach, Florida."
     h = re.sub(r'<title>.*?</title>', f'<title>{e(title)}</title>', head)
     h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc_meta)}">', h)
     h1 = e(name).replace('Rolls-Royce', '<span class="nowrap">Rolls-Royce</span>')
@@ -662,7 +662,7 @@ def vehicle_page(v):
   <!-- On a small screen the offer follows the page once it has scrolled off. -->
   <div class="vdp__bar" hidden>
     <div class="wrap vdp__bar-wrap">
-      <p class="vdp__bar-price"><span>{label}</span> {money(v['price'])}</p>
+      <p class="vdp__bar-price"><span>{'Status' if is_sold(v) else label}</span> {'Sold' if is_sold(v) else money(lead_price(v))}</p>
       <a class="btn btn--white btn--compact" href="#enquire">Enquire</a>
     </div>
   </div>
