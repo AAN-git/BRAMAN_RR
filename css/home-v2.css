@@ -808,3 +808,23 @@
 .stock .wrap { padding-top: max(calc(var(--bar) + 28px), 120px); padding-bottom: clamp(48px, 7svh, 88px); }
 @media (max-height: 820px) { .stock .wrap { padding-top: max(calc(var(--bar) + 20px), 96px); } }
 @media (max-width: 1023px) { .stock .wrap { padding-top: max(calc(var(--bar) + 24px), 96px); } }
+
+/* --- A phone: the Service and About photographs at full width ------------------
+   The rules above kept each chapter to one phone screen by shrinking the
+   picture, down to 13svh — a stamp in the corner (Alex, 2026-09-25: "fix
+   this image on a small screen"). A chapter may grow past the screen when
+   its content needs it, so on a phone the photograph takes the column's
+   whole width at its own proportion and the chapter grows. Last in the
+   sheet so it outranks every height step above. */
+@media (max-width: 639px) {
+  .service__media, .about__media { display: block; width: 100%; height: auto; min-height: 0; max-height: none; aspect-ratio: auto; margin: 0 0 24px; }
+  .about__media { margin: 24px 0 0; }            /* About sets its picture after the copy */
+  .service__media img, .about__media img {
+    display: block; width: 100%; height: auto; max-height: none;
+    aspect-ratio: 4 / 3; object-fit: cover; object-position: 50% 50%;
+  }
+  /* two calls share a line only while both words fit; a longer one takes
+     its own line rather than running past the screen's edge */
+  .service .actions, .about .actions { flex-wrap: wrap; }
+  .service .actions .btn, .about .actions .btn { flex: 1 1 auto; }
+}

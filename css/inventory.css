@@ -349,3 +349,18 @@
 }
 .srp__route-clear:hover { border-bottom-color: var(--white); }
 .srp__route-clear:focus-visible { outline: 2px solid var(--white); outline-offset: 3px; }
+
+/* --- Recently sold — a record, not an offer ------------------------------------
+   Under the listing and apart from it (the FTC's letters: an unavailable car
+   is not advertised): the photograph with SOLD on it, the name, the colours.
+   No price, no lease, no call to buy; it is not in the count, the picks or
+   the sort, and the way on is back to the cars that can be bought. */
+.sold { margin-top: 96px; padding-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.12); }
+.sold__title { font-weight: 300; font-size: var(--h4); line-height: 1.2; letter-spacing: 0.02em; text-transform: uppercase; }
+.sold__lede { margin-top: 12px; max-width: 60ch; font-size: var(--small); line-height: var(--small-lead); color: var(--ink-support); }
+.sold__lede .route { display: table; margin-top: 8px; color: var(--white); }
+.sold__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px var(--gutter); margin-top: 32px; }
+.card--record .card__media img { filter: grayscale(0.35) brightness(0.9); }
+.card--record .card__title { padding-bottom: 16px; }
+@media (max-width: 1023px) { .sold__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 639px)  { .sold__grid { grid-template-columns: 1fr; } .sold { margin-top: 64px; } }

@@ -28,8 +28,14 @@ def money(n): return '${:,}'.format(n)
 #     and again, each group in the dealer's own order. Pre-owned leads so the
 #     Provenance cars are the first thing on the page, and the two stocks stay
 #     mixed all the way down rather than one stacked under the other.
-new_cars = [v for v in V if v['condition'] == 'new']
-used_cars = [v for v in V if v['condition'] != 'new']
+# A sold motor car is not advertised (the FTC's letters, 2026-09-25): it leaves
+# the listing, the count, the picks, the home rail and "more on the floor",
+# and stands only in the Recently sold record under the listing.
+def is_sold(v): return (v.get('status') or '').lower() == 'sold'
+LISTED = [v for v in V if not is_sold(v)]
+SOLD = [v for v in V if is_sold(v)]
+new_cars = [v for v in LISTED if v['condition'] == 'new']
+used_cars = [v for v in LISTED if v['condition'] != 'new']
 featured = []
 while new_cars or used_cars:
     featured += used_cars[:3]; del used_cars[:3]
@@ -57,8 +63,14 @@ def due_of(v):
     return lt.get('due_at_signing') if v['lease_month'] else None
 
 def due_text(v):
+    # the lease advertised with its term and the money due at signing
+    # (Regulation M, and the FTC's letters on down payments)
+    lt = v.get('lease_terms') or {}
     d = due_of(v)
-    return f"{money(d)} due at signing" if d else ''
+    parts = []
+    if v['lease_month'] and lt.get('term_months'): parts.append(f"{lt['term_months']} months")
+    if d: parts.append(f"{money(d)} due at signing")
+    return ' · '.join(parts)
 
 # ...and the price that stands out is the one a buyer can pay: the sale
 # price with the dealer's charges in it. MSRP or the listed price and the
@@ -105,7 +117,7 @@ def card(v, p='', eager=False, status=True):
     # money down beside it
     stack = []
     if v['sale_price_with_fees']:
-        stack += [(base, money(v['price'])), ('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514')]
+        stack += [(base, money(v['price'])), ('+ Dealer service charge', '$1,189'), ('+ Electronic filing charge', '$514')]
     if v['lease_month']:
         due = due_text(v)
         stack += [('Lease', f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month" + (f'<span class="card__stack-due">{due}</span>' if due else ''))]
@@ -140,9 +152,9 @@ def card(v, p='', eager=False, status=True):
 # =========================================================================
 cards = [card(v, '', eager=i < 3) for i, v in enumerate(featured)]
 grid = '<ul class="grid" id="grid">\n' + '\n'.join(cards) + '\n    </ul>'
-years = sorted(Counter(v['year'] for v in V), reverse=True)
+years = sorted(Counter(v['year'] for v in LISTED), reverse=True)
 order = ['Cullinan', 'Ghost', 'Phantom', 'Spectre', 'Wraith', 'Dawn']
-models = [m for m in order if any(v['model'] == m for v in V)] + sorted({v['model'] for v in V} - set(order))
+models = [m for m in order if any(v['model'] == m for v in LISTED)] + sorted({v['model'] for v in LISTED} - set(order))
 def options(first, values):
     return '\n'.join([f'          <option value="">{first}</option>'] + [f'          <option value="{v}">{v}</option>' for v in values])
 
@@ -151,7 +163,29 @@ srp = open(path).read()
 srp = re.sub(r'<ul class="grid" id="grid">.*?</ul>', lambda m: grid, srp, count=1, flags=re.S)
 srp = re.sub(r'(<select class="pick__select" name="year" data-pick="year">\n).*?(\n        </select>)', lambda m: m.group(1) + options('All years', years) + m.group(2), srp, count=1, flags=re.S)
 srp = re.sub(r'(<select class="pick__select" name="model" data-pick="model">\n).*?(\n        </select>)', lambda m: m.group(1) + options('All models', models) + m.group(2), srp, count=1, flags=re.S)
-srp = re.sub(r'<span data-count>\d+</span>', f'<span data-count>{len(V)}</span>', srp)
+srp = re.sub(r'<span data-count>\d+</span>', f'<span data-count>{len(LISTED)}</span>', srp)
+def sold_card(v):
+    alt = f'{v["exterior"]} {v["year"]} Rolls-Royce {v["model"]}'
+    return f'''        <li class="card card--record">
+          <a class="card__link" href="{v['page']}" aria-label="{e(v['title'])}, sold">
+            <span class="card__media"><span class="card__flag card__flag--banner card__flag--sold">Sold</span><img src="{v['image']}" width="840" height="630" loading="lazy" decoding="async" alt="{e(alt)}"></span>
+            <h3 class="card__title">{e(v['title'])} <span class="card__place">in West Palm Beach, FL</span></h3>
+          </a>
+          <dl class="card__spec">
+            <div><dt>Exterior</dt> <dd>{e(v['exterior'])}</dd></div>
+            <div><dt>Interior</dt> <dd>{e(v['interior'])}</dd></div>
+          </dl>
+        </li>'''
+if SOLD:
+    record = ('<section class="sold" id="sold" aria-labelledby="sold-title">\n'
+              '      <h2 class="sold__title" id="sold-title">Recently sold</h2>\n'
+              '      <p class="sold__lede">These motor cars have found their owners and are no longer available. <a class="route" href="#grid">See the motor cars you can buy</a></p>\n'
+              '      <ul class="sold__grid">\n' + '\n'.join(sold_card(v) for v in SOLD) + '\n      </ul>\n    </section>')
+else:
+    record = ''
+srp = re.sub(r'\n    <section class="sold" id="sold".*?</section>', '', srp, count=1, flags=re.S)
+if record:
+    srp = srp.replace('\n\n    <!-- The dealer\'s disclosure, verbatim', '\n\n    ' + record + '\n\n    <!-- The dealer\'s disclosure, verbatim', 1)
 # the footnote under the listing: the dealer's disclosure, verbatim
 legal = d.get('price_disclaimer') or ''
 srp = re.sub(r'<p class="srp__legal" id="legal">.*?</p>', lambda m: f'<p class="srp__legal" id="legal">{e(legal)}</p>', srp, count=1, flags=re.S)
@@ -332,7 +366,7 @@ def vehicle_page(v):
     if used and v['msrp']:
         around += [('MSRP', money(v['msrp']))]
     if v['sale_price_with_fees']:
-        around += [(base, money(v['price'])), ('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514')]
+        around += [(base, money(v['price'])), ('+ Dealer service charge', '$1,189'), ('+ Electronic filing charge', '$514')]
     if used and v['msrp']:
         around += [('You save', f"− {money(v['msrp'] - lead_price(v))}")]
     # The body of the offer. A sold motor car is not for sale: no price, no
