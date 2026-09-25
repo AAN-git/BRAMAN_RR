@@ -940,6 +940,15 @@ a { color: inherit; }
   letter-spacing: 0.04em;
 }
 .card__flag--banner i { display: none; }
+/* the lease banner carries two lines: the payment, and beneath it the money
+   due at signing — the FTC's letters: a payment is never advertised without
+   the down payment beside it (the client's note of 2026-09-25) */
+.card__flag--banner.card__flag--lease {
+  flex-direction: column; align-items: flex-start; justify-content: center;
+  height: auto; min-height: 36px; padding: 7px 16px;
+  line-height: 20px; white-space: normal;
+}
+.card__flag-due { letter-spacing: 0.03em; }
 /* Four banners, four colours, all from the brand's own sheet, each with the
    ink it can carry: Aqua 12.6:1, Amber 7.1:1, Noir 21:1, Ultraviolet
    7.3:1 — measured, and the word says the state as well as the colour. */
@@ -1035,6 +1044,8 @@ a { color: inherit; }
   text-align: right;
   color: var(--white);
 }
+/* the lease row: the money due at signing on its own line under the payment */
+.card__stack-due { display: block; color: var(--ink-support); }
 .card__details {
   display: inline-flex;
   margin-top: 12px;
@@ -1102,6 +1113,21 @@ a { color: inherit; }
   transition: color var(--dur-press) var(--ease-out);
 }
 .card:hover .cpo { color: var(--ink-support); }
+/* The tag now carries "Sale price" (the FTC's letters: the price that
+   stands out is the one with the dealer's charges in it — 2026-09-25), a
+   longer word than "Price": the tag draws a little tighter and the mark a
+   little smaller, so the two still share one line on every card width */
+.card__row { gap: 12px; }
+.card__price { gap: 8px; padding: 0 12px; }
+.card__price-label { letter-spacing: 0.02em; }
+.card__row .cpo { width: 84px; height: 38px; }
+/* where a card is too narrow for both on one line (a 1200 screen, a small
+   phone), the mark stands under the tag at the left edge — a second tread,
+   not a stray on the right; the row's reserved height already holds it */
+.card__row { container-type: inline-size; }
+@container (max-width: 268px) {
+  .card__row .cpo { margin-left: 0; }
+}
 
 /* A route: one line with the chevron turned along the line of reading. */
 .route {
@@ -1690,9 +1716,11 @@ a.asterisk:focus-visible { outline: 2px solid var(--white); outline-offset: 2px;
   /* three cards to a row leave 260px inside each: the mark steps down so
      it stays beside the tag and every card keeps the same height */
   .cpo { width: 84px; height: 38px; }
+  .card__row .cpo { width: 64px; height: 29px; }
 }
 @media (max-width: 1259px) {
   .cpo { width: 76px; height: 35px; }
+  .card__row .cpo { width: 64px; height: 29px; }
 }
 @media (max-width: 1199px) {
   .stock__row .card { flex-basis: calc((100% - var(--gutter)) / 2); }

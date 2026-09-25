@@ -688,6 +688,9 @@ a.carfax:hover { opacity: 1; }
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   font-weight: 400;
 }
+.offer__lease span:last-child { text-align: right; }
+/* the money due at signing, beneath the payment, in the quiet register */
+.offer__lease small { display: block; font-size: var(--small); line-height: 20px; color: var(--ink-support); }
 .offer__lease span:first-child { font-size: var(--label); letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-support); line-height: var(--body-lead); }
 .offer__rows { margin: 0; }
 .offer__rows div {

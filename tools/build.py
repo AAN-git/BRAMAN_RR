@@ -49,13 +49,33 @@ def lease_text(v, short=True):
     tax = ' + tax' if v['lease_plus_tax'] else ''
     return f"Lease {money(v['lease_month'])}{tax} / mo" if short else f"{money(v['lease_month'])}{tax} / month"
 
+# The FTC's warning letters (KPA's checklist, sent by the client 2026-09-25):
+# a monthly payment is never advertised without the money down beside it.
+# The figure is the dealer's own, from its lease terms.
+def due_of(v):
+    lt = v.get('lease_terms') or {}
+    return lt.get('due_at_signing') if v['lease_month'] else None
+
+def due_text(v):
+    d = due_of(v)
+    return f"{money(d)} due at signing" if d else ''
+
+# ...and the price that stands out is the one a buyer can pay: the sale
+# price with the dealer's charges in it. MSRP or the listed price and the
+# two charges are the quiet working beneath it.
+def lead_price(v):
+    return v['sale_price_with_fees'] or v['price']
+
+def lead_label(v):
+    return 'Sale price' if v['sale_price_with_fees'] else ('MSRP' if v['condition'] == 'new' else 'Price')
+
 # The retailer's own word on where a motor car stands. One mark to a
 # photograph: a status outranks the lease, because a car that is sold or
 # spoken for makes its monthly payment beside the point. The lease keeps its
 # row in the price stack either way.
 STATUS = {
     'new arrival':  ('New arrival',  'card__flag--arrival'),
-    'sale pending': ('Sale pending', 'card__flag--pending'),
+    'sale pending': ('Sale Pending', 'card__flag--pending'),
     'sold':         ('Sold',         'card__flag--sold'),
 }
 
@@ -68,7 +88,9 @@ def flag_of(v, extra=''):
         text, mod = st
         return f'<span class="{cls} {mod}">{text}</span>'
     if v['lease_month']:
-        return f'<span class="{cls}">{lease_text(v)}</span>'
+        due = due_text(v)
+        sub = f'<span class="card__flag-due">{due}</span>' if due else ''
+        return f'<span class="{cls} card__flag--lease"><span>{lease_text(v)}</span>{sub}</span>'
     return ''
 
 # --- One card. `p` is the path prefix to the site root ('' or '../').
@@ -76,17 +98,21 @@ def card(v, p='', eager=False, status=True):
     flag = flag_of(v) if status else (f'<span class="card__flag">{lease_text(v)}</span>' if v['lease_month'] else '')
     alt = f'{v["exterior"]} {v["year"]} Rolls-Royce {v["model"]}' + (' — manufacturer image; the dealer has no photograph of this car' if v['stock_image'] else '')
     mark = ('\n              ' + MARK) if v['condition'] == 'used' else ''
-    label = 'MSRP' if v['condition'] == 'new' else 'Price'
-    # the price stack as the dealer's own card shows it: the charges, the sale price, the lease
+    label = lead_label(v)
+    base = 'MSRP' if v['condition'] == 'new' else 'Price'
+    # the tag carries the sale price; the stack is how it is made up — the
+    # listed price, the dealer's two charges — and then the lease with the
+    # money down beside it
     stack = []
     if v['sale_price_with_fees']:
-        stack += [('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514'), ('Sale price', money(v['sale_price_with_fees']))]
+        stack += [(base, money(v['price'])), ('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514')]
     if v['lease_month']:
-        stack += [('Lease', f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month")]
+        due = due_text(v)
+        stack += [('Lease', f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month" + (f'<span class="card__stack-due">{due}</span>' if due else ''))]
     stack_html = '\n'.join(f'              <div><dt>{e(k)}</dt><dd>{val}</dd></div>' for k, val in stack)
     sold = (v.get('status') or '').lower() == 'sold' and status
     return f'''        <li class="card{' card--sold' if sold else ''}" data-status="{e(v.get('status') or '')}" data-condition="{v['condition']}" data-year="{v['year']}" data-price="{v['price']}" data-mileage="{v['mileage']}" data-model="{e(v['model'])}" data-trim="{e(v['trim'])}" data-stock="{e(v['stock'])}" data-vin="{e(v['vin'])}">
-          <a class="card__link" href="{p}{v['page']}" aria-label="{e(v['title'])}, {label} {money(v['price'])}">
+          <a class="card__link" href="{p}{v['page']}" aria-label="{e(v['title'])}, {label} {money(lead_price(v))}">
             <span class="card__media">{flag}<img src="{p}{v['image']}" width="840" height="630" loading="{'eager' if eager else 'lazy'}" decoding="async" alt="{e(alt)}"></span>
             <dl class="card__facts">
               <div><dt>Stock:</dt> <dd>{e(v['stock'])}</dd></div>
@@ -96,7 +122,7 @@ def card(v, p='', eager=False, status=True):
           </a>
           <div class="card__offer">
             <div class="card__row">
-              <p class="card__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><a class="asterisk" href="{p}{v['page']}#pricing" aria-label="Pricing details">*</a></p>{mark}
+              <p class="card__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(lead_price(v))}</span><a class="asterisk" href="{p}{v['page']}#pricing" aria-label="Pricing details">*</a></p>{mark}
             </div>
             <dl class="card__stack">
 {stack_html}
@@ -277,7 +303,8 @@ def vehicle_page(v):
     name = name_of(v)
     used = v['condition'] == 'used'
     eyebrow = 'Pre-owned · Provenance certified' if used else 'New · In stock'
-    label = 'MSRP' if v['condition'] == 'new' else 'Price'
+    label = lead_label(v)
+    base = 'MSRP' if v['condition'] == 'new' else 'Price'
     photos = v['photos'] or [{'src': v['image'], 'thumb': v['image'], 'w': 840, 'h': 630}]
     stock_note = ' (manufacturer image — the dealer has no photograph of this car)' if v['stock_image'] else ''
     spin = json.dumps([f"{p}{f}" for f in v['spin']])
@@ -296,13 +323,18 @@ def vehicle_page(v):
     features = '\n'.join(f'              <li>{e(f)}</li>' for f in v['features'])
     engine_short = 'Electric' if 'Electric' in (v['engine'] or '') else ('V12' if 'V12' in (v['engine'] or '') else (v['engine'] or ''))
     lease_row = f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month" if v['lease_month'] else ''
+    lease_due = due_text(v)
 
     # the buy box: the price large, then what the dealer shows around it
+    # the buy box leads with the sale price; beneath it, how it is made up.
+    # A saving is measured against what the buyer pays, fees in.
     around = []
     if used and v['msrp']:
-        around += [('MSRP', money(v['msrp'])), ('You save', f"− {money(v['msrp'] - v['price'])}")]
+        around += [('MSRP', money(v['msrp']))]
     if v['sale_price_with_fees']:
-        around += [('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514'), ('Sale price', money(v['sale_price_with_fees']))]
+        around += [(base, money(v['price'])), ('Dealer service charge', '$1,189'), ('Electronic filing charge', '$514')]
+    if used and v['msrp']:
+        around += [('You save', f"− {money(v['msrp'] - lead_price(v))}")]
     # The body of the offer. A sold motor car is not for sale: no price, no
     # lease, no charges, no quote — only the way to reach the retailer about
     # another one. The listed figure is not what it sold for, and that figure
@@ -317,12 +349,12 @@ def vehicle_page(v):
     else:
         special = '<p class="offer__flag">Internet Special</p>\n        ' if v['special'] else ''
         lease_line = (f'<p class="offer__lease"><span>Lease<a class="asterisk" href="#pricing" aria-label="Lease terms">*</a></span>'
-                      f'<span>{lease_row}</span></p>\n        ') if lease_row else ''
+                      f'<span>{lease_row}' + (f'<small>{lease_due}</small>' if lease_due else '') + '</span></p>\n        ') if lease_row else ''
         rows_block = (f'<dl class="offer__rows">\n{rows(around)}\n        </dl>\n        ') if around else ''
         offer_body = (
             f'{special}'
             f'<p class="offer__label">{label}<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>\n        '
-            f'<p class="offer__price">{money(v["price"])}</p>\n        '
+            f'<p class="offer__price">{money(lead_price(v))}</p>\n        '
             f'{lease_line}{rows_block}'
             '<div class="offer__actions">\n'
             '          <a class="btn btn--white" href="#enquire">Request a Quote</a>\n'
@@ -499,7 +531,7 @@ def vehicle_page(v):
         <h1 class="vdp__title">{h1}</h1>
       </div>
       <div class="vdp__figure">
-        <p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(v['price'])}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
+        <p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(lead_price(v))}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
         <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
       </div>
     </header>
