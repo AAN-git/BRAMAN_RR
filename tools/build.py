@@ -550,7 +550,9 @@ def vehicle_page(v):
     desc_meta = f"{v['title']}, {v['exterior']} over {v['interior']}, {'{:,}'.format(v['mileage'])} miles, {('sold' if is_sold(v) else label + ' ' + money(lead_price(v)))} at Rolls-Royce Motor Cars Palm Beach, West Palm Beach, Florida."
     h = re.sub(r'<title>.*?</title>', f'<title>{e(title)}</title>', head)
     h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc_meta)}">', h)
-    h1 = e(name).replace('Rolls-Royce', '<span class="nowrap">Rolls-Royce</span>')
+    # two lines, as on the Bentley page: the year and the marque, then the
+    # motor car (Alex, 2026-09-28)
+    h1 = f'<span class="vdp__title-make">{v["year"]} Rolls-Royce</span> <span class="vdp__title-model">' + e(name.split('Rolls-Royce', 1)[1].strip()) + '</span>'
 
     return f'''<!doctype html>
 <html lang="en">

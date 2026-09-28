@@ -111,6 +111,11 @@
   text-transform: uppercase;
 }
 .vdp__title .nowrap { white-space: nowrap; }
+.vdp__title-make, .vdp__title-model { display: block; }
+.vdp__title-make { white-space: nowrap; }
+/* on a phone the name steps down so the year and the marque hold one line;
+   a long model (Cullinan Black Badge) may take a second */
+@media (max-width: 639px) { .vdp__title { font-size: 1.75rem; } }
 .vdp__figure {
   display: flex;
   flex-wrap: wrap;
