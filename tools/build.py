@@ -358,6 +358,19 @@ def vehicle_page(v):
     engine_short = 'Electric' if 'Electric' in (v['engine'] or '') else ('V12' if 'V12' in (v['engine'] or '') else (v['engine'] or ''))
     lease_row = f"{money(v['lease_month'])}{' + tax' if v['lease_plus_tax'] else ''} / month" if v['lease_month'] else ''
     lease_due = due_text(v)
+    # the head: the sale price, and beside it — top right, in the first screen
+    # — how it is made up, listed out as the dealer's own page does (the
+    # client, 2026-09-28: "they need it all listed out top right"). A sold
+    # motor car shows no figure at all.
+    if is_sold(v):
+        head_figure = ('<p class="card__price vdp__price vdp__price--sold"><span class="card__price-value">Sold</span></p>\n        '
+                       '<a class="btn btn--ghost vdp__confirm" href="#more">See other motor cars</a>')
+    else:
+        build_rows = ([(base, money(v['price'])), ('+ Dealer service charge', '$1,189'), ('+ Electronic filing charge', '$514')]
+                      if v['sale_price_with_fees'] else [])
+        build_html = ('<dl class="vdp__build">\n' + '\n'.join(f'          <div><dt>{k}</dt><dd>{val}</dd></div>' for k, val in build_rows) + '\n        </dl>\n        ') if build_rows else ''
+        head_figure = (f'<p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(lead_price(v))}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>\n        '
+                       f'{build_html}<a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>')
 
     # the buy box: the price large, then what the dealer shows around it
     # the buy box leads with the sale price; beneath it, how it is made up.
@@ -565,8 +578,7 @@ def vehicle_page(v):
         <h1 class="vdp__title">{h1}</h1>
       </div>
       <div class="vdp__figure">
-        <p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(lead_price(v))}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
-        <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
+        {head_figure}
       </div>
     </header>
 

@@ -124,6 +124,23 @@
 .vdp__confirm { height: 46px; min-width: 0; padding: 0 22px; }
 .vdp__price { height: 46px; padding: 0 22px; }
 .vdp__price .card__price-value { font-size: var(--h4); }
+/* The price build, listed out beside the sale price in the first screen
+   (the client, 2026-09-28): the listed price and the two charges the sale
+   price holds, quiet under the tag; then the call. */
+.vdp__figure:has(.vdp__build) { flex-direction: column; align-items: flex-end; flex-wrap: nowrap; }
+.vdp__head:has(.vdp__build) { align-items: flex-start; }   /* the name and the figure start on one line; the list hangs below the tag */
+.vdp__build { width: 22rem; max-width: 100%; margin: 0; }
+.vdp__figure:has(.vdp__build) { flex: 0 0 auto; }
+.vdp__build dt { white-space: nowrap; }
+.vdp__build div {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.vdp__build div:first-child { border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.vdp__build dt { font-weight: 400; font-size: var(--label); line-height: 20px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-support); }
+.vdp__build dd { margin: 0; font-weight: 400; font-size: var(--small); line-height: 20px; color: var(--white); font-variant-numeric: tabular-nums; }
+.vdp__price--sold .card__price-value { color: var(--ink-support); letter-spacing: 0.04em; text-transform: uppercase; font-size: var(--body); }
 .vdp__lease {
   display: inline-flex;
   align-items: center;
@@ -1069,6 +1086,8 @@ body[data-drawer] { overflow: hidden; }
   .vdp { padding-top: 84px; }
   .vdp__head { flex-wrap: wrap; align-items: flex-start; }
   .vdp__figure { padding-bottom: 0; }
+  .vdp__figure:has(.vdp__build) { align-items: flex-start; max-width: none; width: 100%; }
+  .vdp__build { width: min(100%, 26rem); }
   .film { --frame: clamp(300px, 52vh, 560px); }
   .plate { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
   .plate div { padding: 18px var(--gutter) 20px 0; }
