@@ -8,9 +8,9 @@
 <meta name="theme-color" content="#151515">
 <link rel="preload" href="../assets/fonts/riviera-nights-light.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="../assets/fonts/riviera-nights-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="../css/tokens.css?v=20260928142744">
-<link rel="stylesheet" href="../css/main.css?v=20260928142744">
-<link rel="stylesheet" href="../css/vehicle.css?v=20260928142744">
+<link rel="stylesheet" href="../css/tokens.css?v=20260928143730">
+<link rel="stylesheet" href="../css/main.css?v=20260928143730">
+<link rel="stylesheet" href="../css/vehicle.css?v=20260928143730">
 <script>
   if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     document.documentElement.classList.add("motion");
@@ -90,13 +90,15 @@
         <h1 class="vdp__title">2027 <span class="nowrap">Rolls-Royce</span> Ghost</h1>
       </div>
       <div class="vdp__figure">
-        <p class="card__price vdp__price"><span class="card__price-label">Sale price</span> <span class="card__price-value">$485,153</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>
-        <dl class="vdp__build">
-          <div><dt>MSRP</dt><dd>$483,450</dd></div>
-          <div><dt>+ Dealer service charge</dt><dd>$1,189</dd></div>
-          <div><dt>+ Electronic filing charge</dt><dd>$514</dd></div>
-        </dl>
-        <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
+        <div class="vdp__sum">
+          <dl class="vdp__build">
+            <div><dt>MSRP</dt><dd>$483,450</dd></div>
+            <div><dt>+ Dealer service charge</dt><dd>$1,189</dd></div>
+            <div><dt>+ Electronic filing charge</dt><dd>$514</dd></div>
+          </dl>
+          <p class="vdp__sum-total"><span class="vdp__sum-label">Sale price<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></span> <span class="vdp__sum-value">$485,153</span></p>
+          <a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>
+        </div>
       </div>
     </header>
 
@@ -483,7 +485,7 @@
   </div>
 </footer>
 
-<script src="../js/main.js?v=20260928142744"></script>
-<script src="../js/vehicle.js?v=20260928142744"></script>
+<script src="../js/main.js?v=20260928143730"></script>
+<script src="../js/vehicle.js?v=20260928143730"></script>
 </body>
 </html>

@@ -366,11 +366,14 @@ def vehicle_page(v):
         head_figure = ('<p class="card__price vdp__price vdp__price--sold"><span class="card__price-value">Sold</span></p>\n        '
                        '<a class="btn btn--ghost vdp__confirm" href="#more">See other motor cars</a>')
     else:
-        build_rows = ([(base, money(v['price'])), ('+ Dealer service charge', '$1,189'), ('+ Electronic filing charge', '$514')]
-                      if v['sale_price_with_fees'] else [])
-        build_html = ('<dl class="vdp__build">\n' + '\n'.join(f'          <div><dt>{k}</dt><dd>{val}</dd></div>' for k, val in build_rows) + '\n        </dl>\n        ') if build_rows else ''
-        head_figure = (f'<p class="card__price vdp__price"><span class="card__price-label">{label}</span> <span class="card__price-value">{money(lead_price(v))}</span><a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></p>\n        '
-                       f'{build_html}<a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>')
+        # one plate, read as a sum: the listed price and the two charges, a
+        # rule, and the sale price they make — the largest figure, last
+        rows_ = ([(base, money(v['price'])), ('+ Dealer service charge', '$1,189'), ('+ Electronic filing charge', '$514')]
+                 if v['sale_price_with_fees'] else [])
+        rows_html = ('<dl class="vdp__build">\n' + '\n'.join(f'            <div><dt>{k}</dt><dd>{val}</dd></div>' for k, val in rows_) + '\n          </dl>\n          ') if rows_ else ''
+        head_figure = ('<div class="vdp__sum">\n          ' + rows_html +
+                       f'<p class="vdp__sum-total"><span class="vdp__sum-label">{label}<a class="asterisk" href="#pricing" aria-label="Pricing details">*</a></span> <span class="vdp__sum-value">{money(lead_price(v))}</span></p>\n          '
+                       '<a class="btn btn--ghost vdp__confirm" href="#enquire">Confirm Availability</a>\n        </div>')
 
     # the buy box: the price large, then what the dealer shows around it
     # the buy box leads with the sale price; beneath it, how it is made up.

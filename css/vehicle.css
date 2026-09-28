@@ -124,22 +124,31 @@
 .vdp__confirm { height: 46px; min-width: 0; padding: 0 22px; }
 .vdp__price { height: 46px; padding: 0 22px; }
 .vdp__price .card__price-value { font-size: var(--h4); }
-/* The price build, listed out beside the sale price in the first screen
-   (the client, 2026-09-28): the listed price and the two charges the sale
-   price holds, quiet under the tag; then the call. */
-.vdp__figure:has(.vdp__build) { flex-direction: column; align-items: flex-end; flex-wrap: nowrap; }
-.vdp__head:has(.vdp__build) { align-items: flex-start; }   /* the name and the figure start on one line; the list hangs below the tag */
-.vdp__build { width: 22rem; max-width: 100%; margin: 0; }
-.vdp__figure:has(.vdp__build) { flex: 0 0 auto; }
-.vdp__build dt { white-space: nowrap; }
-.vdp__build div {
-  display: flex; justify-content: space-between; gap: 16px;
-  padding: 5px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+/* The price, listed out top right in the first screen (the client,
+   2026-09-28): one plate in the offer box's own language, read as a sum —
+   the listed price and the two charges, a rule, and the sale price they
+   make, the largest figure and the last; then the call. */
+.vdp__figure:has(.vdp__sum) { flex: 0 0 auto; max-width: none; }
+.vdp__head:has(.vdp__sum) { align-items: flex-start; }
+.vdp__sum {
+  width: 24rem; max-width: 100%;
+  padding: 18px 24px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.03);
 }
-.vdp__build div:first-child { border-top: 1px solid rgba(255, 255, 255, 0.1); }
-.vdp__build dt { font-weight: 400; font-size: var(--label); line-height: 20px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-support); }
-.vdp__build dd { margin: 0; font-weight: 400; font-size: var(--small); line-height: 20px; color: var(--white); font-variant-numeric: tabular-nums; }
+.vdp__build { margin: 0; }
+.vdp__build div { display: flex; justify-content: space-between; gap: 16px; padding: 4px 0; }
+.vdp__build dt { font-weight: 400; font-size: var(--label); line-height: 22px; letter-spacing: 0.03em; text-transform: uppercase; color: var(--ink-support); white-space: nowrap; }
+.vdp__build dd { margin: 0; font-weight: 400; font-size: var(--small); line-height: 22px; color: var(--white); font-variant-numeric: tabular-nums; }
+.vdp__sum-total {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+  margin-top: 10px; padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+}
+.vdp__sum-label { font-weight: 400; font-size: var(--label); letter-spacing: 0.03em; text-transform: uppercase; color: var(--white); }
+.vdp__sum-label .asterisk { margin-left: 2px; }
+.vdp__sum-value { font-weight: 300; font-size: var(--h3, 2rem); line-height: 1; letter-spacing: 0.01em; color: var(--white); font-variant-numeric: tabular-nums; }
+.vdp__sum .vdp__confirm { width: 100%; margin-top: 20px; }
 .vdp__price--sold .card__price-value { color: var(--ink-support); letter-spacing: 0.04em; text-transform: uppercase; font-size: var(--body); }
 .vdp__lease {
   display: inline-flex;
@@ -1086,8 +1095,8 @@ body[data-drawer] { overflow: hidden; }
   .vdp { padding-top: 84px; }
   .vdp__head { flex-wrap: wrap; align-items: flex-start; }
   .vdp__figure { padding-bottom: 0; }
-  .vdp__figure:has(.vdp__build) { align-items: flex-start; max-width: none; width: 100%; }
-  .vdp__build { width: min(100%, 26rem); }
+  .vdp__figure:has(.vdp__sum) { width: 100%; }
+  .vdp__sum { width: min(100%, 26rem); }
   .film { --frame: clamp(300px, 52vh, 560px); }
   .plate { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
   .plate div { padding: 18px var(--gutter) 20px 0; }
