@@ -246,6 +246,22 @@ a { color: inherit; }
   transition: color var(--dur-press) var(--ease-out);
 }
 .header__utility a:hover { color: var(--white); }
+/* The dealer's site terms, beside the telephone (the client, 2026-09-28: not
+   only in the footer). The services' letters, in the face's light cut, so it
+   reads as the fine print of the row rather than a third service. */
+.header__utility a,
+.header__terms { white-space: nowrap; }
+.header__terms {
+  font-weight: 300;
+  font-size: var(--label);
+  line-height: 26px;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nav-ink);
+  transition: color var(--dur-press) var(--ease-out);
+}
+.header__terms:hover { color: var(--white); }
 
 .header__phone {
   display: grid;
@@ -382,6 +398,13 @@ a { color: inherit; }
   bottom: 48px;
 }
 .header[data-open] .header__phone { display: none; }
+/* Open, the terms join the services at the foot of the panel. */
+.header[data-open] .header__terms {
+  position: fixed;
+  left: var(--chrome-margin);
+  bottom: 18px;
+  color: var(--white);
+}
 .header[data-open]::before { opacity: 0; }
 .header[data-open] .header__logo,
 .header[data-open] .header__toggle,
@@ -1742,8 +1765,9 @@ a.asterisk:focus-visible { outline: 2px solid var(--white); outline-offset: 2px;
 @media (max-width: 767px) {
   .header,
   .header[data-scrolled] { height: 72px; --logo-w: 108px; }
-  .header__utility { display: none; }
+  .header__utility, .header__terms { display: none; }
   .header[data-open] .header__utility { display: flex; }
+  .header[data-open] .header__terms { display: block; }
 
   .actions .btn { flex: 1 1 100%; min-width: 0; }
 
