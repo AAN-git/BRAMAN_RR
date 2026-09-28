@@ -113,8 +113,16 @@
 .vdp__title .nowrap { white-space: nowrap; }
 .vdp__title-make, .vdp__title-model { display: block; }
 .vdp__title-make { white-space: nowrap; }
-/* Save · Email · Text · Share under the name, on its left edge */
+/* Save · Email · Text · Share under the name, on its left edge, standing
+   on the plate's foot: the name's column is as tall as the plate and the
+   tools sit at its bottom, level with the plate's lower edge */
+.vdp__head:has(.vdp__sum) { align-items: stretch; }
+.vdp__head:has(.vdp__sum) .vdp__name { display: flex; flex-direction: column; }
 .vdp__name .tools { margin-top: 20px; justify-content: flex-start; flex-wrap: wrap; }
+.vdp__head:has(.vdp__sum) .vdp__name .tools { margin-top: auto; padding-top: 20px; margin-bottom: 32px; }   /* on one line with Confirm Availability: the figure's 8px foot + the plate's 24px padding */
+@media (max-width: 1023px) {
+  .vdp__head:has(.vdp__sum) .vdp__name .tools { margin-top: 0; margin-bottom: 0; }
+}
 /* on a phone the name steps down so the year and the marque hold one line;
    a long model (Cullinan Black Badge) may take a second */
 @media (max-width: 639px) { .vdp__title { font-size: 1.75rem; } }
@@ -136,7 +144,6 @@
    the listed price and the two charges, a rule, and the sale price they
    make, the largest figure and the last; then the call. */
 .vdp__figure:has(.vdp__sum) { flex: 0 0 auto; max-width: none; }
-.vdp__head:has(.vdp__sum) { align-items: flex-start; }
 .vdp__sum {
   position: relative;               /* js/vehicle.js shifts it onto the header's edge */
   width: 24rem; max-width: 100%;
