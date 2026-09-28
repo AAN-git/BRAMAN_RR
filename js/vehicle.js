@@ -441,4 +441,27 @@
     window.addEventListener("resize", onScroll);
     paint();
   }
+
+  /* --- The price plate on the header's right edge ----------------------
+     (Alex, 2026-09-28) The header runs wider than the page's column, so
+     the plate is shifted by the difference: measured, on load and on
+     every resize; on a narrow screen it stands in the column. */
+  var sum = document.querySelector(".vdp__sum");
+  var hdr = document.querySelector(".header");
+  function alignSum() {
+    if (!sum || !hdr) return;
+    sum.style.right = "";
+    if (!window.matchMedia("(min-width: 1024px)").matches) return;
+    var edge = 0;
+    Array.prototype.forEach.call(hdr.querySelectorAll("a, button"), function (el) {
+      if (el.offsetParent) edge = Math.max(edge, el.getBoundingClientRect().right);
+    });
+    if (!edge) return;
+    sum.style.right = (sum.getBoundingClientRect().right - edge) + "px";
+  }
+  alignSum();
+  window.addEventListener("resize", alignSum);
+  window.addEventListener("load", alignSum);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(alignSum);
+
 })();

@@ -568,12 +568,7 @@ def vehicle_page(v):
         <a href="../index_v2.html">Home</a><span aria-hidden="true">/</span><a href="../inventory.html">Inventory</a><span aria-hidden="true">/</span><span aria-current="page">{e(name)}</span>
       </nav>
       <!-- Save · Email · Text · Share — Save keeps the car; the other three open the drawer -->
-      <ul class="tools" data-stock="{e(v['stock'])}" data-name="{e(name)}">
-        <li><button class="tool" type="button" data-tool="save" aria-pressed="false"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M10 17s-7-4.4-7-9.2A3.8 3.8 0 0 1 10 6a3.8 3.8 0 0 1 7 1.8C17 12.6 10 17 10 17z"/></svg><span>Save</span></button></li>
-        <li><button class="tool" type="button" data-tool="email" data-open="email"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><rect x="2.5" y="4.5" width="15" height="11"/><path d="M2.5 5l7.5 6 7.5-6"/></svg><span>Email</span></button></li>
-        <li><button class="tool" type="button" data-tool="text" data-open="text"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M3 4h14v9H8l-4 3v-3H3z"/></svg><span>Text</span></button></li>
-        <li><button class="tool" type="button" data-tool="share" data-open="share"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true" focusable="false"><path d="M10 12V3M6.5 6.5L10 3l3.5 3.5"/><path d="M4 10v6h12v-6"/></svg><span>Share</span></button></li>
-      </ul>
+      <!-- Save · Email · Text · Share: taken off for now (Alex, 2026-09-28) -->
     </div>
 
     <!-- The name, and the figure beside it. -->
