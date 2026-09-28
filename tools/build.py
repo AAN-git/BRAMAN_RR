@@ -79,7 +79,7 @@ def lead_price(v):
     return v['sale_price_with_fees'] or v['price']
 
 def lead_label(v):
-    return 'Sale price' if v['sale_price_with_fees'] else ('MSRP' if v['condition'] == 'new' else 'Price')
+    return 'Final price' if v['sale_price_with_fees'] else ('MSRP' if v['condition'] == 'new' else 'Price')
 
 # The retailer's own word on where a motor car stands. One mark to a
 # photograph: a status outranks the lease, because a car that is sold or

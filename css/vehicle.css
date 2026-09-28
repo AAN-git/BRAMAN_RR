@@ -118,8 +118,9 @@
    tools sit at its bottom, level with the plate's lower edge */
 .vdp__head:has(.vdp__sum) { align-items: stretch; }
 .vdp__head:has(.vdp__sum) .vdp__name { display: flex; flex-direction: column; }
+.vdp__head:has(.vdp__sum) .vdp__figure:has(.vdp__sum) { flex-direction: column; flex-wrap: nowrap; justify-content: flex-end; align-items: flex-end; }   /* a taller name: the plate stands on the same foot */
 .vdp__name .tools { margin-top: 20px; justify-content: flex-start; flex-wrap: wrap; }
-.vdp__head:has(.vdp__sum) .vdp__name .tools { margin-top: auto; padding-top: 20px; margin-bottom: 32px; }   /* on one line with Confirm Availability: the figure's 8px foot + the plate's 24px padding */
+.vdp__head:has(.vdp__sum) .vdp__name .tools { margin-top: auto; padding-top: 20px; margin-bottom: 39px; }   /* on one line with Confirm Availability: the figure's 8px foot + the plate's 24px padding */
 @media (max-width: 1023px) {
   .vdp__head:has(.vdp__sum) .vdp__name .tools { margin-top: 0; margin-bottom: 0; }
 }
