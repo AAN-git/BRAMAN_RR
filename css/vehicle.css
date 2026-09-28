@@ -113,6 +113,8 @@
 .vdp__title .nowrap { white-space: nowrap; }
 .vdp__title-make, .vdp__title-model { display: block; }
 .vdp__title-make { white-space: nowrap; }
+/* Save · Email · Text · Share under the name, on its left edge */
+.vdp__name .tools { margin-top: 20px; justify-content: flex-start; flex-wrap: wrap; }
 /* on a phone the name steps down so the year and the marque hold one line;
    a long model (Cullinan Black Badge) may take a second */
 @media (max-width: 639px) { .vdp__title { font-size: 1.75rem; } }
@@ -1220,3 +1222,8 @@ body[data-drawer] { overflow: hidden; }
   color: var(--ink-quiet);
 }
 .offer__gone + .offer__actions { margin-top: 24px; }
+/* a phone: the four tools hold one line under the name */
+@media (max-width: 639px) { .vdp__name .tools { gap: 14px; flex-wrap: nowrap; } }
+@media (max-width: 359px) { .vdp__name .tools { flex-wrap: wrap; row-gap: 8px; } }
+/* the record on the smallest phones: a value may break rather than run past the edge */
+@media (max-width: 359px) { .vdp__vin, .record dd, .vdp__record dd { overflow-wrap: anywhere; min-width: 0; } .vdp__build dt { white-space: normal; } .vdp__sum { padding-inline: 16px; } .offer__rows dt { flex: 1 1 auto; min-width: 0; } .offer { padding-inline: 16px; } }
