@@ -222,3 +222,26 @@ html .badge__film { object-fit: cover; object-position: 50% 50%; }
   transform: rotate(-45deg);
 }
 .more:hover::before { transform: rotate(-45deg) translate(2px, 2px); }
+
+/* --- The site terms above the fold on a phone (the client, 2026-10-05) ----
+   From 768 up they stand in the bar beside the telephone; on a phone the
+   bar has no room at the legal size, so the bar grows by one line and the
+   terms stand in it at the right, on the bar's own ground, under a hairline.
+   Everything that sat under the 72px bar moves down by the line. */
+.header__terms-line { display: none; }
+@media (max-width: 767px) {
+  :root { --terms-h: 32px; }
+  html .header:not([data-open]), html .header[data-scrolled]:not([data-open]) { height: calc(72px + var(--terms-h)); }
+  html .header:not([data-open]) .header__terms-line {
+    display: block; position: absolute; left: 0; right: 0; top: 72px;
+    height: var(--terms-h); padding-inline: var(--chrome-margin);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    text-align: right; line-height: var(--terms-h);
+    font-weight: 300; font-size: var(--label); letter-spacing: 0.005em; text-transform: uppercase;
+    color: var(--nav-ink);
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;
+  }
+  html .hero { padding-top: calc(72px + var(--terms-h)); }
+  .vdp { padding-top: calc(72px + var(--terms-h)); }
+  .srp { padding-top: calc(72px + var(--terms-h)); }
+}

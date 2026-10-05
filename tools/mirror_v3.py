@@ -107,10 +107,21 @@ def sheet(s):
     m = list(SHEET.finditer(s))[-1]
     return s[:m.end()] + f'<link rel="stylesheet" href="{m.group(2)}css/v3.css?v={h}">\n' + s[m.end():]
 
+# The client, 2026-10-05: the site terms in the first screen on a phone too.
+# The bar's own terms link lives in the aside (moved by a transform), so the
+# phone gets a line of its own, a direct child of the header.
+TERMS = DEALER + '/terms-and-conditions/'
+def terms_line(s):
+    if 'header__terms-line' in s:
+        return s
+    line = f'\n  <a class="header__terms-line" href="{TERMS}">Site Terms &amp; Conditions</a>'
+    return re.sub(r'(<header class="header"[^>]*>)', lambda m: m.group(1) + line, s, count=1)
+
 def page(s, pre='', home=False):
     s = calm(relink(s))
     s = routes(s, pre, home)
     s = dock(s, pre)
+    s = terms_line(s)
     if home: s = badge(deck(s))
     return sheet(s)
 
