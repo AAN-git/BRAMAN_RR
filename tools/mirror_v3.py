@@ -114,8 +114,10 @@ TERMS = DEALER + '/terms-and-conditions/'
 def terms_line(s):
     if 'header__terms-line' in s:
         return s
-    line = f'\n  <a class="header__terms-line" href="{TERMS}">Site Terms &amp; Conditions</a>'
-    return re.sub(r'(<header class="header"[^>]*>)', lambda m: m.group(1) + line, s, count=1)
+    # after the bar's own contents, so it comes after the logo in tab and
+    # reading order (review, 2026-10-05)
+    line = f'  <a class="header__terms-line" href="{TERMS}">Site Terms &amp; Conditions</a>\n'
+    return s.replace('</header>', line + '</header>', 1)
 
 def page(s, pre='', home=False):
     s = calm(relink(s))

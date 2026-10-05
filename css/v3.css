@@ -245,3 +245,17 @@ html .badge__film { object-fit: cover; object-position: 50% 50%; }
   .vdp { padding-top: calc(72px + var(--terms-h)); }
   .srp { padding-top: calc(72px + var(--terms-h)); }
 }
+/* the bar's own contents keep the 72px line: the logo and the controls
+   centred on the bar, not on the bar + the terms line (review, 2026-10-05) */
+@media (max-width: 767px) {
+  html .header:not([data-open]) .header__logo { top: 36px; }
+  html .header:not([data-open]) .header__aside { top: 36px; }
+}
+/* the menu open over a scrolled page: the aside's scrolled transform is
+   undone, so the terms link it holds is on the screen (main.css: the
+   scrolled rule came later at the same weight and won) */
+@media (max-width: 1023px) {
+  .header[data-open][data-scrolled] .header__aside { transform: none; }
+}
+/* the VIN on a 360 phone: one 17-letter word may break rather than widen the page */
+@media (max-width: 420px) { .vdp__vin { overflow-wrap: anywhere; } .vdp__vin { word-break: break-all; } }
