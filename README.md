@@ -26,6 +26,20 @@ RR/
 Preview over a server that supports range requests — Safari will not play the
 films from `python3 -m http.server`, which sends no `Accept-Ranges`.
 
+## Version 3 — the calm page
+
+`index_v3.html`, `inventory_v3.html` and `vehicles_v3/` are written by
+`tools/mirror_v3.py` from version 2 (`index_v2.html`, `inventory.html`,
+`vehicles/`), which stays exactly as the client saw it (live at da79c55). On
+the client's note of 4 October 2026, for an older clientele, the same note as
+the Bentley site's direction 7: a static page (no motion class, no section
+stepping, Cullinan and Black Badge no longer pinned); Inventory (marked),
+Specials, Finance and Contact Us always on screen — the bar's routes on a
+wide screen, a bar at the foot below 1024; under the hero's title, New and
+Pre-Owned Inventory side by side with Special Offers beneath. Edit version 3
+in `tools/mirror_v3.py` and `css/v3.css`, then run the script; never edit the
+pages it writes.
+
 ## Source
 
 Figma **Braman BRANDS** → page *UPD #2 Braman RR* → frame **“1920 version #2”**

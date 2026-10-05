@@ -1,0 +1,224 @@
+/* ==========================================================================
+   Rolls-Royce Motor Cars Palm Beach — version 3: the calm page.
+   Loads last on every version-3 page (tools/mirror_v3.py). On the client's
+   note of 2026-10-04, for an older clientele, on desktop and phone:
+     - a normal, static page: no motion class, no section stepping, so every
+       sheet takes its finished composition;
+     - Inventory, Specials, Finance and Contact Us always on screen;
+     - under the hero's title, static: New and Pre-Owned Inventory side by
+       side, Special Offers centred beneath.
+   Only the brand's tokens (css/tokens.css); no new colours or radii.
+   ========================================================================== */
+
+:root { --dock-h: 0px; }
+@media (max-width: 1023px) {
+  :root { --dock-h: calc(64px + env(safe-area-inset-bottom, 0px)); }
+}
+body { padding-bottom: var(--dock-h); }
+
+/* --- 1 · The bar: always on its ground, whatever is under it ------------ */
+.header::before { opacity: 1; }
+
+/* Inventory, marked among the routes: the white pill, the brand's primary
+   control, drawn to the bar's line */
+.header__nav-inventory a {
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--black);
+  line-height: 36px;
+  margin-block: 5px;
+}
+.header__nav-inventory a::after { display: none; }
+.header__nav-inventory a:hover { background: var(--white-press); color: var(--black); }
+/* the pill is wider than a route; under 1366 the line tightens by as much,
+   so the eight still clear the wordmark at 1024 */
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .header__nav ul { gap: 18px; }
+  .header__nav-inventory a { padding: 0 10px; }
+}
+.header[data-open] .header__nav-inventory a { background: none; color: var(--white); padding: 0; margin: 0; line-height: inherit; }
+
+/* --- 2 · The foot bar, below 1024: the four, each a word ---------------- */
+.dock { display: none; }
+@media (max-width: 1023px) {
+  .dock {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 49;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    height: var(--dock-h);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    background: var(--grey-8);
+    border-top: 1px solid rgba(255, 255, 255, 0.24);
+  }
+  .dock a {
+    display: flex; align-items: center; justify-content: center;
+    height: 64px; padding: 0 6px;
+    font-size: var(--label); font-weight: 400; line-height: 1.25;
+    letter-spacing: var(--button-track); text-transform: uppercase;
+    text-align: center; text-decoration: none;
+    color: var(--white);
+  }
+  .dock a + a { border-left: 1px solid rgba(255, 255, 255, 0.16); }
+  .dock .dock__main { background: var(--white); color: var(--black); }
+  /* the car page's price bar stands on the foot bar, not under it */
+  .vdp__bar { bottom: var(--dock-h); }
+}
+
+/* --- 3 · The hero: the three under the title ---------------------------- */
+.hero__deck {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 307px));
+  justify-content: center;
+  gap: 14px 16px;
+  margin-top: 32px;
+  width: 100%;
+}
+.hero__deck .btn { min-width: 0; width: 100%; }
+.hero__deck .hero__deck-offers { grid-column: 1 / -1; justify-self: center; width: calc((100% - 16px) / 2); }
+/* the lockup stands on the open road under the car, as in version 2; with
+   the three under the title it sits lower and a little tighter, so it never
+   climbs onto the car */
+@media (min-width: 768px) {
+  .hero__body { bottom: 7.5%; }   /* raised a step (Alex, 2026-10-05), still clear of the car */
+  .hero__title { margin-top: 12px; }
+  .hero__deck { margin-top: 28px; gap: 12px 16px; }
+}
+@media (max-width: 767px) {
+  /* the phone's hero is as tall as what it holds: the photograph, the words,
+     the three — nothing pushed under the foot bar */
+  html .hero { height: auto; min-height: 0; justify-content: flex-start; padding: 72px 0 48px; }   /* 72: the bar over its top */
+  .hero__deck { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .hero__deck .btn { height: auto; min-height: var(--button-h); padding: 10px 12px; white-space: normal; line-height: 1.25; }
+  .hero__deck .hero__deck-offers { width: 100%; }
+}
+
+/* --- 4 · Cullinan and Black Badge, still: the picture no longer pins and
+       the next chapter no longer climbs over it; each is one screen with its
+       words on the picture where version 2's composition settles them ----- */
+html .cullinan, html .badge { height: auto; min-height: 0; }
+html .cullinan__field, html .badge__frame { position: relative; }
+html .cullinan__track, html .badge__track { height: auto; }
+html .cullinan__body, html .badge__body { position: relative; top: auto; }
+html .about, html .badge + section { margin-top: 0; }
+
+/* --- 5 · Reading on a phone (Alex, 2026-10-05: "it doesn't read"): the
+       copy in the face's regular cut, one size up; MORE stands under the
+       copy with its chevron in sight; the address and the three numbers in
+       rows, a label and its number on one line, the numbers marked as
+       links. The headings keep their light cut. ------------------------- */
+@media (max-width: 767px) {
+  :root { --body: 1.125rem; --body-lead: 1.6; --small: 1rem; --small-lead: 1.5; }
+  body { font-weight: 400; }
+  .more { margin-top: 28px; gap: 12px; font-size: var(--small); min-height: 44px; }
+  .service .more, .about .more { margin-top: 24px; }
+  .more::before { width: 18px; height: 10px; }
+  html .service__copy, html .about__copy { font-size: var(--body); line-height: var(--body-lead); }
+  .sell__lede { font-weight: 400; }
+  .service__contacts { margin-top: 24px; padding: 16px 0; font-size: var(--body); line-height: 1.5; }
+  .service__lines { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin-top: 12px; }
+  .service__lines > div { display: contents; }
+  .service__lines dd a { text-decoration: underline; text-underline-offset: 3px; }
+}
+
+/* --- 6 · Sell on a phone (Alex, 2026-10-05): version 2 squeezed the whole
+       chapter into one screen, over the photograph. Static now, it opens
+       like the hero: the photograph as a band at the top, everything else
+       on the house ground, at reading size, with air between the groups. -- */
+@media (max-width: 767px) {
+  html .sell { min-height: 0; height: auto; display: block; }
+  html .sell .sell__field { position: relative; inset: auto; height: auto; aspect-ratio: 16 / 9; overflow: hidden; }
+  html .sell .sell__field img { position: absolute; inset: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+  html .sell .sell__field::after { background: linear-gradient(to bottom, rgba(21, 21, 21, 0) 55%, var(--grey-8)); }
+  html .sell .sell__wrap { display: block; padding: 32px 0 56px !important; }
+  html .sell .sell__head { max-width: none; }
+  html .sell .sell__label { font-size: var(--small); }
+  html .sell .sell__title { margin-top: 8px; font-size: var(--h3); line-height: var(--h3-lead); }
+  html .sell .sell__lede { margin-top: 16px; font-size: var(--body); line-height: 1.5; letter-spacing: 0; text-transform: none; color: var(--ink-quiet); }
+
+  html .sell .sell__points { display: grid; grid-template-columns: none; row-gap: 28px; margin-top: 36px; }
+  html .sell .sell__points li { display: block; }
+  html .sell .sell__points li::before { margin: 0; width: 31px; transform: none; }   /* no hover reach on a touch screen */
+  html .sell .sell__points h3 { margin-top: 14px; font-size: var(--body); line-height: 1.4; }
+  html .sell .sell__points p { margin-top: 8px; font-size: var(--small); line-height: 1.55; color: var(--ink-quiet); }
+  html .sell .sell__points p br { display: inline; }
+
+  html .sell .sell__form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 16px; margin-top: 44px; padding-top: 32px; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+  html .sell .sell__form > :not(.field), html .sell .sell__form .field--wide { grid-column: 1 / -1; }
+  html .sell .sell__form-label { margin: 0; font-size: var(--small); }
+  html .sell .sell__form .field { gap: 8px; }
+  html .sell .sell__form .field__label { font-size: var(--small); }
+  html .sell .sell__form .field__input { height: 48px; font-size: var(--body); }
+  html .sell .sell__send { display: flex; flex-direction: column; align-items: stretch; gap: 20px; margin-top: 8px; }
+  html .sell .sell__send .btn { width: 100%; }
+  html .sell .sell__route { align-self: center; font-size: var(--small); }
+}
+
+/* --- 7 · Bespoke on a phone (Alex, 2026-10-05): the long lede out of
+       capitals, air between the paragraphs, the specification as rows with
+       a hairline between them and its values in ordinary letters; the
+       empty band above the label goes. ---------------------------------- */
+@media (max-width: 767px) {
+  html .bespoke { min-height: 0; align-content: start; padding: 48px 0 56px; }
+  html .bespoke .bespoke__page { margin-top: 24px; row-gap: 32px; }
+  html .bespoke .bespoke__lede { font-size: 1.25rem; line-height: 1.45; letter-spacing: 0; text-transform: none; font-weight: 300; }
+  html .bespoke .bespoke__copy { margin-top: 20px; font-size: var(--body); line-height: var(--body-lead); }
+  html .bespoke .bespoke__spec { display: block; margin-top: 28px; padding-top: 0; border-top: 0; font-size: var(--small); line-height: 1.4; letter-spacing: 0; }
+  html .bespoke .bespoke__spec div,
+  html .bespoke .bespoke__spec div:first-child { display: grid; grid-template-columns: 7rem minmax(0, 1fr); column-gap: 16px; padding: 12px 0; border-top: 1px solid rgba(255, 255, 255, 0.16); }
+  html .bespoke .bespoke__spec div:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+  html .bespoke .bespoke__spec dt { font-size: var(--label); letter-spacing: 0.03em; text-transform: uppercase; }
+  html .bespoke .bespoke__spec dd { text-transform: none; font-size: var(--body); }
+  html .bespoke .bespoke__routes { margin-top: 32px; flex-direction: column; align-items: stretch; gap: 20px; }
+  html .bespoke .bespoke__routes .btn { width: 100%; }
+  html .bespoke .bespoke__route { align-self: center; }
+}
+
+/* --- 8 · About and Service on a phone: the head room version 2 kept for the
+       bar over a full-screen chapter is an empty band in a page that scrolls;
+       one step above the title, a breath between the title and the copy -- */
+@media (max-width: 767px) {
+  html .about .about__wrap, html .service .service__wrap { padding-top: 48px !important; padding-bottom: 56px; }
+  html .about, html .service { min-height: 0; }
+  html .about__copy:first-of-type, html .service__copy:first-of-type { margin-top: 20px; }
+}
+@media (max-width: 767px) {
+  html main > section.stock { min-height: 0; }
+  html .stock .wrap { padding: 48px 0 56px; }
+  html .footer { padding-top: 56px; }
+}
+/* Ghost and Spectre on a phone: as tall as the photograph and the words,
+   not the screen (a tall phone left 200px of their ground under the call) */
+@media (max-width: 767px) {
+  html .split { min-height: 0; height: auto; }
+}
+
+/* --- 9 · Black Badge: the Spectre Black Badge photograph (Alex, 2026-10-05)
+       in place of the film's still. The car stands in the middle of the
+       frame, so on a wide screen the mark, the line and the routes stand on
+       the dark floor beneath it, not on its roof; on a phone the frame is
+       the band above them, as before. -------------------------------------- */
+html .badge__frame { background-image: none; background-color: var(--noir); }
+html .badge__film { object-fit: cover; object-position: 50% 50%; }
+@media (min-width: 768px) {
+  html .badge__frame::after { background: linear-gradient(to bottom, rgba(10, 10, 12, 0) 58%, rgba(10, 10, 12, 0.72) 100%); }
+  html .badge__track { top: auto; bottom: 0; height: auto; padding: 0 0 clamp(56px, 8svh, 88px); }   /* raised a step (Alex, 2026-10-05) */
+  /* the block is held to the floor's height: the line one size down, two
+     lines at most, the steps between mark, line and routes tightened */
+  html .badge .badge__copy { margin-top: 14px; max-width: 44rem; font-size: var(--h4); line-height: var(--h4-lead); }
+  html .badge .badge__cta { margin-top: 20px; }
+  html .badge .doors { margin-top: 12px; }
+}
+
+/* --- 10 · MORE's chevron, drawn in CSS (Alex, 2026-10-05: in his browser the
+       masked SVG did not paint, and MORE hung on an empty indent). Two
+       strokes of the current ink, pointing along the line of reading. ---- */
+.more::before {
+  -webkit-mask: none; mask: none;
+  background: none;
+  width: 9px; height: 9px;
+  margin: 0 4px 0 2px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+}
+.more:hover::before { transform: rotate(-45deg) translate(2px, 2px); }
