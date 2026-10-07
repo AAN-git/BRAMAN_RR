@@ -7,8 +7,9 @@
    The colours are the brand's own (BRAND GUIDELINES → COLOUR USE). The
    guidelines keep Noir for Black Badge and ask that it not be over-used, and
    recommend Frost for long text; the supporting backgrounds bring the coast:
-     Frost  #FFFFFF  the Inventory on the home page, the listing, a car's page
-     Pearl  #E7D2C3  sand — the car plates, Bespoke
+     Frost  #FFFFFF  the Inventory on the home page, the listing, a car's page,
+                     and the car plates on them, drawn by a hairline
+     Pearl  #E7D2C3  sand — Bespoke
      Sky    #B4C7CB  sea and sky — Sell
    Type on them is Noir (21 / 14.4 / 12 : 1). Hairlines are tints of Noir.
    Black Badge stays Noir; Purple Spirit still closes the page; the hero, the
@@ -55,6 +56,24 @@
   color: var(--ink);
 }
 
+/* --- the type: no Light (Alex, 2026-10-07: "убери font вообще") ----------
+   Riviera Nights Light read too thin on the light grounds. Version 4 has one
+   weight: the Light face is re-pointed at the Regular file, so every rule
+   that asks for 300 gets Regular and no rule had to change. */
+@font-face {
+  font-family: "Riviera Nights";
+  src: url("../assets/fonts/riviera-nights-regular.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sell: the headings a step up the site's own scale — the title H3 → H1,
+   the three points H4 → H3 */
+html [data-coast="sell"] .sell__head { max-width: 900px; }
+html [data-coast="sell"] .sell__title { font-size: var(--h1); line-height: var(--h1-lead); }
+html [data-coast="sell"] .sell__points h3 { font-size: var(--h3); line-height: var(--h3-lead); letter-spacing: 0; }
+
 /* --- the grounds -------------------------------------------------------- */
 [data-coast="stock"]   { background: var(--frost); }
 [data-coast="sell"]    { background: var(--sky); }
@@ -86,14 +105,18 @@
 /* ======================================================================== */
 
 /* AFTER */
-/* --- the car plates: sand on the white ground -------------------------- */
-[data-coast] .card { background: var(--pearl); border-color: rgba(0, 0, 0, 0.12); }
-[data-coast] .card:hover { border-color: rgba(0, 0, 0, 0.28); }
+/* --- the car plates: Frost on the white ground, drawn by a hairline ------
+   (Pearl was tried and turned down by Alex, 2026-10-07) */
+[data-coast] .card { background: var(--frost); border-color: rgba(0, 0, 0, 0.14); }
+/* hover: a light shadow only — no line darkens, on the plate or round the
+   price (Alex, 2026-10-07: "слишком бросается") */
+[data-coast] :is(.card:hover, .card:focus-within) { border-color: rgba(0, 0, 0, 0.14); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); }
+[data-coast] .card:hover .card__price { border-color: rgba(0, 0, 0, 0.4); }   /* as at rest */
 [data-coast] .card__flag { color: var(--frost); }           /* the flag stands on the photograph */
 [data-coast] .card__flag--banner.card__flag--sold { color: var(--frost); }
 
-/* the car page: the price plate and the offer on sand */
-[data-coast="vdp"] :is(.vdp__sum, .offer, .special, .enquire) { background: var(--pearl); border-color: rgba(0, 0, 0, 0.12); }
+/* the car page: the price plate and the offer, Frost drawn by a hairline */
+[data-coast="vdp"] :is(.vdp__sum, .offer, .special, .enquire) { background: var(--frost); border-color: rgba(0, 0, 0, 0.14); }
 
 /* the slate button (Steel) keeps its Frost type everywhere */
 [data-coast] .btn--slate { color: var(--frost); }
@@ -117,7 +140,7 @@ body:has(main[data-coast]) .header::before { opacity: 1; }
 [data-coast] :is(.btn--sky, .door--lead) { color: var(--noir); }
 [data-coast] .door--lead .door__n { color: rgba(0, 0, 0, 0.72); }
 [data-coast] .door--lead:hover { background: var(--pearl); }
-/* the lease label: Pearl type was set for the dark plate; on the Pearl plate
+/* the lease label: Pearl type was set for the dark plate; on the light plate
    it is Ultraviolet, the guidelines' highlight on a light ground */
 [data-coast] :is(.special__label, .special__label .asterisk) { color: var(--ultraviolet); }
 
