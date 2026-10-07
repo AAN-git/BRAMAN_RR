@@ -7,7 +7,7 @@
    from Czinger and Pagani: the section docks full-screen, the words hold to
    be read, then — scrubbed to the scroll, reversible — the title's lines rise
    out of their masks, the line follows, the calls lift and fade; the picture
-   settles back a touch and darkens. Once the words are gone the pin lets go.
+   holds its size (Alex: no shrink before it leaves) and only darkens. Once the words are gone the pin lets go.
    When the scroll comes to rest just before a pin (moving down) or inside
    one (moving up), the page glides the rest of the way and docks; any input
    cancels the glide. From 768px only — a phone keeps the plain page.
@@ -81,13 +81,11 @@
       };
       lead.forEach((node) => lift(node, 0.3));
       calls.forEach((node, i) => lift(node, 0.5 + i * 0.04));
-      if (media) tl.to(media, { scale: 0.965, duration: 0.7, ease: 'none' }, 0.3);
       tl.to(dim, { opacity: 0.35, duration: 0.7, ease: 'none' }, 0.3);
       return { st: tl.scrollTrigger, undo: () => {
         tl.scrollTrigger && tl.scrollTrigger.kill(); tl.kill();
         splits.forEach((sp) => sp.revert());
         [...lead, ...calls].forEach((n) => { n.style.removeProperty('--pinx-y'); n.style.removeProperty('--pinx-a'); });
-        if (media) gsap.set(media, { clearProps: 'scale' });
         dim.remove(); el.removeAttribute('data-pinx');
       } };
     });
