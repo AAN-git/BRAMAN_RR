@@ -71,6 +71,10 @@ def pins(s):
 
 # Sell's ground: Alex's photograph of the paint and the badge (2026-10-07)
 def sell(s):
+    # no "Private submission" over the form: the form starts level with the
+    # first point (Alex, 2026-10-07)
+    s = s.replace('<form class="sell__form" data-inbox novalidate>', '<form class="sell__form" data-inbox novalidate aria-label="Private submission">')
+    s = re.sub(r'\s*<p class="sell__form-label">Private submission</p>', '', s)
     # the title on two lines (Alex, 2026-10-07)
     s = s.replace('id="sell-title">White Glove Acquisition &amp; Concierge<', 'id="sell-title">White Glove Acquisition<br> &amp; Concierge<')
     return s.replace('<img src="assets/img/sell.webp" width="2560" height="1707" loading="lazy"',
