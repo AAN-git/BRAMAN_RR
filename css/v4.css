@@ -68,12 +68,13 @@
 /* Sell: Alex's photograph (2026-10-07) — the paint of a blue motor car and its
    RR badge, the coast's own blue. On a wide screen it is the chapter's ground
    under a veil of Sky — 0.8, set back further on Alex's word ("утопить"), so the
-   words read first — which thins around the badge where no words stand; on a phone it is the
+   words read first — even over the whole chapter, the badge not singled out
+   (Alex); the badge is still kept clear of the words (js/v4.js); on a phone it is the
    band above the words, falling into Sky. */
 @media (min-width: 768px) {
   [data-coast="sell"] .sell__field img { top: 0; height: 100%; object-position: 50% 45%; }
   [data-coast="sell"] .sell__field::after {
-    background: radial-gradient(circle at var(--bx, 38%) var(--by, 45%), rgba(180, 199, 203, 0.2) 0 44px, rgba(180, 199, 203, 0.8) 170px);
+    background: rgba(180, 199, 203, 0.8);
   }
 }
 @media (max-width: 767px) {
