@@ -76,13 +76,17 @@ html [data-coast="sell"] .sell__points h3 { font-size: var(--h3); line-height: v
 /* …and drawn in (Alex, 2026-10-07: "подтянуть, чтобы больше центровалось,
    компактнее"): the title on two lines across the top, the points and the
    form set close from the top rather than spread to the column's height, the
-   composition on the middle ten columns, the block in the middle of the
-   screen under the bar */
+   composition on the middle ten columns, the block strictly on the chapter's
+   vertical centre (Alex) */
 @media (min-width: 1024px) {
   html [data-coast="sell"] { display: flex; flex-direction: column; justify-content: center; }
   html [data-coast="sell"] .sell__wrap {
     width: var(--container);
-    padding: calc(112px + clamp(32px, 6vh, 72px)) 0 clamp(40px, 7vh, 80px);
+    /* the bar (112) is taken off the top, then the same air above and below:
+       the chapter's flex centring splits whatever is left equally, so the
+       block sits strictly on the centre line of what is seen under the bar.
+       !important: over home-v2's own !important pair */
+    padding: calc(112px + 32px) 0 32px !important;
     row-gap: clamp(32px, 5vh, 52px);
   }
   html [data-coast="sell"] .sell__head { grid-column: 2 / span 10; }
