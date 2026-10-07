@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Rolls-Royce Motor Cars Palm Beach — version 4: the coast.
+   On the client's note of 2026-10-07: "brighten up the Rolls site a bit with
+   some more coastal background colors rather than black". Loads last, over
+   version 3's sheets, on every version-4 page.
+
+   The colours are the brand's own (BRAND GUIDELINES → COLOUR USE). The
+   guidelines keep Noir for Black Badge and ask that it not be over-used, and
+   recommend Frost for long text; the supporting backgrounds bring the coast:
+     Frost  #FFFFFF  the Inventory on the home page, the listing, a car's page
+     Pearl  #E7D2C3  sand — the car plates, Bespoke
+     Sky    #B4C7CB  sea and sky — Sell
+   Type on them is Noir (21 / 14.4 / 12 : 1). Hairlines are tints of Noir.
+   Black Badge stays Noir; Purple Spirit still closes the page; the hero, the
+   films and every photograph keep their own ground.
+
+   How: inside a chapter marked data-coast the light/dark tokens are re-solved
+   (Frost type becomes Noir, the white pill becomes the Noir pill), and below
+   this sheet's hand-written part every rule of the version-3 sheets that
+   draws a Frost hairline or tint is restated in Noir for those chapters —
+   written by tools/coast_v4.py, never by hand.
+   ========================================================================== */
+
+[data-coast] {
+  --white: #000000;               /* the type and the pill */
+  --black: #ffffff;               /* the pill's own type */
+  --white-press: var(--steel-press);
+  --ink:         #000000;
+  --ink-quiet:   rgba(0, 0, 0, 0.86);
+  --ink-support: rgba(0, 0, 0, 0.78);
+  --ink-muted:   rgba(0, 0, 0, 0.74);
+  --ink-route:   rgba(0, 0, 0, 0.74);
+  --ink-legal:   rgba(0, 0, 0, 0.72);
+  --grey-86:     rgba(0, 0, 0, 0.86);
+  --copy-news:   var(--ink-muted);
+  --copy-sell:   var(--ink-support);
+  --copy-footer: var(--ink-route);
+  --copy-legal:  var(--ink-legal);
+  --ring: #000000;
+  color: #000000;
+}
+
+/* what stands on a photograph or a film inside those chapters keeps the
+   dark register: the photograph did not change */
+[data-coast] :is(.card__media, .tile, .film, .spin, .lightbox, .film__stage, .sell__field, .vdp__bar) {
+  --white: var(--frost);
+  --black: var(--noir);
+  --white-press: var(--pebble);
+  --ink: var(--frost);
+  --ink-quiet:   rgba(255, 255, 255, 0.86);
+  --ink-support: rgba(255, 255, 255, 0.78);
+  --ink-muted:   rgba(255, 255, 255, 0.70);
+  --ink-legal:   rgba(255, 255, 255, 0.52);
+  --ring: #ffffff;
+  color: var(--ink);
+}
+
+/* --- the grounds -------------------------------------------------------- */
+[data-coast="stock"]   { background: var(--frost); }
+[data-coast="sell"]    { background: var(--sky); }
+[data-coast="bespoke"] { background: var(--pearl); }
+[data-coast="srp"],
+[data-coast="vdp"]     { background: var(--frost); }
+/* the listing's and the car page's lit pools of Purple Spirit go with the black */
+[data-coast="srp"]::before,
+[data-coast="vdp"]::before { background: var(--frost); }
+
+/* Sell: Alex's photograph (2026-10-07) — the paint of a blue motor car and its
+   RR badge, the coast's own blue. On a wide screen it is the chapter's ground
+   under a veil of Sky (0.55: Noir type 7.2 : 1 at its darkest, over the tyre),
+   which opens around the badge where no words stand; on a phone it is the
+   band above the words, falling into Sky. */
+@media (min-width: 768px) {
+  [data-coast="sell"] .sell__field img { top: 0; height: 100%; object-position: 50% 45%; }
+  [data-coast="sell"] .sell__field::after {
+    background: radial-gradient(circle at var(--bx, 38%) var(--by, 45%), rgba(180, 199, 203, 0) 0 44px, rgba(180, 199, 203, 0.55) 160px);
+  }
+}
+@media (max-width: 767px) {
+  html [data-coast="sell"] .sell__field::after { background: linear-gradient(to bottom, rgba(180, 199, 203, 0) 60%, var(--sky)); }
+}
+
+/* ======================================================================== */
+/* GENERATED BELOW — tools/coast_v4.py                                      */
+/* ======================================================================== */
+
+/* from css/main.css */
+:is([data-coast], [data-coast] *):is(.card) { border-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.card__facts) { border-bottom-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.card__stack) { border-top-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.card__stack div) { border-bottom-color:rgba(0, 0, 0, 0.08); }
+:is([data-coast], [data-coast] *):is(.card__details) { border-bottom-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.card__price) { border-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.card__spec) { border-top-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.route) { border-bottom-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.stock__arrow) { border-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.stock__legal a) { border-bottom-color:rgba(0, 0, 0, 0.24); }
+
+/* from css/home-v2.css */
+:is([data-coast], [data-coast] *):is(.sell__form .field__input) { border-bottom-color:rgba(0, 0, 0, 0.34); }
+:is([data-coast], [data-coast] *):is(.sell__form .field__input:hover) { border-bottom-color:rgba(0, 0, 0, 0.6); }
+:is([data-coast], [data-coast] *):is(.bespoke__spec) { border-top-color:rgba(0, 0, 0, 0.2); }
+
+/* from css/inventory.css */
+:is([data-coast], [data-coast] *):is(.pick) { border-bottom-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.srp__legal) { border-top-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.srp__legal:target) { border-top-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.srp__route-clear) { border-bottom-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.sold) { border-top-color:rgba(0, 0, 0, 0.12); }
+
+/* from css/vehicle.css */
+:is([data-coast], [data-coast] *):is(.vdp__sum) { border-color:rgba(0, 0, 0, 0.16); background:rgba(0, 0, 0, 0.03); }
+:is([data-coast], [data-coast] *):is(.vdp__sum-total) { border-top-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.special__figure span) { color:rgba(0, 0, 0, 0.78); }
+:is([data-coast], [data-coast] *):is(.special__fine) { color:rgba(0, 0, 0, 0.78); }
+:is([data-coast], [data-coast] *):is(.special__route) { border-bottom-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.plate) { border-top-color:rgba(0, 0, 0, 0.24); border-bottom-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.plate div + div) { border-left-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.fold) { border-bottom-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.fold:first-of-type) { border-top-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.vdp__h) { border-bottom-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.vdp__copy a) { border-bottom-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.vdp__features li) { border-bottom-color:rgba(0, 0, 0, 0.08); }
+:is([data-coast], [data-coast] *):is(.offer) { border-color:rgba(0, 0, 0, 0.16); background:rgba(0, 0, 0, 0.03); }
+:is([data-coast], [data-coast] *):is(.offer__lease) { border-top-color:rgba(0, 0, 0, 0.12); border-bottom-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.offer__rows div) { border-bottom-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.btn--ghost) { border-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.offer__note a) { border-bottom-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.offer__facts) { border-top-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.pricing) { border-top-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.offer__route--quiet .route) { border-bottom-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.vdp__enquire) { border-top-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.enquire) { border-color:rgba(0, 0, 0, 0.16); background:rgba(0, 0, 0, 0.03); }
+:is([data-coast], [data-coast] *):is(.field__input) { border-color:rgba(0, 0, 0, 0.24); }
+:is([data-coast], [data-coast] *):is(.field__input:hover) { border-color:rgba(0, 0, 0, 0.4); }
+:is([data-coast], [data-coast] *):is(.stock--more) { border-top-color:rgba(0, 0, 0, 0.12); }
+:is([data-coast], [data-coast] *):is(.vdp__bar) { border-top-color:rgba(0, 0, 0, 0.12); }
+@media (max-width: 1023px) { :is([data-coast], [data-coast] *):is(.plate div:nth-child(even)) { border-left-color:rgba(0, 0, 0, 0.12); } }
+@media (max-width: 1023px) { :is([data-coast], [data-coast] *):is(.plate div:nth-child(n + 3)) { border-top-color:rgba(0, 0, 0, 0.12); } }
+:is([data-coast], [data-coast] *):is(.record div) { border-bottom-color:rgba(0, 0, 0, 0.12); }
+
+/* from css/v3.css */
+@media (max-width: 767px) { :is([data-coast], [data-coast] *):is(html .sell .sell__form) { border-top-color:rgba(0, 0, 0, 0.16); } }
+@media (max-width: 767px) { :is([data-coast], [data-coast] *):is(html .bespoke .bespoke__spec div), :is([data-coast], [data-coast] *):is(html .bespoke .bespoke__spec div:first-child) { border-top-color:rgba(0, 0, 0, 0.16); } }
+@media (max-width: 767px) { :is([data-coast], [data-coast] *):is(html .bespoke .bespoke__spec div:last-child) { border-bottom-color:rgba(0, 0, 0, 0.16); } }
+
+/* exceptions, restated after the generated rules (css/v4.src.css, AFTER) */
+/* --- the car plates: sand on the white ground -------------------------- */
+[data-coast] .card { background: var(--pearl); border-color: rgba(0, 0, 0, 0.12); }
+[data-coast] .card:hover { border-color: rgba(0, 0, 0, 0.28); }
+[data-coast] .card__flag { color: var(--frost); }           /* the flag stands on the photograph */
+[data-coast] .card__flag--banner.card__flag--sold { color: var(--frost); }
+
+/* the car page: the price plate and the offer on sand */
+[data-coast="vdp"] :is(.vdp__sum, .offer, .special, .enquire) { background: var(--pearl); border-color: rgba(0, 0, 0, 0.12); }
+
+/* the slate button (Steel) keeps its Frost type everywhere */
+[data-coast] .btn--slate { color: var(--frost); }
+/* the Sky pill on a white ground needs its edge */
+[data-coast] .btn--sky { box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.16); }
+
+
+/* the bar: at rest it is the page, as before version 3 — the ground comes in
+   once the page moves under it. Over a light ground the glass reads as grey,
+   so that ground is the brand's own, Purple Spirit, as the footer's.
+   The listing and a car's page open on Frost, where a Frost logo would be
+   lost: there the bar keeps its ground from the start. */
+.header::before { background: rgba(40, 20, 50, 0.96); opacity: 0; }
+.header:is([data-scrolled], [data-open])::before,
+body:has(main[data-coast]) .header::before { opacity: 1; }
+/* the car page's phone bar takes the same ground */
+[data-coast] .vdp__bar { background: rgba(40, 20, 50, 0.96); border-top-color: rgba(255, 255, 255, 0.12); }
+/* chips that carry their own dark ground keep Frost type */
+[data-coast] :is(.offer__flag, .special__flag, .vdp__flag) { color: var(--frost); }
+/* the Sky pills keep Noir type on their own ground */
+[data-coast] :is(.btn--sky, .door--lead) { color: var(--noir); }
+[data-coast] .door--lead .door__n { color: rgba(0, 0, 0, 0.72); }
+[data-coast] .door--lead:hover { background: var(--pearl); }
+/* the lease label: Pearl type was set for the dark plate; on the Pearl plate
+   it is Ultraviolet, the guidelines' highlight on a light ground */
+[data-coast] :is(.special__label, .special__label .asterisk) { color: var(--ultraviolet); }
+
+/* --- the scroll (js/v4-motion.js) --------------------------------------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+html.lenis { scroll-behavior: auto !important; }
+/* the pinned exit: the calls move by translate and fade by filter, which the
+   reveals never touch (they own transform and opacity) */
+[data-pinx] :is(.actions, .doors, .badge__mark svg, .badge__cta) {
+  translate: 0 var(--pinx-y, 0px);
+  filter: opacity(var(--pinx-a, 100%));
+}
+/* GSAP wraps a pinned section in a spacer: version 3's "the next chapter does
+   not climb over Black Badge" must reach past it */
+html .pin-spacer + section { margin-top: 0; }
+.pinx__dim { position: absolute; inset: 0; z-index: 1; background: #000; opacity: 0; pointer-events: none; }
