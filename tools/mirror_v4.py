@@ -71,6 +71,8 @@ def pins(s):
 
 # Sell's ground: Alex's photograph of the paint and the badge (2026-10-07)
 def sell(s):
+    # the title on two lines (Alex, 2026-10-07)
+    s = s.replace('id="sell-title">White Glove Acquisition &amp; Concierge<', 'id="sell-title">White Glove Acquisition<br> &amp; Concierge<')
     return s.replace('<img src="assets/img/sell.webp" width="2560" height="1707" loading="lazy"',
                      '<img src="assets/img/sell-coast-1920.webp" srcset="assets/img/sell-coast-1200.webp 1200w, assets/img/sell-coast-1920.webp 1920w" sizes="100vw" width="1920" height="1080" loading="lazy"')
 

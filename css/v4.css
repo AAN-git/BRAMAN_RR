@@ -73,9 +73,33 @@
 html [data-coast="sell"] .sell__head { max-width: 900px; }
 html [data-coast="sell"] .sell__title { font-size: var(--h1); line-height: var(--h1-lead); }
 html [data-coast="sell"] .sell__points h3 { font-size: var(--h3); line-height: var(--h3-lead); letter-spacing: 0; }
+/* …and drawn in (Alex, 2026-10-07: "подтянуть, чтобы больше центровалось,
+   компактнее"): the title on two lines across the top, the points and the
+   form set close from the top rather than spread to the column's height, the
+   composition on the middle ten columns, the block in the middle of the
+   screen under the bar */
+@media (min-width: 1024px) {
+  html [data-coast="sell"] { display: flex; flex-direction: column; justify-content: center; }
+  html [data-coast="sell"] .sell__wrap {
+    width: var(--container);
+    padding: calc(112px + clamp(32px, 6vh, 72px)) 0 clamp(40px, 7vh, 80px);
+    row-gap: clamp(32px, 5vh, 52px);
+  }
+  html [data-coast="sell"] .sell__head { grid-column: 2 / span 10; }
+  html [data-coast="sell"] .sell__points { grid-column: 2 / span 5; align-content: start; row-gap: clamp(24px, 3.6vh, 36px); }
+  html [data-coast="sell"] .sell__points h3 { margin-top: 12px; }
+  html [data-coast="sell"] .sell__points p { margin-top: 8px; }
+  html [data-coast="sell"] .sell__form { grid-column: 7 / span 5; align-content: start; gap: 22px var(--gutter); }
+  html [data-coast="sell"] .sell__send { margin-top: 10px; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  html [data-coast="sell"] .sell__head { grid-column: 1 / -1; }
+  html [data-coast="sell"] .sell__points { grid-column: 1 / span 6; }
+  html [data-coast="sell"] .sell__form { grid-column: 7 / span 6; }
+}
 
 /* --- the grounds -------------------------------------------------------- */
-[data-coast="stock"]   { background: var(--frost); }
+[data-coast="stock"]   { background: var(--pebble); }   /* a light ground under the Frost cards (Alex) */
 [data-coast="sell"]    { background: var(--sky); }
 [data-coast="bespoke"] { background: var(--pearl); }
 [data-coast="srp"],
@@ -220,3 +244,35 @@ html.lenis { scroll-behavior: auto !important; }
    not climb over Black Badge" must reach past it */
 html .pin-spacer + section { margin-top: 0; }
 .pinx__dim { position: absolute; inset: 0; z-index: 1; background: #000; opacity: 0; pointer-events: none; }
+
+/* the car page's enquiry: no filled boxes on the light plate (Alex: "не
+   эстетично") — the fields are ruled lines, as Sell's are; the message keeps
+   its frame as a hairline, nothing filled */
+html [data-coast="vdp"] .field__input {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.28);
+  padding: 11px 0;
+  color: var(--noir);
+}
+html [data-coast="vdp"] .field__area { border: 1px solid rgba(0, 0, 0, 0.2); padding: 11px 14px; }
+html [data-coast="vdp"] .field__input:hover { border-color: rgba(0, 0, 0, 0.5); }
+html [data-coast="vdp"] .field__input:focus { border-color: var(--noir); }
+html [data-coast="vdp"] .field__input::placeholder { color: rgba(0, 0, 0, 0.5); }
+
+/* --- the calls to action: the guideline's own pair (COLOUR USE — DIGITAL
+   PRODUCTS, UI ELEMENTS): Aqua with Noir type on a dark ground, Ultraviolet
+   with Frost type on a light one (Alex, 2026-10-07: "яркие из палитры").
+   Noir on Aqua 12.8 : 1, Frost on Ultraviolet 7.98 : 1. Hover goes to the
+   ground's own type colour. */
+html .btn--white,
+html .header__nav-inventory a { background: var(--aqua); color: var(--noir); }
+html .btn--white:hover,
+html .header__nav-inventory a:hover { background: var(--frost); color: var(--noir); }
+html [data-coast] :is(.btn--white, .vdp__confirm) { background: var(--ultraviolet); color: var(--frost); box-shadow: none; border-color: transparent; }
+html [data-coast] :is(.btn--white, .vdp__confirm):hover { background: var(--purple-spirit); color: var(--frost); }
+/* what stands on a photograph or in the dark bars inside a light chapter
+   keeps the dark ground's call */
+html [data-coast] :is(.card__media, .tile, .film, .spin, .lightbox, .vdp__bar) .btn--white { background: var(--aqua); color: var(--noir); }
+html [data-coast] :is(.card__media, .tile, .film, .spin, .lightbox, .vdp__bar) .btn--white:hover { background: var(--frost); color: var(--noir); }
+html .header[data-open] .header__nav-inventory a { background: none; color: var(--white); }
