@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RR Palm Beach — V4 Design System</title>
+<meta name="description" content="Version 4 of the Rolls-Royce Motor Cars Palm Beach site: tokens, type, grid, controls and motion, for development.">
+<!-- The project's own sheets, in the order every version-4 page loads them, so
+     every sample below is the real component, not a drawing of it. -->
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/inventory.css">
+<link rel="stylesheet" href="css/vehicle.css">
+<link rel="stylesheet" href="css/v3.css">
+<link rel="stylesheet" href="css/v4.css">
+<style>
+  /* --- the document's own frame (ds-*), drawn with the project's tokens --- */
+  body { background: var(--frost); color: var(--noir); padding: 0; font-weight: 400; }
+  .ds { width: var(--container); margin: 0 auto; padding: 96px 0 140px; }
+  .ds-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 24px 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(0,0,0,.14); }
+  .ds-kicker { font-size: var(--label); letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.72); margin-bottom: 16px; }
+  .ds-title { font-size: var(--h1); line-height: var(--h1-lead); font-weight: 400; text-transform: uppercase; max-width: 15ch; }
+  .ds-lede { margin-top: 20px; max-width: 58ch; color: rgba(0,0,0,.78); }
+  .ds-links { display: flex; flex-direction: column; gap: 10px; font-size: var(--small); }
+  .ds-links a { text-decoration: none; border-bottom: 1px solid rgba(0,0,0,.28); padding-bottom: 2px; }
+  .ds-links a:hover { border-color: var(--noir); }
+  .ds-nav { position: sticky; top: 0; z-index: 5; background: rgba(255,255,255,.94); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(0,0,0,.08); }
+  .ds-nav ul { width: var(--container); margin: 0 auto; display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
+  .ds-nav a { display: block; padding: 16px 0; font-size: var(--label); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; white-space: nowrap; color: rgba(0,0,0,.72); }
+  .ds-nav a:hover { color: var(--noir); }
+
+  .ds-sec { padding-top: 96px; scroll-margin-top: 56px; }
+  .ds-h2 { display: grid; grid-template-columns: 56px 1fr; align-items: baseline; font-size: var(--h3); line-height: var(--h3-lead); font-weight: 400; text-transform: uppercase; }
+  .ds-h2 span { font-size: var(--label); color: rgba(0,0,0,.52); letter-spacing: .06em; }
+  .ds-intro { margin: 16px 0 40px 56px; max-width: 64ch; color: rgba(0,0,0,.78); }
+  .ds-h3 { font-size: var(--h4); line-height: var(--h4-lead); font-weight: 400; text-transform: uppercase; letter-spacing: var(--h4-track); margin: 48px 0 20px; }
+  .ds code, .ds-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .8125rem; letter-spacing: 0; }
+  .ds p code, .ds li code, .ds td code { background: rgba(0,0,0,.05); padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+
+  .ds-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0 var(--gutter); counter-reset: r; }
+  .ds-rules li { padding: 20px 0; border-top: 1px solid rgba(0,0,0,.14); color: rgba(0,0,0,.86); }
+  .ds-rules b { display: block; font-weight: 400; text-transform: uppercase; font-size: var(--label); letter-spacing: .06em; margin-bottom: 6px; color: var(--noir); }
+
+  .ds-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--gutter); }
+  .ds-sw { border: 1px solid rgba(0,0,0,.14); }
+  .ds-sw i { display: block; height: 120px; }
+  .ds-sw div { padding: 14px 16px 16px; font-size: var(--small); line-height: var(--small-lead); }
+  .ds-sw b { display: block; font-weight: 400; text-transform: uppercase; letter-spacing: .04em; }
+  .ds-sw small { display: block; color: rgba(0,0,0,.72); font-size: var(--label); }
+
+  .ds-table { width: 100%; border-collapse: collapse; font-size: var(--small); line-height: var(--small-lead); }
+  .ds-table th { text-align: left; font-weight: 400; font-size: var(--label); letter-spacing: .06em; text-transform: uppercase; color: rgba(0,0,0,.6); padding: 0 16px 12px 0; border-bottom: 1px solid rgba(0,0,0,.28); }
+  .ds-table td { padding: 14px 16px 14px 0; border-bottom: 1px solid rgba(0,0,0,.1); vertical-align: top; }
+  .ds-scroll { overflow-x: auto; }
+
+  .ds-grounds { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--gutter); }
+  .ds-ground { padding: 28px 24px; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .ds-ground b { font-weight: 400; text-transform: uppercase; letter-spacing: .04em; }
+  .ds-ground small { font-size: var(--label); opacity: .8; }
+
+  .ds-type > div { display: grid; grid-template-columns: 220px 1fr; gap: 12px 32px; align-items: baseline; padding: 24px 0; border-top: 1px solid rgba(0,0,0,.14); }
+  .ds-type dt { font-size: var(--label); color: rgba(0,0,0,.72); line-height: 1.6; }
+  .ds-type dt b { display: block; font-weight: 400; color: var(--noir); text-transform: uppercase; letter-spacing: .06em; }
+
+  .ds-stage { padding: 40px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+  .ds-stage + .ds-cap, .ds-cap { font-size: var(--label); color: rgba(0,0,0,.72); margin: 10px 0 28px; }
+  .ds-dark { background: var(--grey-8); }
+  .ds-plum { background: var(--purple-spirit); }
+
+  .ds-grid-demo { position: relative; height: 120px; display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--gutter); }
+  .ds-grid-demo i { background: rgba(109,48,167,.12); border-inline: 1px solid rgba(109,48,167,.35); }
+
+  .ds-card { max-width: 420px; }
+  .ds-form { max-width: 560px; display: grid; gap: 22px; padding: 40px; border: 1px solid rgba(0,0,0,.14); }
+
+  @media (max-width: 767px) {
+    .ds { padding-top: 56px; }
+    .ds-sec { padding-top: 72px; }
+    .ds-h2 { grid-template-columns: 40px 1fr; }
+    .ds-intro { margin-left: 0; }
+    .ds-type > div { grid-template-columns: 1fr; }
+    .ds-stage, .ds-form { padding: 24px; }
+    .ds-stage .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="ds-nav" aria-label="Sections">
+  <ul>
+    <li><a href="#rules">Rules</a></li>
+    <li><a href="#colour">Colour</a></li>
+    <li><a href="#grounds">Grounds</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#grid">Grid</a></li>
+    <li><a href="#controls">Controls</a></li>
+    <li><a href="#card">Car card</a></li>
+    <li><a href="#forms">Forms</a></li>
+    <li><a href="#motion">Motion</a></li>
+    <li><a href="#files">Files</a></li>
+  </ul>
+</nav>
+
+<main class="ds">
+
+  <header class="ds-top">
+    <div>
+      <p class="ds-kicker">Rolls-Royce Motor Cars Palm Beach · Version 4</p>
+      <h1 class="ds-title">Design system</h1>
+      <p class="ds-lede">What version 4 is built from: the tokens in <code>css/tokens.css</code>, re-solved for the light chapters in <code>css/v4.src.css</code>. Every control and the car card below are rendered by the site's own stylesheets.</p>
+    </div>
+    <div class="ds-links">
+      <a href="index_v4.html">Home page</a>
+      <a href="inventory_v4.html">Inventory</a>
+      <a href="vehicles_v4/r77099.html">A car's page</a>
+    </div>
+  </header>
+
+  <!-- 01 -->
+  <section class="ds-sec" id="rules">
+    <h2 class="ds-h2"><span>01</span>Rules that hold everywhere</h2>
+    <p class="ds-intro">From the client's notes and the design reviews. Every page in version 4 already keeps them; anything new should too.</p>
+    <ul class="ds-rules">
+      <li><b>A calm page</b>An older clientele: a static page you can read. Inventory, Specials, Finance and Contact Us are always on screen: in the bar on a wide screen, in a bar at the foot below 1024px.</li>
+      <li><b>One weight</b>Riviera Nights Regular only. Version 4 has no Light: the Light face is re-pointed at the Regular file.</li>
+      <li><b>Type is Frost or Noir</b>Noir on the light grounds, Frost on the dark ones and on photographs. The quieter registers are tints of the same colour.</li>
+      <li><b>14px floor</b>No functional text under 14px. On a phone, body copy is 18px.</li>
+      <li><b>Capitals stay short</b>Headings, labels and buttons may be capitals; running text never is.</li>
+      <li><b>No words on a busy photograph</b>Copy stands on a ground, or on a part of the photograph kept quiet for it.</li>
+      <li><b>Phone keeps the boxes</b>What is boxed on a desktop is boxed on a phone. Buttons go full width. No holes between or inside sections.</li>
+      <li><b>Noir is rare</b>The brand keeps Noir for Black Badge. Elsewhere the coast: Frost, Pebble, Sky, Pearl. Purple Spirit closes the page.</li>
+    </ul>
+  </section>
+
+  <!-- 02 -->
+  <section class="ds-sec" id="colour">
+    <h2 class="ds-h2"><span>02</span>Colour</h2>
+    <p class="ds-intro">The brand's own named colours, from the guidelines. No other colour is used. Tokens live in <code>css/tokens.css</code>.</p>
+    <div class="ds-swatches">
+      <div class="ds-sw"><i style="background:#281432"></i><div><b>Purple Spirit</b><code>#281432</code><small>--purple-spirit · footer, the bar's ground</small></div></div>
+      <div class="ds-sw"><i style="background:#6d30a7"></i><div><b>Ultraviolet</b><code>#6D30A7</code><small>--ultraviolet · the call on a light ground</small></div></div>
+      <div class="ds-sw"><i style="background:#6fdbc7"></i><div><b>Aqua</b><code>#6FDBC7</code><small>--aqua · the call on a dark ground</small></div></div>
+      <div class="ds-sw"><i style="background:#e7d2c3"></i><div><b>Pearl</b><code>#E7D2C3</code><small>--pearl · Bespoke</small></div></div>
+      <div class="ds-sw"><i style="background:#b4c7cb"></i><div><b>Sky</b><code>#B4C7CB</code><small>--sky · Sell</small></div></div>
+      <div class="ds-sw"><i style="background:#d2d2d2"></i><div><b>Pebble</b><code>#D2D2D2</code><small>--pebble · home Inventory</small></div></div>
+      <div class="ds-sw"><i style="background:#676776"></i><div><b>Steel</b><code>#676776</code><small>--steel · secondary button (press #4C4C58)</small></div></div>
+      <div class="ds-sw"><i style="background:#ff6432"></i><div><b>Amber</b><code>#FF6432</code><small>--amber · sale-pending banner</small></div></div>
+      <div class="ds-sw"><i style="background:#ffffff; border-bottom:1px solid rgba(0,0,0,.14)"></i><div><b>Frost</b><code>#FFFFFF</code><small>--frost · listing, car page, card plates</small></div></div>
+      <div class="ds-sw"><i style="background:#000000"></i><div><b>Noir</b><code>#000000</code><small>--noir · Black Badge; type on light</small></div></div>
+      <div class="ds-sw"><i style="background:#151515"></i><div><b>Grey 8</b><code>#151515</code><small>--grey-8 · the photographs' shade</small></div></div>
+    </div>
+
+    <h3 class="ds-h3">Type tints</h3>
+    <div class="ds-scroll">
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>On dark</th><th>On light (inside <code>[data-coast]</code>)</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code>--ink</code></td><td>Frost</td><td>Noir</td><td>Headings, key copy</td></tr>
+          <tr><td><code>--ink-quiet</code></td><td>Frost 86%</td><td>Noir 86%</td><td>Body copy</td></tr>
+          <tr><td><code>--ink-support</code></td><td>Frost 78%</td><td>Noir 78%</td><td>Supporting copy, field labels</td></tr>
+          <tr><td><code>--ink-muted</code></td><td>Frost 70%</td><td>Noir 74%</td><td>Excerpts</td></tr>
+          <tr><td><code>--ink-route</code></td><td>Frost 64%</td><td>Noir 74%</td><td>Footer routes</td></tr>
+          <tr><td><code>--ink-legal</code></td><td>Frost 52%</td><td>Noir 72%</td><td>Legal line</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="ds-sec" id="grounds">
+    <h2 class="ds-h2"><span>03</span>Grounds</h2>
+    <p class="ds-intro">Version 4 is the coast: the brand's supporting colours instead of black. A chapter marked <code>data-coast="…"</code> takes a light ground, and its tokens switch to Noir type. Anything on a photograph inside it keeps the dark register.</p>
+    <div class="ds-grounds">
+      <div class="ds-ground" style="background:var(--frost); border:1px solid rgba(0,0,0,.14)"><b>Frost</b><small><code>srp</code>, <code>vdp</code> · inventory and car pages</small></div>
+      <div class="ds-ground" style="background:var(--pebble)"><b>Pebble</b><small><code>stock</code> · Inventory on the home page, Frost cards on it</small></div>
+      <div class="ds-ground" style="background:var(--sky)"><b>Sky</b><small><code>sell</code> · Sell your car, photograph under a Sky veil (80%)</small></div>
+      <div class="ds-ground" style="background:var(--pearl)"><b>Pearl</b><small><code>bespoke</code> · Bespoke</small></div>
+      <div class="ds-ground" style="background:var(--noir); color:var(--frost)"><b>Noir</b><small>Black Badge only</small></div>
+      <div class="ds-ground" style="background:var(--purple-spirit); color:var(--frost)"><b>Purple Spirit</b><small>Footer; the header bar at 96%</small></div>
+    </div>
+    <p class="ds-cap">Contrast, as measured for version 4: Noir on Frost 21 : 1, on Pearl 14.4 : 1, on Sky 12 : 1. Noir on Aqua 12.8 : 1, Frost on Ultraviolet 7.98 : 1.</p>
+  </section>
+
+  <!-- 04 -->
+  <section class="ds-sec" id="type">
+    <h2 class="ds-h2"><span>04</span>Type</h2>
+    <p class="ds-intro">Riviera Nights, the marque typeface, in its Regular cut (<code>assets/fonts/riviera-nights-regular.woff</code>). Sizes are fluid between the phone and 1920px. Below 768px the body steps up to 18px and small text to 16px.</p>
+    <dl class="ds-type">
+      <div><dt><b>H1</b>--h1 · 36 → 60px · lead 1.167</dt><dd style="font-size:var(--h1);line-height:var(--h1-lead);text-transform:uppercase">Cullinan Black Badge</dd></div>
+      <div><dt><b>H3</b>--h3 · 24 → 30px · lead 1.333</dt><dd style="font-size:var(--h3);line-height:var(--h3-lead);text-transform:uppercase">Sell your motor car</dd></div>
+      <div><dt><b>H4</b>--h4 · 18 → 20px · lead 1.5 · track 0.02em</dt><dd style="font-size:var(--h4);line-height:var(--h4-lead);letter-spacing:var(--h4-track);text-transform:uppercase">Bespoke by Braman</dd></div>
+      <div><dt><b>Body</b>--body · 16px (18px on a phone) · lead 1.625</dt><dd style="font-size:var(--body);line-height:var(--body-lead);max-width:60ch">Every motor car on the floor in West Palm Beach, with the dealer's own price build and the lease where one is offered.</dd></div>
+      <div><dt><b>Small</b>--small · 14px (16px on a phone) · lead 1.571</dt><dd style="font-size:var(--small);line-height:var(--small-lead);max-width:60ch">Prices and payments do not include tax, tag, title.</dd></div>
+      <div><dt><b>Button</b>--button · 16px · caps · track 0.02em</dt><dd style="font-size:var(--button);letter-spacing:var(--button-track);text-transform:uppercase">View inventory</dd></div>
+      <div><dt><b>Label</b>--label · 14px · the floor</dt><dd style="font-size:var(--label);text-transform:uppercase;letter-spacing:.03em">Stock: R77580T</dd></div>
+    </dl>
+  </section>
+
+  <!-- 05 -->
+  <section class="ds-sec" id="grid">
+    <h2 class="ds-h2"><span>05</span>Grid and layout</h2>
+    <p class="ds-intro">From the Figma frame at 1920: 12 columns, a 30px gutter, a 1320px measure, 300px margins. The margin tightens faster than the screen so the measure stays usable at 1024.</p>
+    <div class="ds-grid-demo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="ds-cap">Live: this page's own container, at your screen's width.</p>
+    <div class="ds-scroll">
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code>--container</code></td><td><code>min(1320px, 100% − 2 × margin)</code></td><td>Content measure</td></tr>
+          <tr><td><code>--page-margin</code></td><td><code>clamp(24px, 26.3vw − 205px, 300px)</code></td><td>Content margins</td></tr>
+          <tr><td><code>--chrome-margin</code></td><td><code>clamp(24px, 3.9vw, 75px)</code></td><td>Header and footer edges</td></tr>
+          <tr><td><code>--gutter</code></td><td><code>30px</code></td><td>Column gap</td></tr>
+          <tr><td><code>--h-full</code> / <code>--h-split</code></td><td><code>max(660px, 100svh)</code> / <code>max(620px, 100svh)</code></td><td>Full-screen chapters</td></tr>
+          <tr><td><code>--dock-h</code></td><td><code>64px</code> + safe area, below 1024px</td><td>Foot bar: Inventory, Specials, Finance, Contact</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="ds-h3">Breakpoints</h3>
+    <div class="ds-scroll">
+      <table class="ds-table">
+        <thead><tr><th>Width</th><th>What changes</th></tr></thead>
+        <tbody>
+          <tr><td><code>≥ 1366</code></td><td>The full bar: eight routes with the Inventory pill</td></tr>
+          <tr><td><code>1024 – 1365</code></td><td>The routes tighten to clear the wordmark</td></tr>
+          <tr><td><code>&lt; 1024</code></td><td>Menu button, foot bar (dock) with the four routes</td></tr>
+          <tr><td><code>≥ 768</code></td><td>Pinned exits on Cullinan and Black Badge, Black Badge still placed by <code>js/v4.js</code></td></tr>
+          <tr><td><code>&lt; 768</code></td><td>Phone: 18px body, full-width buttons, photographs as bands above the words</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="ds-sec" id="controls">
+    <h2 class="ds-h2"><span>06</span>Controls</h2>
+    <p class="ds-intro">One pill: 46px high, 70px radius, 16px caps, 195px minimum width (<code>.btn--compact</code> 149px, <code>.btn--wide</code> 307px). The primary call takes its colour from its ground, as the guidelines pair them: Aqua with Noir type on a dark ground, Ultraviolet with Frost type on a light one.</p>
+
+    <div class="ds-stage ds-dark">
+      <a class="btn btn--white" href="#controls">View inventory</a>
+      <a class="btn btn--slate" href="#controls">Special offers</a>
+      <a class="btn btn--sky" href="#controls">Value my car</a>
+    </div>
+    <p class="ds-cap">On a dark ground or a photograph: <code>.btn--white</code> renders Aqua; <code>.btn--slate</code> Steel; <code>.btn--sky</code> Sky.</p>
+
+    <div class="ds-stage" data-coast="srp" style="border:1px solid rgba(0,0,0,.14)">
+      <a class="btn btn--white" href="#controls">Confirm availability</a>
+      <a class="btn btn--slate" href="#controls">Special offers</a>
+      <a class="btn btn--sky" href="#controls">Value my car</a>
+    </div>
+    <p class="ds-cap">Inside a light chapter (<code>[data-coast]</code>): the same <code>.btn--white</code> renders Ultraviolet, hover Purple Spirit. Hover on Aqua goes to Frost.</p>
+  </section>
+
+  <!-- 07 -->
+  <section class="ds-sec" id="card">
+    <h2 class="ds-h2"><span>07</span>Car card</h2>
+    <p class="ds-intro">The listing's plate: Frost, drawn by a hairline (Noir 14%). Hover adds a short shadow only; no line darkens. The price leads, then the price build, then the colours. Flags (lease, new arrival, sale pending) stand on the photograph.</p>
+    <ul class="ds-card" data-coast="srp">
+      <li class="card" data-condition="new">
+        <a class="card__link" href="vehicles_v4/r77580t.html" aria-label="New 2027 Rolls-Royce Cullinan Black Badge, Final price $541,428">
+          <span class="card__media"><img src="assets/img/inventory/r77580t.webp" width="840" height="630" loading="lazy" decoding="async" alt="Arctic White 2027 Rolls-Royce Cullinan"></span>
+          <dl class="card__facts">
+            <div><dt>Stock:</dt> <dd>R77580T</dd></div>
+            <div><dt>Mileage</dt> <dd>30</dd></div>
+          </dl>
+          <h2 class="card__title">New 2027 Rolls-Royce Cullinan Black Badge <span class="card__place">in West Palm Beach, FL</span></h2>
+        </a>
+        <div class="card__offer">
+          <div class="card__row">
+            <p class="card__price"><span class="card__price-label">Final price</span> <span class="card__price-value">$541,428</span><a class="asterisk" href="vehicles_v4/r77580t.html#pricing" aria-label="Pricing details">*</a></p>
+          </div>
+          <dl class="card__stack">
+            <div><dt>MSRP</dt><dd>$539,725</dd></div>
+            <div><dt>+ Dealer service charge</dt><dd>$1,189</dd></div>
+            <div><dt>+ Electronic filing charge</dt><dd>$514</dd></div>
+          </dl>
+          <a class="card__details route" href="vehicles_v4/r77580t.html#pricing">Pricing details<svg viewBox="0 0 16 10" fill="currentColor" aria-hidden="true" focusable="false"><path d="M1.414 0L9.07 7.79778L7.656 9.23796L0 1.44019L1.414 0ZM14.3614 0L15.7754 1.44019L11.5573 5.58656L10.1433 4.14536L14.3614 0Z"/></svg></a>
+        </div>
+        <dl class="card__spec">
+          <div><dt>Exterior</dt> <dd>Arctic White</dd></div>
+          <div><dt>Interior</dt> <dd>Grace White</dd></div>
+        </dl>
+      </li>
+    </ul>
+    <p class="ds-cap">A real card from <code>inventory_v4.html</code> (stock R77580T), rendered by <code>css/main.css</code> and <code>css/v4.css</code>.</p>
+  </section>
+
+  <!-- 08 -->
+  <section class="ds-sec" id="forms">
+    <h2 class="ds-h2"><span>08</span>Forms</h2>
+    <p class="ds-intro">On a light plate, fields are ruled lines, not filled boxes: a Noir 28% line under each, darker on hover, Noir on focus. The message keeps a hairline frame. Labels are 14px capitals.</p>
+    <form class="ds-form" data-coast="vdp" onsubmit="return false">
+      <label class="field"><span class="field__label">Name</span><input class="field__input" type="text" placeholder="Your name"></label>
+      <label class="field"><span class="field__label">Email</span><input class="field__input" type="email" placeholder="name@example.com"></label>
+      <label class="field"><span class="field__label">Message</span><textarea class="field__input field__area" rows="3" placeholder="Your message"></textarea></label>
+      <button class="btn btn--white" type="submit">Send</button>
+    </form>
+  </section>
+
+  <!-- 09 -->
+  <section class="ds-sec" id="motion">
+    <h2 class="ds-h2"><span>09</span>Motion</h2>
+    <p class="ds-intro">Quiet by default. Lenis smooths the scroll on every version-4 page. On the home page from 768px, Cullinan and Black Badge hold full-screen while their words leave, scrubbed to the scroll (GSAP, ScrollTrigger, SplitText). Everything is off under <code>prefers-reduced-motion</code>; a phone keeps the plain page.</p>
+    <div class="ds-scroll">
+      <table class="ds-table">
+        <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+        <tbody>
+          <tr><td><code>--dur-press</code></td><td>280ms</td><td>Hover and press</td></tr>
+          <tr><td><code>--dur-bar</code></td><td>400ms</td><td>The header condensing</td></tr>
+          <tr><td><code>--dur-exit</code></td><td>480ms</td><td>Leaving</td></tr>
+          <tr><td><code>--dur-enter</code></td><td>900ms</td><td>Copy and buttons arriving</td></tr>
+          <tr><td><code>--dur-arrive</code></td><td>1100ms</td><td>Photographs arriving</td></tr>
+          <tr><td><code>--step-enter</code> / <code>--step-exit</code></td><td>140ms / 90ms</td><td>Stagger between lines</td></tr>
+          <tr><td><code>--ease-out</code></td><td><code>cubic-bezier(.33, 1, .68, 1)</code></td><td>Arrivals</td></tr>
+          <tr><td><code>--ease-in</code></td><td><code>cubic-bezier(.32, 0, .67, 0)</code></td><td>Exits</td></tr>
+          <tr><td><code>--ease-gentle</code></td><td>Figma "Gentle" spring as <code>linear()</code></td><td>The prototype's own curve</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="ds-sec" id="files">
+    <h2 class="ds-h2"><span>10</span>Files</h2>
+    <p class="ds-intro">Plain HTML, CSS and JavaScript. No framework, no build step to run the pages.</p>
+    <div class="ds-scroll">
+      <table class="ds-table">
+        <thead><tr><th>File</th><th>What it is</th></tr></thead>
+        <tbody>
+          <tr><td><code>index_v4.html</code></td><td>Home page</td></tr>
+          <tr><td><code>inventory_v4.html</code></td><td>Inventory: four filters and the sort run over the cards in the page (<code>js/inventory.js</code>)</td></tr>
+          <tr><td><code>vehicles_v4/*.html</code></td><td>One page per car: gallery, 360° (24 frames from <code>assets/img/spin/</code>), offer, enquiry</td></tr>
+          <tr><td><code>css/tokens.css</code></td><td>Palette, type, grid, motion</td></tr>
+          <tr><td><code>css/main.css</code>, <code>home-v2.css</code>, <code>inventory.css</code>, <code>vehicle.css</code></td><td>Components and sections</td></tr>
+          <tr><td><code>css/v3.css</code></td><td>The calm page: static bar, foot dock, phone rules</td></tr>
+          <tr><td><code>css/v4.css</code></td><td>The coast: light grounds, calls, ruled fields, one weight. Loads last.</td></tr>
+          <tr><td><code>js/main.js</code>, <code>vehicle.js</code>, <code>inventory.js</code></td><td>Header and menu, the gallery and 360°, the filters</td></tr>
+          <tr><td><code>js/v4-motion.js</code>, <code>js/v4.js</code></td><td>Lenis and the pinned exits; Black Badge placement</td></tr>
+          <tr><td><code>data/inventory.json</code></td><td>The cars the pages were written from, every figure and where it came from. A feed replaces it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+</body>
+</html>

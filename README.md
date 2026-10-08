@@ -74,6 +74,13 @@ stamps come out different (CRLF), and nothing else changes.
 Preview: https://aan-git.github.io/BRAMAN_RR/index_v4.html — the state handed
 over is tagged `handoff-v4-2026-10-08`.
 
+The design system is `design-system.html`
+(https://aan-git.github.io/BRAMAN_RR/design-system.html): rules, colour,
+grounds, type, grid, controls, the car card, forms and motion, rendered by the
+site's own stylesheets. Development gets version 4 alone, as a zip attached to
+the release `handoff-v4-2026-10-08`: the v4 pages, every file they reference,
+the design system, `data/inventory.json` and a README of its own.
+
 ## Source
 
 Figma **Braman BRANDS** → page *UPD #2 Braman RR* → frame **“1920 version #2”**
