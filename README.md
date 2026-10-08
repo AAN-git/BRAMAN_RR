@@ -40,6 +40,40 @@ Pre-Owned Inventory side by side with Special Offers beneath. Edit version 3
 in `tools/mirror_v3.py` and `css/v3.css`, then run the script; never edit the
 pages it writes.
 
+## Version 4 — the coast (handed to development)
+
+`index_v4.html`, `inventory_v4.html` and `vehicles_v4/` are written by
+`tools/mirror_v4.py` from version 3, which stays exactly as the client saw it.
+On the client's note of 7 October 2026 ("brighten up the Rolls site a bit with
+some more coastal background colors rather than black"): the brand's own
+supporting backgrounds — Frost, Pearl, Sky — in place of black on the home
+page's Inventory, Sell and Bespoke, on the listing and on the car pages; Noir
+stays for Black Badge, Purple Spirit closes the page. Every version-4 page
+loads `css/v4.css` last, over version 3's sheets.
+
+- `css/v4.src.css` is written by hand; `tools/coast_v4.py` writes `css/v4.css`
+  from it (it restates version 3's white hairlines and type in Noir inside
+  the light chapters). Never edit `css/v4.css` itself.
+- `js/v4-motion.js`: Lenis as the scroll layer on every version-4 page, and on
+  the home page (from 768px) the pinned exits of Cullinan and Black Badge,
+  scrubbed to the scroll, with GSAP, ScrollTrigger and SplitText from unpkg.
+  Off under `prefers-reduced-motion`.
+- `js/v4.js`: places the Black Badge still so the car is never under its
+  words (from 768px).
+
+Rebuild, in order (on Windows set `PYTHONUTF8=1` first, or the pages are
+written in cp1252):
+
+```
+python3 tools/coast_v4.py && python3 tools/mirror_v3.py && python3 tools/mirror_v4.py
+```
+
+The pages carry `?v=` stamps hashed from the files; on a Windows checkout the
+stamps come out different (CRLF), and nothing else changes.
+
+Preview: https://aan-git.github.io/BRAMAN_RR/index_v4.html — the state handed
+over is tagged `handoff-v4-2026-10-08`.
+
 ## Source
 
 Figma **Braman BRANDS** → page *UPD #2 Braman RR* → frame **“1920 version #2”**
