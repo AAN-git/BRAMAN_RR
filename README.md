@@ -81,6 +81,30 @@ site's own stylesheets. Development gets version 4 alone, as a zip attached to
 the release `handoff-v4-2026-10-08`: the v4 pages, every file they reference,
 the design system, `data/inventory.json` and a README of its own.
 
+## Version 4 — the inner pages
+
+The dealer's inner pages (Contact, About, Finance and its applications, the
+calculator, Service and its appointment, Ask a Tech, Recall, Parts, Order
+Parts, the test-drive, quote, trade, sell and find forms, the specials,
+Testimonials, Privacy, Reasons to Choose Braman) are the Bentley site's inner
+pages (../BRAMAN_BENTLEY, direction 7) in this site's colours and face.
+
+- `pages_v4/<name>.main.html` is each page's `<main>`, written by hand;
+  `tools/sub_v4.py` wraps it in `index_v4.html`'s head, bar and footer as
+  `<name>_v4.html`, and fills a specials page's cards from the listing
+  (`<!-- STOCKS ids="…" -->`).
+- `css/sub_v4.css` is WRITTEN by the same script: the Bentley inner pages'
+  sheets, every rule held to `main.sub` so the bar, menu and footer keep this
+  site's sheets, then `css/sub_v4.skin.css` (by hand) — the Rolls-Royce ground,
+  ink, face and controls. A fix to the Bentley template comes over at the next
+  run. `js/sub_v4.js` is written from the Bentley inner pages' scripts.
+- `tools/mirror_v4.py` points the bar, the dock, the footer and the home
+  page's calls at these pages.
+
+Rebuild after the version-4 run above: `python3 tools/sub_v4.py`.
+Photographs: `assets/img/sub/` (rolls-roycemotorcars.com, 2026 models),
+`assets/img/team/` (the dealer's staff, as on its own About page).
+
 ## Source
 
 Figma **Braman BRANDS** → page *UPD #2 Braman RR* → frame **“1920 version #2”**

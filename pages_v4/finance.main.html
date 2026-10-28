@@ -1,0 +1,124 @@
+<main id="main" class="srp sub">
+
+  <!-- Finance Department on the inner pages' template (the Bentley site's, in the
+       Rolls-Royce colours: tools/sub_v4.py). Words, fields and numbers: the
+       dealer's own page, bramanrolls-roycepalmbeach.com/finance-department/. -->
+
+  <section class="srp__head sub__head--pic" aria-labelledby="sub-h">
+    <div class="sub__band-pic sub__band-pic--finance-spirit">
+      <img src="assets/img/sub/finance-spirit.webp" srcset="assets/img/sub/finance-spirit-1200.webp 1200w, assets/img/sub/finance-spirit.webp 2400w" sizes="100vw" alt="" width="2400" height="1740" decoding="async">
+      <div class="page sub__band-words">
+        <p class="label sub__label">Rolls-Royce Motor Cars Palm Beach</p>
+        <h1 class="h2 sub__title" id="sub-h">Finance Department</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="sub__portal" aria-label="Finance">
+    <div class="page">
+      <ul class="range__row sub__tiles">
+        <li class="range__item sub__tile--lead">
+          <a href="finance-application_v4.html">
+            <img src="assets/img/sub/ghost-ewb-cabin.webp" srcset="assets/img/sub/ghost-ewb-cabin-1200.webp 1200w, assets/img/sub/ghost-ewb-cabin.webp 2400w" sizes="(min-width: 1024px) 40vw, 100vw" alt="The rear cabin of a Ghost Extended Series II, its seats in pale leather." width="2400" height="1350" loading="lazy" decoding="async">
+            <span class="range__name">Finance application</span>
+            <span class="btn">Apply for financing</span>
+          </a>
+        </li>
+        <li class="range__item">
+          <a href="value-trade_v4.html">
+            <img src="assets/img/sub/phantom-marble-side.webp" srcset="assets/img/sub/phantom-marble-side-1200.webp 1200w, assets/img/sub/phantom-marble-side.webp 2400w" alt="An orange Phantom in profile on a block of marble." width="2400" height="1350" loading="lazy" decoding="async">
+            <span class="range__name">Value your trade</span>
+          </a>
+        </li>
+        <li class="range__item">
+          <a href="calculator_v4.html">
+            <img src="assets/img/sub/handover.webp" srcset="assets/img/sub/handover-1200.webp 1200w, assets/img/sub/handover.webp 2400w" sizes="(min-width: 1024px) 40vw, 100vw" alt="Clients beside a Rolls-Royce, the Spirit of Ecstasy in the foreground." width="2400" height="1350" loading="lazy" decoding="async">
+            <span class="range__name">Payment calculator</span>
+          </a>
+        </li>
+        <li class="range__item">
+          <a href="inventory_v4.html">
+            <img src="assets/img/sub/cullinan-window.webp" srcset="assets/img/sub/cullinan-window-1200.webp 1200w, assets/img/sub/cullinan-window.webp 2400w" sizes="(min-width: 1024px) 40vw, 100vw" alt="A Cullinan Series II seen through the window of a house." width="2400" height="1600" loading="lazy" decoding="async">
+            <span class="range__name">View inventory</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="vdp__enquire" aria-labelledby="enq-title">
+    <div class="page">
+      <div class="enquire enquire--fit">
+        <div class="enquire__lede">
+          <h2 class="h2 h2--small" id="enq-title">Contact Information</h2>
+          <div class="sub__loc">
+            <h3 class="sub__loc-h">Our Location</h3>
+            <address class="body">Rolls-Royce Motor Cars Palm Beach<br>2801 Okeechobee Blvd<br>West Palm Beach, FL 33409</address>
+            <dl class="record"><dt>Sales</dt><dd><a href="tel:+15612038780">561-203-8780</a></dd></dl>
+            <div class="actions">
+              <a class="btn btn--line" href="https://www.bramanrolls-roycepalmbeach.com/directions/">Get directions</a>
+              <button class="btn btn--line" type="button" data-send-to-phone aria-haspopup="dialog">Send to phone</button>
+            </div>
+            <div class="sub__dept sub__loc-hours">
+              <h3 class="sub__loc-h">Sales Hours</h3>
+              <dl class="record">
+                <dt>Mon – Thu</dt><dd>9:00 am – 8:00 pm</dd>
+                <dt>Friday</dt><dd>9:00 am – 7:00 pm</dd>
+                <dt>Saturday</dt><dd>9:00 am – 6:00 pm</dd>
+                <dt>Sunday</dt><dd>11:00 am – 5:00 pm</dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <form class="enquire__form" onsubmit="return false" aria-labelledby="enq-title">
+          <p class="enquire__req">Fields marked with (*) are required.</p>
+          <label class="field"><span class="field__label">First name*</span><input class="field__input" type="text" name="fname" autocomplete="given-name" required></label>
+          <label class="field"><span class="field__label">Last name*</span><input class="field__input" type="text" name="lname" autocomplete="family-name" required></label>
+          <label class="field"><span class="field__label">Email*</span><input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span class="field__label">Phone*</span><input class="field__input" type="tel" name="phone" autocomplete="tel" required></label>
+          <fieldset class="field sub__choice">
+            <legend class="field__label">Best time to contact*</legend>
+            <label><input type="radio" name="contact_mode" value="Morning"> Morning</label>
+            <label><input type="radio" name="contact_mode" value="Afternoon"> Afternoon</label>
+            <label><input type="radio" name="contact_mode" value="Evening"> Evening</label>
+          </fieldset>
+          <label class="field field--wide"><span class="field__label">Message</span><textarea class="field__input field__area" name="message" rows="3"></textarea></label>
+          <label class="field field--wide sub__consent"><input type="checkbox" name="i_agree"> Please note that by completing this form, you agree to being contacted via text, phone and email.</label>
+          <div class="enquire__send"><button class="btn" type="submit">Send message</button><span class="enquire__fine">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</span></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="sub__reviews" aria-labelledby="rev-h">
+    <div class="page">
+      <div class="head sub__reviews-head">
+        <h2 class="h2 h2--small" id="rev-h">Reviews</h2>
+      </div>
+      <div class="stock__frame sub__reviews-frame">
+        <button class="stock__arrow stock__arrow--prev" type="button" data-dir="-1" aria-label="Previous reviews"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10.5 2.5 5 8l5.5 5.5" stroke="currentColor" stroke-width="1.25"/></svg></button>
+        <ul class="sub__review-list" tabindex="0" aria-label="Testimonials; use the arrows or scroll sideways">
+          <li class="sub__review">
+            <blockquote><p>Thanks Rezza for a great service. Very satisfied with my new car.</p></blockquote>
+            <p class="label">Scott Levine</p>
+          </li>
+          <li class="sub__review">
+            <blockquote><p>Wow, great location, amazing inventory, very gentle and kind people</p></blockquote>
+            <p class="label">Jason Werner</p>
+          </li>
+          <li class="sub__review">
+            <blockquote><p>Transported a Rolls Royce Dawn from California everyone very helpful the entire team</p></blockquote>
+            <p class="label">Carlos Kidd</p>
+          </li>
+          <li class="sub__review">
+            <blockquote><p>Great service, professional, knowledgable and patient. We drove 3 hours down from Central Florida to buy a car from this dealership and would do it again. We were very happy with the deal they gave us and especially the level of service all personnel provided us with. Including Jay Rossow and the…</p></blockquote>
+            <p class="label">nldaviscpa</p>
+          </li>
+        </ul>
+        <button class="stock__arrow stock__arrow--next" type="button" data-dir="1" aria-label="Next reviews"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5.5 2.5 11 8l-5.5 5.5" stroke="currentColor" stroke-width="1.25"/></svg></button>
+      </div>
+      <div class="actions"><a class="btn btn--line" href="testimonials_v4.html">View all testimonials</a></div>
+    </div>
+  </section>
+
+</main>

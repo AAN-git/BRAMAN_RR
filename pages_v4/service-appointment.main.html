@@ -1,0 +1,83 @@
+<main id="main" class="srp sub">
+
+  <!-- Service Appointment on the inner pages' form template (the Bentley
+       site's, in the Rolls-Royce colours: tools/sub_v4.py) — a page the
+       Bentley site sends to the dealer's own; here built on the same template
+       with the dealer's form, bramanrolls-roycepalmbeach.com/service-appointment/:
+       every group, field and choice of theirs; the service hours beside it. -->
+
+  <section class="srp__head sub__head--pic" aria-labelledby="sub-h">
+    <div class="sub__band-pic sub__band-pic--phantom-ewb-spirit">
+      <img src="assets/img/sub/phantom-ewb-spirit.webp" srcset="assets/img/sub/phantom-ewb-spirit-1200.webp 1200w, assets/img/sub/phantom-ewb-spirit.webp 2400w" sizes="100vw" alt="" width="2400" height="1350" decoding="async">
+      <div class="page sub__band-words">
+        <p class="label sub__label">Rolls-Royce Motor Cars Palm Beach</p>
+        <h1 class="h2 sub__title" id="sub-h">Service Appointment</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="vdp__enquire sub__sell" aria-labelledby="appt-h">
+    <div class="page">
+      <div class="sub__sell-lede">
+        <h2 class="h2 h2--small" id="appt-h">Schedule Your Service</h2>
+      </div>
+      <form class="enquire__form sub__sellform" onsubmit="return false" aria-labelledby="appt-h">
+          <p class="enquire__req">Fields marked with (*) are required.</p>
+          <h3 class="sub__form-h">Vehicle Information</h3>
+          <label class="field"><span class="field__label">Year*</span><input class="field__input" type="text" name="year" inputmode="numeric" required></label>
+          <label class="field"><span class="field__label">Make*</span><select class="field__input field__select" name="make" required><option value="">Make</option><option>ACURA</option><option>ALFA ROMEO</option><option>AM GENERAL</option><option>AMC</option><option>AMERICAN MOTORS</option><option>ASTON MARTIN</option><option>AUBURN</option><option>AUSTIN</option><option>AUSTIN HEALEY</option><option>AUDI</option><option>AVANTI</option><option>A.C.</option><option>BENTLEY</option><option>BMC</option><option>BMW</option><option>BUELL</option><option>BUICK</option><option>BUCKBOARD</option><option>CADILLAC</option><option>CHEVROLET</option><option>CHRYSLER</option><option>CORD</option><option>CROSLEY</option><option>CUSHMAN</option><option>DAEWOO</option><option>DAIHATSU</option><option>DELOREAN</option><option>DETOMASO</option><option>DODGE</option><option>DUCATI</option><option>DUESENBERG</option><option>EAGLE</option><option>EDSEL</option><option>ESSEX</option><option>EXCALIBUR</option><option>FERRARI</option><option>FIAT</option><option>FIRESTONE</option><option>FORD</option><option>GEO</option><option>GMC</option><option>HARLEY-DAVIDSON</option><option>HOLLYWOOD</option><option>HOLLYWOOD+PROP</option><option>HONDA</option><option>HUMMER</option><option>HYUNDAI</option><option>INTERNATIONAL</option><option>INFINITI</option><option>ISUZU</option><option>JAGUAR</option><option>JEEP</option><option>JENSEN</option><option>JENSEN HEALEY</option><option>JOHN</option><option>KARMA</option><option>KAWASAKI</option><option>KENT</option><option>KIA</option><option>KIT CARS</option><option>LAMBORGHINI</option><option>LAND ROVER</option><option>LA SALLE</option><option>LEXUS</option><option>LINCOLN</option><option>LOTUS</option><option>MASERATI</option><option>MAYBACH</option><option>MAZDA</option><option>MAXWELL</option><option>MCLAREN</option><option>MERCEDES-BENZ</option><option>MERCURY</option><option>MERKUR</option><option>MINI</option><option>MITSUBISHI</option><option>MORGAN</option><option>MG</option><option>MGA</option><option>MGB</option><option>NISSAN</option><option>OLDSMOBILE</option><option>OTHER</option><option>PANOZ</option><option>PACKARD</option><option>PATHFINDER</option><option>PEUGEOT</option><option>PONTIAC</option><option>PORSCHE</option><option>PLYMOUTH</option><option>QVALE</option><option>RENAULT</option><option>ROLLS-ROYCE</option><option>SAAB</option><option>SALEEN</option><option>SATURN</option><option>SCHWIN</option><option>SCION</option><option>SMART</option><option>STERLING</option><option>STUDEBAKER</option><option>SUBARU</option><option>SUZUKI</option><option>TESLA</option><option>TEXACO</option><option>TOYOTA</option><option>TRIUMPH</option><option>ULTRA</option><option>VOLKSWAGEN</option><option>VOLVO</option><option>WHIPPET</option><option>WOOD</option><option>YAMAHA</option><option>YUGO</option><option>ZIMMER</option></select></label>
+          <label class="field"><span class="field__label">Model*</span><input class="field__input" type="text" name="model" required></label>
+          <label class="field"><span class="field__label">Mileage</span><input class="field__input" type="text" name="miles"></label>
+          <label class="field field--wide"><span class="field__label">VIN</span><input class="field__input" type="text" name="vin"></label>
+          <fieldset class="field field--wide sub__choice">
+            <legend class="field__label">Service required</legend>
+            <label><input type="checkbox" name="oil_change" value="1"> Oil Change</label>
+            <label><input type="checkbox" name="fuel_filter" value="1"> Fuel Filter</label>
+            <label><input type="checkbox" name="spark_plugs" value="1"> Spark Plugs</label>
+            <label><input type="checkbox" name="trans" value="1"> Transmission</label>
+            <label><input type="checkbox" name="brake_inspection" value="1"> Brake Inspection</label>
+            <label><input type="checkbox" name="air_filter" value="1"> Air Filter</label>
+            <label><input type="checkbox" name="wheel_alignment" value="1"> Wheel Alignment</label>
+            <label><input type="checkbox" name="cooling_system" value="1"> Cooling System</label>
+            <label><input type="checkbox" name="shocks" value="1"> Shocks</label>
+            <label><input type="checkbox" name="air_conditioner" value="1"> Air Conditioner</label>
+          </fieldset>
+          <h3 class="sub__form-h">Contact Information</h3>
+          <label class="field"><span class="field__label">First name*</span><input class="field__input" type="text" name="fname" autocomplete="given-name" required></label>
+          <label class="field"><span class="field__label">Last name*</span><input class="field__input" type="text" name="lname" autocomplete="family-name" required></label>
+          <label class="field"><span class="field__label">Email*</span><input class="field__input" type="email" name="email" autocomplete="email" required></label>
+          <label class="field"><span class="field__label">Phone*</span><input class="field__input" type="tel" name="phone" autocomplete="tel" required></label>
+          <label class="field field--wide"><span class="field__label">Message</span><textarea class="field__input field__area" name="message" rows="3"></textarea></label>
+          <h3 class="sub__form-h">Appointment Information</h3>
+          <label class="field"><span class="field__label">Preferred appointment date*</span><input class="field__input" type="date" name="appointment_datetime" required></label>
+          <label class="field"><span class="field__label">Alternative appointment date</span><input class="field__input" type="date" name="alternate_appointment_datetime"></label>
+          <label class="field field--wide sub__consent"><input type="checkbox" name="i_agree"> Please note that by completing this form, you agree to being contacted via text, phone and email.</label>
+          <div class="enquire__send"><button class="btn" type="submit">Send</button><span class="enquire__fine">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</span></div>
+        </form>
+    </div>
+  </section>
+
+  <section class="sub__dept-ch sub__after" aria-label="Hours and location">
+    <div class="page sub__dept-grid">
+      <div class="sub__dept">
+        <h3 class="sub__loc-h">Service Hours</h3>
+        <dl class="record">
+          <dt>Mon – Thu</dt><dd>7:30 am – 7:00 pm</dd>
+          <dt>Friday</dt><dd>7:30 am – 6:00 pm</dd>
+          <dt>Saturday</dt><dd>8:00 am – 5:00 pm</dd>
+          <dt>Sunday</dt><dd>Closed</dd>
+        </dl>
+      </div>
+      <div class="sub__loc">
+        <h3 class="sub__loc-h">Our Location</h3>
+        <address class="body">Rolls-Royce Motor Cars Palm Beach<br>2801 Okeechobee Blvd<br>West Palm Beach, FL 33409</address>
+        <dl class="record"><dt>Service</dt><dd><a href="tel:+15612773624">561-277-3624</a></dd></dl>
+        <div class="actions">
+          <a class="btn btn--line" href="https://www.bramanrolls-roycepalmbeach.com/directions/">Get directions</a>
+          <button class="btn btn--line" type="button" data-send-to-phone aria-haspopup="dialog">Send to phone</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>

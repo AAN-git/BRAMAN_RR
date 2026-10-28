@@ -1,0 +1,172 @@
+/* Version 4 — the dealer's menu in the bar (Alex, 2026-10-28: the demo's
+   drop-down). Every version-4 page loads it after v4.css; tools/mirror_v4.py
+   writes the groups, js/menu_v4.js opens them by a press.
+
+   On a desktop a group's list drops under its name on the pointer, on focus,
+   or on its caret: a Purple Spirit plate, as the bar itself, the routes in
+   the bar's capitals, the demo's headings inside it quieter. In the menu
+   panel (under 1024, or the bar's button) a group opens in place by its caret. */
+
+.header__group { position: relative; }
+.header__group-head { display: flex; align-items: center; gap: 4px; }
+
+/* a group with no page of its own (Bespoke Projects) names itself as the
+   routes do */
+.header__group-name {
+  display: block;
+  font-weight: 400;
+  font-size: clamp(0.875rem, 0.22vw + 0.76rem, 1rem);
+  line-height: 46px;
+  letter-spacing: var(--button-track);
+  text-transform: uppercase;
+  color: var(--nav-ink);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.header__nav .header__group-head > a { white-space: nowrap; }
+
+.header__more {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 46px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--nav-ink);
+  cursor: pointer;
+}
+.header__more svg { transition: transform var(--dur-press) var(--ease-out); }
+.header__group[data-open] .header__more svg { transform: rotate(180deg); }
+
+/* the list: closed, it is not there to the pointer or the reader */
+.header__nav .header__drop {
+  position: absolute;
+  top: 100%;
+  left: -20px;
+  z-index: 2;
+  display: block;
+  min-width: 264px;
+  padding: 8px 0 10px;
+  background: var(--purple-spirit);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity var(--dur-press) var(--ease-out), transform var(--dur-press) var(--ease-out), visibility 0s linear var(--dur-press);
+}
+/* the two groups at the bar's right edge open towards the page */
+.header__nav .header__group:nth-last-child(-n+2) .header__drop { left: auto; right: -20px; }
+
+/* the pointer opens a list by resting on its group (Alex: "on hover, not on
+   a click"), on any screen that has one; the keyboard by focusing a route in
+   it (a click's focus does not hold it open) */
+@media (min-width: 1024px) {
+  .header:not([data-open]) .header__group:hover > .header__drop { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+}
+.header:not([data-open]) .header__group:has(:focus-visible) > .header__drop,
+.header:not([data-open]) .header__group[data-open] > .header__drop { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+
+.header__nav .header__drop a {
+  padding: 10px 24px;
+  font-size: var(--small);
+  line-height: 20px;
+  letter-spacing: var(--button-track);
+  white-space: nowrap;
+  color: var(--ink-quiet);
+}
+.header__nav .header__drop a::after { display: none; }
+.header__nav .header__drop a:hover { color: var(--frost); background: rgba(255, 255, 255, 0.06); }
+.header__nav .header__drop li + li { border-top: 0.5px solid var(--rule-plum); }
+
+/* the demo's own headings inside a list: the bar's light cut, quieter */
+.header__drop-label {
+  padding: 16px 24px 8px;
+  font-weight: 300;
+  font-size: var(--small);
+  line-height: 20px;
+  letter-spacing: var(--button-track);
+  text-transform: uppercase;
+  color: var(--ink-legal);
+}
+.header__nav .header__drop li.header__drop-label + li { border-top: 0; }
+
+/* --- in the menu panel --------------------------------------------------- */
+.header[data-open] .header__group-head { justify-content: space-between; border-bottom: 0.5px solid var(--rule-plum); }
+.header[data-open] .header__group-head > a,
+.header[data-open] .header__group-name { font-size: var(--h4); line-height: 64px; border-bottom: 0; color: var(--white); }
+.header[data-open] .header__more { width: 44px; height: 64px; margin-right: -12px; color: var(--white); }
+.header[data-open] .header__nav .header__drop {
+  position: static;
+  display: none;
+  min-width: 0;
+  padding: 4px 0 16px 16px;
+  background: none;
+  box-shadow: none;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition: none;
+}
+.header[data-open] .header__nav .header__group[data-open] > .header__drop { display: block; }
+.header[data-open] .header__nav .header__drop a {
+  padding: 0;
+  font-size: var(--body);
+  line-height: 44px;
+  border-bottom: 0;
+  white-space: normal;
+}
+.header[data-open] .header__nav .header__drop a:hover { background: none; }
+.header[data-open] .header__nav .header__drop li + li { border-top: 0; }
+.header[data-open] .header__drop-label { padding: 12px 0 0; }
+
+/* --- in the bar, from 1024 ----------------------------------------------- */
+/* the line holds the pill and eight groups clear of the wordmark only without
+   a caret beside each: a pointer opens a list by resting on its name, the
+   keyboard by focusing it, a finger by its first press (js/menu_v4.js) */
+@media (min-width: 1024px) {
+  .header:not([data-open]) .header__more { display: none; }
+}
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .header__nav > ul { gap: clamp(10px, 2.6vw - 16px, 18px); }
+}
+/* under 1180 the mark at rest takes nearly the size it takes once the bar
+   condenses (120), so the line keeps its air from it */
+@media (min-width: 1024px) and (max-width: 1179px) {
+  .header:not([data-scrolled]) { --logo-w: 128px; }
+}
+
+/* the panel's foot: the services and the terms stand fixed at the panel's
+   foot (main.css); with the dealer's groups the list runs past them, so they
+   stand on a band of the panel's own ground, and the list ends above it */
+.header[data-open] .header__menu { padding-bottom: 132px; }
+.header[data-open] .header__utility {
+  left: 0; right: 0; bottom: 44px;
+  padding: 10px var(--chrome-margin) 0;
+  background: var(--purple-spirit);
+  border-top: 0.5px solid var(--rule-plum);
+}
+.header[data-open] .header__terms {
+  left: 0; right: 0; bottom: 0;
+  padding: 4px var(--chrome-margin) 18px;
+  background: var(--purple-spirit);
+}
+/* on a phone the three services run past one line: they wrap whole */
+.header[data-open] .header__utility { flex-wrap: wrap; }
+.header[data-open] .header__utility li { white-space: nowrap; }
+.header[data-open] .header__utility { gap: 2px 22px; }
+.header[data-open] .header__utility li + li::before { display: none; }
+
+/* the list hangs from the bar's lower edge, not from the name: js/menu_v4.js
+   measures the gap from the name's foot to the bar's foot as the list opens
+   (--drop-gap), and an unseen bridge over that gap keeps the pointer's hover
+   on its way down */
+@media (min-width: 1024px) {
+  .header__nav .header__drop { top: calc(100% + var(--drop-gap, 24px)); }
+  .header__nav .header__drop::before {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 100%;
+    height: var(--drop-gap, 24px);
+  }
+}

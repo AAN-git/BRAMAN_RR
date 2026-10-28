@@ -1,0 +1,100 @@
+/* Version 4's inner pages — the Rolls-Royce skin over the Bentley inner-page
+   template (written by hand; tools/sub_v4.py appends it to css/sub_v4.css).
+   Kirsten, 2026-10-28: the layout of the Bentley inner pages, the Rolls-Royce
+   colours. Alex: light, black and white. So: Frost ground, Noir ink, the dark
+   band Noir where Bentley's is Bentley Green, the plates white on a hairline
+   as the car page's enquiry, and the site's own controls — Riviera Nights,
+   titles in capitals, the pill button in Ultraviolet (as on the car page). */
+
+main.sub {
+  --font: "Riviera Nights", "Helvetica Neue", Arial, sans-serif;
+
+  /* Bentley's names, Rolls-Royce's values */
+  --bentley-green:  var(--noir);          /* the dark band and plate        */
+  --teal-70:        var(--ultraviolet);   /* the primary control            */
+  --teal-hover:     var(--purple-spirit);
+  --heritage-white: var(--frost);
+  --satin-linen-40: var(--frost);
+  --light-grey-10:  rgba(0, 0, 0, 0.14);
+  --dark-grey-40:   var(--steel-press);   /* secondary copy: 8.6:1 on Frost */
+  --black:          var(--noir);
+  --white:          var(--frost);
+
+  --day:         var(--frost);
+  --day-plate:   var(--frost);
+  --ink:         var(--noir);
+  --ink-2:       var(--steel-press);
+  --ink-3:       var(--steel-press);
+  --rule:        rgba(0, 0, 0, 0.14);
+  --rule-strong: rgba(0, 0, 0, 0.5);
+  --hover-ink:   var(--ultraviolet);
+  --accent-ink:  var(--ultraviolet);
+  --plate-edge:  1px solid rgba(0, 0, 0, 0.14);
+
+  /* the face: Riviera Nights, titles in capitals at no tracking */
+  --track-display: 0;
+  --track-label:   0.06em;
+
+  /* the Rolls-Royce header stands over the page as Bentley's does */
+  --mh-h: var(--rr-bar, 96px);
+
+  font-family: var(--font);
+  font-weight: 300;
+  color: var(--ink);
+  background: var(--day);
+}
+
+main.sub.sub :is(.h2, .sub__title, .hero__title) { text-transform: uppercase; font-weight: 300; }
+
+/* the site's pill button, 46 tall, Ultraviolet; the line button on a hairline */
+main.sub .btn {
+  min-height: var(--button-h);
+  min-width: 195px;
+  padding: 0 19px;
+  border-radius: var(--radius-pill);
+  font-size: var(--button);
+  letter-spacing: var(--button-track);
+  line-height: 22px;
+}
+main.sub .btn--line { background: transparent; border-color: rgba(0, 0, 0, 0.4); color: var(--noir); }
+main.sub .btn--line:hover { border-color: var(--noir); background: transparent; }
+
+/* the specials pages: the listing's own cards (main.css), three across as on
+   the listing, on the light ground the listing gives them (data-coast) */
+main.sub .sub__cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 60px var(--gutter);
+  margin-block: var(--space-6) var(--space-7);
+}
+@media (max-width: 1199px) { main.sub .sub__cards-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px)  { main.sub .sub__cards-grid { grid-template-columns: none; gap: 32px; } }
+
+/* the page head's photograph (Rolls-Royce rule, Alex 2026-10-28): the words
+   never on a whole motor car — a large detail may carry them. The Cullinan
+   seen through the window is held at its window, the words on the room. */
+main.sub.sub .sub__head--pic .sub__band-pic--cullinan-window img { object-position: 50% 30%; }
+
+/* the address over the location's photograph: in capitals the display size
+   ran to three lines — the site's H3 step above the others, two lines */
+main.sub.sub .retailer__copy .h2 { font-size: clamp(1.75rem, 1.1rem + 1.4vw, 2.625rem); line-height: 1.15; }
+
+/* a plate's title is a title: the site's capitals, as every heading here */
+main.sub.sub :is(.sub__promo-h, .sub__lead-h) { text-transform: uppercase; letter-spacing: 0; }
+
+/* the bar over an inner page is the listing's and the car page's: solid
+   Purple Spirit (v4.src.css does so for the light listing and car pages) —
+   the glass over a white page read as a grey smear */
+body:has(main.sub) .header::before { opacity: 1; }
+
+/* the photograph starts at the bar's foot: the bar is 139 tall from 1024px,
+   84 below it, and 104 on a phone with the terms line (there the page itself
+   is held below it) */
+main.sub { --rr-bar: 139px; }
+@media (max-width: 1023px) { main.sub { --rr-bar: 84px; } }
+@media (max-width: 767px)  { main.sub { --rr-bar: 0px; } main.sub.sub.srp { padding-top: 104px; } }
+
+/* the reviews' arrows are the Bentley template's (its chevrons drawn to point
+   left and right): the home rail's turn of its own chevron (main.css) stays
+   off them */
+main.sub .stock__arrow svg { transform: none; }

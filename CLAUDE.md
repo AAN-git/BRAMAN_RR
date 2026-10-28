@@ -24,3 +24,25 @@ CLAUDE.md) gets the same client notes.
   on desktop its words stand on the floor beneath the car.
 - **Hero (v3):** the three buttons replace the commission button; the lockup
   sits on the road below the car — raised as far as it goes without touching it.
+- **Inner pages (Kirsten via Alex, 2026-10-28):** every page made for the
+  Bentley site comes to this one — the Bentley inner pages' layout in the
+  Rolls-Royce colours, light: Frost ground, Noir ink, the dark plate Noir,
+  Riviera Nights, titles in capitals, the pill button in Ultraviolet, the bar
+  solid Purple Spirit as on the listing and car pages. The page list is the
+  dealer's demo menu; words, staff, direct lines and forms from the demo
+  (bramanrolls-roycepalmbeach.aandemo.com), verbatim. Built by tools/sub_v4.py
+  (README). SRP and VDP stay as they are.
+- **Rolls-Royce photographs (Alex, 2026-10-28):** every car shown is a 2026
+  model (Phantom, Ghost / Ghost Extended Series II, Cullinan Series II, Spectre
+  Series II, Black Badge); from rolls-roycemotorcars.com and Braman's own
+  pictures — never the PressClub (editorial use only). Words never on a whole
+  car; on a large detail they may lie ("главное какое фото"). Specials: the
+  whole car zoomed out, or a zoomed-in detail.
+- **The bar's menu is the dealer's (Alex, 2026-10-28, "where is the demo's
+  drop-down?"):** the demo's groups and lists in its words and order (New,
+  Pre-Owned, Bespoke Projects, Specials, Service, Parts, Finance, About Us),
+  behind the Inventory pill; lists drop on a Purple Spirit plate on hover /
+  focus / first tap, open by caret in the phone panel (tools/mirror_v4.py
+  MENU, css/menu_v4.css, js/menu_v4.js). A route without a git page goes to
+  the dealer's own. The demo is the real site, unfinished: git builds the
+  pages it lacks and hands them to development.
