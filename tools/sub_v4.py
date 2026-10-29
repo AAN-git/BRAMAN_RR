@@ -72,23 +72,30 @@ def scope(sel):
     """One selector held to the inner page's <main>, or None to drop it."""
     if re.search(r'(?<![\w-])\.card(?![\w-])|\.card__|(?<![\w-])\.grid(?![\w-])', sel):
         return None                      # the Rolls-Royce card and grid keep theirs
+    # every selector gains exactly main.sub's weight (0,1,1), so the Bentley
+    # sheets' own order of strength holds: an html compound stays as it was
+    # (its :not([data-look]) included — true here, as there is no look), and a
+    # compound already naming <main> gains .sub and one more type, :is(main)
     head, rest = first_compound(sel)
     pre = ''
     if re.match(r'(html|:root)\b', head):
         if re.search(r'\[data-look="\d"\]', LOOK.sub('', head)): return None   # another look's
-        head = LOOK.sub('', head)
-        if head in ('html', ':root') and not rest.strip(): return SCOPE
-        if head not in ('html', ':root'): pre = head + ' '
+        if not rest.strip(): return SCOPE if head in ('html', ':root') else None
+        pre = head + ' '
         rest = rest.lstrip(' >')
-        if not rest: return None
         head, rest = first_compound(rest)
     if re.match(r'body\b', head):
         if head != 'body': return None
         rest = rest.lstrip(' >')
         if not rest: return pre + SCOPE
         head, rest = first_compound(rest)
-    if re.match(r'(main\b|#main\b|\.(sub|srp)(?![\w-]))', head) or re.search(r'\.(sub|srp)(?![\w-])', head.split(':')[0]):
-        return pre + SCOPE + re.sub(r'^main', '', head) + rest
+    # the inner page's <main> carries .srp, .sub and, on a model page,
+    # .sub--model and .sub--mx: a selector whose first compound names any of
+    # them is about <main> itself
+    if re.match(r'main\b', head):
+        return pre + SCOPE + head[4:] + ':is(main)' + rest
+    if head.startswith('#main') or re.search(r'\.(?:sub|srp)(?:--[a-z0-9-]+)?(?![\w-])', head.split(':')[0]):
+        return pre + SCOPE + head + rest
     return pre + SCOPE + ' ' + head + rest
 
 def scoped(css, hoist):
@@ -156,6 +163,13 @@ PAGES = {
     'specials-used': ('Used Inventory Specials' + RR, f'Pre-owned inventory specials at {WPB}.'),
     'testimonials': ('Testimonials' + RR, f'Customer testimonials for {WPB}, from DealerRater.'),
     'privacy': ('Privacy Policy' + RR, 'The privacy policy of Rolls-Royce Motor Cars Palm Beach.'),
+    'spectre': ('Spectre Series II' + RR, f'Spectre Series II at {WPB}: the exterior, its iconography, the interior and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
+    'phantom': ('Phantom' + RR, f'Phantom at {WPB}: the exterior, its details, the interior and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
+    'ghost': ('Ghost Series II' + RR, f'Ghost Series II at {WPB}: the exterior, its details, the interior and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
+    'cullinan': ('Cullinan Series II' + RR, f'Cullinan Series II at {WPB}: the exterior, its details, the interior and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
+    'black-badge-ghost': ('Black Badge Ghost Series II' + RR, f'Black Badge Ghost Series II at {WPB}: the exterior, its details, the interior and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
+    'black-badge-spectre': ('Black Badge Spectre Series II' + RR, f'Black Badge Spectre Series II at {WPB}: the exterior, its details and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
+    'black-badge-cullinan': ('Black Badge Cullinan Series II' + RR, f'Black Badge Cullinan Series II at {WPB}: the exterior, its details, the interior and Bespoke; make an enquiry or schedule a test drive. Sales 561-203-8780.'),
     'difference': ('Reasons to Choose Braman' + RR, 'Reasons to choose Braman Motorcars: PermaPlate protection, Nitro-filled tires, our service departments, parts and boutiques.'),
 }
 
@@ -164,13 +178,25 @@ PAGES = {
 # out), and {{N}} with their count; the cards keep the listing's own sheet, on
 # the light ground the listing gives them (data-coast)
 CARDS = re.findall(r'\n(\s*<li class="card"[^>]*>.*?\n\s*</li>)', read('inventory_v4.html'), re.S)
+def grid(pick):
+    return '<div class="sub__cards" data-coast="sub"><ul class="sub__cards-grid">\n' + '\n'.join(pick) + '\n      </ul></div>'
+# a model page's cars in stock, as on the Bentley site's model pages:
+# <!-- STOCK model="Ghost" trim="" condition="new" n="3" --> is filled at every
+# build with the listing's own cards (model "" = any; trim "" puts the cars
+# without one first), so it is never stale
+def stock(m):
+    model, trim, cond, n = m.group(1), m.group(2), m.group(3), int(m.group(4))
+    pick = [c for c in CARDS if f'data-condition="{cond}"' in c and (not model or f'data-model="{model}"' in c)
+            and (not trim or f'data-trim="{trim}"' in c)]
+    if not trim: pick.sort(key=lambda c: 'data-trim=""' not in c)
+    return grid(pick[:n])
 def stocks(body):
+    body = re.sub(r'<!-- STOCK model="([^"]*)" trim="([^"]*)" condition="([^"]+)" n="(\d+)" -->', stock, body)
     m = re.search(r'<!-- STOCKS ids="([^"]+)" -->', body)
     if not m: return body
     pick = [c for i in m.group(1).split(',') for c in CARDS if f'data-stock="{i}"' in c]
-    grid = '<div class="sub__cards" data-coast="sub"><ul class="sub__cards-grid">\n' + '\n'.join(pick) + '\n      </ul></div>'
     n = len(pick)
-    return body.replace(m.group(0), grid).replace('{{N}}', f'{n} Motor Car{"s" if n != 1 else ""}')
+    return body.replace(m.group(0), grid(pick)).replace('{{N}}', f'{n} Motor Car{"s" if n != 1 else ""}')
 
 def pages():
     home = read('index_v4.html')

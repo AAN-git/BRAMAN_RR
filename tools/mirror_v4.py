@@ -95,13 +95,20 @@ ROUTES = {
     'Order Parts': 'order-parts_v4.html', 'Hours &amp; Directions': 'contact_v4.html#hours-h',
     'Meet Our Team': 'about_v4.html#team', 'Speak With a Specialist': 'contact_v4.html',
     'new specials': 'specials-new_v4.html', 'used specials': 'specials-used_v4.html',
+    'Spectre': 'spectre_v4.html', 'Ghost': 'ghost_v4.html', 'Cullinan': 'cullinan_v4.html',
+    'Black Badge Spectre': 'black-badge-spectre_v4.html',
 }
+# the home page's model chapters: each Discover opens its model's page
+DISCOVER = {'ghost-title': 'ghost_v4.html', 'spectre-title': 'spectre_v4.html', 'cullinan-title': 'cullinan_v4.html'}
 def routes(s, up, home):
     for label, href in ROUTES.items():
         s = re.sub(rf'(<a(?: class="[^"]*")?) href="(?:#[a-z]*|https://www\.bramanrolls-roycepalmbeach\.com/[^"]*)"((?: [^>]*)?>){re.escape(label)}</a>',
                    lambda m: f'{m.group(1)} href="{up}{href}"{m.group(2)}{label}</a>', s)
     # the home page's chapter anchors from every other page
     if not home: s = s.replace('<a href="#models">Models</a>', f'<a href="{up}index_v4.html#models">Models</a>')
+    for title, href in DISCOVER.items():
+        i = s.find(f'id="{title}"')
+        if i > 0: s = s[:i] + s[i:].replace('href="#">Discover</a>', f'href="{up}{href}">Discover</a>', 1)
     return s
 
 # the bar's routes are the dealer's menu (Alex, 2026-10-28: "where is the demo's
@@ -110,16 +117,26 @@ def routes(s, up, home):
 # where there is one, on the dealer's own page where there is not yet.
 # A line without an address is the demo's own heading inside a list.
 LIVE = 'https://www.bramanrolls-roycepalmbeach.com/'
+# Inventory, the pill, carries the demo's New shopping tools; New lists the
+# models (Alex, 2026-10-28: "на Inventory перетащил бы всё с NEW, а на NEW
+# оставил бы models 2026–27").
 MENU = [
-    ('New', 'inventory_v4.html?condition=new', [
+    ('Inventory', 'inventory_v4.html', [
         ('Shopping Tools', None),
         ('View All New Inventory', 'inventory_v4.html?condition=new'),
         ('Schedule Test Drive', 'test-drive-new_v4.html'),
         ('Get a Quote', 'quote-new_v4.html'),
         ('Value Your Trade', 'value-trade_v4.html'),
-        ('Rolls-Royce Spectre', LIVE + 'the-rolls-royce-spectre/'),
-        ('Rolls-Royce Black Badge Ghost', LIVE + 'black-badge-ghost/'),
         ('Reasons to Choose Braman', 'difference_v4.html')]),
+    ('New', 'inventory_v4.html?condition=new', [
+        ('Models', None),
+        ('Rolls-Royce Phantom', 'phantom_v4.html'),
+        ('Rolls-Royce Ghost', 'ghost_v4.html'),
+        ('Rolls-Royce Spectre', 'spectre_v4.html'),
+        ('Rolls-Royce Cullinan', 'cullinan_v4.html'),
+        ('Rolls-Royce Black Badge Ghost', 'black-badge-ghost_v4.html'),
+        ('Rolls-Royce Black Badge Spectre', 'black-badge-spectre_v4.html'),
+        ('Rolls-Royce Black Badge Cullinan', 'black-badge-cullinan_v4.html')]),
     ('Pre-Owned', 'inventory_v4.html?condition=used', [
         ('Pre-Owned Inventory', None),
         ('All Pre-Owned Vehicles', 'inventory_v4.html?condition=used'),
@@ -164,10 +181,11 @@ MENU = [
 CARET = '<svg viewBox="0 0 10 6" width="10" height="6" aria-hidden="true" focusable="false"><path d="M1 1l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>'
 def menu(up):
     url = lambda h: h if h.startswith('http') else up + h
-    out = ['      <ul>', f'        <li class="header__nav-inventory"><a href="{up}inventory_v4.html">Inventory</a></li>']
+    out = ['      <ul>']
     for i, (name, href, items) in enumerate(MENU):
         sid = 'nav-' + re.sub(r'[^a-z]+', '-', name.lower()).strip('-')
         head = f'<a href="{url(href)}">{name}</a>' if href else f'<span class="header__group-name">{name}</span>'
+        if name == 'Inventory': head = f'<span class="header__nav-inventory">{head}</span>'
         rows = ''.join(f'\n            <li><a href="{url(h)}">{t}</a></li>' if h else f'\n            <li class="header__drop-label">{t}</li>' for t, h in items)
         out.append(f'''        <li class="header__group">
           <div class="header__group-head">{head}<button class="header__more" type="button" aria-expanded="false" aria-controls="{sid}" aria-label="{name}: more">{CARET}</button></div>

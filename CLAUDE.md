@@ -41,8 +41,22 @@ CLAUDE.md) gets the same client notes.
 - **The bar's menu is the dealer's (Alex, 2026-10-28, "where is the demo's
   drop-down?"):** the demo's groups and lists in its words and order (New,
   Pre-Owned, Bespoke Projects, Specials, Service, Parts, Finance, About Us),
-  behind the Inventory pill; lists drop on a Purple Spirit plate on hover /
+  behind the Inventory pill (2026-10-28: Inventory carries the demo's New
+  shopping tools, New lists the 2026–27 models); lists drop on a Purple Spirit plate on hover /
   focus / first tap, open by caret in the phone panel (tools/mirror_v4.py
   MENU, css/menu_v4.css, js/menu_v4.js). A route without a git page goes to
   the dealer's own. The demo is the real site, unfinished: git builds the
   pages it lacks and hands them to development.
+- **Model pages (Alex, 2026-10-28):** chapter for chapter the Bentley site's
+  model page (BRAMAN_BENTLEY pages7/bentayga-speed.main.html: hero, statement,
+  exterior + details, interior, the drive WITH FIGURES, Bespoke as
+  personalisation, in stock, enquiry). Words verbatim from
+  rolls-roycemotorcars.com (US) — check every page against it, words and
+  photographs of that model only. Figures: the US site states none, so they
+  come from Rolls-Royce's own press releases (PressClub text only, never its
+  photographs). Hero tagline two lines at most.
+  The hero's words lie over the frame as on Spectre: pick a frame where they
+  clear the car (car at the right) or lie on a large detail — never invent a
+  layout for it (a words-under-the-frame band was rejected: "откуда это
+  взялось? у Bentley такого не помню"). Parts pictures are car parts, never
+  accessories (umbrella, bag rejected).

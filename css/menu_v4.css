@@ -23,7 +23,11 @@
   cursor: pointer;
   white-space: nowrap;
 }
-.header__nav .header__group-head > a { white-space: nowrap; }
+.header__nav .header__group-head > a,
+.header__nav .header__group-head > .header__nav-inventory > a { white-space: nowrap; }
+/* Inventory, the pill, heads a group of its own: the pill keeps its look,
+   its list drops as the others' do */
+.header__group-head > .header__nav-inventory { display: block; }
 
 .header__more {
   display: grid;
@@ -94,6 +98,7 @@
 /* --- in the menu panel --------------------------------------------------- */
 .header[data-open] .header__group-head { justify-content: space-between; border-bottom: 0.5px solid var(--rule-plum); }
 .header[data-open] .header__group-head > a,
+.header[data-open] .header__group-head > .header__nav-inventory > a,
 .header[data-open] .header__group-name { font-size: var(--h4); line-height: 64px; border-bottom: 0; color: var(--white); }
 .header[data-open] .header__more { width: 44px; height: 64px; margin-right: -12px; color: var(--white); }
 .header[data-open] .header__nav .header__drop {

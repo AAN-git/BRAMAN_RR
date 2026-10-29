@@ -98,3 +98,31 @@ main.sub { --rr-bar: 139px; }
    left and right): the home rail's turn of its own chevron (main.css) stays
    off them */
 main.sub .stock__arrow svg { transform: none; }
+
+/* on a photograph (a model page's hero and scenes) the line button keeps the
+   photograph's white ink, as the Bentley template draws it there */
+main.sub.sub :is(.mx__hero, .mx__scene) .btn--line { color: var(--frost); border-color: rgba(255, 255, 255, 0.6); }
+main.sub.sub :is(.mx__hero, .mx__scene) .btn--line:hover { border-color: var(--frost); }
+@media (max-width: 767px) {
+  /* on a phone the words fall under the photograph, on the page's white */
+  main.sub.sub :is(.mx__hero, .mx__scene) .btn--line { color: var(--noir); border-color: rgba(0, 0, 0, 0.4); }
+}
+
+/* Spectre: the grille, held in the tall frame from the road photograph */
+main.sub.sub .mx__detail--rr-grille img { object-position: 71% 50%; }
+
+/* Spectre's studio: the frame stands at the right at its own proportion and
+   its left edge dissolves into the studio wall's colour, so the car stands
+   right of centre and the words keep the bare wall (the car is never under
+   them); on a phone the words fall under the photograph as everywhere */
+@media (min-width: 768px) {
+  main.sub.sub .mx__scene--rr-studio .mx__scene-pic { display: flex; justify-content: flex-end; background: rgb(176, 139, 115); }
+  main.sub.sub .mx__scene--rr-studio .mx__scene-pic img {
+    width: auto; max-width: none; aspect-ratio: auto;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 24%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 24%);
+  }
+}
+
+/* The model pages: the hero's tagline in two lines at most (Alex, 2026-10-28) */
+main.sub.sub.sub--mx .mx__hero .mx__tagline { max-width: 30rem; }
